@@ -475,9 +475,9 @@ GameObject:
   m_Component:
   - component: {fileID: 535769828}
   - component: {fileID: 535769824}
-  - component: {fileID: 535769827}
   - component: {fileID: 535769826}
   - component: {fileID: 535769825}
+  - component: {fileID: 535769827}
   m_Layer: 0
   m_Name: AR Camera
   m_TagString: MainCamera
