@@ -6,6 +6,9 @@ using UnityEngine;
 
 public class GameGrid : MonoBehaviour
 {
+    [SerializeField] private DefencesViewModel defencesViewModel;
+    [SerializeField] private DefencesModel defencesModel;
+
     [SerializeField] private GridCell gridCellPrefab;
     [SerializeField] private CastleDefence castlePrefab;
     private int width = 15;
@@ -18,10 +21,73 @@ public class GameGrid : MonoBehaviour
 
     private List<GridCell> centreCells;
 
+    public Defence SelectedDefence { get; private set; }
+
     // Start is called before the first frame update
     void Start()
     {
+        defencesViewModel.OnDefenseSelected += SelectDefence;
+
         CreateGrid();
+    }
+
+    public Vector2Int GetGridPositionFromWorld(Vector3 worldPosition)
+    {
+        int x = Mathf.FloorToInt(worldPosition.x / gridSpaceSize);
+        int y = Mathf.FloorToInt(worldPosition.z / gridSpaceSize);
+
+        x = Mathf.Clamp(x, 0, width);
+        y = Mathf.Clamp(y, 0, length);
+
+        return new Vector2Int(x, y);
+    }
+
+    public Vector3 GetWorldPositionFromGrid(GridCell cell)
+    {
+        float x = cell.Pos.x * gridSpaceSize;
+        float y = cell.Pos.y * gridSpaceSize;
+
+        return new Vector3(x, cell.Height, y);
+    }
+
+    public Vector3 GetWorldPositionFromGrid(Vector2Int position, int height)
+    {
+        float x = position.x * gridSpaceSize;
+        float y = position.y * gridSpaceSize;
+
+        return new Vector3(x, height, y);
+    }
+
+    public Vector3 GetWorldPositionFromGrid(Vector2 position, int height)
+    {
+        float x = position.x * gridSpaceSize;
+        float y = position.y * gridSpaceSize;
+
+        return new Vector3(x, height, y);
+    }
+
+    public void SelectDefence(Defence defence)
+    {
+        SelectedDefence = defence;
+        DeselectAllCells();
+        var match = GridList.FindAll(defence.ConditionToPlace).FindAll(ConditionsData.IsEmptyCell);
+        match.ForEach(x => x.SetSelected());
+    }
+
+    public void SpawnDefence(GridCell cell)
+    {
+        if (!SelectedDefence) return;
+        Instantiate(SelectedDefence, GetWorldPositionFromGrid(cell), Quaternion.identity);
+    }
+
+
+    private (bool, Quaternion) IsCornerCell(GridCell cell)
+    {
+        if(cell.Pos.x == width - 1 && cell.Pos.y == width - 1) return (true, Quaternion.Euler(0, 45, 0));
+        if(cell.Pos.x == width - 1 && cell.Pos.y == 0) return (true, Quaternion.Euler(0, 135, 0));
+        if(cell.Pos.x == 0 && cell.Pos.y == width - 1) return (true, Quaternion.Euler(0, -45, 0));
+        if(cell.Pos.x == 0 && cell.Pos.y == 0) return (true, Quaternion.Euler(0, 225, 0));
+        return (false, Quaternion.identity);
     }
 
     private void CreateGrid()
@@ -44,14 +110,14 @@ public class GameGrid : MonoBehaviour
 
     private void SpawnCastleAtCentre()
     {
-        var centre = centreCells.Aggregate(Vector2Int.zero, (acc, v) => acc + v.Position) / centreCells.Count;
-        var castle = Instantiate(castlePrefab, GetWorldPositionFromGrid(centre) + new Vector3(0, centreCells[0].Height, 0), Quaternion.identity);
+        Vector2 centre = centreCells.Aggregate(Vector2.zero, (acc, v) => acc + v.Pos) / centreCells.Count;
+        var castle = Instantiate(castlePrefab, GetWorldPositionFromGrid(centre, centreCells[0].Height), Quaternion.identity);
         centreCells.ForEach(x => x.SetDefence(castle));
     }
 
     private void TryChangeHeight(GridCell cell)
     {
-        if (cell.Position.x == 0 || cell.Position.y == 0 || cell.Position.x == width - 1 || cell.Position.y == length - 1)
+        if (cell.Pos.x == 0 || cell.Pos.y == 0 || cell.Pos.x == width - 1 || cell.Pos.y == length - 1)
             return;
 
         cell.SetHeight(UnityEngine.Random.Range(1, 3));
@@ -62,9 +128,9 @@ public class GameGrid : MonoBehaviour
         int centre = GridList.Count / 2;
 
         var gridCell1 = GridList[centre];
-        var gridCell2 = grid[gridCell1.Position.x, gridCell1.Position.y - 1];
-        var gridCell3 = grid[gridCell1.Position.x + 1, gridCell1.Position.y];
-        var gridCell4 = grid[gridCell1.Position.x + 1, gridCell1.Position.y - 1];
+        var gridCell2 = grid[gridCell1.Pos.x, gridCell1.Pos.y - 1];
+        var gridCell3 = grid[gridCell1.Pos.x + 1, gridCell1.Pos.y];
+        var gridCell4 = grid[gridCell1.Pos.x + 1, gridCell1.Pos.y - 1];
         centreCells = new List<GridCell>()
         {
             gridCell1, gridCell2, gridCell3, gridCell4
@@ -83,31 +149,19 @@ public class GameGrid : MonoBehaviour
 
     private bool IsMustHaveGroundHeight(GridCell cell)
     {
-        return cell.Position.x == 0 || cell.Position.y == 0 || cell.Position.x == width - 1 || cell.Position.y == length - 1 || centreCells.Contains(cell);
+        return cell.Pos.x == 0 || cell.Pos.y == 0 || cell.Pos.x == width - 1 || cell.Pos.y == length - 1 || centreCells.Contains(cell);
     }
 
     private bool IsAnyDiagonalCellUp(GridCell cell)
     {
-        return grid[cell.Position.x - 1, cell.Position.y - 1].IsUpper || grid[cell.Position.x - 1, cell.Position.y + 1].IsUpper
-                || grid[cell.Position.x + 1, cell.Position.y + 1].IsUpper || grid[cell.Position.x + 1, cell.Position.y - 1].IsUpper;
+        return grid[cell.Pos.x - 1, cell.Pos.y - 1].IsUpper || grid[cell.Pos.x - 1, cell.Pos.y + 1].IsUpper
+                || grid[cell.Pos.x + 1, cell.Pos.y + 1].IsUpper || grid[cell.Pos.x + 1, cell.Pos.y - 1].IsUpper;
     }
 
-    public Vector2Int GetGridPositionFromWorld(Vector3 worldPosition)
+    private void DeselectAllCells() => GridList.ForEach(x => x.DeselectCell());
+
+    private void OnDestroy()
     {
-        int x = Mathf.FloorToInt(worldPosition.x / gridSpaceSize);
-        int y = Mathf.FloorToInt(worldPosition.z / gridSpaceSize);
-
-        x = Mathf.Clamp(x, 0, width);
-        y = Mathf.Clamp(y, 0, length);
-
-        return new Vector2Int(x, y);
-    }
-
-    public Vector3 GetWorldPositionFromGrid(Vector2Int position)
-    {
-        float x = position.x * gridSpaceSize + 0.5f;
-        float y = position.y * gridSpaceSize + 0.5f;
-
-        return new Vector3(x, 0, y);
+        defencesViewModel.OnDefenseSelected -= SelectDefence;
     }
 }

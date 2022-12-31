@@ -11,17 +11,15 @@ public class DefenceButton : MonoBehaviour
     [SerializeField] private Image image;
     [SerializeField] private Button button;
 
-    public Defence Defence { get; private set; }
-    public GameGrid Grid { get; private set; }
+    private DefencesViewModel DefencesViewModel { get; set; }
 
-    private void Start()
+    public void Init(Defence defence, DefencesViewModel defensesViewModel)
     {
-        button.onClick.AddListener(SelectDefence);
+        DefencesViewModel = defensesViewModel;
+        text.text = defence.gameObject.name;
+        button.onClick.AddListener(delegate{SelectDefence(defence);});
     }
 
-    private void SelectDefence()
-    {
-        var match = Grid.GridList.FindAll(Defence.ConditionToPlace).FindAll(ConditionsData.IsEmptyCell);
-        match.ForEach(x => x.SetSelected());
-    }
+    private void SelectDefence(Defence defence) => DefencesViewModel.DefenseSelected(defence);
+
 }

@@ -17,11 +17,9 @@ namespace Defendable
         protected int RelaodTime { get; set; }
         protected abstract bool IsReady { get; set; }
         protected Time ReloadStart { get; private set; }
-        public Predicate<GridCell> ConditionToPlace;
+        public Predicate<GridCell> ConditionToPlace => SO.GetCondition();
         public Predicate<GridCell> IsEmptyCell = (GridCell cell) => cell.IsFree; 
         public bool IsActionAvailable() => IsActiveDefence && IsReady;
-
-        
 
         private void GetData()
         {
@@ -31,7 +29,7 @@ namespace Defendable
             Health = SO.Health;
             RelaodTime = SO.RelaodTime;
             Size = SO.Size;
-            ConditionToPlace = SO.GetCondition(SO.Condition);
+            // ConditionToPlace = SO.GetCondition(SO.Condition);
         }
 
         private void Start()

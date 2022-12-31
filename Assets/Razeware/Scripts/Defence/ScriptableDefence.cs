@@ -15,7 +15,7 @@ public class ScriptableDefence : ScriptableObject
     public Vector2 Size;
     public Conditions Condition;
 
-    public Predicate<GridCell> GetCondition(Conditions condition) => ConditionsData.ConditionData.FirstOrDefault(x => x.Name == condition).Condition;
+    public Predicate<GridCell> GetCondition() => ConditionsData.ConditionData.FirstOrDefault(x => x.Name == Condition).Condition;
 }
 
 public static class ConditionsData

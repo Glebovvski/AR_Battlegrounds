@@ -1,3 +1,4 @@
+using System;
 using Defendable;
 using UnityEngine;
 
@@ -13,9 +14,12 @@ public class GridCell : MonoBehaviour
 
     public Defence Defence { get; private set; }
     public bool IsFree => Defence == null;
-    public Vector2Int Position => new Vector2Int(posX, posY);
+    public Vector2Int Pos => new Vector2Int(posX, posY);
     public int Height => Mathf.FloorToInt(transform.localScale.z);
     public bool IsUpper => transform.localScale.z > 1;
+    public bool IsSelected => quadRenderer.material.color != defaultCellColor;
+
+    private Color defaultCellColor;
 
 
     public void SetSelected() => quadRenderer.material.color = Color.green * 10;
@@ -36,4 +40,6 @@ public class GridCell : MonoBehaviour
         if (IsFree)
             Defence = defence;
     }
+
+    internal void DeselectCell() => quadRenderer.material.color = defaultCellColor;
 }

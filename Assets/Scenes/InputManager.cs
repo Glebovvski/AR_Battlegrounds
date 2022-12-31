@@ -10,12 +10,17 @@ public class InputManager : MonoBehaviour
     private void Update() 
     {
         var cell = GetGridCell();
-        if(!cell) return;
+        if(!cell || !cell.IsSelected) return;
 
         if(Input.GetMouseButtonDown(0))
         {
-            cell.SetSelected();
+            SpawnOnCell(cell);
         }
+    }
+
+    private void SpawnOnCell(GridCell cell)
+    {
+        grid.SpawnDefence(cell);
     }
 
     private GridCell GetGridCell()
