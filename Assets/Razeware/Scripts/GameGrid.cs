@@ -71,8 +71,11 @@ public class GameGrid : MonoBehaviour
     {
         SelectedDefence = defence;
         DeselectAllCells();
-        var match = GridList.FindAll(defence.ConditionToPlace).FindAll(ConditionsData.IsEmptyCell);
-        match.ForEach(x => x.SetSelected());
+        if (defence.Size == Vector2.one)
+        {
+            var match = GridList.FindAll(defence.ConditionToPlace).FindAll(ConditionsData.IsEmptyCell);
+            match.ForEach(x => x.SetSelected());
+        }
     }
 
     public void DeselectDefense()
@@ -90,10 +93,10 @@ public class GameGrid : MonoBehaviour
 
     private (bool, Quaternion) IsCornerCell(GridCell cell)
     {
-        if(cell.Pos.x == width - 1 && cell.Pos.y == width - 1) return (true, Quaternion.Euler(0, 45, 0));
-        if(cell.Pos.x == width - 1 && cell.Pos.y == 0) return (true, Quaternion.Euler(0, 135, 0));
-        if(cell.Pos.x == 0 && cell.Pos.y == width - 1) return (true, Quaternion.Euler(0, -45, 0));
-        if(cell.Pos.x == 0 && cell.Pos.y == 0) return (true, Quaternion.Euler(0, 225, 0));
+        if (cell.Pos.x == width - 1 && cell.Pos.y == width - 1) return (true, Quaternion.Euler(0, 45, 0));
+        if (cell.Pos.x == width - 1 && cell.Pos.y == 0) return (true, Quaternion.Euler(0, 135, 0));
+        if (cell.Pos.x == 0 && cell.Pos.y == width - 1) return (true, Quaternion.Euler(0, -45, 0));
+        if (cell.Pos.x == 0 && cell.Pos.y == 0) return (true, Quaternion.Euler(0, 225, 0));
         return (false, Quaternion.identity);
     }
 

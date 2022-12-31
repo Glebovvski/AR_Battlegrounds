@@ -18,7 +18,7 @@ namespace Defendable
         protected abstract bool IsReady { get; set; }
         protected Time ReloadStart { get; private set; }
         public Predicate<GridCell> ConditionToPlace => SO.GetCondition();
-        public Predicate<GridCell> IsEmptyCell = (GridCell cell) => cell.IsFree; 
+        public Predicate<GridCell[]> CanFit = (GridCell[] cells) => cells.All(x=>x.IsUpper) || cells.All(x => !x.IsUpper); 
         public bool IsActionAvailable() => IsActiveDefence && IsReady;
 
         private void GetData()
