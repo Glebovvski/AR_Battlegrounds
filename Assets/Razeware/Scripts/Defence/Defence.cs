@@ -21,11 +21,7 @@ namespace Defendable
         public Predicate<GridCell> IsEmptyCell = (GridCell cell) => cell.IsFree; 
         public bool IsActionAvailable() => IsActiveDefence && IsReady;
 
-        // public void CheckCondition()
-        // {
-        //     var match = grid.GridList.FindAll(ConditionToPlace).FindAll(IsEmptyCell);
-        //     match.ForEach(x => x.SetSelected());
-        // }
+        
 
         private void GetData()
         {

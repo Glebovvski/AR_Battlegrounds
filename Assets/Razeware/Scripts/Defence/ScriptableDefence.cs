@@ -23,6 +23,7 @@ public static class ConditionsData
     private static bool HasZeroHeight(GridCell cell) => !cell.IsUpper;
     private static bool HasNonZeroHeight(GridCell cell) => cell.IsUpper;
     private static bool EmptyCondition(GridCell cell) => true; 
+    public static bool IsEmptyCell(GridCell cell) => cell.IsFree;
     public static readonly List<ConditionData<GridCell>> ConditionData = new List<ConditionData<GridCell>>()
     {
         new ConditionData<GridCell>()
