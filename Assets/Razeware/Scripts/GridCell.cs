@@ -14,6 +14,7 @@ public class GridCell : MonoBehaviour
     public Defence Defence { get; private set; }
     public bool IsFree => Defence == null;
     public Vector2Int Position => new Vector2Int(posX, posY);
+    public int Height => Mathf.FloorToInt(transform.localScale.z);
     public bool IsUpper => transform.localScale.z > 1;
 
 

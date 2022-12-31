@@ -15,10 +15,21 @@ public class ScriptableDefence : ScriptableObject
     public Vector2 Size;
     public Conditions Condition;
 
-    public Predicate<GridCell> GetCondition(Conditions condition) => ConditionData.FirstOrDefault(x => x.Name == condition).Condition;
+    public Predicate<GridCell> GetCondition(Conditions condition) => ConditionsData.ConditionData.FirstOrDefault(x => x.Name == condition).Condition;
+}
 
-    private List<ConditionData<GridCell>> ConditionData = new List<ConditionData<GridCell>>()
+public static class ConditionsData
+{
+    private static bool HasZeroHeight(GridCell cell) => !cell.IsUpper;
+    private static bool HasNonZeroHeight(GridCell cell) => cell.IsUpper;
+    private static bool EmptyCondition(GridCell cell) => true; 
+    public static readonly List<ConditionData<GridCell>> ConditionData = new List<ConditionData<GridCell>>()
     {
+        new ConditionData<GridCell>()
+        {
+            Name = Conditions.None,
+            Condition = EmptyCondition
+        },
         new ConditionData<GridCell>()
         {
             Name = Conditions.HasZeroHeight,
@@ -30,17 +41,14 @@ public class ScriptableDefence : ScriptableObject
             Condition = HasNonZeroHeight
         }
     };
-
-    public static bool HasZeroHeight(GridCell cell) => !cell.IsUpper;
-    public static bool HasNonZeroHeight(GridCell cell) => cell.IsUpper;
-
 }
 
 [Serializable]
 public enum Conditions
 {
-    HasZeroHeight = 0,
-    HasNonZeroHeight = 1,
+    None = 0,
+    HasZeroHeight = 1,
+    HasNonZeroHeight = 2,
 }
 
 [Serializable]

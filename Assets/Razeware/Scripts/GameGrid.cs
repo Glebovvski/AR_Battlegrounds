@@ -1,10 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using Defendable;
 using UnityEngine;
 
 public class GameGrid : MonoBehaviour
 {
     [SerializeField] private GridCell gridCellPrefab;
+    [SerializeField] private CastleDefence castlePrefab;
     private int width = 15;
     private int length = 15;
     private float gridSpaceSize = 1f;
@@ -36,6 +39,14 @@ public class GameGrid : MonoBehaviour
             }
         }
         TryChangeHeight();
+        SpawnCastleAtCentre();
+    }
+
+    private void SpawnCastleAtCentre()
+    {
+        var centre = centreCells.Aggregate(Vector2Int.zero, (acc, v) => acc + v.Position) / centreCells.Count;
+        var castle = Instantiate(castlePrefab, GetWorldPositionFromGrid(centre) + new Vector3(0, centreCells[0].Height, 0), Quaternion.identity);
+        centreCells.ForEach(x => x.SetDefence(castle));
     }
 
     private void TryChangeHeight(GridCell cell)
@@ -94,8 +105,8 @@ public class GameGrid : MonoBehaviour
 
     public Vector3 GetWorldPositionFromGrid(Vector2Int position)
     {
-        float x = position.x * gridSpaceSize;
-        float y = position.y * gridSpaceSize;
+        float x = position.x * gridSpaceSize + 0.5f;
+        float y = position.y * gridSpaceSize + 0.5f;
 
         return new Vector3(x, 0, y);
     }
