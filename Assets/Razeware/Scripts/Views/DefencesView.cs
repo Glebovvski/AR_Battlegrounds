@@ -16,4 +16,9 @@ public class DefencesView : MonoBehaviour
             button.Init(defense, defencesViewModel);
         }
     }
+
+    public void CancelSelection()
+    {
+        defencesViewModel.DefenseDeselected();
+    }
 }

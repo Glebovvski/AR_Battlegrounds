@@ -27,6 +27,7 @@ public class GameGrid : MonoBehaviour
     void Start()
     {
         defencesViewModel.OnDefenseSelected += SelectDefence;
+        defencesViewModel.OnDefenseDeselected += DeselectDefense;
 
         CreateGrid();
     }
@@ -72,6 +73,12 @@ public class GameGrid : MonoBehaviour
         DeselectAllCells();
         var match = GridList.FindAll(defence.ConditionToPlace).FindAll(ConditionsData.IsEmptyCell);
         match.ForEach(x => x.SetSelected());
+    }
+
+    public void DeselectDefense()
+    {
+        DeselectAllCells();
+        SelectedDefence = null;
     }
 
     public void SpawnDefence(GridCell cell)
@@ -163,5 +170,6 @@ public class GameGrid : MonoBehaviour
     private void OnDestroy()
     {
         defencesViewModel.OnDefenseSelected -= SelectDefence;
+        defencesViewModel.OnDefenseDeselected -= DeselectDefense;
     }
 }

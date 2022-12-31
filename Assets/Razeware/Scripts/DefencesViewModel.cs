@@ -13,4 +13,7 @@ public class DefencesViewModel : MonoBehaviour
     public event Action<Defence> OnDefenseSelected;
     public void DefenseSelected(Defence defence) => OnDefenseSelected?.Invoke(defence);
 
+    public event Action OnDefenseDeselected;
+    public void DefenseDeselected() => OnDefenseDeselected?.Invoke();
+
 }
