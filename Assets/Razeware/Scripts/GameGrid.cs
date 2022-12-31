@@ -13,6 +13,8 @@ public class GameGrid : MonoBehaviour
 
     private GridCell[,] grid;
 
+    private List<GridCell> centreCells;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,12 +30,12 @@ public class GameGrid : MonoBehaviour
             {
                 grid[x, z] = Instantiate(gridCellPrefab, new Vector3(x * gridSpaceSize, 0, z * gridSpaceSize), Quaternion.Euler(90, 0, 0));
                 grid[x, z].Init(x, z);
-                TryChangeHeight(grid[x, z]);
                 grid[x, z].gameObject.name = string.Format("Cell {0}:{1}", x, z);
                 grid[x, z].transform.parent = transform;
-                GridList.Add(grid[x,z]);
+                GridList.Add(grid[x, z]);
             }
         }
+        TryChangeHeight();
     }
 
     private void TryChangeHeight(GridCell cell)
@@ -42,6 +44,41 @@ public class GameGrid : MonoBehaviour
             return;
 
         cell.SetHeight(UnityEngine.Random.Range(1, 3));
+    }
+
+    private void TryChangeHeight()
+    {
+        int centre = GridList.Count / 2;
+
+        var gridCell1 = GridList[centre];
+        var gridCell2 = grid[gridCell1.Position.x, gridCell1.Position.y - 1];
+        var gridCell3 = grid[gridCell1.Position.x + 1, gridCell1.Position.y];
+        var gridCell4 = grid[gridCell1.Position.x + 1, gridCell1.Position.y - 1];
+        centreCells = new List<GridCell>()
+        {
+            gridCell1, gridCell2, gridCell3, gridCell4
+        };
+
+        foreach (var cell in GridList)
+        {
+            if (IsMustHaveGroundHeight(cell))
+                continue;
+            if (IsAnyDiagonalCellUp(cell))
+                continue;
+            cell.SetHeight(UnityEngine.Random.Range(1, 3));
+        }
+
+    }
+
+    private bool IsMustHaveGroundHeight(GridCell cell)
+    {
+        return cell.Position.x == 0 || cell.Position.y == 0 || cell.Position.x == width - 1 || cell.Position.y == length - 1 || centreCells.Contains(cell);
+    }
+
+    private bool IsAnyDiagonalCellUp(GridCell cell)
+    {
+        return grid[cell.Position.x - 1, cell.Position.y - 1].IsUpper || grid[cell.Position.x - 1, cell.Position.y + 1].IsUpper
+                || grid[cell.Position.x + 1, cell.Position.y + 1].IsUpper || grid[cell.Position.x + 1, cell.Position.y - 1].IsUpper;
     }
 
     public Vector2Int GetGridPositionFromWorld(Vector3 worldPosition)
