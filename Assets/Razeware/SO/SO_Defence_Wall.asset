@@ -16,3 +16,6 @@ MonoBehaviour:
   IsActiveDefence: 0
   AttackForce: 0
   AttackRange: 0
+  RelaodTime: 0
+  Size: {x: 0, y: 0}
+  Condition: 0
