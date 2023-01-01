@@ -17,5 +17,6 @@ MonoBehaviour:
   AttackForce: 10
   AttackRange: 100
   RelaodTime: 2
+  ProjectileSpeed: 5
   Size: {x: 1, y: 1}
   Condition: 0

@@ -245,7 +245,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 581853323}
   m_Direction: 0
   m_Value: 0
-  m_Size: 1
+  m_Size: 0
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -467,8 +467,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defences:
-  - {fileID: 3066382648115367535, guid: ded43c50ce9d44db2a7c95fceaaa5e74, type: 3}
-  - {fileID: 7337283921075884863, guid: 2b8c6f3046dcf5f4d9ded5b6bf4564d4, type: 3}
+  - <Type>k__BackingField: 2
+    <Defence>k__BackingField: {fileID: 7337283921075884863, guid: 2b8c6f3046dcf5f4d9ded5b6bf4564d4,
+      type: 3}
+  - <Type>k__BackingField: 3
+    <Defence>k__BackingField: {fileID: 3066382648115367535, guid: ded43c50ce9d44db2a7c95fceaaa5e74,
+      type: 3}
 --- !u!114 &568455788
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1137,9 +1141,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poolList:
-  - type: 0
-    amount: 20
+  - type: 1
+    amount: 50
     prefab: {fileID: 1240887441953726, guid: 8a976dcd328a4664c85144f33b9c46b0, type: 3}
+    container: {fileID: 745831102}
+    pool: []
+  - type: 2
+    amount: 20
+    prefab: {fileID: 7337283921075884861, guid: 2b8c6f3046dcf5f4d9ded5b6bf4564d4,
+      type: 3}
+    container: {fileID: 745831102}
+    pool: []
+  - type: 3
+    amount: 20
+    prefab: {fileID: 3512068383827528869, guid: ded43c50ce9d44db2a7c95fceaaa5e74,
+      type: 3}
     container: {fileID: 745831102}
     pool: []
 --- !u!4 &745831104

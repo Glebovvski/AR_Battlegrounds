@@ -21,7 +21,7 @@ public class GameGrid : MonoBehaviour
 
     private List<GridCell> centreCells;
 
-    public Defence SelectedDefence { get; private set; }
+    public PoolObjectType SelectedDefence { get; private set; }
 
     // Start is called before the first frame update
     void Start()
@@ -67,13 +67,14 @@ public class GameGrid : MonoBehaviour
         return new Vector3(x, height, y);
     }
 
-    public void SelectDefence(Defence defence)
+    public void SelectDefence(PoolObjectType type)
     {
-        SelectedDefence = defence;
+        SelectedDefence = type;
+        var defenseInfo = PoolManager.Instance.GetFromPool<Defence>(type).SO;
         DeselectAllCells();
-        if (defence.GetSize() == Vector2.one)
+        if (defenseInfo.Size == Vector2.one)
         {
-            var match = GridList.FindAll(defence.ConditionToPlace).FindAll(ConditionsData.IsEmptyCell);
+            var match = GridList.FindAll(defenseInfo.GetCondition()).FindAll(ConditionsData.IsEmptyCell);
             match.ForEach(x => x.SetSelected());
         }
     }
@@ -81,13 +82,16 @@ public class GameGrid : MonoBehaviour
     public void DeselectDefense()
     {
         DeselectAllCells();
-        SelectedDefence = null;
+        SelectedDefence = PoolObjectType.None;
     }
 
     public void SpawnDefence(GridCell cell)
     {
-        if (!SelectedDefence) return;
-        Instantiate(SelectedDefence, GetWorldPositionFromGrid(cell), Quaternion.identity);
+        if (SelectedDefence == PoolObjectType.None) return;
+        
+        var defence = PoolManager.Instance.GetFromPool<Defence>(SelectedDefence);
+        defence.transform.position = GetWorldPositionFromGrid(cell);
+        // Instantiate(SelectedDefence, GetWorldPositionFromGrid(cell), Quaternion.identity);
     }
 
 

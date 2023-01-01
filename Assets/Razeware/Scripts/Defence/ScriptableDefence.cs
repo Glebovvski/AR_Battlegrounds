@@ -12,6 +12,7 @@ public class ScriptableDefence : ScriptableObject
     public int AttackForce;
     public int AttackRange;
     public int RelaodTime;
+    public float ProjectileSpeed;
     public Vector2Int Size;
     public Conditions Condition;
 

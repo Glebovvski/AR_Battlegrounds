@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DefenceButton : MonoBehaviour
+public class DefenceView : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI text;
     [SerializeField] private Image image;
@@ -13,13 +13,13 @@ public class DefenceButton : MonoBehaviour
 
     private DefencesViewModel DefencesViewModel { get; set; }
 
-    public void Init(Defence defence, DefencesViewModel defensesViewModel)
+    public void Init(PoolObjectType type, DefencesViewModel defensesViewModel)
     {
         DefencesViewModel = defensesViewModel;
-        text.text = defence.gameObject.name;
-        button.onClick.AddListener(delegate{SelectDefence(defence);});
+        text.text = type.ToString();
+        button.onClick.AddListener(delegate{SelectDefence(type);});
     }
 
-    private void SelectDefence(Defence defence) => DefencesViewModel.DefenseSelected(defence);
+    private void SelectDefence(PoolObjectType type) => DefencesViewModel.DefenseSelected(type);
 
 }

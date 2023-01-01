@@ -8,10 +8,10 @@ public class DefencesViewModel : MonoBehaviour
 {
     [SerializeField] private DefencesModel defencesModel;
 
-    public List<Defence> GetDefencesList() => defencesModel.List;
+    public List<DefenceInfo> GetDefencesList() => defencesModel.List;
 
-    public event Action<Defence> OnDefenseSelected;
-    public void DefenseSelected(Defence defence) => OnDefenseSelected?.Invoke(defence);
+    public event Action<PoolObjectType> OnDefenseSelected;
+    public void DefenseSelected(PoolObjectType type) => OnDefenseSelected?.Invoke(type);
 
     public event Action OnDefenseDeselected;
     public void DefenseDeselected() => OnDefenseDeselected?.Invoke();

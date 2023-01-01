@@ -5,7 +5,7 @@ using UnityEngine;
 public class DefencesView : MonoBehaviour
 {
     [SerializeField] private DefencesViewModel defencesViewModel;
-    [SerializeField] private DefenceButton buttonPrefab;
+    [SerializeField] private DefenceView buttonPrefab;
     [SerializeField] private Transform content;
 
     private void Start() 
@@ -13,7 +13,7 @@ public class DefencesView : MonoBehaviour
         foreach (var defense in defencesViewModel.GetDefencesList())
         {
             var button = Instantiate(buttonPrefab, content);
-            button.Init(defense, defencesViewModel);
+            button.Init(defense.Type, defencesViewModel);
         }
     }
 

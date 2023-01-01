@@ -69,7 +69,6 @@ public class PoolManager : MonoBehaviour
         GameObject go;
         var poolInfo = GetPoolInfoByType(type);
         var pool = poolInfo.pool;
-        var objectType = TypeDictionary[type];
         if (pool.Count == 0)
             go = Instantiate(poolInfo.prefab, poolInfo.container.transform);
         else
@@ -96,5 +95,9 @@ public class PoolInfo
 
 public enum PoolObjectType
 {
-    CannonBullet = 0,
+    None = 0,
+    CannonBullet = 1,
+    CannonTower = 2,
+    WallTower = 3,
+
 }
