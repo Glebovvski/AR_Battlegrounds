@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Enemies;
+using Missiles;
 using UnityEngine;
 
 namespace Defendable
@@ -11,6 +12,7 @@ namespace Defendable
         [SerializeField] private Transform tower;
         [SerializeField] private float rotationSpeed = 10f;
         [SerializeField] private float angleThreshold = 5f;
+        [SerializeField] private Transform cannon;
         private float lastShotTime;
         protected override bool IsReady { get => Time.time - lastShotTime > RelaodTime; set => IsReady = value; }
 
@@ -31,11 +33,14 @@ namespace Defendable
         private void RotateAndAttack(Enemy enemy)
         {
             if (RotateToEnemy(enemy) && IsReady)
-                Attack();
+                Attack(enemy);
         }
 
-        private void Attack()
+        private void Attack(Enemy enemy)
         {
+            var bullet = PoolManager.Instance.GetFromPool<CannonBullet>(PoolObjectType.CannonBullet);
+            bullet.transform.position = cannon.position;
+            bullet.Fire((enemy.transform.position - cannon.transform.position).normalized);
             lastShotTime = Time.time;
         }
 
