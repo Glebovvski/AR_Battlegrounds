@@ -9,17 +9,18 @@ namespace Defendable
         [field: SerializeField] public ScriptableDefence SO { get; set; }
         // [field: SerializeField] public GameGrid grid { get; set; }
 
+        public int Health { get; private set; }
         public bool IsActiveDefence { get; private set; }
         public int AttackRange { get; private set; }
         public int AttackForce { get; private set; }
-        public int Health { get; private set; }
-        public Vector2 Size { get; private set; }
+        public Vector2Int Size { get; private set; }
         protected int RelaodTime { get; set; }
         protected abstract bool IsReady { get; set; }
         protected Time ReloadStart { get; private set; }
         public Predicate<GridCell> ConditionToPlace => SO.GetCondition();
         public Predicate<GridCell[]> CanFit = (GridCell[] cells) => cells.All(x=>x.IsUpper) || cells.All(x => !x.IsUpper); 
         public bool IsActionAvailable() => IsActiveDefence && IsReady;
+        public Vector2Int GetSize() => SO.Size;
 
         private void GetData()
         {
@@ -29,10 +30,9 @@ namespace Defendable
             Health = SO.Health;
             RelaodTime = SO.RelaodTime;
             Size = SO.Size;
-            // ConditionToPlace = SO.GetCondition(SO.Condition);
         }
 
-        private void Start()
+        protected void Start()
         {
             GetData();
         }

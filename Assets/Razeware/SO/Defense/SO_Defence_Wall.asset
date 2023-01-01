@@ -17,5 +17,5 @@ MonoBehaviour:
   AttackForce: 0
   AttackRange: 0
   RelaodTime: 0
-  Size: {x: 0, y: 0}
+  Size: {x: 1, y: 1}
   Condition: 1

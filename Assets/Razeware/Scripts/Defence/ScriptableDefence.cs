@@ -12,7 +12,7 @@ public class ScriptableDefence : ScriptableObject
     public int AttackForce;
     public int AttackRange;
     public int RelaodTime;
-    public Vector2 Size;
+    public Vector2Int Size;
     public Conditions Condition;
 
     public Predicate<GridCell> GetCondition() => ConditionsData.ConditionData.FirstOrDefault(x => x.Name == Condition).Condition;

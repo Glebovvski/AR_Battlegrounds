@@ -71,7 +71,7 @@ public class GameGrid : MonoBehaviour
     {
         SelectedDefence = defence;
         DeselectAllCells();
-        if (defence.Size == Vector2.one)
+        if (defence.GetSize() == Vector2.one)
         {
             var match = GridList.FindAll(defence.ConditionToPlace).FindAll(ConditionsData.IsEmptyCell);
             match.ForEach(x => x.SetSelected());
