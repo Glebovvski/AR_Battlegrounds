@@ -13,6 +13,7 @@ namespace Defendable
 
         public void SetAttackRange(int radius) => Radius.radius = radius;
 
+        public bool IsEnemyInRange(Enemy enemy) => enemiesInRange.Contains(enemy);
 
         private void OnTriggerEnter(Collider other)
         {

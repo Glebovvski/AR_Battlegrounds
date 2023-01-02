@@ -99,5 +99,6 @@ public enum PoolObjectType
     CannonBullet = 1,
     CannonTower = 2,
     WallTower = 3,
+    LaserTower = 4,
 
 }

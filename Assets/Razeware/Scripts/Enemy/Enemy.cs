@@ -10,6 +10,8 @@ namespace Enemies
 
         public int Health {get; private set; }
         public int AttackForce {get; set;}
+        public bool IsAlive => true;// Health > 0;
+
 
         public void GetData()
         {

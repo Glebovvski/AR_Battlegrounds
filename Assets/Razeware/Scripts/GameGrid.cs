@@ -91,7 +91,7 @@ public class GameGrid : MonoBehaviour
         
         var defence = PoolManager.Instance.GetFromPool<Defence>(SelectedDefence);
         defence.transform.position = GetWorldPositionFromGrid(cell);
-        // Instantiate(SelectedDefence, GetWorldPositionFromGrid(cell), Quaternion.identity);
+        cell.SetDefence(defence);
     }
 
 
