@@ -26,7 +26,7 @@ namespace Defendable
 
         private void Update()
         {
-            if (!IsReady || Detection.Enemies.Count == 0) return;
+            if (!IsReady || Detection.Enemy == null) return;
 
             if (!isAttacking)
                 Attack();
@@ -35,7 +35,7 @@ namespace Defendable
         public void Attack()
         {
             isAttacking = true;
-            var enemy = Detection.Enemies[0];
+            var enemy = Detection.Enemy;
             StartCoroutine(LaserShot(enemy));
         }
 
@@ -52,7 +52,7 @@ namespace Defendable
                 yield return null;
             }
 
-            while (enemy.IsAlive)// && Detection.IsEnemyInRange(enemy))
+            while (enemy.IsAlive && Detection.IsEnemyInRange(enemy))
             {
                 Debug.LogError("LASER SHOOT");
                 UpdateLaser(enemy);

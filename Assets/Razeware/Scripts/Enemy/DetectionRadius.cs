@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Enemies;
+using System;
+using System.Linq;
 
 namespace Defendable
 {
@@ -9,17 +11,32 @@ namespace Defendable
     {
         [SerializeField] private SphereCollider Radius;
         private List<Enemy> enemiesInRange = new List<Enemy>();
-        public List<Enemy> Enemies => enemiesInRange;
+        public Enemy Enemy => ClosestEnemy();
 
         public void SetAttackRange(int radius) => Radius.radius = radius;
 
         public bool IsEnemyInRange(Enemy enemy) => enemiesInRange.Contains(enemy);
 
+        private Enemy ClosestEnemy()
+        {
+            float minDistance = 100;
+            Enemy closestEnemy = null;
+            foreach (var enemy in enemiesInRange)
+            {
+                var distance = Vector3.Distance(enemy.transform.position, this.transform.position);
+                if(distance < minDistance)
+                {
+                    minDistance = distance;
+                    closestEnemy = enemy;
+                }
+            }
+            return closestEnemy;
+        }
+
         private void OnTriggerEnter(Collider other)
         {
             if (!other.TryGetComponent<Enemy>(out var enemy)) return;
 
-Debug.LogError("SEE ENEMY");
             enemiesInRange.Add(enemy);
         }
 

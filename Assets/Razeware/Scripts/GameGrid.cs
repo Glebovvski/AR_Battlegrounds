@@ -112,7 +112,7 @@ public class GameGrid : MonoBehaviour
         if (SelectedDefence == PoolObjectType.None) return;
 
         var defence = PoolManager.Instance.GetFromPool<Defence>(SelectedDefence);
-        if (defence.Size == Vector2Int.one)
+        if (defence.GetSize() == Vector2Int.one)
         {
             defence.transform.position = GetWorldPositionFromGrid(cell);
             cell.SetDefence(defence);

@@ -15,6 +15,7 @@ namespace Defendable
         [SerializeField] private Transform cannon;
         private float lastShotTime;
         protected override bool IsReady { get => Time.time - lastShotTime > RelaodTime; set => IsReady = value; }
+        IEnumerator attackRoutine;
 
         private void Start()
         {
@@ -24,14 +25,13 @@ namespace Defendable
 
         private void Update()
         {
-            foreach (var enemy in Detection.Enemies)
-            {
-                RotateAndAttack(enemy);
-            }
+            RotateAndAttack(Detection.Enemy);
         }
 
         private void RotateAndAttack(Enemy enemy)
         {
+            if(enemy == null) return;
+            
             if (RotateToEnemy(enemy) && IsReady)
                 Attack(enemy);
         }
