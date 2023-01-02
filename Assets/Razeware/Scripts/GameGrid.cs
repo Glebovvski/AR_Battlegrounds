@@ -81,7 +81,20 @@ public class GameGrid : MonoBehaviour
         }
         else
         {
-
+            var pairs = GetCellGroupsBySize(defenseInfo.Size);
+            List<List<GridCell>> match = new List<List<GridCell>>();
+            foreach (var pair in pairs)
+            {
+                if (pair.FindAll(defenseInfo.GetCondition()).FindAll(ConditionsData.IsEmptyCell).Count != 0)
+                    match.Add(pair);
+            }
+            foreach(var pair in match)
+            {
+                foreach (var cell in pair)
+                {
+                    cell.SetSelected();
+                }
+            }
         }
     }
 
@@ -94,15 +107,30 @@ public class GameGrid : MonoBehaviour
     public void SpawnDefence(GridCell cell)
     {
         if (SelectedDefence == PoolObjectType.None) return;
-        
+
         var defence = PoolManager.Instance.GetFromPool<Defence>(SelectedDefence);
         defence.transform.position = GetWorldPositionFromGrid(cell);
         cell.SetDefence(defence);
     }
 
-    private List<GridCell[,]> GetCellGroupsBySize(Vector2Int size)
+    private List<List<GridCell>> GetCellGroupsBySize(Vector2Int size)
     {
-        
+        List<List<GridCell>> cells = new List<List<GridCell>>();
+        for (int i = 0; i < width-1; i++)
+        {
+            for (int j = 0; j < length-1; j++)
+            {
+                var possiblePairs = new List<GridCell>();
+                possiblePairs.Add(grid[i, j]);
+                possiblePairs.Add(grid[i, j + 1]);
+                possiblePairs.Add(grid[i + 1, j]);
+                possiblePairs.Add(grid[i + 1, j + 1]);
+
+                if (possiblePairs.All(pair => pair.IsUpper || !pair.IsUpper))
+                    cells.Add(possiblePairs);
+            }
+        }
+        return cells;
     }
 
     private void CreateGrid()
