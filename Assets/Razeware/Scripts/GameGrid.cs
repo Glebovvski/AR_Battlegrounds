@@ -120,13 +120,13 @@ public class GameGrid : MonoBehaviour
         else
         {
             var selectedPair = pairCells.First(x => x.Contains(cell));
-            if(selectedPair == null) return;
+            if (selectedPair == null) return;
 
             var centre = GetCentreOfPair(selectedPair);
             defence.transform.position = GetWorldPositionFromGrid(centre, selectedPair[0].Height);
-            selectedPair.ForEach(x=>x.SetDefence(defence));
-            SelectDefence(SelectedDefence);
+            selectedPair.ForEach(x => x.SetDefence(defence));
         }
+        SelectDefence(SelectedDefence);
     }
 
     private List<List<GridCell>> GetCellGroupsBySize(Vector2Int size)

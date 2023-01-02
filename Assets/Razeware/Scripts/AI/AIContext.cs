@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using Apex.AI;
 
-public class AIContext : IAIContext
+namespace AI
 {
-    public AIContext()
+    public class AIContext : IAIContext
     {
-        
+        public AIContext()
+        {
+
+        }
     }
 }
