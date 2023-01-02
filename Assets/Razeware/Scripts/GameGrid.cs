@@ -21,6 +21,8 @@ public class GameGrid : MonoBehaviour
 
     private List<GridCell> centreCells;
 
+    private List<List<GridCell>> pairCells = new List<List<GridCell>>();
+
     public PoolObjectType SelectedDefence { get; private set; }
 
     // Start is called before the first frame update
@@ -82,13 +84,14 @@ public class GameGrid : MonoBehaviour
         else
         {
             var pairs = GetCellGroupsBySize(defenseInfo.Size);
-            List<List<GridCell>> match = new List<List<GridCell>>();
+            pairCells = new List<List<GridCell>>();
             foreach (var pair in pairs)
             {
-                if (pair.FindAll(defenseInfo.GetCondition()).FindAll(ConditionsData.IsEmptyCell).Count != 0)
-                    match.Add(pair);
+                // pair = pair.FindAll(defenseInfo.GetCondition())
+                if (pair.All(ConditionsData.IsEmptyCell))
+                    pairCells.Add(pair);
             }
-            foreach(var pair in match)
+            foreach (var pair in pairCells)
             {
                 foreach (var cell in pair)
                 {
@@ -109,16 +112,29 @@ public class GameGrid : MonoBehaviour
         if (SelectedDefence == PoolObjectType.None) return;
 
         var defence = PoolManager.Instance.GetFromPool<Defence>(SelectedDefence);
-        defence.transform.position = GetWorldPositionFromGrid(cell);
-        cell.SetDefence(defence);
+        if (defence.Size == Vector2Int.one)
+        {
+            defence.transform.position = GetWorldPositionFromGrid(cell);
+            cell.SetDefence(defence);
+        }
+        else
+        {
+            var selectedPair = pairCells.First(x => x.Contains(cell));
+            if(selectedPair == null) return;
+
+            var centre = GetCentreOfPair(selectedPair);
+            defence.transform.position = GetWorldPositionFromGrid(centre, selectedPair[0].Height);
+            selectedPair.ForEach(x=>x.SetDefence(defence));
+            SelectDefence(SelectedDefence);
+        }
     }
 
     private List<List<GridCell>> GetCellGroupsBySize(Vector2Int size)
     {
         List<List<GridCell>> cells = new List<List<GridCell>>();
-        for (int i = 0; i < width-1; i++)
+        for (int i = 0; i < width - 1; i++)
         {
-            for (int j = 0; j < length-1; j++)
+            for (int j = 0; j < length - 1; j++)
             {
                 var possiblePairs = new List<GridCell>();
                 possiblePairs.Add(grid[i, j]);
@@ -126,7 +142,7 @@ public class GameGrid : MonoBehaviour
                 possiblePairs.Add(grid[i + 1, j]);
                 possiblePairs.Add(grid[i + 1, j + 1]);
 
-                if (possiblePairs.All(pair => pair.IsUpper || !pair.IsUpper))
+                if (possiblePairs.All(pair => !pair.IsUpper) || possiblePairs.All(pair => pair.IsUpper))
                     cells.Add(possiblePairs);
             }
         }
@@ -153,10 +169,12 @@ public class GameGrid : MonoBehaviour
 
     private void SpawnCastleAtCentre()
     {
-        Vector2 centre = centreCells.Aggregate(Vector2.zero, (acc, v) => acc + v.Pos) / centreCells.Count;
+        Vector2 centre = GetCentreOfPair(centreCells);// centreCells.Aggregate(Vector2.zero, (acc, v) => acc + v.Pos) / centreCells.Count;
         var castle = Instantiate(castlePrefab, GetWorldPositionFromGrid(centre, centreCells[0].Height), Quaternion.identity);
         centreCells.ForEach(x => x.SetDefence(castle));
     }
+
+    private Vector2 GetCentreOfPair(List<GridCell> cells) => cells.Aggregate(Vector2.zero, (acc, v) => acc + v.Pos) / cells.Count;
 
     private void TryChangeHeight(GridCell cell)
     {
