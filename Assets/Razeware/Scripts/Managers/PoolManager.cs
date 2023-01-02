@@ -76,6 +76,7 @@ public class PoolManager : MonoBehaviour
             go = pool.FirstOrDefault(x => !x.activeSelf);
             pool.Remove(go);
         }
+        go.SetActive(true);
         return go.GetComponent<T>();
     }
 

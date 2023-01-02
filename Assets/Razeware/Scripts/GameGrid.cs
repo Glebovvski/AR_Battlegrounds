@@ -70,7 +70,9 @@ public class GameGrid : MonoBehaviour
     public void SelectDefence(PoolObjectType type)
     {
         SelectedDefence = type;
-        var defenseInfo = PoolManager.Instance.GetFromPool<Defence>(type).SO;
+        var defense = PoolManager.Instance.GetFromPool<Defence>(type);
+        var defenseInfo = defense.SO;
+        PoolManager.Instance.ReturnToPool(defense.gameObject, type);
         DeselectAllCells();
         if (defenseInfo.Size == Vector2.one)
         {
