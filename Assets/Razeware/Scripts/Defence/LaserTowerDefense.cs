@@ -27,7 +27,7 @@ namespace Defendable
         private void Update()
         {
             if (!IsReady || Detection.Enemies.Count == 0) return;
-            
+
             if (!isAttacking)
                 Attack();
         }
@@ -41,20 +41,31 @@ namespace Defendable
 
         IEnumerator LaserShot(Enemy enemy)
         {
-            while (enemy.IsAlive)// && Detection.IsEnemyInRange(enemy))
+            float t = 0;
+            float time = 5;
+            Vector3 endLaserPos = laser.transform.position;
+            laser.SetPosition(0, laserStartPos.position);
+            for (; t < time; t += Time.deltaTime)
+            {
+                endLaserPos = Vector3.Lerp(laserStartPos.position, enemy.transform.position, t/time);
+                laser.SetPosition(1, endLaserPos);
+                yield return null;
+            }
+
+            while (enemy.IsAlive && Detection.IsEnemyInRange(enemy))
             {
                 Debug.LogError("LASER SHOOT");
                 UpdateLaser(enemy);
-                yield return new WaitForSeconds(1);
+                yield return new WaitForEndOfFrame();
             }
-            // ResetLaser();
+            ResetLaser();
         }
 
         private void ResetLaser()
         {
             lastShotTime = Time.time;
             isAttacking = false;
-            laser.SetPositions(new Vector3[2]{Vector3.zero, Vector3.zero});
+            laser.SetPositions(new Vector3[2] { Vector3.zero, Vector3.zero });
         }
 
         private void UpdateLaser(Enemy enemy)
