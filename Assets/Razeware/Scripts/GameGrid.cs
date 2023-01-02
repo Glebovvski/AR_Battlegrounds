@@ -79,6 +79,10 @@ public class GameGrid : MonoBehaviour
             var match = GridList.FindAll(defenseInfo.GetCondition()).FindAll(ConditionsData.IsEmptyCell);
             match.ForEach(x => x.SetSelected());
         }
+        else
+        {
+
+        }
     }
 
     public void DeselectDefense()
@@ -96,14 +100,9 @@ public class GameGrid : MonoBehaviour
         cell.SetDefence(defence);
     }
 
-
-    private (bool, Quaternion) IsCornerCell(GridCell cell)
+    private List<GridCell[,]> GetCellGroupsBySize(Vector2Int size)
     {
-        if (cell.Pos.x == width - 1 && cell.Pos.y == width - 1) return (true, Quaternion.Euler(0, 45, 0));
-        if (cell.Pos.x == width - 1 && cell.Pos.y == 0) return (true, Quaternion.Euler(0, 135, 0));
-        if (cell.Pos.x == 0 && cell.Pos.y == width - 1) return (true, Quaternion.Euler(0, -45, 0));
-        if (cell.Pos.x == 0 && cell.Pos.y == 0) return (true, Quaternion.Euler(0, 225, 0));
-        return (false, Quaternion.identity);
+        
     }
 
     private void CreateGrid()

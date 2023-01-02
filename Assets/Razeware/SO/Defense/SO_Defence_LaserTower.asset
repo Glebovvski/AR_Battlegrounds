@@ -18,5 +18,5 @@ MonoBehaviour:
   AttackRange: 20
   RelaodTime: 1
   ProjectileSpeed: 100
-  Size: {x: 1, y: 1}
+  Size: {x: 2, y: 2}
   Condition: 0
