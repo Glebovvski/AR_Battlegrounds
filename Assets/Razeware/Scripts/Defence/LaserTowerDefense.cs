@@ -52,11 +52,11 @@ namespace Defendable
                 yield return null;
             }
 
-            while (enemy.IsAlive && Detection.IsEnemyInRange(enemy))
+            while (enemy.IsAlive)// && Detection.IsEnemyInRange(enemy))
             {
                 Debug.LogError("LASER SHOOT");
                 UpdateLaser(enemy);
-                yield return new WaitForEndOfFrame();
+                yield return new WaitForFixedUpdate();
             }
             ResetLaser();
         }
