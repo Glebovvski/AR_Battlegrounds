@@ -22,6 +22,7 @@ namespace Defendable
         public Predicate<GridCell[]> CanFit = (GridCell[] cells) => cells.All(x => x.IsUpper) || cells.All(x => !x.IsUpper);
         public bool IsActionAvailable() => IsActiveDefence && IsReady;
         public Vector2Int GetSize() => SO.Size;
+        public DefenseType Type => SO.Type;
 
         private void GetData()
         {

@@ -15,8 +15,18 @@ public class ScriptableDefence : ScriptableObject
     public float ProjectileSpeed;
     public Vector2Int Size;
     public Conditions Condition;
+    public DefenseType Type;
 
     public Predicate<GridCell> GetCondition() => ConditionsData.ConditionData.FirstOrDefault(x => x.Name == Condition).Condition;
+}
+
+public enum DefenseType
+{
+    Castle = 0,
+    Wall = 1,
+    Cannon = 2,
+    Laser = 3,
+
 }
 
 public static class ConditionsData
