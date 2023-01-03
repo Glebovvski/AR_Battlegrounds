@@ -10,7 +10,6 @@ namespace AI
         public override void Execute(IAIContext context)
         {
             var c = (AIContext)context;
-            var grid = c.Grid;
         }
     }
 }

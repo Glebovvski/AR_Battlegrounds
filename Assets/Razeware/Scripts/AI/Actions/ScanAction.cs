@@ -16,14 +16,13 @@ namespace AI
             LayerMask = LayerMask.GetMask("Defense");
             var c = (AIContext)context;
             
-            List<Defence> defences = new List<Defence>();
+            List<Observation> defences = new List<Observation>();
             var colliders = Physics.OverlapSphere(Enemy.transform.position, Enemy.ScanRadius, LayerMask);
             foreach (var defence in colliders)
             {
-                defences.Add(defence.GetComponent<Defence>());
+                defences.Add(new Observation(defence.GetComponent<Defence>()));
             }
-
-            c.SetDefences(defences);
+            Enemies.AIManager.Instance.AddObservation(defences);
         }
     }
 }
