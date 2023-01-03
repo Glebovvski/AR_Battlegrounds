@@ -7,13 +7,24 @@ namespace Enemies
 {
     public class AIManager : MonoBehaviour
     {
-        public static AIManager Instance = new AIManager();
+        public static AIManager Instance;
 
-        [field: SerializeField] public GameGrid Grid {get; private set;}
+        [field: SerializeField] public GameGrid Grid { get; private set; }
         public List<Observation> Observations { get; private set; }
 
         private void Awake()
         {
+            if (Instance == null)
+            {
+                Instance = this;
+            }
+            else if (Instance == this)
+            {
+                Destroy(gameObject);
+            }
+
+            DontDestroyOnLoad(gameObject);
+
             Observations = new List<Observation>();
         }
 

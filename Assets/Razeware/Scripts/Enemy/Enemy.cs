@@ -29,7 +29,7 @@ namespace Enemies
 
         public IAIContext GetContext(Guid aiId) => Context;
 
-        private void Awake() 
+        public void Awake() 
         {
             Context = new AIContext(this);
             GetData();

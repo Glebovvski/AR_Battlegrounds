@@ -7,7 +7,8 @@ namespace AI
         public override void Execute(IAIContext context)
         {
             var c = (AIContext)context;
-            c.Enemy.MoveTo(Enemies.AIManager.Instance.Grid.transform.position);
+            var position = Enemies.AIManager.Instance.Grid.transform.position;
+            c.Enemy.MoveTo(position);
         }
     }
 }
