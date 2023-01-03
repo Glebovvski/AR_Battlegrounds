@@ -40,6 +40,7 @@ namespace Defendable
         {
             var bullet = PoolManager.Instance.GetFromPool<CannonBullet>(PoolObjectType.CannonBullet);
             bullet.transform.position = cannon.position;
+            bullet.transform.rotation = tower.rotation;
             bullet.Fire((enemy.transform.position - cannon.transform.position).normalized * ProjectileSpeed);
             lastShotTime = Time.time;
         }
