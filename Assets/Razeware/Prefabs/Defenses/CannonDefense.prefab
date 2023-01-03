@@ -41,6 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7337283921075884860}
   - component: {fileID: 7337283921075884863}
+  - component: {fileID: 158451343494441969}
   m_Layer: 7
   m_Name: CannonDefense
   m_TagString: Untagged
@@ -84,6 +85,22 @@ MonoBehaviour:
   rotationSpeed: 30
   angleThreshold: 5
   cannon: {fileID: 43305129991233838}
+--- !u!208 &158451343494441969
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7337283921075884861}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 3, y: 5, z: 3}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 5.04, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &7708051081411543686
 GameObject:
   m_ObjectHideFlags: 0
