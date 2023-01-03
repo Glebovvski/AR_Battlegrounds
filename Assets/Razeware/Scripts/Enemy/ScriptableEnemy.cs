@@ -8,4 +8,5 @@ public class ScriptableEnemy : ScriptableObject
     public int Health;
     public int AttackForce;
     public int GoldToDrop;
+    public int Speed;
 }

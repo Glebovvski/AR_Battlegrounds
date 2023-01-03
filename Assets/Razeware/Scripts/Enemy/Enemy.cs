@@ -10,6 +10,7 @@ namespace Enemies
 
         public int Health {get; private set; }
         public int AttackForce {get; set;}
+        public int Speed {get;set;}
         public bool IsAlive => true;// Health > 0;
 
 
@@ -17,6 +18,7 @@ namespace Enemies
         {
             Health = SO.Health;
             AttackForce = SO.AttackForce;
+            Speed = SO.Speed;
         }
 
     }
