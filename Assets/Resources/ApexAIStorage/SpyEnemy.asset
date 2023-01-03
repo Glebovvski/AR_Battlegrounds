@@ -19,9 +19,8 @@ MonoBehaviour:
     ApexAI","_id":2a47907e25224653b07cd42428009632,"_qualifiers":[],"_defaultQualifier":{"@type":"Apex.AI.DefaultQualifier,
     ApexAI","action":{"@type":"AI.ScanAction, Assembly-CSharp"}}},{"@type":"Apex.AI.ScoreSelector,
     ApexAI","_id":96f1f01093814e8a8db628ec8de21598,"_qualifiers":[{"@type":"Apex.AI.FixedScoreQualifier,
-    ApexAI","action":{"@type":"Apex.AI.SelectorAction, ApexAI","_selectorId":2a47907e25224653b07cd42428009632}}],"_defaultQualifier":{"@type":"Apex.AI.DefaultQualifier,
-    ApexAI"}}]}'
-  editorConfiguration: '{"offset":{"@x":90,"@y":41},"zoom":1,"SelectorView":{"ViewArea":{"@left":450,"@top":121,"@width":200,"@height":100},"Name":"Scan","DefaultQualifier":{"Name":"Update
-    Context","ActionView":{}}},"SelectorView":{"ViewArea":{"@left":130,"@top":101,"@width":200,"@height":160},"Name":"Move
+    ApexAI","action":{"@type":"Apex.AI.SelectorAction, ApexAI","_selectorId":2a47907e25224653b07cd42428009632},"score":0}],"_defaultQualifier":{"@type":"Apex.AI.DefaultQualifier,
+    ApexAI","action":{"@type":"AI.MoveToGrid, Assembly-CSharp"}}}]}'
+  editorConfiguration: '{"offset":{"@x":90,"@y":41},"zoom":1,"SelectorView":{"ViewArea":{"@left":450,"@top":121,"@width":200,"@height":100},"Name":"Scan","DefaultQualifier":{"Name":"Scan","ActionView":{}}},"SelectorView":{"ViewArea":{"@left":130,"@top":101,"@width":200,"@height":160},"Name":"Move
     or Scan","QualifierView":{"Name":"Is Close To Grid","ActionView":{"@connectorType":"Selector"}},"DefaultQualifier":{"Name":"Move
-    To Grid"}}}'
+    To Grid","ActionView":{}}}}'

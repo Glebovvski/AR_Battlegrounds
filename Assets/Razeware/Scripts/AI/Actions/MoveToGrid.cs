@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using Apex.AI;
-using UnityEngine;
 
 namespace AI
 {
@@ -10,6 +7,7 @@ namespace AI
         public override void Execute(IAIContext context)
         {
             var c = (AIContext)context;
+            c.Enemy.MoveTo(Enemies.AIManager.Instance.Grid.transform.position);
         }
     }
 }
