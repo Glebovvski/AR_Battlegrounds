@@ -1,6 +1,7 @@
 using System;
 using Defendable;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class GridCell : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class GridCell : MonoBehaviour
     [SerializeField] private MeshFilter cubeMesh;
     [SerializeField] private Mesh ground;
     [SerializeField] private Mesh grass;
+    [SerializeField] private NavMeshSurface surface;
 
     private int posX;
     private int posY;
@@ -38,8 +40,13 @@ public class GridCell : MonoBehaviour
     public void SetDefence(Defence defence)
     {
         if (IsFree)
+        {
             Defence = defence;
+            surface.BuildNavMesh();
+        }
     }
+
+    public void BuildNavMesh() => surface.BuildNavMesh();
 
     internal void DeselectCell() => quadRenderer.material.color = defaultCellColor;
 }

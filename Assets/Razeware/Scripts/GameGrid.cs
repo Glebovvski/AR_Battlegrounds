@@ -165,6 +165,7 @@ public class GameGrid : MonoBehaviour
         }
         TryChangeHeight();
         SpawnCastleAtCentre();
+        GridList.ForEach(x=>x.BuildNavMesh());
     }
 
     private void SpawnCastleAtCentre()
