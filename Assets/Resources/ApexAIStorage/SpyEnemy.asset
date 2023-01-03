@@ -17,6 +17,9 @@ MonoBehaviour:
   aiId: e6fc5f07-8ee4-4a75-9962-ce8dc82f8f7c
   configuration: '{"@type":"Apex.AI.UtilityAI, ApexAI","_rootSelectorId":2a47907e25224653b07cd42428009632,"_id":e6fc5f078ee44a759962ce8dc82f8f7c,"_selectors":[{"@type":"Apex.AI.ScoreSelector,
     ApexAI","_id":2a47907e25224653b07cd42428009632,"_qualifiers":[],"_defaultQualifier":{"@type":"Apex.AI.DefaultQualifier,
-    ApexAI","action":{"@type":"AI.ScanAction, Assembly-CSharp"}}}]}'
-  editorConfiguration: '{"offset":{"@x":0,"@y":0},"zoom":1,"SelectorView":{"ViewArea":{"@left":100,"@top":100,"@width":200,"@height":100},"DefaultQualifier":{"Name":"Update
-    Context","ActionView":{}}}}'
+    ApexAI","action":{"@type":"AI.ScanAction, Assembly-CSharp"}}},{"@type":"Apex.AI.ScoreSelector,
+    ApexAI","_id":52d666f35460445697bf89f37e28250d,"_qualifiers":[],"_defaultQualifier":{"@type":"Apex.AI.DefaultQualifier,
+    ApexAI"}}]}'
+  editorConfiguration: '{"offset":{"@x":90,"@y":41},"zoom":1,"SelectorView":{"ViewArea":{"@left":610,"@top":181,"@width":200,"@height":100},"DefaultQualifier":{"Name":"Update
+    Context","ActionView":{}}},"SelectorView":{"ViewArea":{"@left":230,"@top":201,"@width":200,"@height":100},"Name":"Move","DefaultQualifier":{"Name":"Move
+    to grid"}}}'

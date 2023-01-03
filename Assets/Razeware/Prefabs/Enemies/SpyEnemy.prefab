@@ -9,11 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 497068949028825281}
+  - component: {fileID: 1391045341283484148}
+  - component: {fileID: 683039605362336157}
   - component: {fileID: 497068949028825280}
   - component: {fileID: 497068949028825283}
   - component: {fileID: 497068949028825282}
   - component: {fileID: 497068949028825294}
-  - component: {fileID: 1391045341283484148}
   m_Layer: 0
   m_Name: SpyEnemy
   m_TagString: Untagged
@@ -36,6 +37,39 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1391045341283484148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 497068949028825284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c809f8ac9247ea241bb67d286172ff4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SO: {fileID: 11400000, guid: 67d7ef46db95450469a798a81bbf0629, type: 2}
+  scanRadius: 40
+--- !u!114 &683039605362336157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 497068949028825284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 939582531, guid: 6012f3241c1c1f7409c44769fc0a1db7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aiConfigs:
+  - aiId: e6fc5f07-8ee4-4a75-9962-ce8dc82f8f7c
+    intervalMin: 1
+    intervalMax: 10
+    startDelayMin: 0
+    startDelayMax: 0
+    isActive: 1
 --- !u!33 &497068949028825280
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -115,17 +149,3 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &1391045341283484148
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 497068949028825284}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c809f8ac9247ea241bb67d286172ff4f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SO: {fileID: 0}
-  scanRadius: 40
