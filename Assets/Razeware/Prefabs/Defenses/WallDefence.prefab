@@ -17,6 +17,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: WallDefence
       objectReference: {fileID: 0}
+    - target: {fileID: 913087713329378284, guid: c80cb6c127c3e4cf9b4970dbb8bc2e8d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 913087713329378287, guid: c80cb6c127c3e4cf9b4970dbb8bc2e8d,
         type: 3}
       propertyPath: m_RootOrder
@@ -197,6 +202,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8010174082899857812, guid: 3318a0dcc90627d4394e56a36f632ee6,
         type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8010174082899857812, guid: 3318a0dcc90627d4394e56a36f632ee6,
+        type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -284,6 +294,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: WoodenPlankBarrier_14_v1 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8010174082899857812, guid: 3318a0dcc90627d4394e56a36f632ee6,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8010174082899857812, guid: 3318a0dcc90627d4394e56a36f632ee6,
         type: 3}
@@ -377,6 +392,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8010174082899857812, guid: 3318a0dcc90627d4394e56a36f632ee6,
         type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8010174082899857812, guid: 3318a0dcc90627d4394e56a36f632ee6,
+        type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -464,6 +484,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: WoodenPlankBarrier_14_v1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8010174082899857812, guid: 3318a0dcc90627d4394e56a36f632ee6,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8010174082899857812, guid: 3318a0dcc90627d4394e56a36f632ee6,
         type: 3}

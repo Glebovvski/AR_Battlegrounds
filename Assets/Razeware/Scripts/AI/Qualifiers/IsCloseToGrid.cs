@@ -5,7 +5,7 @@ using Apex.AI;
 using Apex.Serialization;
 using UnityEngine;
 
-public class IsCloseToGrid : QualifierBase
+public class IsCloseToGrid : ContextualScorerBase
 {
     public override float Score(IAIContext context)
     {

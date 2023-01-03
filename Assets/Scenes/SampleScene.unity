@@ -863,7 +863,7 @@ PrefabInstance:
     - target: {fileID: 6000988167660706115, guid: 91ba00481d9194bd4974e9dcc125242e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.0000019073486
+      value: -0.99
       objectReference: {fileID: 0}
     - target: {fileID: 6000988167660706115, guid: 91ba00481d9194bd4974e9dcc125242e,
         type: 3}
@@ -1961,10 +1961,10 @@ PrefabInstance:
         type: 3}
       propertyPath: navMeshAgent
       value: 
-      objectReference: {fileID: 1846276491}
+      objectReference: {fileID: 1846276492}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b8d098908aa552f4899c294aecff83ec, type: 3}
---- !u!195 &1846276491 stripped
+--- !u!195 &1846276492 stripped
 NavMeshAgent:
   m_CorrespondingSourceObject: {fileID: 7875034080553232178, guid: b8d098908aa552f4899c294aecff83ec,
     type: 3}
