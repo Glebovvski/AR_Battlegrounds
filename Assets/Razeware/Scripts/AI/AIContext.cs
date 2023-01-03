@@ -8,10 +8,12 @@ namespace AI
 {
     public class AIContext : IAIContext
     {
+        public GameGrid Grid {get; private set; }
         public List<Defence> Defenses {get; private set;}
-        public AIContext()
+        public AIContext(GameGrid grid)
         {
             Defenses = new List<Defence>();
+            Grid = grid;
         }
 
         public void SetDefences(List<Defence> defences)
