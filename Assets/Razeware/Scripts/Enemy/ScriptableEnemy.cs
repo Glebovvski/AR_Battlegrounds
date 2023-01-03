@@ -9,4 +9,5 @@ public class ScriptableEnemy : ScriptableObject
     public int AttackForce;
     public int GoldToDrop;
     public int Speed;
+    public float ScanRange;
 }

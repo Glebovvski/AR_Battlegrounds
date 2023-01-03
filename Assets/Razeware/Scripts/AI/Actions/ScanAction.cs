@@ -17,7 +17,7 @@ namespace AI
             var c = (AIContext)context;
             
             List<Observation> defences = new List<Observation>();
-            var colliders = Physics.OverlapSphere(Enemy.transform.position, Enemy.ScanRadius, LayerMask);
+            var colliders = Physics.OverlapSphere(Enemy.transform.position, Enemy.ScanRange, LayerMask);
             foreach (var defence in colliders)
             {
                 defences.Add(new Observation(defence.GetComponent<Defence>()));

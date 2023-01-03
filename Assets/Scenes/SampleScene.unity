@@ -1952,26 +1952,19 @@ PrefabInstance:
       propertyPath: aiConfigs.Array.data[0].intervalMax
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1391045341283484148, guid: b8d098908aa552f4899c294aecff83ec,
+        type: 3}
+      propertyPath: navMeshAgent
+      value: 
+      objectReference: {fileID: 1846276491}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b8d098908aa552f4899c294aecff83ec, type: 3}
---- !u!1 &1846276491 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 497068949028825284, guid: b8d098908aa552f4899c294aecff83ec,
+--- !u!195 &1846276491 stripped
+NavMeshAgent:
+  m_CorrespondingSourceObject: {fileID: 7875034080553232178, guid: b8d098908aa552f4899c294aecff83ec,
     type: 3}
   m_PrefabInstance: {fileID: 1846276490}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1846276492
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1846276491}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8458edd4ccaea624db5e4bd8fb9269c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2070187243
 GameObject:
   m_ObjectHideFlags: 0

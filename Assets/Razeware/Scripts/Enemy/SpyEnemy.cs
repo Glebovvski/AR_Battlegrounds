@@ -6,7 +6,5 @@ namespace Enemies
 {
     public class SpyEnemy : Enemy
     {
-        [SerializeField] private float scanRadius;
-        public float ScanRadius => scanRadius;
     }
 }

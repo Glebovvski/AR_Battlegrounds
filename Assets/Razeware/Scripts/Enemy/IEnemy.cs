@@ -13,10 +13,8 @@ namespace Enemies
         Vector3? MoveTarget { get; set; }
         Defence AttackTarget { get; set; }
         float ScanRange { get; }
-        bool CanCommunicate { get; }
         Vector3 Position { get; }
 
         void MoveTo(Vector3 destination);
-        void ReceiveCommunicatedMemory(IList<Observation> observations);
     }
 }
