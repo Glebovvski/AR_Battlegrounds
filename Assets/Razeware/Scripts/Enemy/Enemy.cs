@@ -15,24 +15,26 @@ namespace Enemies
         [SerializeField] private ScriptableEnemy SO;
         [SerializeField] private NavMeshAgent navMeshAgent;
 
-        public int Health {get; private set; }
-        public int AttackForce {get; set;}
-        public int Speed {get;set;}
-        public bool IsAlive => true; //TODO: add check
-        public AIContext Context {get; private set; }
+        public int Health { get; private set; }
+        public int AttackForce { get; set; }
+        public int Speed { get; set; }
+        public bool IsAlive => !DamageReceiver.IsDead;
+        public AIContext Context { get; private set; }
         public GameObject GameObject => this.gameObject;
         public NavMeshAgent NavMeshAgent => navMeshAgent;
         public Vector3? MoveTarget { get; set; }
         public Defence AttackTarget { get; set; }
         public float ScanRange => SO.ScanRange;
         public Vector3 Position => this.gameObject.transform.position;
+        public DamageReceiver DamageReceiver;
 
         public IAIContext GetContext(Guid aiId) => Context;
 
-        public void Awake() 
+        public void Awake()
         {
             Context = new AIContext(this);
             GetData();
+            DamageReceiver = new DamageReceiver(Health);
         }
 
         public void GetData()
@@ -46,6 +48,11 @@ namespace Enemies
         public void MoveTo(Vector3 destination)
         {
             NavMeshAgent.destination = destination;
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            DamageReceiver.OnCollision(other);
         }
     }
 }
