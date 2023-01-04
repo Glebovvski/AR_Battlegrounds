@@ -174,8 +174,8 @@ public class GameGrid : MonoBehaviour
         {
             this.transform.position,
             this.transform.position + new Vector3(width, 0, 0),
-            this.transform.position + new Vector3(0,0, length),
-            this.transform.position + new Vector3(width, 0, length)
+            this.transform.position + new Vector3(width,0, length),
+            this.transform.position + new Vector3(0, 0, length)
         };
     }
 

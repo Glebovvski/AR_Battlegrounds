@@ -1956,7 +1956,7 @@ PrefabInstance:
     - target: {fileID: 683039605362336157, guid: b8d098908aa552f4899c294aecff83ec,
         type: 3}
       propertyPath: aiConfigs.Array.data[0].intervalMax
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1391045341283484148, guid: b8d098908aa552f4899c294aecff83ec,
         type: 3}

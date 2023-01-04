@@ -10,13 +10,14 @@ namespace AI
     {
         public override void Execute(IAIContext context)
         {
-            Debug.LogError("MOVING AROUND: ");
+            // Debug.LogError("MOVING AROUND: ");
             var c = (AIContext)context;
-            var enemy = c.Enemy;
+            var enemy = (SpyEnemy)c.Enemy;
 
             var corners = Enemies.AIManager.Instance.Grid.Corners();
             int closest = GetClosestCornerIndex(corners, enemy);
             enemy.MoveTo(corners[closest]);
+            enemy.SetIsScanFinished(false);
         }
 
         private int GetClosestCornerIndex(List<Vector3> Corners, IEnemy enemy)
