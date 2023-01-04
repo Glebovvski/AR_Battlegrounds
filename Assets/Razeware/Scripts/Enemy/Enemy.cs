@@ -27,14 +27,21 @@ namespace Enemies
         public float ScanRange => SO.ScanRange;
         public Vector3 Position => this.gameObject.transform.position;
         public DamageReceiver DamageReceiver;
+        public PoolObjectType Type => SO.Type;
 
         public IAIContext GetContext(Guid aiId) => Context;
 
-        public void Awake()
+        private void Init()
         {
             Context = new AIContext(this);
             GetData();
             DamageReceiver = new DamageReceiver(Health);
+            DamageReceiver.OnDeath += Death;
+        }
+
+        private void OnEnable()
+        {
+            Init();
         }
 
         public void GetData()
@@ -55,6 +62,12 @@ namespace Enemies
         private void OnTriggerEnter(Collider other)
         {
             DamageReceiver.OnCollision(other);
+        }
+
+        private void Death()
+        {
+            DamageReceiver.OnDeath -= Death;
+            AIManager.Instance.UnregisterEnemy(this);
         }
     }
 }

@@ -10,4 +10,5 @@ public class ScriptableEnemy : ScriptableObject
     public int GoldToDrop;
     public int Speed;
     public float ScanRange;
+    public PoolObjectType Type;
 }

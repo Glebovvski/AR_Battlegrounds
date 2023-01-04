@@ -101,5 +101,7 @@ public enum PoolObjectType
     CannonTower = 2,
     WallTower = 3,
     LaserTower = 4,
+    Enemy = 5,
+    SpyEnemy = 6,
 
 }

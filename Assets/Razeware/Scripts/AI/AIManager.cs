@@ -57,6 +57,16 @@ namespace Enemies
             return GetClosest(enemy, observations);
         }
 
+        public T RegisterEnemy<T>(PoolObjectType enemyType) where T : Enemy
+        {
+            return PoolManager.Instance.GetFromPool<T>(enemyType);
+        }
+
+        public void UnregisterEnemy(Enemy enemy)
+        {
+            PoolManager.Instance.ReturnToPool(enemy.GameObject, enemy.Type);
+        }
+
         private Observation GetClosest(IEnemy enemy, List<Observation> observations)
         {
             Vector3 position = enemy.GameObject.transform.position;
