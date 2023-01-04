@@ -30,6 +30,7 @@ namespace Enemies
         public DamageReceiver DamageReceiver;
         public PoolObjectType Type => SO.Type;
         public float AttackRange => SO.AttackRange;
+        public EnemyType EnemyType => SO.EnemyType;
 
         public int AttackWallScore => SO.AttackWallScore;
         public int AttackCannonScore => SO.AttackCannonScore;
@@ -87,7 +88,7 @@ namespace Enemies
         {
             var navMeshPath = new NavMeshPath();
             NavMeshAgent.CalculatePath(observation.Position, navMeshPath);
-             return navMeshPath;
+            return navMeshPath;
         }
 
         private void OnTriggerEnter(Collider other)
@@ -100,5 +101,12 @@ namespace Enemies
             DamageReceiver.OnDeath -= Death;
             AIManager.Instance.UnregisterEnemy(this);
         }
+    }
+
+    public enum EnemyType
+    {
+        Mono = 0, //for big enemies or spies
+        Team = 1, //for small mobs
+        Any = 2
     }
 }
