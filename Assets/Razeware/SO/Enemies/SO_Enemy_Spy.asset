@@ -17,3 +17,4 @@ MonoBehaviour:
   GoldToDrop: 20
   Speed: 5
   ScanRange: 15
+  Type: 6
