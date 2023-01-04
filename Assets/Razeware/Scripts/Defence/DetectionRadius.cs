@@ -24,7 +24,7 @@ namespace Defendable
             foreach (var enemy in enemiesInRange)
             {
                 var distance = Vector3.Distance(enemy.transform.position, this.transform.position);
-                if(distance < minDistance)
+                if (distance < minDistance)
                 {
                     minDistance = distance;
                     closestEnemy = enemy;
@@ -38,13 +38,20 @@ namespace Defendable
             if (!other.TryGetComponent<Enemy>(out var enemy)) return;
 
             enemiesInRange.Add(enemy);
+            enemy.OnDeath += UnregisterEnemy;
         }
 
-        private void OnTriggerExit(Collider other) 
+        private void OnTriggerExit(Collider other)
         {
-            if(!other.TryGetComponent<Enemy>(out var enemy)) return;
+            if (!other.TryGetComponent<Enemy>(out var enemy)) return;
 
             enemiesInRange.Remove(enemy);
+        }
+
+        private void UnregisterEnemy(Enemy enemy)
+        {
+            enemiesInRange.Remove(enemy);
+            enemy.OnDeath -= UnregisterEnemy;
         }
     }
 }

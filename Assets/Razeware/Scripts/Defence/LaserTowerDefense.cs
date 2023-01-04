@@ -28,7 +28,11 @@ namespace Defendable
 
         private void Update()
         {
-            if (!IsReady || Detection.Enemy == null) return;
+            if (!IsReady || Detection.Enemy == null)
+            {
+                ResetLaser();
+                return;
+            }
 
             if (!isAttacking)
                 Attack();
@@ -47,10 +51,10 @@ namespace Defendable
             float time = 5;
             Vector3 endLaserPos = laser.transform.position;
             laserRenderer.SetPosition(0, laserStartPos.position);
-            
+
             for (; t < time; t += Time.deltaTime)
             {
-                endLaserPos = Vector3.Lerp(laserStartPos.position, enemy.transform.position, t/time);
+                endLaserPos = Vector3.Lerp(laserStartPos.position, enemy.transform.position, t / time);
                 laserRenderer.SetPosition(1, endLaserPos);
                 yield return null;
             }
@@ -66,7 +70,7 @@ namespace Defendable
 
         private void ResetLaser()
         {
-            lastShotTime = Time.time;
+            if (IsReady) lastShotTime = Time.time;
             isAttacking = false;
             laserRenderer.SetPositions(new Vector3[2] { Vector3.zero, Vector3.zero });
         }
@@ -75,7 +79,7 @@ namespace Defendable
         {
             laserRenderer.SetPosition(0, laserStartPos.position);
             laserRenderer.SetPosition(1, enemy.transform.position);
-            enemy.TakeDamage(laser.Damage/Time.deltaTime);
+            enemy.TakeDamage(laser.Damage / Time.deltaTime);
         }
     }
 }

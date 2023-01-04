@@ -37,6 +37,8 @@ namespace Enemies
         public int AttackLaserScore => SO.AttackLaserScore;
         public int AttackCastleScore => SO.AttackCastleScore;
 
+        public event Action<Enemy> OnDeath;
+
         public Dictionary<DefenseType, int> DefenseTypeToScore = new Dictionary<DefenseType, int>();
 
         public IAIContext GetContext(Guid aiId) => Context;
@@ -100,6 +102,7 @@ namespace Enemies
         {
             DamageReceiver.OnDeath -= Death;
             AIManager.Instance.UnregisterEnemy(this);
+            OnDeath?.Invoke(this);
         }
     }
 
