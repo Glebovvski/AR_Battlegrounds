@@ -74,7 +74,7 @@ public class GameGrid : MonoBehaviour
     public void SelectDefence(PoolObjectType type)
     {
         SelectedDefence = type;
-        var defense = PoolManager.Instance.GetFromPool<Defence>(type);
+        var defense = PoolManager.Instance.GetFromPool<Defense>(type);
         var defenseInfo = defense.SO;
         PoolManager.Instance.ReturnToPool(defense.gameObject, type);
         DeselectAllCells();
@@ -113,7 +113,7 @@ public class GameGrid : MonoBehaviour
     {
         if (SelectedDefence == PoolObjectType.None) return;
 
-        var defence = PoolManager.Instance.GetFromPool<Defence>(SelectedDefence);
+        var defence = PoolManager.Instance.GetFromPool<Defense>(SelectedDefence);
         if (defence.GetSize() == Vector2Int.one)
         {
             defence.transform.position = GetWorldPositionFromGrid(cell);

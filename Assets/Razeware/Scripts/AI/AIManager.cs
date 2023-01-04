@@ -11,6 +11,8 @@ namespace Enemies
 
         [field: SerializeField] public GameGrid Grid { get; private set; }
         [field: SerializeField] public List<Observation> Observations { get; private set; }
+        
+        private List<Enemy> Enemies = new List<Enemy>();
 
         private void Awake()
         {
@@ -59,13 +61,18 @@ namespace Enemies
 
         public T RegisterEnemy<T>(PoolObjectType enemyType) where T : Enemy
         {
-            return PoolManager.Instance.GetFromPool<T>(enemyType);
+            var enemy = PoolManager.Instance.GetFromPool<T>(enemyType);
+            Enemies.Add(enemy);
+            return enemy;
         }
 
         public void UnregisterEnemy(Enemy enemy)
         {
+            Enemies.Remove(enemy);
             PoolManager.Instance.ReturnToPool(enemy.GameObject, enemy.Type);
         }
+
+        public int GetEnemiesAttackingObservation(Observation observation) => Enemies.Where(x => x.AttackTarget == observation.Defence).Count();
 
         private Observation GetClosest(IEnemy enemy, List<Observation> observations)
         {

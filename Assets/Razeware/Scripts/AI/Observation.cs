@@ -5,12 +5,12 @@ using UnityEngine;
 [Serializable]
 public class Observation :  IEquatable<Observation>
 {
-    public Observation(Defence defence)
+    public Observation(Defense defence)
     {
         this.Defence = defence;
     }
 
-    public Defence Defence { get; private set; }
+    public Defense Defence { get; private set; }
     public Vector3 Position => Defence.gameObject.transform.position;
 
     public bool Equals(Observation other)

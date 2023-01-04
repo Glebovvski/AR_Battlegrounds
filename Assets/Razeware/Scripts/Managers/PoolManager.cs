@@ -97,11 +97,11 @@ public class PoolInfo
 public enum PoolObjectType
 {
     None = 0,
-    CannonBullet = 1,
-    CannonTower = 2,
-    WallTower = 3,
-    LaserTower = 4,
-    Enemy = 5,
-    SpyEnemy = 6,
+    CannonTower = 100,
+    WallTower,
+    LaserTower,
+    Enemy = 100,
+    SpyEnemy,
+    CannonBullet = 300,
 
 }

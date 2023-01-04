@@ -15,6 +15,6 @@ namespace Defendable
     public class DefenceInfo
     {
         [field:SerializeField] public PoolObjectType Type {get;set;}
-        [field:SerializeField] public Defence Defence {get;set;}
+        [field:SerializeField] public Defense Defence {get;set;}
     }
 }

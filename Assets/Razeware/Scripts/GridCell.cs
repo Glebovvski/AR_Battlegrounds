@@ -14,7 +14,7 @@ public class GridCell : MonoBehaviour
     private int posX;
     private int posY;
 
-    public Defence Defence { get; private set; }
+    public Defense Defence { get; private set; }
     public bool IsFree => Defence == null;
     public Vector2Int Pos => new Vector2Int(posX, posY);
     public int Height => Mathf.FloorToInt(transform.localScale.z);
@@ -37,7 +37,7 @@ public class GridCell : MonoBehaviour
         cubeMesh.mesh = value == 1 ? grass : ground;
 
     }
-    public void SetDefence(Defence defence)
+    public void SetDefence(Defense defence)
     {
         if (IsFree)
         {

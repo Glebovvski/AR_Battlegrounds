@@ -9,8 +9,8 @@ namespace AI
 {
     public class AIContext : IAIContext
     {
-        public IEnemy Enemy { get; private set; }
-        public AIContext(IEnemy enemy)
+        public Enemy Enemy { get; private set; }
+        public AIContext(Enemy enemy)
         {
             Enemy = enemy;
         }

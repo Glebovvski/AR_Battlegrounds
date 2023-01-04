@@ -467,13 +467,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defences:
-  - <Type>k__BackingField: 2
+  - <Type>k__BackingField: 100
     <Defence>k__BackingField: {fileID: 7337283921075884863, guid: 2b8c6f3046dcf5f4d9ded5b6bf4564d4,
       type: 3}
-  - <Type>k__BackingField: 3
+  - <Type>k__BackingField: 101
     <Defence>k__BackingField: {fileID: 3066382648115367535, guid: ded43c50ce9d44db2a7c95fceaaa5e74,
       type: 3}
-  - <Type>k__BackingField: 4
+  - <Type>k__BackingField: 102
     <Defence>k__BackingField: {fileID: 8956900902844347426, guid: a68667cd162fe4f718f39e0285bc4b6c,
       type: 3}
 --- !u!114 &568455788
@@ -1144,37 +1144,42 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poolList:
-  - type: 1
+  - type: 300
     amount: 50
     prefab: {fileID: 1240887441953726, guid: 8a976dcd328a4664c85144f33b9c46b0, type: 3}
     container: {fileID: 745831102}
     pool: []
-  - type: 2
+  - type: 100
     amount: 20
     prefab: {fileID: 7337283921075884861, guid: 2b8c6f3046dcf5f4d9ded5b6bf4564d4,
       type: 3}
     container: {fileID: 745831102}
     pool: []
-  - type: 3
+  - type: 101
     amount: 20
     prefab: {fileID: 3512068383827528869, guid: ded43c50ce9d44db2a7c95fceaaa5e74,
       type: 3}
     container: {fileID: 745831102}
     pool: []
-  - type: 4
+  - type: 102
     amount: 20
     prefab: {fileID: 1743066002486615745, guid: a68667cd162fe4f718f39e0285bc4b6c,
       type: 3}
     container: {fileID: 745831102}
     pool: []
-  - type: 5
+  - type: 100
     amount: 20
     prefab: {fileID: 497068949028825284, guid: 8fb30d3c8ee29284a90ff1949abe00c9, type: 3}
     container: {fileID: 745831102}
     pool: []
-  - type: 6
+  - type: 101
     amount: 20
     prefab: {fileID: 497068949028825284, guid: b8d098908aa552f4899c294aecff83ec, type: 3}
+    container: {fileID: 745831102}
+    pool: []
+  - type: 103
+    amount: 20
+    prefab: {fileID: 632206186788182576, guid: 04e75d005ee598b4e93e4dff9d5fc98f, type: 3}
     container: {fileID: 745831102}
     pool: []
 --- !u!4 &745831104
@@ -2076,7 +2081,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -1645.5, y: 0}
+  m_AnchoredPosition: {x: -1644.5001, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &2079989270

@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Defendable
 {
-    public class LaserTowerDefense : Defence
+    public class LaserTowerDefense : Defense
     {
         [SerializeField] private DetectionRadius Detection;
         [SerializeField] private Transform laserStartPos;

@@ -4,12 +4,12 @@ using UnityEngine;
 
 namespace Defendable
 {
-    public abstract class Defence : MonoBehaviour
+    public abstract class Defense : MonoBehaviour
     {
         [field: SerializeField] public ScriptableDefence SO { get; set; }
-        // [field: SerializeField] public GameGrid grid { get; set; }
 
         public int Health { get; private set; }
+        public float CurrentHealth => DamageReceiver.CurrentHealth;
         public bool IsActiveDefence { get; private set; }
         public int AttackRange { get; private set; }
         public int AttackForce { get; private set; }
@@ -22,6 +22,7 @@ namespace Defendable
         public bool IsActionAvailable() => IsActiveDefence && IsReady;
         public Vector2Int GetSize() => SO.Size;
         public DefenseType Type => SO.Type;
+        protected DamageReceiver DamageReceiver;
 
         private void GetData()
         {
@@ -36,6 +37,7 @@ namespace Defendable
         protected void Start()
         {
             GetData();
+            DamageReceiver = new DamageReceiver(Health);
         }
     }
 }

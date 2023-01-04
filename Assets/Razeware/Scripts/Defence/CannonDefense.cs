@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Defendable
 {
-    public class CannonDefense : Defence
+    public class CannonDefense : Defense
     {
         [SerializeField] private DetectionRadius Detection;
         [SerializeField] private Transform tower;

@@ -23,11 +23,17 @@ namespace Enemies
         public GameObject GameObject => this.gameObject;
         public NavMeshAgent NavMeshAgent => navMeshAgent;
         public Vector3? MoveTarget { get; set; }
-        public Defence AttackTarget { get; set; }
+        public Defense AttackTarget { get; set; }
         public float ScanRange => SO.ScanRange;
         public Vector3 Position => this.gameObject.transform.position;
         public DamageReceiver DamageReceiver;
         public PoolObjectType Type => SO.Type;
+        public float AttackRange => SO.AttackRange;
+
+        public int AttackWallScore => SO.AttackWallScore;
+        public int AttackCannonScore => SO.AttackCannonScore;
+        public int AttackLaserScore => SO.AttackLaserScore;
+        public int AttackCastleScore => SO.AttackCastleScore;
 
         public IAIContext GetContext(Guid aiId) => Context;
 
