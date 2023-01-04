@@ -7,6 +7,7 @@ using Apex.AI.Components;
 using Defendable;
 using UnityEngine;
 using UnityEngine.AI;
+using System.Linq;
 
 namespace Enemies
 {
@@ -35,7 +36,14 @@ namespace Enemies
         public int AttackLaserScore => SO.AttackLaserScore;
         public int AttackCastleScore => SO.AttackCastleScore;
 
+        public Dictionary<DefenseType, int> DefenseTypeToScore = new Dictionary<DefenseType, int>();
+
         public IAIContext GetContext(Guid aiId) => Context;
+
+        private void Awake()
+        {
+            PopulateDictionary();
+        }
 
         private void Init()
         {
@@ -43,6 +51,16 @@ namespace Enemies
             GetData();
             DamageReceiver = new DamageReceiver(Health);
             DamageReceiver.OnDeath += Death;
+        }
+
+        private void PopulateDictionary()
+        {
+            DefenseTypeToScore.Add(DefenseType.Castle, AttackCastleScore);
+            DefenseTypeToScore.Add(DefenseType.Cannon, AttackCannonScore);
+            DefenseTypeToScore.Add(DefenseType.Laser, AttackLaserScore);
+            DefenseTypeToScore.Add(DefenseType.Wall, AttackWallScore);
+
+            DefenseTypeToScore = DefenseTypeToScore.OrderBy(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
         }
 
         private void OnEnable()
@@ -64,6 +82,13 @@ namespace Enemies
         }
 
         public void TakeDamage(float value) => DamageReceiver.TakeDamage(value);
+
+        public NavMeshPath GetCalculatedPath(Observation observation)
+        {
+            var navMeshPath = new NavMeshPath();
+            NavMeshAgent.CalculatePath(observation.Position, navMeshPath);
+             return navMeshPath;
+        }
 
         private void OnTriggerEnter(Collider other)
         {
