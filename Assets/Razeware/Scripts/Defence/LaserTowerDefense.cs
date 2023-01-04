@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Enemies;
+using Missiles;
 using UnityEngine;
 
 namespace Defendable
@@ -10,11 +11,12 @@ namespace Defendable
     {
         [SerializeField] private DetectionRadius Detection;
         [SerializeField] private Transform laserStartPos;
+        [SerializeField] private Laser laser;
 
         private float lastShotTime;
         protected override bool IsReady { get => Time.time - lastShotTime > RelaodTime; set => IsReady = value; }
 
-        [SerializeField] LineRenderer laser;
+        [SerializeField] LineRenderer laserRenderer;
         private bool isAttacking = false;
 
         private void Start()
@@ -44,11 +46,11 @@ namespace Defendable
             float t = 0;
             float time = 5;
             Vector3 endLaserPos = laser.transform.position;
-            laser.SetPosition(0, laserStartPos.position);
+            laserRenderer.SetPosition(0, laserStartPos.position);
             for (; t < time; t += Time.deltaTime)
             {
                 endLaserPos = Vector3.Lerp(laserStartPos.position, enemy.transform.position, t/time);
-                laser.SetPosition(1, endLaserPos);
+                laserRenderer.SetPosition(1, endLaserPos);
                 yield return null;
             }
 
@@ -65,13 +67,14 @@ namespace Defendable
         {
             lastShotTime = Time.time;
             isAttacking = false;
-            laser.SetPositions(new Vector3[2] { Vector3.zero, Vector3.zero });
+            laserRenderer.SetPositions(new Vector3[2] { Vector3.zero, Vector3.zero });
         }
 
         private void UpdateLaser(Enemy enemy)
         {
-            laser.SetPosition(0, laserStartPos.position);
-            laser.SetPosition(1, enemy.transform.position);
+            laserRenderer.SetPosition(0, laserStartPos.position);
+            laserRenderer.SetPosition(1, enemy.transform.position);
+            enemy.TakeDamage(laser.Damage/Time.deltaTime);
         }
     }
 }

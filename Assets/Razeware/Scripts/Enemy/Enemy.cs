@@ -50,6 +50,8 @@ namespace Enemies
             NavMeshAgent.destination = destination;
         }
 
+        public void TakeDamage(float value) => DamageReceiver.TakeDamage(value);
+
         private void OnTriggerEnter(Collider other)
         {
             DamageReceiver.OnCollision(other);

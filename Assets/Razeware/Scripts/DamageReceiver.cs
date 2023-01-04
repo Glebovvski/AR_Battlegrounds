@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DamageReceiver : IDamageReceiver
 {
-    public int CurrentHealth { get; private set; }
+    public float CurrentHealth { get; private set; }
     public bool IsDead => CurrentHealth <= 0;
 
     public DamageReceiver(int Health)
@@ -15,7 +15,7 @@ public class DamageReceiver : IDamageReceiver
     public event Action OnTakeDamage;
     public event Action OnDeath;
 
-    public void TakeDamage(int value)
+    public void TakeDamage(float value)
     {
         CurrentHealth -= value;
         if (CurrentHealth <= 0)
