@@ -10,7 +10,7 @@ namespace Enemies
         public static AIManager Instance;
 
         [field: SerializeField] public GameGrid Grid { get; private set; }
-        public List<Observation> Observations { get; private set; }
+        [field: SerializeField] public List<Observation> Observations { get; private set; }
 
         private void Awake()
         {
@@ -30,15 +30,17 @@ namespace Enemies
 
         public void AddObservation(Observation observation)
         {
-            if (Observations.Contains(observation)) return;
+            if(Observations.Any(x=> x.Equals(observation))) return;
 
             Observations.Add(observation);
         }
 
         public void AddObservation(List<Observation> observations)
         {
-            Observations.AddRange(observations);
-            Observations = Observations.Distinct().ToList();
+            foreach (var observation in observations)
+            {
+                AddObservation(observation);
+            }
         }
 
         public void RemoveObservation(Observation observation)

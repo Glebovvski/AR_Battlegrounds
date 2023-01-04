@@ -165,7 +165,18 @@ public class GameGrid : MonoBehaviour
         }
         TryChangeHeight();
         SpawnCastleAtCentre();
-        GridList.ForEach(x=>x.BuildNavMesh());
+        GridList.ForEach(x => x.BuildNavMesh());
+    }
+
+    public List<Vector3> Corners()
+    {
+        return new List<Vector3>()
+        {
+            this.transform.position,
+            this.transform.position + new Vector3(width, 0, 0),
+            this.transform.position + new Vector3(0,0, length),
+            this.transform.position + new Vector3(width, 0, length)
+        };
     }
 
     private void SpawnCastleAtCentre()
