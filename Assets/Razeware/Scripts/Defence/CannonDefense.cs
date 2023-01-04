@@ -15,7 +15,6 @@ namespace Defendable
         [SerializeField] private Transform cannon;
         private float lastShotTime;
         protected override bool IsReady { get => Time.time - lastShotTime > RelaodTime; set => IsReady = value; }
-        IEnumerator attackRoutine;
 
         private void Start()
         {
@@ -41,7 +40,7 @@ namespace Defendable
             var bullet = PoolManager.Instance.GetFromPool<CannonBullet>(PoolObjectType.CannonBullet);
             bullet.transform.position = cannon.position;
             bullet.transform.rotation = tower.rotation;
-            bullet.Fire((enemy.transform.position - cannon.transform.position).normalized * ProjectileSpeed);
+            bullet.Fire((enemy.transform.position - cannon.transform.position).normalized);
             lastShotTime = Time.time;
         }
 

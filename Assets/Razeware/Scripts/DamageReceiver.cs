@@ -26,7 +26,7 @@ public class DamageReceiver : IDamageReceiver
 
     public void OnCollision(Collider other) 
     {
-        other.TryGetComponent<IMissile>(out var missile);
+        other.TryGetComponent<Missile>(out var missile);
         if(missile == null) return;
 
         Debug.LogError("DAMAGE");

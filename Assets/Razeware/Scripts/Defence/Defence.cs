@@ -15,7 +15,6 @@ namespace Defendable
         public int AttackForce { get; private set; }
         public Vector2Int Size { get; private set; }
         protected int RelaodTime { get; set; }
-        protected float ProjectileSpeed { get; set; }
         protected abstract bool IsReady { get; set; }
         protected Time ReloadStart { get; private set; }
         public Predicate<GridCell> ConditionToPlace => SO.GetCondition();
@@ -31,7 +30,6 @@ namespace Defendable
             AttackForce = SO.AttackForce;
             Health = SO.Health;
             RelaodTime = SO.RelaodTime;
-            ProjectileSpeed = SO.ProjectileSpeed;
             Size = SO.Size;
         }
 

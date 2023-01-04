@@ -2,16 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Missile : MonoBehaviour
+namespace Missiles
 {
-    public Vector3 Direction {get; private set;} = Vector3.zero;
-    public void Fire(Vector3 direction)
+    public abstract class Missile : MonoBehaviour, IMissile
     {
-        Direction = direction;
-    }
+        [SerializeField] private ScriptableMissile SO;
+        public Vector3 Direction { get; private set; } = Vector3.zero;
+        public int Damage => SO.Damage;
+        public float Speed => SO.Speed;
+        public bool IsFromPool => SO.IsFromPool;
 
-    private void Update() 
-    {
-        transform.position += Direction*Time.deltaTime;    
+        public void Fire(Vector3 direction)
+        {
+            Direction = direction;
+        }
+
+        private void Update()
+        {
+            transform.position += Direction * Time.deltaTime * Speed;
+        }
+
+        public abstract void OnTriggerEnter(Collider other);
     }
 }
