@@ -16,7 +16,7 @@ namespace AI
         {
             LayerMask = LayerMask.GetMask("Defense");
             var c = (AIContext)context;
-            var Enemy = c.Enemy;
+            var Enemy = (SpyEnemy)c.Enemy;
 
             var colliders = Physics.OverlapSphere(Enemy.Position, Enemy.ScanRange, LayerMask);
             foreach (var defence in colliders)
@@ -25,6 +25,10 @@ namespace AI
             }
             Enemies.AIManager.Instance.AddObservation(defences);
             defences.Clear();
+
+            Enemy.SetIsScanFinished(true);
+
+            Debug.LogError("SCAN FINISHED");
         }
     }
 }

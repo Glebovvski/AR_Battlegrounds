@@ -42,7 +42,6 @@ public class GridCell : MonoBehaviour
         if (IsFree)
         {
             Defence = defence;
-            surface.BuildNavMesh();
         }
     }
 

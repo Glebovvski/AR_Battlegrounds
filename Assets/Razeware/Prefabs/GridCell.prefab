@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 3495798400266350665}
   - component: {fileID: 4551957289895266967}
   - component: {fileID: 4774711350049593497}
-  - component: {fileID: 6567427757477414732}
   m_Layer: 6
   m_Name: GridCell
   m_TagString: Untagged
@@ -51,7 +50,7 @@ MonoBehaviour:
   cubeMesh: {fileID: 8929812981842519539}
   ground: {fileID: 4300000, guid: dac1f6a026468af46b8928893e3eea27, type: 3}
   grass: {fileID: 4300000, guid: caca2dfcd7da619408439605ff0667a4, type: 3}
-  surface: {fileID: 6567427757477414732}
+  surface: {fileID: 2418893472294593743}
 --- !u!65 &4774711350049593497
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -65,35 +64,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: -0.5}
---- !u!114 &6567427757477414732
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3495798400266350666}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_AgentTypeID: 0
-  m_CollectObjects: 0
-  m_Size: {x: 10, y: 10, z: 10}
-  m_Center: {x: 0, y: 2, z: 0}
-  m_LayerMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_UseGeometry: 0
-  m_DefaultArea: 0
-  m_IgnoreNavMeshAgent: 1
-  m_IgnoreNavMeshObstacle: 1
-  m_OverrideTileSize: 0
-  m_TileSize: 256
-  m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.16666667
-  m_BuildHeightMesh: 0
-  m_NavMeshData: {fileID: 0}
 --- !u!1 &4221410606716231850
 GameObject:
   m_ObjectHideFlags: 0
@@ -257,6 +227,41 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 8906659263894580053}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &8907913778273423661 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1560257132984952, guid: 5cbae0602ce9acf41a98fda3a353569a,
+    type: 3}
+  m_PrefabInstance: {fileID: 8906659263894580053}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2418893472294593743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8907913778273423661}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AgentTypeID: 0
+  m_CollectObjects: 0
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 129
+  m_UseGeometry: 0
+  m_DefaultArea: 0
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.16666667
+  m_BuildHeightMesh: 0
+  m_NavMeshData: {fileID: 0}
 --- !u!33 &8929812981842519539 stripped
 MeshFilter:
   m_CorrespondingSourceObject: {fileID: 33740650818424486, guid: 5cbae0602ce9acf41a98fda3a353569a,

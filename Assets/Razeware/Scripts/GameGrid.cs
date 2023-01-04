@@ -52,7 +52,7 @@ public class GameGrid : MonoBehaviour
         float x = cell.Pos.x * gridSpaceSize;
         float y = cell.Pos.y * gridSpaceSize;
 
-        return new Vector3(x, cell.Height, y);
+        return new Vector3(x, cell.Height + yPos, y);
     }
 
     public Vector3 GetWorldPositionFromGrid(Vector2Int position, int height)
@@ -166,7 +166,6 @@ public class GameGrid : MonoBehaviour
         }
         TryChangeHeight();
         SpawnCastleAtCentre();
-        GridList.ForEach(x => x.BuildNavMesh());
     }
 
     public List<Vector3> Corners()
