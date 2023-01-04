@@ -245,7 +245,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 581853323}
   m_Direction: 0
   m_Value: 0
-  m_Size: 0
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -863,7 +863,7 @@ PrefabInstance:
     - target: {fileID: 6000988167660706115, guid: 91ba00481d9194bd4974e9dcc125242e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.99
       objectReference: {fileID: 0}
     - target: {fileID: 6000988167660706115, guid: 91ba00481d9194bd4974e9dcc125242e,
         type: 3}

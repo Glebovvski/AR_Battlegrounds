@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class GameGrid : MonoBehaviour
 {
+    private const float yPos = -0.99f;
+
     [SerializeField] private DefencesViewModel defencesViewModel;
     [SerializeField] private DefencesModel defencesModel;
 
@@ -66,7 +68,7 @@ public class GameGrid : MonoBehaviour
         float x = position.x * gridSpaceSize;
         float y = position.y * gridSpaceSize;
 
-        return new Vector3(x, height, y);
+        return new Vector3(x, height + yPos, y);
     }
 
     public void SelectDefence(PoolObjectType type)
@@ -87,7 +89,7 @@ public class GameGrid : MonoBehaviour
             pairCells = new List<List<GridCell>>();
             foreach (var pair in pairs)
             {
-                // pair = pair.FindAll(defenseInfo.GetCondition())
+                // pair = pair.FindAll(defenseInfo.GetCondition()).ToList();
                 if (pair.All(ConditionsData.IsEmptyCell))
                     pairCells.Add(pair);
             }
@@ -156,10 +158,9 @@ public class GameGrid : MonoBehaviour
         {
             for (int z = 0; z < length; z++)
             {
-                grid[x, z] = Instantiate(gridCellPrefab, new Vector3(x * gridSpaceSize, 0, z * gridSpaceSize), Quaternion.Euler(90, 0, 0));
+                grid[x, z] = Instantiate(gridCellPrefab, new Vector3(x * gridSpaceSize, yPos, z * gridSpaceSize), Quaternion.Euler(90, 0, 0), this.transform);
                 grid[x, z].Init(x, z);
                 grid[x, z].gameObject.name = string.Format("Cell {0}:{1}", x, z);
-                grid[x, z].transform.parent = transform;
                 GridList.Add(grid[x, z]);
             }
         }
@@ -181,20 +182,12 @@ public class GameGrid : MonoBehaviour
 
     private void SpawnCastleAtCentre()
     {
-        Vector2 centre = GetCentreOfPair(centreCells);// centreCells.Aggregate(Vector2.zero, (acc, v) => acc + v.Pos) / centreCells.Count;
+        Vector2 centre = GetCentreOfPair(centreCells);
         var castle = Instantiate(castlePrefab, GetWorldPositionFromGrid(centre, centreCells[0].Height), Quaternion.identity);
         centreCells.ForEach(x => x.SetDefence(castle));
     }
 
     private Vector2 GetCentreOfPair(List<GridCell> cells) => cells.Aggregate(Vector2.zero, (acc, v) => acc + v.Pos) / cells.Count;
-
-    private void TryChangeHeight(GridCell cell)
-    {
-        if (cell.Pos.x == 0 || cell.Pos.y == 0 || cell.Pos.x == width - 1 || cell.Pos.y == length - 1)
-            return;
-
-        cell.SetHeight(UnityEngine.Random.Range(1, 3));
-    }
 
     private void TryChangeHeight()
     {
