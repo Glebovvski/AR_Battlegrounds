@@ -72,7 +72,7 @@ namespace Enemies
             PoolManager.Instance.ReturnToPool(enemy.GameObject, enemy.Type);
         }
 
-        public int GetEnemiesAttackingObservation(Observation observation) => Enemies.Where(x => x.AttackTarget == observation.Defence).Count();
+        public int GetEnemiesAttackingObservation(Observation observation) => Enemies.Where(x => x.AttackTarget == observation).Count();
 
         private Observation GetClosest(IEnemy enemy, List<Observation> observations)
         {

@@ -10,9 +10,9 @@ namespace Defendable
 
         public int Health { get; private set; }
         public float CurrentHealth => DamageReceiver.CurrentHealth;
-        public bool IsActiveDefence { get; private set; }
-        public int AttackRange { get; private set; }
-        public int AttackForce { get; private set; }
+        protected bool IsActiveDefence { get; private set; }
+        protected int AttackRange { get; private set; }
+        protected int AttackForce { get; private set; }
         public Vector2Int Size { get; private set; }
         protected int RelaodTime { get; set; }
         protected abstract bool IsReady { get; set; }

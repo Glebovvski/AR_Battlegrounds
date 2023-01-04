@@ -47,6 +47,7 @@ namespace Defendable
             float time = 5;
             Vector3 endLaserPos = laser.transform.position;
             laserRenderer.SetPosition(0, laserStartPos.position);
+            
             for (; t < time; t += Time.deltaTime)
             {
                 endLaserPos = Vector3.Lerp(laserStartPos.position, enemy.transform.position, t/time);

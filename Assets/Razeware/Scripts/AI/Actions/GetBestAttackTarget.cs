@@ -23,7 +23,7 @@ public class GetBestAttackTarget : ActionBase
             multiplier -= 20;
         }
         var attackTarget = scores.OrderByDescending(x => x.TotalScore).First().Observation;
-        c.Enemy.AttackTarget = attackTarget.Defence;
+        c.Enemy.AttackTarget = attackTarget;
     }
 }
 

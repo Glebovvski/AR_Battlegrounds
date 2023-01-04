@@ -24,7 +24,7 @@ namespace Enemies
         public GameObject GameObject => this.gameObject;
         public NavMeshAgent NavMeshAgent => navMeshAgent;
         public Vector3? MoveTarget { get; set; }
-        public Defense AttackTarget { get; set; }
+        public Observation AttackTarget { get; set; }
         public float ScanRange => SO.ScanRange;
         public Vector3 Position => this.gameObject.transform.position;
         public DamageReceiver DamageReceiver;

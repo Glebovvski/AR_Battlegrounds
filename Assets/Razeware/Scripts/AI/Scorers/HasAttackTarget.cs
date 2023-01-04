@@ -15,7 +15,7 @@ public sealed class HasAttackTargetInRange : ContextualScorerBase
         {
             return 100f;
         }
-        if(Vector3.Distance(c.Enemy.AttackTarget.transform.position, c.Enemy.Position) <= c.Enemy.AttackRange)
+        if(Vector3.Distance(c.Enemy.AttackTarget.Position, c.Enemy.Position) <= c.Enemy.AttackRange)
             return this.score;
 
         return 100f;
