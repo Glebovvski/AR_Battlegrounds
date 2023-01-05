@@ -11,11 +11,11 @@ public sealed class HasNoAttackTargetInRange : ContextualScorerBase
     {
         var c = (AIContext)context;
 
-        if (c.Enemy.AttackTarget == null)
+        if (c.Enemy.GetAttackTarget() == null || !c.Enemy.GetAttackTarget().IsAlive)
         {
             return 100f;
         }
-        if(Vector3.Distance(c.Enemy.AttackTarget.Position, c.Enemy.Position) <= c.Enemy.AttackRange)
+        if(Vector3.Distance(c.Enemy.GetAttackTarget().Position, c.Enemy.Position) <= c.Enemy.AttackRange)
             return this.score;
 
         return 100f;

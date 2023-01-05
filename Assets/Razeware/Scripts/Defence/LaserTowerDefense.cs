@@ -19,9 +19,9 @@ namespace Defendable
         [SerializeField] LineRenderer laserRenderer;
         private bool isAttacking = false;
 
-        private void Start()
+        private void Awake()
         {
-            base.Start();
+            base.Awake();
             lastShotTime = Time.time;
             Detection.SetAttackRange(AttackRange);
         }

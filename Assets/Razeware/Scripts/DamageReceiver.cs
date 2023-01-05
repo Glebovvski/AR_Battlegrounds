@@ -17,6 +17,8 @@ public class DamageReceiver : IDamageReceiver
 
     public void TakeDamage(float value)
     {
+        if(IsDead) return;
+        
         CurrentHealth -= value;
         if (CurrentHealth <= 0)
             OnDeath?.Invoke();

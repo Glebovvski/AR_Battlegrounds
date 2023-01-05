@@ -13,7 +13,7 @@ namespace Enemies
 
         public void Attack()
         {
-            AttackTarget.Defence.TakeDamage(AttackForce);
+            AttackTarget.Defense.TakeDamage(AttackForce);
         }
     }
 }

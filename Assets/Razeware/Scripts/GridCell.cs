@@ -42,10 +42,16 @@ public class GridCell : MonoBehaviour
         if (IsFree)
         {
             Defence = defence;
+            Defence.OnDeath += FreeCell;
         }
     }
 
     public void BuildNavMesh() => surface.BuildNavMesh();
 
     internal void DeselectCell() => quadRenderer.material.color = defaultCellColor;
+    private void FreeCell()
+    {
+        Defence.OnDeath -= FreeCell;
+        Defence = null;
+    }
 }

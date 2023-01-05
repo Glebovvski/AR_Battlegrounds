@@ -23,7 +23,7 @@ public class GetBestAttackTarget : ActionBase
             multiplier -= 20;
         }
         var attackTarget = scores.OrderByDescending(x => x.TotalScore).First().Observation;
-        c.Enemy.AttackTarget = attackTarget;
+        c.Enemy.SetAttackTarget(attackTarget);
     }
 }
 
@@ -76,6 +76,6 @@ public class TargetScore
         return score;
     }
 
-    private int IsHealthLowScore() => Observation.Defence.CurrentHealth < Observation.Defence.Health / 2f ? 100 : 0;
+    private int IsHealthLowScore() => Observation.Defense.CurrentHealth < Observation.Defense.Health / 2f ? 100 : 0;
 
 }

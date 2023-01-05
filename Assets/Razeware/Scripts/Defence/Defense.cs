@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Linq;
 using UnityEngine;
 
@@ -24,6 +25,8 @@ namespace Defendable
         public DefenseType Type => SO.Type;
         protected DamageReceiver DamageReceiver;
 
+        public event Action OnDeath;
+
         private void GetData()
         {
             IsActiveDefence = SO.IsActiveDefence;
@@ -34,12 +37,46 @@ namespace Defendable
             Size = SO.Size;
         }
 
-        protected void Start()
+        private void OnEnable()
         {
-            GetData();
             DamageReceiver = new DamageReceiver(Health);
+            DamageReceiver.OnDeath += Death;
         }
 
+        protected void Awake()
+        {
+            GetData();
+        }
         public void TakeDamage(float value) => DamageReceiver.TakeDamage(value);
+
+        private void Death()
+        {
+            StartCoroutine(WaitForDeathAnimationFinish());
+        }
+
+        private PoolObjectType DefenseTypeToPoolType(DefenseType type)
+        {
+            switch (type)
+            {
+                case DefenseType.Castle:
+                    return PoolObjectType.None;
+                case DefenseType.Wall:
+                    return PoolObjectType.WallTower;
+                case DefenseType.Cannon:
+                    return PoolObjectType.CannonTower;
+                case DefenseType.Laser:
+                    return PoolObjectType.LaserTower;
+                default:
+                    return PoolObjectType.None;
+            }
+        }
+
+        IEnumerator WaitForDeathAnimationFinish()
+        {
+            yield return new WaitForSeconds(1);
+            DamageReceiver.OnDeath -= OnDeath;
+            OnDeath?.Invoke();
+            PoolManager.Instance.ReturnToPool(this.gameObject, DefenseTypeToPoolType(Type));
+        }
     }
 }

@@ -25,7 +25,7 @@ namespace Enemies
         public GameObject GameObject => this.gameObject;
         public NavMeshAgent NavMeshAgent => navMeshAgent;
         public Vector3? MoveTarget { get; set; }
-        public Observation AttackTarget { get; set; }
+        protected Observation AttackTarget { get; set; }
         public float ScanRange => SO.ScanRange;
         public Vector3 Position => this.gameObject.transform.position;
         public DamageReceiver DamageReceiver;
@@ -80,6 +80,14 @@ namespace Enemies
             animationController.UpdateState();
         }
 
+        public void SetAttackTarget(Observation observation)
+        {
+            AttackTarget = observation;
+            AttackTarget.Defense.OnDeath += ResetTarget;
+        }
+
+        public Observation GetAttackTarget() => AttackTarget;
+
         public void GetData()
         {
             Health = SO.Health;
@@ -120,6 +128,12 @@ namespace Enemies
             yield return new WaitForSeconds(1);
             AIManager.Instance.UnregisterEnemy(this);
             OnDeath?.Invoke(this);
+        }
+
+        private void ResetTarget()
+        {
+            AttackTarget.Defense.OnDeath -= ResetTarget;
+            AttackTarget = null;
         }
     }
 

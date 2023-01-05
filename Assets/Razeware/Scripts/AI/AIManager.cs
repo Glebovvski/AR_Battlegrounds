@@ -55,7 +55,7 @@ namespace Enemies
 
         public Observation GetClosestByType(IEnemy enemy, DefenseType type)
         {
-            var observations = Observations.Where(x => x.Defence.Type == type).ToList();
+            var observations = Observations.Where(x => x.Defense.Type == type).ToList();
             return GetClosest(enemy, observations);
         }
 
@@ -72,7 +72,7 @@ namespace Enemies
             PoolManager.Instance.ReturnToPool(enemy.GameObject, enemy.Type);
         }
 
-        public int GetEnemiesAttackingObservation(Observation observation) => Enemies.Where(x => x.AttackTarget == observation).Count();
+        public int GetEnemiesAttackingObservation(Observation observation) => Enemies.Where(x => x.GetAttackTarget() == observation).Count();
 
         private Observation GetClosest(IEnemy enemy, List<Observation> observations)
         {

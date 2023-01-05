@@ -12,11 +12,11 @@ public class HasAttackTargetInRange : ContextualScorerBase
         var c = (AIContext)context;
         var enemy = c.Enemy;
 
-        if (enemy.AttackTarget == null) return 0;
+        if (enemy.GetAttackTarget() == null || !enemy.GetAttackTarget().IsAlive) return 0;
         if(IsNotInAttackRange(enemy)) return 0;
 
         return 100;
     }
 
-    private bool IsNotInAttackRange(Enemy enemy) => Vector3.Distance(enemy.AttackTarget.Position, enemy.Position) > enemy.AttackRange;
+    private bool IsNotInAttackRange(Enemy enemy) => Vector3.Distance(enemy.GetAttackTarget().Position, enemy.Position) > enemy.AttackRange;
 }
