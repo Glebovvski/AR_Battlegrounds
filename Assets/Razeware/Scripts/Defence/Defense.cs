@@ -39,5 +39,7 @@ namespace Defendable
             GetData();
             DamageReceiver = new DamageReceiver(Health);
         }
+
+        public void TakeDamage(float value) => DamageReceiver.TakeDamage(value);
     }
 }

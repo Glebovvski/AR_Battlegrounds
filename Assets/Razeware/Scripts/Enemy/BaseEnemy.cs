@@ -10,5 +10,10 @@ namespace Enemies
         {
             animationController.Attack();
         }
+
+        public void Attack()
+        {
+            AttackTarget.Defence.TakeDamage(AttackForce);
+        }
     }
 }
