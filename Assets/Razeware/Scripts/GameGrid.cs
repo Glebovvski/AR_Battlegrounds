@@ -174,7 +174,7 @@ public class GameGrid : MonoBehaviour
         }
         TryChangeHeight();
         SpawnCastleAtCentre();
-        RebuildNavMesh();
+        // RebuildNavMesh();
     }
 
     private void RebuildNavMesh() => plane.BuildNavMesh();
@@ -215,7 +215,15 @@ public class GameGrid : MonoBehaviour
         foreach (var cell in GridList)
         {
             if (IsMustHaveGroundHeight(cell))
+            {
+                if (!centreCells.Contains(cell))
+                {
+                    var tower = PoolManager.Instance.GetFromPool<WallDefence>(PoolObjectType.WallTower);
+                    tower.transform.position = GetWorldPositionFromGrid(cell);
+                    cell.SetDefence(tower);
+                }
                 continue;
+            }
             if (IsAnyDiagonalCellUp(cell))
                 continue;
             cell.SetHeight(UnityEngine.Random.Range(1, 3));

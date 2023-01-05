@@ -54,6 +54,6 @@ public class GridCell : MonoBehaviour
     {
         Defence.OnDeath -= FreeCell;
         Defence = null;
-        OnFreeCell?.Invoke();
+        // OnFreeCell?.Invoke();
     }
 }
