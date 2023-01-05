@@ -58,7 +58,7 @@ namespace Enemies
             var observations = Observations.Where(x => x.Defense.Type == type).ToList();
             if (observations.Count == 0)
                 return null;
-                
+
             return GetClosest(enemy, observations);
         }
 
@@ -82,7 +82,7 @@ namespace Enemies
             Vector3 position = enemy.GameObject.transform.position;
             float distance = 1000;
             Observation closest = null;
-            for (int i = 0; i < Observations.Count; i++)
+            for (int i = 0; i < observations.Count; i++)
             {
                 var currDistance = Vector3.Distance(position, Observations[i].Position);
                 if (currDistance < distance)
