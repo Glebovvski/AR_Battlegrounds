@@ -4,6 +4,7 @@ using AI;
 using Apex.AI;
 using Apex.Serialization;
 using Enemies;
+using UnityEngine;
 
 public class GetBestAttackTarget : ActionBase
 {
@@ -25,6 +26,7 @@ public class GetBestAttackTarget : ActionBase
             scores.Add(new TargetScore(path.corners.Length, enemiesWithSameTarget, enemy, closestObservation, defense.Value, MaxEnemiesToAttackOneTarget));
         }
         var attackTarget = scores.OrderByDescending(x => x.TotalScore).First().Observation;
+        Debug.LogError(string.Format("ENEMY: {0} TARGET: {1}", enemy.name, attackTarget.Defense.gameObject.name));
         c.Enemy.SetAttackTarget(attackTarget);
     }
 }
