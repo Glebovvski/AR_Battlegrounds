@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641234, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -581,7 +581,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 581853323}
   m_Direction: 0
   m_Value: 0
-  m_Size: 1
+  m_Size: 0
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2442,6 +2442,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1391045341283484148, guid: b8d098908aa552f4899c294aecff83ec,
         type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 2144508340}
+    - target: {fileID: 1391045341283484148, guid: b8d098908aa552f4899c294aecff83ec,
+        type: 3}
       propertyPath: navMeshAgent
       value: 
       objectReference: {fileID: 1846276492}
@@ -2632,7 +2637,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -834, y: 0}
+  m_AnchoredPosition: {x: -1645.5, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &2079989270
@@ -2784,6 +2789,32 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2091554222}
   m_CullTransparentMesh: 1
+--- !u!1 &2144508332 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 497068949028825284, guid: b8d098908aa552f4899c294aecff83ec,
+    type: 3}
+  m_PrefabInstance: {fileID: 1846276490}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &2144508340
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2144508332}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1001 &497068948136557302
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2866,5 +2897,15 @@ PrefabInstance:
       propertyPath: navMeshAgent
       value: 
       objectReference: {fileID: 1642313319}
+    - target: {fileID: 1676730273298610360, guid: 8fb30d3c8ee29284a90ff1949abe00c9,
+        type: 3}
+      propertyPath: aiConfigs.Array.data[0].isActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1676730273298610360, guid: 8fb30d3c8ee29284a90ff1949abe00c9,
+        type: 3}
+      propertyPath: aiConfigs.Array.data[1].isActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8fb30d3c8ee29284a90ff1949abe00c9, type: 3}

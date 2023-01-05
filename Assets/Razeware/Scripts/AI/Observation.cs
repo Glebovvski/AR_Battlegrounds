@@ -3,7 +3,7 @@ using Defendable;
 using UnityEngine;
 
 [Serializable]
-public class Observation :  IEquatable<Observation>
+public class Observation : IEquatable<Observation>
 {
     public Observation(Defense defence)
     {
@@ -12,7 +12,7 @@ public class Observation :  IEquatable<Observation>
 
     public Defense Defense { get; private set; }
     public Vector3 Position => Defense.gameObject.transform.position;
-    public bool IsAlive => Defense != null;
+    public bool IsAlive => Defense.CurrentHealth > 0;
 
     public bool Equals(Observation other)
     {

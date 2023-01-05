@@ -21,4 +21,4 @@ MonoBehaviour:
     Assembly-CSharp"}]}],"_defaultQualifier":{"@type":"Apex.AI.DefaultQualifier,
     ApexAI","score":2}},{"@type":"Apex.AI.PrioritySelector, ApexAI","_id":a441faab119f4e06a9f597f0fcc2ebaf,"_qualifiers":[],"_defaultQualifier":{"@type":"Apex.AI.DefaultQualifier,
     ApexAI","action":{"@type":"Attack, Assembly-CSharp"}}}]}'
-  editorConfiguration: '{"offset":{"@x":213,"@y":86},"zoom":1,"SelectorView":{"ViewArea":{"@left":313,"@top":186,"@width":200,"@height":160},"QualifierView":{"ActionView":{"@connectorType":"Selector"}},"DefaultQualifier":{}},"SelectorView":{"ViewArea":{"@left":653,"@top":286,"@width":200,"@height":100},"DefaultQualifier":{"Name":"Attack","ActionView":{}}}}'
+  editorConfiguration: '{"offset":{"@x":213,"@y":86},"zoom":1,"SelectorView":{"ViewArea":{"@left":233,"@top":166,"@width":200,"@height":160},"QualifierView":{"ActionView":{"@connectorType":"Selector"}},"DefaultQualifier":{"Name":"Default"}},"SelectorView":{"ViewArea":{"@left":513,"@top":246,"@width":200,"@height":100},"DefaultQualifier":{"Name":"Attack","ActionView":{}}}}'
