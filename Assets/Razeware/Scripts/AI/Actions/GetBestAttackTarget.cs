@@ -5,6 +5,7 @@ using Apex.AI;
 using Apex.Serialization;
 using Enemies;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class GetBestAttackTarget : ActionBase
 {
@@ -24,6 +25,8 @@ public class GetBestAttackTarget : ActionBase
             if (closestObservation == null)
                 continue;
             var path = enemy.GetCalculatedPath(closestObservation);
+            if (path.status == NavMeshPathStatus.PathPartial)
+                continue;
             var enemiesWithSameTarget = Enemies.AIManager.Instance.GetEnemiesAttackingObservation(closestObservation);
             scores.Add(new TargetScore(path.corners.Length, enemiesWithSameTarget, enemy, closestObservation, defense.Value, MaxEnemiesToAttackOneTarget));
         }
