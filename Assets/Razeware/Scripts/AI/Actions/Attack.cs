@@ -9,6 +9,6 @@ public class Attack : ActionBase
     public override void Execute(IAIContext context)
     {
         var c = (AIContext)context;
-        c.Enemy.Attack();
+        c.Enemy.StartAttack();
     }
 }

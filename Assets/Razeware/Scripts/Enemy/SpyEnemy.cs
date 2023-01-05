@@ -8,7 +8,7 @@ namespace Enemies
     {
         public bool IsScanFinished { get; private set; } = false;
 
-        public override void Attack()
+        public override void StartAttack()
         {
         }
 

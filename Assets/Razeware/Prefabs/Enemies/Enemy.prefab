@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 497068949028825281}
+  - component: {fileID: 8183040792367433668}
   - component: {fileID: 497068949028825282}
   - component: {fileID: 497068949028825285}
   - component: {fileID: 497068949028825294}
@@ -37,6 +38,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &8183040792367433668
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 497068949028825284}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: e4aa31f274820b94eb0d0b764e0f383b, type: 3}
+  m_Controller: {fileID: 9100000, guid: a781994eee7259f4d8f06fb1abbd4a18, type: 2}
+  m_CullingMode: 1
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!65 &497068949028825282
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -64,7 +85,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SO: {fileID: 11400000, guid: 999d02dc573b23647b5e0821f9d144c6, type: 2}
   navMeshAgent: {fileID: 1268749569857544637}
-  animator: {fileID: 1110131821290380016}
+  animator: {fileID: 8183040792367433668}
 --- !u!54 &497068949028825294
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -188,17 +209,12 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: a781994eee7259f4d8f06fb1abbd4a18, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 95905397883882224, guid: c647a6e9ba715004ebbf4dc6d7bd1e7a, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: c647a6e9ba715004ebbf4dc6d7bd1e7a, type: 3}
 --- !u!4 &1026125504415742278 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4158096630655302, guid: c647a6e9ba715004ebbf4dc6d7bd1e7a,
-    type: 3}
-  m_PrefabInstance: {fileID: 1023234597623140352}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &1110131821290380016 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 95905397883882224, guid: c647a6e9ba715004ebbf4dc6d7bd1e7a,
     type: 3}
   m_PrefabInstance: {fileID: 1023234597623140352}
   m_PrefabAsset: {fileID: 0}

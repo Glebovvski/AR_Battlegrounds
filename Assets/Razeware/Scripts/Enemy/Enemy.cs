@@ -44,7 +44,7 @@ namespace Enemies
 
         public IAIContext GetContext(Guid aiId) => Context;
 
-        private AnimationController animationController;
+        protected AnimationController animationController;
 
         private void Awake()
         {
@@ -102,7 +102,7 @@ namespace Enemies
             return navMeshPath;
         }
 
-        public abstract void Attack();
+        public abstract void StartAttack();
 
         private void OnTriggerEnter(Collider other)
         {
