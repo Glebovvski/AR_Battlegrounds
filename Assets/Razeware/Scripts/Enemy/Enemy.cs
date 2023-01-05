@@ -132,6 +132,7 @@ namespace Enemies
 
         private void ResetTarget()
         {
+            AIManager.Instance.RemoveObservation(AttackTarget);
             AttackTarget.Defense.OnDeath -= ResetTarget;
             AttackTarget = null;
         }

@@ -168,6 +168,7 @@ public class GameGrid : MonoBehaviour
                 grid[x, z] = Instantiate(gridCellPrefab, new Vector3(x * gridSpaceSize, yPos, z * gridSpaceSize), Quaternion.Euler(90, 0, 0), this.transform);
                 grid[x, z].Init(x, z);
                 grid[x, z].gameObject.name = string.Format("Cell {0}:{1}", x, z);
+                grid[x, z].OnFreeCell += RebuildNavMesh;
                 GridList.Add(grid[x, z]);
             }
         }

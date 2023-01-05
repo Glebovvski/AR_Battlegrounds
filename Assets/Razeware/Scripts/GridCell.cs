@@ -23,6 +23,7 @@ public class GridCell : MonoBehaviour
 
     private Color defaultCellColor;
 
+    public event Action OnFreeCell;
 
     public void SetSelected() => quadRenderer.material.color = Color.green * 10;
     public void Init(int x, int y)
@@ -53,5 +54,6 @@ public class GridCell : MonoBehaviour
     {
         Defence.OnDeath -= FreeCell;
         Defence = null;
+        OnFreeCell?.Invoke();
     }
 }

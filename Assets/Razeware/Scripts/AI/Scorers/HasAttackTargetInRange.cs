@@ -22,7 +22,7 @@ public class HasAttackTargetInRange : ContextualScorerBase
     private bool IsNotInAttackRange(Enemy enemy)
     {
         var result = (enemy.GetAttackTarget().Position - enemy.Position).sqrMagnitude > enemy.AttackRange;
-        Debug.LogError("DIST: "+(enemy.GetAttackTarget().Position - enemy.Position).sqrMagnitude);
+        // Debug.LogError("DIST: "+(enemy.GetAttackTarget().Position - enemy.Position).sqrMagnitude);
         return result;
     }
 }

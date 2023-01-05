@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddeb0851e15c012489c89e8b3b85f429, type: 3}
   m_Name: SO_Enemy_Base
   m_EditorClassIdentifier: 
-  Health: 20
+  Health: 10000000
   AttackForce: 5
   GoldToDrop: 1
   Speed: 10
   ScanRange: 25
-  AttackRange: 5
+  AttackRange: 2
   AttackWallScore: 5
   AttackCannonScore: 5
   AttackLaserScore: 5
-  AttackCastleScore: 5
+  AttackCastleScore: 100000
   EnemyType: 1
   Type: 100
