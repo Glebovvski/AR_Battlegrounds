@@ -73,7 +73,7 @@ public class TargetScore
                 }
             case EnemyType.Team:
                 {
-                    var enemiesAttackingTargetScore = enemiesAttackingTarget;// < maxEnemies ? enemiesAttackingTarget : -enemiesAttackingTarget;
+                    var enemiesAttackingTargetScore = enemiesAttackingTarget < maxEnemies ? enemiesAttackingTarget : -enemiesAttackingTarget;
                     score = enemiesAttackingTargetScore * 100 - IsHealthLowScore();
                     break;
                 }
