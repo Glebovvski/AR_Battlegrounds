@@ -16,14 +16,15 @@ MonoBehaviour:
   version: 16779010
   aiId: b733226d-9e53-4c8f-be29-f8abc9712f69
   configuration: '{"@type":"Apex.AI.UtilityAI, ApexAI","_rootSelectorId":9f58054372c34e358ca2dcc10896c563,"_id":b733226d9e534c8fbe29f8abc9712f69,"_selectors":[{"@type":"Apex.AI.ScoreSelector,
-    ApexAI","_id":9f58054372c34e358ca2dcc10896c563,"_qualifiers":[{"@type":"Apex.AI.CompositeScoreQualifier,
-    ApexAI","action":{"@type":"Apex.AI.SelectorAction, ApexAI","_selectorId":f1512737f31f4974911a56ce7a95799a},"_scorers":[{"@type":"HasAttackTargetInRange,
-    Assembly-CSharp"},{"@type":"HasObservations, Assembly-CSharp"}]}],"_defaultQualifier":{"@type":"Apex.AI.DefaultQualifier,
-    ApexAI","score":50,"action":{"@type":"AI.MoveToGrid, Assembly-CSharp"}}},{"@type":"Apex.AI.PrioritySelector,
+    ApexAI","_id":9f58054372c34e358ca2dcc10896c563,"_qualifiers":[{"@type":"Apex.AI.CompositeAllOrNothingQualifier,
+    ApexAI","action":{"@type":"Apex.AI.SelectorAction, ApexAI","_selectorId":f1512737f31f4974911a56ce7a95799a},"threshold":1,"_scorers":[{"@type":"HasAttackTargetInRange,
+    Assembly-CSharp","isDisabled":true},{"@type":"HasObservations, Assembly-CSharp"}]}],"_defaultQualifier":{"@type":"Apex.AI.DefaultQualifier,
+    ApexAI","score":2,"action":{"@type":"Apex.AI.CompositeAction, ApexAI","_actions":[{"@type":"AI.MoveToGrid,
+    Assembly-CSharp"},{"@type":"BaseEnemyScan, Assembly-CSharp"}]}}},{"@type":"Apex.AI.PrioritySelector,
     ApexAI","_id":f1512737f31f4974911a56ce7a95799a,"_qualifiers":[{"@type":"Apex.AI.FixedScoreQualifier,
     ApexAI","action":{"@type":"Apex.AI.CompositeAction, ApexAI","_actions":[{"@type":"GetBestAttackTarget,
     Assembly-CSharp"},{"@type":"MoveToTarget, Assembly-CSharp"}]}}],"_defaultQualifier":{"@type":"Apex.AI.DefaultQualifier,
     ApexAI"}}]}'
-  editorConfiguration: '{"offset":{"@x":154,"@y":98},"zoom":1,"SelectorView":{"ViewArea":{"@left":134,"@top":118,"@width":200,"@height":160},"QualifierView":{"Name":"Should
+  editorConfiguration: '{"offset":{"@x":216,"@y":125},"zoom":1,"SelectorView":{"ViewArea":{"@left":196,"@top":145,"@width":200,"@height":160},"QualifierView":{"Name":"Should
     Move Closer","ActionView":{"@connectorType":"Selector"}},"DefaultQualifier":{"Name":"Move
-    To Grid","ActionView":{}}},"SelectorView":{"ViewArea":{"@left":454,"@top":198,"@width":200,"@height":160},"QualifierView":{"ActionView":{"@connectorType":"Composite"}},"DefaultQualifier":{}}}'
+    To Grid","ActionView":{"@connectorType":"Composite"}}},"SelectorView":{"ViewArea":{"@left":516,"@top":225,"@width":200,"@height":160},"QualifierView":{"ActionView":{"@connectorType":"Composite"}},"DefaultQualifier":{}}}'
