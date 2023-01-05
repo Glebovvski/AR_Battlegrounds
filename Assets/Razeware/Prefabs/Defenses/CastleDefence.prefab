@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4288269597256027812}
   - component: {fileID: 1590232634354658162}
   - component: {fileID: 6112722530362495658}
+  - component: {fileID: 6676709659933302113}
   m_Layer: 7
   m_Name: CastleDefence
   m_TagString: Untagged
@@ -64,6 +65,19 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0.99, z: 0}
   m_TimeToStationary: 0.5
+--- !u!65 &6676709659933302113
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5324471234119408620}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2, z: 2}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1001 &259930761931986034
 PrefabInstance:
   m_ObjectHideFlags: 0

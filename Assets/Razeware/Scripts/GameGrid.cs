@@ -27,6 +27,9 @@ public class GameGrid : MonoBehaviour
 
     public PoolObjectType SelectedDefence { get; private set; }
 
+    public Vector3 Centre => this.transform.position + new Vector3(width / 2f, 0, length / 2f);
+    public Vector3 Position => this.transform.position;
+
     // Start is called before the first frame update
     void Start()
     {

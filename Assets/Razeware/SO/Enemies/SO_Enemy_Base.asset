@@ -16,8 +16,8 @@ MonoBehaviour:
   AttackForce: 1
   GoldToDrop: 1
   Speed: 10
-  ScanRange: 0
-  AttackRange: 0
+  ScanRange: 25
+  AttackRange: 5
   AttackWallScore: 5
   AttackCannonScore: 5
   AttackLaserScore: 5
