@@ -172,3 +172,9 @@ MonoBehaviour:
     startDelayMin: 0
     startDelayMax: 0
     isActive: 1
+  - aiId: f8302355-e2b6-4b15-8f31-cdb656017bf3
+    intervalMin: 1
+    intervalMax: 1
+    startDelayMin: 0
+    startDelayMax: 0
+    isActive: 1

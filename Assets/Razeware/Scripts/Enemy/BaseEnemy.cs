@@ -6,6 +6,8 @@ namespace Enemies
 {
     public class BaseEnemy : Enemy
     {
-        
+        public override void Attack()
+        {
+        }
     }
 }

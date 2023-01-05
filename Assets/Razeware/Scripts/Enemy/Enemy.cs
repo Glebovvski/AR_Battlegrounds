@@ -93,6 +93,8 @@ namespace Enemies
             return navMeshPath;
         }
 
+        public abstract void Attack();
+
         private void OnTriggerEnter(Collider other)
         {
             DamageReceiver.OnCollision(other);
