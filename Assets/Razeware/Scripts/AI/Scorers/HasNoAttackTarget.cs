@@ -5,7 +5,7 @@ using Apex.AI;
 using Apex.Serialization;
 using UnityEngine;
 
-public sealed class HasAttackTargetInRange : ContextualScorerBase
+public sealed class HasNoAttackTargetInRange : ContextualScorerBase
 {
     public override float Score(IAIContext context)
     {
