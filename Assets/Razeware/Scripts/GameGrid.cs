@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Defendable;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class GameGrid : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class GameGrid : MonoBehaviour
 
     [SerializeField] private DefencesViewModel defencesViewModel;
     [SerializeField] private DefencesModel defencesModel;
+    [SerializeField] private NavMeshSurface plane;
 
     [SerializeField] private GridCell gridCellPrefab;
     [SerializeField] private CastleDefence castlePrefab;
@@ -132,6 +134,8 @@ public class GameGrid : MonoBehaviour
             selectedPair.ForEach(x => x.SetDefence(defence));
         }
         SelectDefence(SelectedDefence);
+        if (!cell.IsUpper)
+            RebuildNavMesh();
     }
 
     private List<List<GridCell>> GetCellGroupsBySize(Vector2Int size)
@@ -169,7 +173,10 @@ public class GameGrid : MonoBehaviour
         }
         TryChangeHeight();
         SpawnCastleAtCentre();
+        RebuildNavMesh();
     }
+
+    private void RebuildNavMesh() => plane.BuildNavMesh();
 
     public List<Vector3> Corners()
     {

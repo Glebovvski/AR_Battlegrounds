@@ -33,7 +33,10 @@ namespace AI
                     cornerIndex = i;
                 }
             }
-            return cornerIndex + 1;
+            if (cornerIndex < 3)
+                return cornerIndex + 1;
+            else
+                return 0;
         }
     }
 }
