@@ -12,6 +12,8 @@ public class GetBestAttackTarget : ActionBase
         var c = (AIContext)context;
         var enemy = c.Enemy;
 
+        if(enemy.GetAttackTarget() != null) return;
+
         int multiplier = 100; //Score based on defense type preference
         foreach (var defense in enemy.DefenseTypeToScore)
         {

@@ -12,7 +12,7 @@ public class Observation :  IEquatable<Observation>
 
     public Defense Defense { get; private set; }
     public Vector3 Position => Defense.gameObject.transform.position;
-    public bool IsAlive => Defense.gameObject.activeSelf;
+    public bool IsAlive => Defense != null;
 
     public bool Equals(Observation other)
     {

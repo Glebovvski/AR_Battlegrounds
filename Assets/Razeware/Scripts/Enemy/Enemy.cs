@@ -126,8 +126,8 @@ namespace Enemies
         IEnumerator WaitForDeathAnimationToFinish()
         {
             yield return new WaitForSeconds(1);
-            AIManager.Instance.UnregisterEnemy(this);
             OnDeath?.Invoke(this);
+            AIManager.Instance.UnregisterEnemy(this);
         }
 
         private void ResetTarget()

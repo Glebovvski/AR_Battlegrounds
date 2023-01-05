@@ -74,8 +74,8 @@ namespace Defendable
         IEnumerator WaitForDeathAnimationFinish()
         {
             yield return new WaitForSeconds(1);
-            DamageReceiver.OnDeath -= OnDeath;
             OnDeath?.Invoke();
+            DamageReceiver.OnDeath -= OnDeath;
             PoolManager.Instance.ReturnToPool(this.gameObject, DefenseTypeToPoolType(Type));
         }
     }

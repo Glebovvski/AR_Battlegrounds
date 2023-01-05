@@ -13,6 +13,8 @@ namespace Enemies
 
         public void Attack()
         {
+            if (AttackTarget == null) return;
+            
             AttackTarget.Defense.TakeDamage(AttackForce);
         }
     }
