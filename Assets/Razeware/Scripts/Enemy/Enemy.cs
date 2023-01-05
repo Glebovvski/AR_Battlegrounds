@@ -67,7 +67,7 @@ namespace Enemies
             DefenseTypeToScore.Add(DefenseType.Laser, AttackLaserScore);
             DefenseTypeToScore.Add(DefenseType.Wall, AttackWallScore);
 
-            DefenseTypeToScore = DefenseTypeToScore.OrderBy(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
+            DefenseTypeToScore = DefenseTypeToScore.OrderByDescending(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
         }
 
         private void OnEnable()

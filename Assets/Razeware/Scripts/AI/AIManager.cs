@@ -11,7 +11,7 @@ namespace Enemies
 
         [field: SerializeField] public GameGrid Grid { get; private set; }
         [field: SerializeField] public List<Observation> Observations { get; private set; }
-        
+
         private List<Enemy> Enemies = new List<Enemy>();
 
         private void Awake()
@@ -32,7 +32,7 @@ namespace Enemies
 
         public void AddObservation(Observation observation)
         {
-            if(Observations.Any(x=> x.Equals(observation))) return;
+            if (Observations.Any(x => x.Equals(observation))) return;
 
             Observations.Add(observation);
         }
@@ -56,6 +56,9 @@ namespace Enemies
         public Observation GetClosestByType(IEnemy enemy, DefenseType type)
         {
             var observations = Observations.Where(x => x.Defense.Type == type).ToList();
+            if (observations.Count == 0)
+                return null;
+                
             return GetClosest(enemy, observations);
         }
 

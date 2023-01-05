@@ -15,12 +15,14 @@ public class GetBestAttackTarget : ActionBase
         var c = (AIContext)context;
         var enemy = c.Enemy;
 
-        if(enemy.GetAttackTarget() != null) return;
+        if (enemy.GetAttackTarget() != null) return;
 
         foreach (var defense in enemy.DefenseTypeToScore)
         {
             var bestDefenseType = defense;
             var closestObservation = Enemies.AIManager.Instance.GetClosestByType(enemy, defense.Key);
+            if (closestObservation == null)
+                continue;
             var path = enemy.GetCalculatedPath(closestObservation);
             var enemiesWithSameTarget = Enemies.AIManager.Instance.GetEnemiesAttackingObservation(closestObservation);
             scores.Add(new TargetScore(path.corners.Length, enemiesWithSameTarget, enemy, closestObservation, defense.Value, MaxEnemiesToAttackOneTarget));
