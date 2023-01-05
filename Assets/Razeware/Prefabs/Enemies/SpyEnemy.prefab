@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 497068949028825282}
   - component: {fileID: 497068949028825294}
   - component: {fileID: 7875034080553232178}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SpyEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -52,6 +52,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SO: {fileID: 11400000, guid: 67d7ef46db95450469a798a81bbf0629, type: 2}
   navMeshAgent: {fileID: 7875034080553232178}
+  animator: {fileID: 0}
 --- !u!114 &683039605362336157
 MonoBehaviour:
   m_ObjectHideFlags: 0

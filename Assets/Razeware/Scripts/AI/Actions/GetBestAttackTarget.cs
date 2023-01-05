@@ -25,7 +25,7 @@ public class GetBestAttackTarget : ActionBase
             if (closestObservation == null)
                 continue;
             var path = enemy.GetCalculatedPath(closestObservation);
-            if (path.status == NavMeshPathStatus.PathPartial)
+            if (path.status == NavMeshPathStatus.PathInvalid)
                 continue;
             var enemiesWithSameTarget = Enemies.AIManager.Instance.GetEnemiesAttackingObservation(closestObservation);
             scores.Add(new TargetScore(path.corners.Length, enemiesWithSameTarget, enemy, closestObservation, defense.Value, MaxEnemiesToAttackOneTarget));
