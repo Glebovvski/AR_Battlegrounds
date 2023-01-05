@@ -9,7 +9,9 @@ namespace Apex.AI
 
     public static class AINameMap
     {
-		public static readonly Guid regular_mob = new Guid("b733226d-9e53-4c8f-be29-f8abc9712f69");
+		public static readonly Guid BaseAttck = new Guid("f8302355-e2b6-4b15-8f31-cdb656017bf3");
+		public static readonly Guid BaseEnemy = new Guid("b733226d-9e53-4c8f-be29-f8abc9712f69");
+		public static readonly Guid SpyEnemy = new Guid("e6fc5f07-8ee4-4a75-9962-ce8dc82f8f7c");
 
     }
 }
