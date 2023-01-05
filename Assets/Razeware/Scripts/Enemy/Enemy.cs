@@ -15,6 +15,7 @@ namespace Enemies
     {
         [SerializeField] private ScriptableEnemy SO;
         [SerializeField] private NavMeshAgent navMeshAgent;
+        [SerializeField] private Animator animator;
 
         public int Health { get; private set; }
         public int AttackForce { get; set; }
@@ -43,6 +44,8 @@ namespace Enemies
 
         public IAIContext GetContext(Guid aiId) => Context;
 
+        private AnimationController animationController;
+
         private void Awake()
         {
             PopulateDictionary();
@@ -53,6 +56,7 @@ namespace Enemies
             Context = new AIContext(this);
             GetData();
             DamageReceiver = new DamageReceiver(Health);
+            animationController = new AnimationController(animator, navMeshAgent, DamageReceiver);
             DamageReceiver.OnDeath += Death;
         }
 
@@ -69,6 +73,11 @@ namespace Enemies
         private void OnEnable()
         {
             Init();
+        }
+
+        private void Update()
+        {
+            animationController.UpdateState();
         }
 
         public void GetData()
@@ -103,6 +112,12 @@ namespace Enemies
         private void Death()
         {
             DamageReceiver.OnDeath -= Death;
+            StartCoroutine(WaitForDeathAnimationToFinish());
+        }
+
+        IEnumerator WaitForDeathAnimationToFinish()
+        {
+            yield return new WaitForSeconds(1);
             AIManager.Instance.UnregisterEnemy(this);
             OnDeath?.Invoke(this);
         }
