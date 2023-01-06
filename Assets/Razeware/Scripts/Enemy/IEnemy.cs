@@ -10,7 +10,6 @@ namespace Enemies
     {
         GameObject GameObject { get; }
         NavMeshAgent NavMeshAgent { get; }
-        Vector3? MoveTarget { get; set; }
         float ScanRange { get; }
         Vector3 Position { get; }
 

@@ -24,7 +24,6 @@ namespace Enemies
         public AIContext Context { get; private set; }
         public GameObject GameObject => this.gameObject;
         public NavMeshAgent NavMeshAgent => navMeshAgent;
-        public Vector3? MoveTarget { get; set; }
         protected Observation AttackTarget { get; set; }
         public float ScanRange => SO.ScanRange;
         public Vector3 Position => this.gameObject.transform.position;

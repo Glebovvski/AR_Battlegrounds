@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using AI;
 using Apex.AI;
 using Defendable;
@@ -15,7 +16,7 @@ public class BaseEnemyScan : ActionBase
         var c = (AIContext)context;
         var Enemy = c.Enemy;
 
-        var colliders = Physics.OverlapSphere(Enemy.Position, Enemy.ScanRange, LayerMask);
+        var colliders = Physics.OverlapSphere(Enemy.Position, Enemy.ScanRange, LayerMask);//.Where(x => x.gameObject.activeSelf);
         foreach (var defence in colliders)
         {
             defences.Add(new Observation(defence.GetComponent<Defense>()));

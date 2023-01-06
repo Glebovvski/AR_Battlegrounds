@@ -80,7 +80,8 @@ public class TargetScore
                 }
             case EnemyType.Team:
                 {
-                    var enemiesAttackingTargetScore = enemiesAttackingTarget < maxEnemies ? enemiesAttackingTarget : -enemiesAttackingTarget;
+                    // Debug.LogError("ENEMIES ATTACKING TARGET: "+enemiesAttackingTarget);
+                    var enemiesAttackingTargetScore = enemiesAttackingTarget <= maxEnemies ? enemiesAttackingTarget :  -extraScore;
                     score = enemiesAttackingTargetScore * 100 - IsHealthLowScore();
                     break;
                 }

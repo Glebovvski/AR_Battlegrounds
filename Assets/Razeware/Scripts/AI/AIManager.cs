@@ -12,7 +12,7 @@ namespace Enemies
         [field: SerializeField] public GameGrid Grid { get; private set; }
         [field: SerializeField] public List<Observation> Observations { get; private set; }
 
-        private List<Enemy> Enemies = new List<Enemy>();
+        [SerializeField] private List<Enemy> Enemies = new List<Enemy>();
 
         private void Awake()
         {
@@ -47,7 +47,7 @@ namespace Enemies
 
         public void RemoveObservation(Observation observation)
         {
-            if (Observations.Contains(observation))
+            if (Observations.Any(x => x.Equals(observation)))
                 Observations.Remove(observation);
         }
 

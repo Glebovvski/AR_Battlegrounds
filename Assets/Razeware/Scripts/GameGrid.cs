@@ -134,8 +134,8 @@ public class GameGrid : MonoBehaviour
             selectedPair.ForEach(x => x.SetDefence(defence));
         }
         SelectDefence(SelectedDefence);
-        if (!cell.IsUpper)
-            RebuildNavMesh();
+        // if (!cell.IsUpper)
+        //     RebuildNavMesh();
     }
 
     private List<List<GridCell>> GetCellGroupsBySize(Vector2Int size)
@@ -174,7 +174,7 @@ public class GameGrid : MonoBehaviour
         }
         TryChangeHeight();
         SpawnCastleAtCentre();
-        // RebuildNavMesh();
+        RebuildNavMesh();
     }
 
     private void RebuildNavMesh() => plane.BuildNavMesh();
