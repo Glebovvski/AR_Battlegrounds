@@ -12,6 +12,7 @@ public class GameGrid : MonoBehaviour
     [SerializeField] private DefencesViewModel defencesViewModel;
     [SerializeField] private DefencesModel defencesModel;
     [SerializeField] private NavMeshSurface plane;
+    [SerializeField] private NavMeshSurface gridSurface;
 
     [SerializeField] private GridCell gridCellPrefab;
     [SerializeField] private CastleDefence castlePrefab;
@@ -177,8 +178,11 @@ public class GameGrid : MonoBehaviour
         RebuildNavMesh();
     }
 
-    private void RebuildNavMesh() => plane.BuildNavMesh();
-
+    private void RebuildNavMesh()
+    {
+        // plane.BuildNavMesh();
+        gridSurface.BuildNavMesh();
+    }
     public List<Vector3> Corners()
     {
         return new List<Vector3>()
