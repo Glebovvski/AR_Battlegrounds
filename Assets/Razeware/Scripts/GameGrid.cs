@@ -13,6 +13,7 @@ public class GameGrid : MonoBehaviour
     [SerializeField] private DefencesModel defencesModel;
     [SerializeField] private NavMeshSurface plane;
     [SerializeField] private NavMeshSurface gridSurface;
+    [SerializeField] private Transform planeObstacle;
 
     [SerializeField] private GridCell gridCellPrefab;
     [SerializeField] private CastleDefence castlePrefab;
@@ -134,6 +135,7 @@ public class GameGrid : MonoBehaviour
             defence.transform.position = GetWorldPositionFromGrid(centre, selectedPair[0].Height);
             selectedPair.ForEach(x => x.SetDefence(defence));
         }
+        defence.transform.SetParent(plane.transform);
         SelectDefence(SelectedDefence);
         // if (!cell.IsUpper)
         //     RebuildNavMesh();
@@ -173,6 +175,9 @@ public class GameGrid : MonoBehaviour
                 GridList.Add(grid[x, z]);
             }
         }
+        planeObstacle.position = this.transform.position + new Vector3(width / 2, 0, length / 2);
+        planeObstacle.localScale = new Vector3(width, 1, length);
+        plane.BuildNavMesh();
         TryChangeHeight();
         SpawnCastleAtCentre();
         RebuildNavMesh();
@@ -180,6 +185,7 @@ public class GameGrid : MonoBehaviour
 
     private void RebuildNavMesh()
     {
+        // GridList.ForEach(x => x.BuildNavMesh());
         // plane.BuildNavMesh();
         gridSurface.BuildNavMesh();
     }
