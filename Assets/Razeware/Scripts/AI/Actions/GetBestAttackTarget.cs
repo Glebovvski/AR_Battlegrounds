@@ -24,6 +24,7 @@ public class GetBestAttackTarget : ActionBase
             var closestObservation = Enemies.AIManager.Instance.GetClosestByType(enemy, defense.Key);
             if (closestObservation == null)
                 continue;
+            closestObservation.SetPosition(closestObservation.Defense.transform.forward * 5f);
             var path = enemy.GetCalculatedPath(closestObservation);
             if (path.status == NavMeshPathStatus.PathInvalid)
                 continue;
@@ -81,7 +82,7 @@ public class TargetScore
             case EnemyType.Team:
                 {
                     // Debug.LogError("ENEMIES ATTACKING TARGET: "+enemiesAttackingTarget);
-                    var enemiesAttackingTargetScore = enemiesAttackingTarget <= maxEnemies ? enemiesAttackingTarget :  -extraScore;
+                    var enemiesAttackingTargetScore = enemiesAttackingTarget <= maxEnemies ? enemiesAttackingTarget : -extraScore;
                     score = enemiesAttackingTargetScore * 100 - IsHealthLowScore();
                     break;
                 }

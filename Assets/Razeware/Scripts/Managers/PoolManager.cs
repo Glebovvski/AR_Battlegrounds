@@ -61,6 +61,7 @@ public class PoolManager : MonoBehaviour
         bool IsNotInPool = !poolInfo.pool.Contains(go);
         if (IsNotInPool)
             poolInfo.pool.Add(go);
+        go.transform.position = new Vector3(-100, -100, -100);
         go.transform.SetParent(poolInfo.container.transform);
     }
 

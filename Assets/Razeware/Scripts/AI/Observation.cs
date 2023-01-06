@@ -11,11 +11,18 @@ public class Observation : IEquatable<Observation>
     }
 
     public Defense Defense { get; private set; }
-    public Vector3 Position => Defense.gameObject.transform.position;
+    public Vector3 Position => Defense.gameObject.transform.position + offset;
     public bool IsAlive => Defense.CurrentHealth > 0;
+
+    private Vector3 offset;
 
     public bool Equals(Observation other)
     {
         return this.Defense == other.Defense;
+    }
+
+    internal void SetPosition(Vector3 vector3)
+    {
+        offset = vector3;
     }
 }
