@@ -149,6 +149,12 @@ MonoBehaviour:
     startDelayMin: 0
     startDelayMax: 0
     isActive: 1
+  - aiId: fec13c95-8eac-47d6-9475-bca0b4de0018
+    intervalMin: 1
+    intervalMax: 10
+    startDelayMin: 0
+    startDelayMax: 0
+    isActive: 1
 --- !u!1001 &1023234597623140352
 PrefabInstance:
   m_ObjectHideFlags: 0
