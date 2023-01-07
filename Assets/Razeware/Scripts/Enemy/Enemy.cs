@@ -82,6 +82,7 @@ namespace Enemies
         public void SetAttackTarget(Observation observation)
         {
             AttackTarget = observation;
+            NavMeshAgent.stoppingDistance = AttackTarget.Size.x;
             AttackTarget.Defense.OnDeath += ResetTarget;
         }
 
@@ -111,7 +112,7 @@ namespace Enemies
 
         public virtual void StartAttack()
         {
-            NavMeshAgent.enabled = false;
+            // NavMeshAgent.enabled = false;
         }
 
         private void OnTriggerEnter(Collider other)

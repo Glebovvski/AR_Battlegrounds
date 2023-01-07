@@ -16,7 +16,7 @@ namespace Enemies
         {
             if (AttackTarget == null)
             {
-                NavMeshAgent.enabled = true;
+                // NavMeshAgent.enabled = true;
                 return;
             }
 

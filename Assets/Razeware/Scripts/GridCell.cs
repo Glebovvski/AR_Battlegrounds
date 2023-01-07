@@ -10,6 +10,8 @@ public class GridCell : MonoBehaviour
     [SerializeField] private Mesh ground;
     [SerializeField] private Mesh grass;
     [SerializeField] private NavMeshSurface surface;
+    [SerializeField] private GameObject navVolume;
+    [SerializeField] private NavMeshModifier navMeshModifier;
 
     private int posX;
     private int posY;
@@ -36,12 +38,14 @@ public class GridCell : MonoBehaviour
     {
         this.transform.localScale = new Vector3(1, value, 1);
         cubeMesh.mesh = value == 1 ? grass : ground;
+        CheckNavMeshModifier();
 
     }
     public void SetDefence(Defense defence)
     {
         if (IsFree)
         {
+            ToggleVolume(false);
             Defence = defence;
             Defence.OnDeath += FreeCell;
         }
@@ -54,6 +58,22 @@ public class GridCell : MonoBehaviour
     {
         Defence.OnDeath -= FreeCell;
         Defence = null;
+        ToggleVolume(true);
         OnFreeCell?.Invoke();
+    }
+
+    private void ToggleVolume(bool active)
+    {
+        if (!IsUpper)
+            navVolume.SetActive(active);
+    }
+
+    private void CheckNavMeshModifier()
+    {
+        if (IsUpper)
+        {
+            navMeshModifier.ignoreFromBuild = false;
+            OnFreeCell?.Invoke();
+        }
     }
 }
