@@ -10,8 +10,7 @@ namespace Enemies
         public static AIManager Instance;
 
         [field: SerializeField] public GameGrid Grid { get; private set; }
-        [field: SerializeField] public List<Observation> Observations { get; private set; }
-
+        public List<Observation> Observations = new List<Observation>();
         [SerializeField] private List<Enemy> Enemies = new List<Enemy>();
 
         private void Awake()
@@ -27,7 +26,7 @@ namespace Enemies
 
             DontDestroyOnLoad(gameObject);
 
-            Observations = new List<Observation>();
+            // Observations = new List<Observation>();
         }
 
         public void AddObservation(Observation observation)
