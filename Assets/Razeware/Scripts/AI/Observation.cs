@@ -11,7 +11,8 @@ public class Observation : IEquatable<Observation>
     }
 
     public Defense Defense { get; private set; }
-    public Vector3 Position => Defense.gameObject.transform.position + offset;
+    public Vector3 Position => Defense.gameObject.transform.position;// - Defense.Collider.size*2;
+    public Vector3 Size => Defense.transform.localScale;
     public bool IsAlive => Defense.CurrentHealth > 0;
 
     private Vector3 offset;

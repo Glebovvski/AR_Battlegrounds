@@ -109,7 +109,10 @@ namespace Enemies
             return navMeshPath;
         }
 
-        public abstract void StartAttack();
+        public virtual void StartAttack()
+        {
+            NavMeshAgent.enabled = false;
+        }
 
         private void OnTriggerEnter(Collider other)
         {

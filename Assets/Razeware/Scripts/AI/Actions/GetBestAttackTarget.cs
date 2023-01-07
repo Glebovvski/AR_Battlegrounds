@@ -15,9 +15,10 @@ public class GetBestAttackTarget : ActionBase
     {
         var c = (AIContext)context;
         var enemy = c.Enemy;
+        c.Enemy.NavMeshAgent.enabled = true;
 
         if (enemy.GetAttackTarget() != null) return;
-
+        int pathScore = 0;
         foreach (var defense in enemy.DefenseTypeToScore)
         {
             var bestDefenseType = defense;
@@ -26,10 +27,12 @@ public class GetBestAttackTarget : ActionBase
                 continue;
             // closestObservation.SetPosition(closestObservation.Defense.transform.right * -2f);
             var path = enemy.GetCalculatedPath(closestObservation);
-            if (path.status == NavMeshPathStatus.PathInvalid)
+            if (path.status != NavMeshPathStatus.PathComplete)
                 continue;
+                // pathScore = -1000 - path.corners.Count()*1000;
             var enemiesWithSameTarget = Enemies.AIManager.Instance.GetEnemiesAttackingObservation(closestObservation);
-            scores.Add(new TargetScore(path.corners.Length, enemiesWithSameTarget, enemy, closestObservation, defense.Value, MaxEnemiesToAttackOneTarget));
+            scores.Add(new TargetScore(path.corners.Length, enemiesWithSameTarget, enemy, closestObservation, defense.Value + pathScore, MaxEnemiesToAttackOneTarget));
+            pathScore = 0;
         }
         var attackTarget = scores.OrderByDescending(x => x.TotalScore).First().Observation;
         Debug.LogError(string.Format("ENEMY: {0} TARGET: {1}", enemy.name, attackTarget.Defense.gameObject.name));

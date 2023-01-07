@@ -84,7 +84,7 @@ namespace Enemies
             Observation closest = null;
             for (int i = 0; i < observations.Count; i++)
             {
-                var currDistance = Vector3.Distance(position, observations[i].Position);
+                var currDistance = (observations[i].Position - position).sqrMagnitude;
                 if (currDistance < distance)
                 {
                     distance = currDistance;

@@ -23,6 +23,7 @@ namespace Defendable
         public bool IsActionAvailable() => IsActiveDefence && IsReady;
         public Vector2Int GetSize() => SO.Size;
         public DefenseType Type => SO.Type;
+        public BoxCollider Collider {get; private set;}
         protected DamageReceiver DamageReceiver;
 
         public event Action OnDeath;
@@ -46,6 +47,7 @@ namespace Defendable
         protected void Awake()
         {
             GetData();
+            Collider = GetComponent<BoxCollider>();
         }
         public void TakeDamage(float value) => DamageReceiver.TakeDamage(value);
 

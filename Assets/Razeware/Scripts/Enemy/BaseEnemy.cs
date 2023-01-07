@@ -8,13 +8,18 @@ namespace Enemies
     {
         public override void StartAttack()
         {
+            base.StartAttack();
             animationController.Attack();
         }
 
         public void Attack()
         {
-            if (AttackTarget == null) return;
-            
+            if (AttackTarget == null)
+            {
+                NavMeshAgent.enabled = true;
+                return;
+            }
+
             AttackTarget.Defense.TakeDamage(AttackForce);
         }
     }

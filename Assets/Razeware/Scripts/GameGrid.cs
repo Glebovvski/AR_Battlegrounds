@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Defendable;
@@ -59,7 +60,8 @@ public class GameGrid : MonoBehaviour
         float x = cell.Pos.x * gridSpaceSize;
         float y = cell.Pos.y * gridSpaceSize;
 
-        return new Vector3(x, cell.Height + yPos, y);
+        // return new Vector3(x, cell.Height + yPos, y);
+        return new Vector3(x, 0, y);
     }
 
     public Vector3 GetWorldPositionFromGrid(Vector2Int position, int height)
@@ -75,7 +77,8 @@ public class GameGrid : MonoBehaviour
         float x = position.x * gridSpaceSize;
         float y = position.y * gridSpaceSize;
 
-        return new Vector3(x, height + yPos, y);
+        // return new Vector3(x, height + yPos, y);
+        return new Vector3(x, 0, y);
     }
 
     public void SelectDefence(PoolObjectType type)
@@ -168,16 +171,19 @@ public class GameGrid : MonoBehaviour
         {
             for (int z = 0; z < length; z++)
             {
-                grid[x, z] = Instantiate(gridCellPrefab, new Vector3(x * gridSpaceSize, yPos, z * gridSpaceSize), Quaternion.Euler(90, 0, 0), this.transform);
+                grid[x, z] = Instantiate(gridCellPrefab, new Vector3(x * gridSpaceSize, yPos, z * gridSpaceSize), Quaternion.identity, this.transform);
                 grid[x, z].Init(x, z);
                 grid[x, z].gameObject.name = string.Format("Cell {0}:{1}", x, z);
                 grid[x, z].OnFreeCell += RebuildNavMesh;
                 GridList.Add(grid[x, z]);
             }
         }
-        planeObstacle.position = this.transform.position + new Vector3(width / 2, 0, length / 2);
-        planeObstacle.localScale = new Vector3(width, 1, length);
-        plane.BuildNavMesh();
+        // planeObstacle.position = this.transform.position + new Vector3(width / 2, 0.5f, length / 2);
+        // planeObstacle.localScale = new Vector3(width, 2, length);
+        // var obstacle = planeObstacle.gameObject.AddComponent<NavMeshObstacle>();
+        // obstacle.carving = true;
+        // obstacle.carveOnlyStationary = false;
+        // plane.BuildNavMesh();
         TryChangeHeight();
         SpawnCastleAtCentre();
         RebuildNavMesh();
@@ -186,9 +192,10 @@ public class GameGrid : MonoBehaviour
     private void RebuildNavMesh()
     {
         // GridList.ForEach(x => x.BuildNavMesh());
-        // plane.BuildNavMesh();
-        gridSurface.BuildNavMesh();
+        // gridSurface.BuildNavMesh();
+        plane.BuildNavMesh();
     }
+
     public List<Vector3> Corners()
     {
         return new List<Vector3>()
@@ -204,6 +211,7 @@ public class GameGrid : MonoBehaviour
     {
         Vector2 centre = GetCentreOfPair(centreCells);
         var castle = Instantiate(castlePrefab, GetWorldPositionFromGrid(centre, centreCells[0].Height), Quaternion.identity);
+        castle.transform.SetParent(plane.transform);
         centreCells.ForEach(x => x.SetDefence(castle));
     }
 
@@ -230,6 +238,7 @@ public class GameGrid : MonoBehaviour
                 {
                     var tower = PoolManager.Instance.GetFromPool<WallDefence>(PoolObjectType.WallTower);
                     tower.transform.position = GetWorldPositionFromGrid(cell);
+                    tower.transform.SetParent(plane.transform);
                     cell.SetDefence(tower);
                 }
                 continue;

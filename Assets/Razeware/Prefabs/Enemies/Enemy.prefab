@@ -120,7 +120,7 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 0.5
+  m_Height: 2
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
@@ -154,7 +154,7 @@ MonoBehaviour:
     intervalMax: 10
     startDelayMin: 0
     startDelayMax: 0
-    isActive: 1
+    isActive: 0
 --- !u!1001 &1023234597623140352
 PrefabInstance:
   m_ObjectHideFlags: 0

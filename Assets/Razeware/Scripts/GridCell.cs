@@ -18,7 +18,7 @@ public class GridCell : MonoBehaviour
     public bool IsFree => Defence == null;
     public Vector2Int Pos => new Vector2Int(posX, posY);
     public int Height => Mathf.FloorToInt(transform.localScale.z);
-    public bool IsUpper => transform.localScale.z > 1;
+    public bool IsUpper => transform.localScale.y > 1;
     public bool IsSelected => quadRenderer.material.color != defaultCellColor;
 
     private Color defaultCellColor;
@@ -34,7 +34,7 @@ public class GridCell : MonoBehaviour
 
     public void SetHeight(int value)
     {
-        this.transform.localScale = new Vector3(1, 1, value);
+        this.transform.localScale = new Vector3(1, value, 1);
         cubeMesh.mesh = value == 1 ? grass : ground;
 
     }
@@ -54,6 +54,6 @@ public class GridCell : MonoBehaviour
     {
         Defence.OnDeath -= FreeCell;
         Defence = null;
-        // OnFreeCell?.Invoke();
+        OnFreeCell?.Invoke();
     }
 }

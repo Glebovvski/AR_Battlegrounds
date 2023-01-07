@@ -21,6 +21,6 @@ MonoBehaviour:
   AttackWallScore: 5
   AttackCannonScore: 5
   AttackLaserScore: 5
-  AttackCastleScore: 100000
+  AttackCastleScore: 10000
   EnemyType: 1
   Type: 100
