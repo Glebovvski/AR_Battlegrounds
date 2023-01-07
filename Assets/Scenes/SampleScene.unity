@@ -1077,12 +1077,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 581853322}
   m_CullTransparentMesh: 1
---- !u!1 &593530499 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6000988167660706116, guid: 91ba00481d9194bd4974e9dcc125242e,
-    type: 3}
-  m_PrefabInstance: {fileID: 668598713}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &668598713
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1189,7 +1183,7 @@ PrefabInstance:
         type: 3}
       propertyPath: gridSurface
       value: 
-      objectReference: {fileID: 1796738234}
+      objectReference: {fileID: 0}
     - target: {fileID: 6261986795282757049, guid: 91ba00481d9194bd4974e9dcc125242e,
         type: 3}
       propertyPath: castlePrefab
@@ -2476,41 +2470,12 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 668598713}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 593530499}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 798e3037a840b4168b67ad3cb9b681fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1796738234
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 593530499}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_AgentTypeID: 0
-  m_CollectObjects: 0
-  m_Size: {x: 10, y: 10, z: 10}
-  m_Center: {x: 0, y: 2, z: 0}
-  m_LayerMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_UseGeometry: 1
-  m_DefaultArea: 0
-  m_IgnoreNavMeshAgent: 1
-  m_IgnoreNavMeshObstacle: 1
-  m_OverrideTileSize: 0
-  m_TileSize: 256
-  m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.033333335
-  m_BuildHeightMesh: 0
-  m_NavMeshData: {fileID: 0}
 --- !u!4 &1796738236 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6000988167660706115, guid: 91ba00481d9194bd4974e9dcc125242e,
