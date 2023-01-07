@@ -60,8 +60,8 @@ public class GameGrid : MonoBehaviour
         float x = cell.Pos.x * gridSpaceSize;
         float y = cell.Pos.y * gridSpaceSize;
 
-        // return new Vector3(x, cell.Height + yPos, y);
-        return new Vector3(x, 0, y);
+        return new Vector3(x, cell.Height + yPos, y);
+        // return new Vector3(x, 0, y);
     }
 
     public Vector3 GetWorldPositionFromGrid(Vector2Int position, int height)
@@ -77,8 +77,8 @@ public class GameGrid : MonoBehaviour
         float x = position.x * gridSpaceSize;
         float y = position.y * gridSpaceSize;
 
-        // return new Vector3(x, height + yPos, y);
-        return new Vector3(x, 0, y);
+        return new Vector3(x, height + yPos, y);
+        // return new Vector3(x, 0, y);
     }
 
     public void SelectDefence(PoolObjectType type)
@@ -126,7 +126,7 @@ public class GameGrid : MonoBehaviour
         var defence = PoolManager.Instance.GetFromPool<Defense>(SelectedDefence);
         if (defence.GetSize() == Vector2Int.one)
         {
-            defence.transform.position = GetWorldPositionFromGrid(cell);
+            defence.transform.position = GetWorldPositionFromGrid(cell.Pos, Mathf.CeilToInt(-yPos));
             cell.SetDefence(defence);
         }
         else

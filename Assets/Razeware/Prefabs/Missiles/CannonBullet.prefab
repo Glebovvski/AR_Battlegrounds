@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 23972824282041216}
   - component: {fileID: 65923475919724998}
   - component: {fileID: 6984377681542997584}
-  m_Layer: 0
+  - component: {fileID: 3376280993885859277}
+  m_Layer: 10
   m_Name: CannonBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -113,6 +114,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SO: {fileID: 11400000, guid: 9ab9669d93124c840b403865d9c2587f, type: 2}
+--- !u!54 &3376280993885859277
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1240887441953726}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1420486808462880
 GameObject:
   m_ObjectHideFlags: 0
@@ -124,7 +141,7 @@ GameObject:
   - component: {fileID: 4718672092507590}
   - component: {fileID: 198675176984076890}
   - component: {fileID: 199649127611144004}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Smoke_trail1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4949,7 +4966,7 @@ GameObject:
   - component: {fileID: 4571428054930038}
   - component: {fileID: 198913002333648172}
   - component: {fileID: 199734427342937072}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Smoke_trail2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
