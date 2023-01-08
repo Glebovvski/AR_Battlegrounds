@@ -23,7 +23,7 @@ namespace Defendable
         public bool IsActionAvailable() => IsActiveDefence && IsReady;
         public Vector2Int GetSize() => SO.Size;
         public DefenseType Type => SO.Type;
-        public BoxCollider Collider {get; private set;}
+        public BoxCollider Collider { get; private set; }
         protected DamageReceiver DamageReceiver;
 
         public event Action OnDeath;
@@ -61,7 +61,7 @@ namespace Defendable
             switch (type)
             {
                 case DefenseType.Castle:
-                    return PoolObjectType.None;
+                    return PoolObjectType.CastleTower;
                 case DefenseType.Wall:
                     return PoolObjectType.WallTower;
                 case DefenseType.Cannon:
