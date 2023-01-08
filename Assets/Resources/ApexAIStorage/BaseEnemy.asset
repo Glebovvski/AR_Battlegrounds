@@ -23,9 +23,13 @@ MonoBehaviour:
     Assembly-CSharp"},{"@type":"BaseEnemyScan, Assembly-CSharp"}]}}},{"@type":"Apex.AI.PrioritySelector,
     ApexAI","_id":f1512737f31f4974911a56ce7a95799a,"_qualifiers":[{"@type":"Apex.AI.FixedScoreQualifier,
     ApexAI","action":{"@type":"Apex.AI.CompositeAction, ApexAI","_actions":[{"@type":"BaseEnemyScan,
-    Assembly-CSharp"},{"@type":"GetBestAttackTarget, Assembly-CSharp","MaxEnemiesToAttackOneTarget":3},{"@type":"MoveToTarget,
-    Assembly-CSharp"}]}}],"_defaultQualifier":{"@type":"Apex.AI.DefaultQualifier,
+    Assembly-CSharp"},{"@type":"GetBestAttackTarget, Assembly-CSharp","MaxEnemiesToAttackOneTarget":3}],"_connectorAction":{"@type":"Apex.AI.SelectorAction,
+    ApexAI","_selectorId":c08d73242bb44a78898f5c609849213c}}}],"_defaultQualifier":{"@type":"Apex.AI.DefaultQualifier,
+    ApexAI"}},{"@type":"Apex.AI.ScoreSelector, ApexAI","_id":c08d73242bb44a78898f5c609849213c,"_qualifiers":[{"@type":"Apex.AI.CompositeScoreQualifier,
+    ApexAI","action":{"@type":"MoveToTarget, Assembly-CSharp"},"_scorers":[]},{"@type":"Apex.AI.CompositeScoreQualifier,
+    ApexAI","_scorers":[]}],"_defaultQualifier":{"@type":"Apex.AI.DefaultQualifier,
     ApexAI"}}]}'
   editorConfiguration: '{"offset":{"@x":335,"@y":112},"zoom":1,"SelectorView":{"ViewArea":{"@left":315,"@top":132,"@width":200,"@height":160},"QualifierView":{"Name":"Should
     Move Closer","ActionView":{"@connectorType":"Selector"}},"DefaultQualifier":{"Name":"Move
-    To Grid","ActionView":{"@connectorType":"Composite"}}},"SelectorView":{"ViewArea":{"@left":575,"@top":212,"@width":200,"@height":160},"QualifierView":{"ActionView":{"@connectorType":"Composite"}},"DefaultQualifier":{}}}'
+    To Grid","ActionView":{"@connectorType":"Composite"}}},"SelectorView":{"ViewArea":{"@left":615,"@top":172,"@width":200,"@height":160},"QualifierView":{"ActionView":{"@connectorType":"Composite"}},"DefaultQualifier":{}},"SelectorView":{"ViewArea":{"@left":935,"@top":192,"@width":200,"@height":220},"QualifierView":{"Name":"Straight
+    move","ActionView":{}},"QualifierView":{"Name":"Move Behind Cover"},"DefaultQualifier":{}}}'

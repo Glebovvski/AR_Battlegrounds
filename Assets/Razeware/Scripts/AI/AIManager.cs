@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,8 +26,6 @@ namespace Enemies
             }
 
             DontDestroyOnLoad(gameObject);
-
-            // Observations = new List<Observation>();
         }
 
         public void AddObservation(Observation observation)
@@ -74,7 +73,7 @@ namespace Enemies
             PoolManager.Instance.ReturnToPool(enemy.GameObject, enemy.Type);
         }
 
-        public int GetEnemiesAttackingObservation(Observation observation) => Enemies.Where(x => x.GetAttackTarget() == observation).Count();
+        public IEnumerable<Enemy> GetEnemiesAttackingObservation(Observation observation) => Enemies.Where(x => x.GetAttackTarget() == observation);
 
         private Observation GetClosest(IEnemy enemy, List<Observation> observations)
         {
