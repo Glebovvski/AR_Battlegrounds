@@ -16,7 +16,7 @@ public class BaseEnemyScan : ActionBase
         var c = (AIContext)context;
         var Enemy = c.Enemy;
 
-        var colliders = Physics.OverlapSphere(Enemy.Position, Enemy.ScanRange, LayerMask);//.Where(x => x.gameObject.activeSelf);
+        var colliders = Physics.OverlapSphere(Enemy.Position, Enemy.ScanRange, LayerMask);
         foreach (var defence in colliders)
         {
             defences.Add(new Observation(defence.GetComponent<Defense>()));
