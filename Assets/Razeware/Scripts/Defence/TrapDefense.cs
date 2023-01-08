@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Enemies;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -26,6 +27,15 @@ namespace Defendable
             {
                 Debug.LogError("TRAP REBUILD");
                 surface.BuildNavMesh();
+            }
+        }
+
+        private void OnTriggerEnter(Collider other) 
+        {
+            if(other.TryGetComponent<Enemy>(out var enemy))
+            {
+                enemy.TakeDamage(AttackForce);
+                animator.SetTrigger("open");
             }
         }
 
