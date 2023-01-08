@@ -23,12 +23,12 @@ MonoBehaviour:
     Assembly-CSharp"},{"@type":"BaseEnemyScan, Assembly-CSharp"}]}}},{"@type":"Apex.AI.PrioritySelector,
     ApexAI","_id":4953909cb10d4a08887e80a8f629251f,"_qualifiers":[{"@type":"Apex.AI.FixedScoreQualifier,
     ApexAI","action":{"@type":"Apex.AI.CompositeAction, ApexAI","_actions":[{"@type":"BaseEnemyScan,
-    Assembly-CSharp"},{"@type":"GetBestAttackTarget, Assembly-CSharp","MaxEnemiesToAttackOneTarget":0}],"_connectorAction":{"@type":"Apex.AI.SelectorAction,
+    Assembly-CSharp"},{"@type":"GetBestAttackTarget, Assembly-CSharp","MaxEnemiesToAttackOneTarget":1}],"_connectorAction":{"@type":"Apex.AI.SelectorAction,
     ApexAI","_selectorId":e8b3374bb556448c9128fa393271773e}}}],"_defaultQualifier":{"@type":"Apex.AI.DefaultQualifier,
     ApexAI"}},{"@type":"Apex.AI.ScoreSelector, ApexAI","_id":e8b3374bb556448c9128fa393271773e,"_qualifiers":[{"@type":"Apex.AI.CompositeScoreQualifier,
     ApexAI","action":{"@type":"MoveToTarget, Assembly-CSharp"},"_scorers":[]}],"_defaultQualifier":{"@type":"Apex.AI.DefaultQualifier,
-    ApexAI"}}]}'
-  editorConfiguration: '{"offset":{"@x":0,"@y":0},"zoom":1,"SelectorView":{"ViewArea":{"@left":160,"@top":180,"@width":200,"@height":160},"QualifierView":{"Name":"Should
+    ApexAI","score":0}}]}'
+  editorConfiguration: '{"offset":{"@x":94,"@y":15},"zoom":1,"SelectorView":{"ViewArea":{"@left":254,"@top":195,"@width":200,"@height":160},"QualifierView":{"Name":"Should
     Move Closer","ActionView":{"@connectorType":"Selector"}},"DefaultQualifier":{"Name":"Move
-    To Grid","ActionView":{"@connectorType":"Composite"}}},"SelectorView":{"ViewArea":{"@left":440,"@top":260,"@width":200,"@height":160},"QualifierView":{"ActionView":{"@connectorType":"Composite"}},"DefaultQualifier":{}},"SelectorView":{"ViewArea":{"@left":740,"@top":320,"@width":200,"@height":160},"QualifierView":{"Name":"Straight
+    To Grid","ActionView":{"@connectorType":"Composite"}}},"SelectorView":{"ViewArea":{"@left":534,"@top":275,"@width":200,"@height":160},"QualifierView":{"ActionView":{"@connectorType":"Composite"}},"DefaultQualifier":{}},"SelectorView":{"ViewArea":{"@left":834,"@top":335,"@width":200,"@height":160},"QualifierView":{"Name":"Straight
     move","ActionView":{}},"DefaultQualifier":{}}}'

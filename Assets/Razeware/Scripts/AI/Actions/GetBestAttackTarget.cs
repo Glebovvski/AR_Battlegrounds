@@ -80,7 +80,7 @@ public class TargetScore
         {
             case EnemyType.Mono:
                 {
-                    score = -100 - IsHealthLowScore();
+                    score = 0;// -100 - IsHealthLowScore();
                     break;
                 }
             case EnemyType.Any:

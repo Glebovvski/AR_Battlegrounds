@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Health: 25
   IsActiveDefence: 1
-  AttackForce: 20
+  AttackForce: 0
   AttackRange: 20
   RelaodTime: 1
   ProjectileSpeed: 100
