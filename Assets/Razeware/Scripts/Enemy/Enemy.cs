@@ -18,6 +18,7 @@ namespace Enemies
         [SerializeField] private Animator animator;
 
         public int Health { get; private set; }
+        public float CurrentHealth => DamageReceiver.CurrentHealth;
         public int AttackForce { get; set; }
         public int Speed { get; set; }
         public bool IsAlive => !DamageReceiver.IsDead;
@@ -25,7 +26,7 @@ namespace Enemies
         public GameObject GameObject => this.gameObject;
         public NavMeshAgent NavMeshAgent => navMeshAgent;
         protected Observation AttackTarget { get; set; }
-        protected Enemy FollowTarget { get; set; }
+        public Enemy FollowTarget { get; set; }
         public float ScanRange => SO.ScanRange;
         public Vector3 Position => this.gameObject.transform.position;
         public DamageReceiver DamageReceiver;
