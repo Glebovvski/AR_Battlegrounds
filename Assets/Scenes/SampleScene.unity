@@ -664,8 +664,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 581853324}
   m_HandleRect: {fileID: 581853323}
   m_Direction: 0
-  m_Value: 1
-  m_Size: 0
+  m_Value: 0
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -3369,6 +3369,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_StoppingDistance
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8341249109370848062, guid: 00445ded5dfd59649b1e0363b6c822a3,
+        type: 3}
+      propertyPath: aiConfigs.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8341249109370848062, guid: 00445ded5dfd59649b1e0363b6c822a3,
+        type: 3}
+      propertyPath: aiConfigs.Array.data[1].aiId
+      value: f8302355-e2b6-4b15-8f31-cdb656017bf3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8341249109370848062, guid: 00445ded5dfd59649b1e0363b6c822a3,
+        type: 3}
+      propertyPath: aiConfigs.Array.data[1].isActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8341249109370848062, guid: 00445ded5dfd59649b1e0363b6c822a3,
+        type: 3}
+      propertyPath: aiConfigs.Array.data[1].intervalMax
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8341249109370848062, guid: 00445ded5dfd59649b1e0363b6c822a3,
+        type: 3}
+      propertyPath: aiConfigs.Array.data[1].intervalMin
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 00445ded5dfd59649b1e0363b6c822a3, type: 3}
