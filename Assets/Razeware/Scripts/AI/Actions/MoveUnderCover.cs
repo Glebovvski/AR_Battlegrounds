@@ -12,6 +12,6 @@ public class MoveUnderCover : ActionBase
         var c = (AIContext)context;
         var enemy = c.Enemy;
 
-        
+        var closeEnemies = Enemies.AIManager.Instance.GetClosestEnemies(enemy);
     }
 }

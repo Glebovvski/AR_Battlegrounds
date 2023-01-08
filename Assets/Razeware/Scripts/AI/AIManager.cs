@@ -75,6 +75,8 @@ namespace Enemies
 
         public IEnumerable<Enemy> GetEnemiesAttackingObservation(Observation observation) => Enemies.Where(x => x.GetAttackTarget() == observation);
 
+        public IEnumerable<Enemy> GetClosestEnemies(Enemy enemy) => Enemies.Where(x => (x.Position - enemy.Position).sqrMagnitude < enemy.ScanRange);
+
         private Observation GetClosest(IEnemy enemy, List<Observation> observations)
         {
             Vector3 position = enemy.GameObject.transform.position;
