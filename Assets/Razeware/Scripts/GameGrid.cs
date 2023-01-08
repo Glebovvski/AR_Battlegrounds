@@ -35,6 +35,8 @@ public class GameGrid : MonoBehaviour
     public Vector3 Centre => this.transform.position + new Vector3(width / 2f, 0, length / 2f);
     public Vector3 Position => this.transform.position;
 
+    public event Action OnGridCreated;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -181,6 +183,7 @@ public class GameGrid : MonoBehaviour
         TryChangeHeight();
         SpawnCastleAtCentre();
         RebuildNavMesh();
+        OnGridCreated?.Invoke();
     }
 
     private void RebuildNavMesh()

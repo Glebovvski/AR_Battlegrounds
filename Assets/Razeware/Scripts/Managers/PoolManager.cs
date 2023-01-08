@@ -12,6 +12,7 @@ public class PoolManager : MonoBehaviour
     private Dictionary<PoolObjectType, Type> TypeDictionary = new Dictionary<PoolObjectType, Type>();
 
     [SerializeField] private List<PoolInfo> poolList;
+    [SerializeField] public List<PoolInfo> decorList;
     [SerializeField] private Type type;
 
     private void Awake()
@@ -40,6 +41,10 @@ public class PoolManager : MonoBehaviour
         for (int i = 0; i < poolList.Count; i++)
         {
             FillPool(poolList[i]);
+        }
+         for (int i = 0; i < decorList.Count; i++)
+        {
+            FillPool(decorList[i]);
         }
     }
 
@@ -82,6 +87,24 @@ public class PoolManager : MonoBehaviour
     }
 
     private PoolInfo GetPoolInfoByType(PoolObjectType type) => poolList.FirstOrDefault(x => x.type == type);
+
+    public GameObject GetFromDecor(PoolObjectType type)
+    {
+        GameObject go;
+        var poolInfo = GetDecorInfoByType(type);
+        var pool = poolInfo.pool;
+        if (pool.Count == 0)
+            go = Instantiate(poolInfo.prefab, poolInfo.container.transform);
+        else
+        {
+            go = pool.FirstOrDefault(x => !x.activeSelf);
+            pool.Remove(go);
+        }
+        go.SetActive(true);
+        return go;
+    }
+
+    private PoolInfo GetDecorInfoByType(PoolObjectType type) => decorList.FirstOrDefault(x => x.type == type);
 }
 
 [Serializable]
@@ -106,5 +129,15 @@ public enum PoolObjectType
     Enemy = 100,
     SpyEnemy,
     CannonBullet = 300,
+    DecorTree01 = 1000,
+    DecorTree02,
+    DecorAppleTree01,
+    DecorAppleTree02,
+    DecorGrass01,
+    DecorGrass02,
+    DecorPine01,
+    DecorPine02,
+    DecorPine03,
+    DecorPine04,
 
 }
