@@ -18,6 +18,7 @@ public class ScriptableEnemy : ScriptableObject
     public int AttackCannonScore;
     public int AttackLaserScore;
     public int AttackCastleScore;
+    public int AttackTrapScore;
     public EnemyType EnemyType;
     
     [Space(10)]

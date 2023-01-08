@@ -39,7 +39,7 @@ namespace Defendable
             Size = SO.Size;
         }
 
-        private void OnEnable()
+        public void OnEnable()
         {
             DamageReceiver = new DamageReceiver(Health);
             DamageReceiver.OnDeath += Death;

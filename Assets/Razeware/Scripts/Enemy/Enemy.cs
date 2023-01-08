@@ -36,6 +36,7 @@ namespace Enemies
         public int AttackCannonScore => SO.AttackCannonScore;
         public int AttackLaserScore => SO.AttackLaserScore;
         public int AttackCastleScore => SO.AttackCastleScore;
+        public int AttackTrapScore => SO.AttackTrapScore;
 
         public event Action<Enemy> OnDeath;
 
@@ -65,6 +66,7 @@ namespace Enemies
             DefenseTypeToScore.Add(DefenseType.Cannon, AttackCannonScore);
             DefenseTypeToScore.Add(DefenseType.Laser, AttackLaserScore);
             DefenseTypeToScore.Add(DefenseType.Wall, AttackWallScore);
+            DefenseTypeToScore.Add(DefenseType.Trap, AttackTrapScore);
 
             DefenseTypeToScore = DefenseTypeToScore.OrderByDescending(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
         }
