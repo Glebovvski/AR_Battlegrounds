@@ -8,6 +8,8 @@ namespace Defendable
 {
     public class TrapDefense : Defense
     {
+        private const string openTrapKey = "open";
+        private const string closeTrapKey = "close";
         [SerializeField] private Animator animator;
         private float lastShotTime;
 
@@ -25,18 +27,27 @@ namespace Defendable
             transform.parent.TryGetComponent<NavMeshSurface>(out surface);
             if (surface)
             {
-                Debug.LogError("TRAP REBUILD");
                 surface.BuildNavMesh();
             }
         }
 
-        private void OnTriggerEnter(Collider other) 
+        private void OnTriggerEnter(Collider other)
         {
-            if(other.TryGetComponent<Enemy>(out var enemy))
+            if (other.TryGetComponent<Enemy>(out var enemy))
             {
-                enemy.TakeDamage(AttackForce);
-                animator.SetTrigger("open");
+                if (IsReady)
+                    StartCoroutine(SetTrap(enemy));
             }
+        }
+
+        IEnumerator SetTrap(Enemy enemy)
+        {
+            animator.SetTrigger(openTrapKey);
+            enemy.TakeDamage(AttackForce);
+            yield return new WaitForSeconds(1f);
+            animator.SetTrigger(closeTrapKey);
+            lastShotTime = Time.time;
+
         }
 
         private void OnDisable()
