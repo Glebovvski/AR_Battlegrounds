@@ -20,4 +20,4 @@ MonoBehaviour:
   ProjectileSpeed: 0
   Size: {x: 1, y: 1}
   Condition: 1
-  Type: 0
+  Type: 4

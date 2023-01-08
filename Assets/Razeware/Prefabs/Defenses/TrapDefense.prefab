@@ -263,7 +263,7 @@ GameObject:
   - component: {fileID: 23248802485315498}
   - component: {fileID: 95846521961778924}
   m_Layer: 0
-  m_Name: SpikeTrapD
+  m_Name: TrapDefense
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -305,7 +305,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 067703de781f3b748b3eb24c2a5d6e4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <SO>k__BackingField: {fileID: 0}
+  <SO>k__BackingField: {fileID: 11400000, guid: db800d59af6eaf34abcc3fdefdc527ac,
+    type: 2}
 --- !u!33 &33776582947446772
 MeshFilter:
   m_ObjectHideFlags: 0
