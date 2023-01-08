@@ -13,8 +13,8 @@ NavMeshProjectSettings:
     cost: 2
   - name: Obstacle
     cost: 2
-  - name: 
-    cost: 1
+  - name: Trap
+    cost: 100
   - name: 
     cost: 1
   - name: 

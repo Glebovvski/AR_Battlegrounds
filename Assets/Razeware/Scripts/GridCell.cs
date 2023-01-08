@@ -48,6 +48,7 @@ public class GridCell : MonoBehaviour
             ToggleVolume(false);
             Defence = defence;
             Defence.OnDeath += FreeCell;
+            defence.DefenseSet();
         }
     }
 

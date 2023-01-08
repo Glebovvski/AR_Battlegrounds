@@ -17,6 +17,8 @@ public class GetBestAttackTarget : ActionBase
         var enemy = c.Enemy;
         c.Enemy.NavMeshAgent.enabled = true;
 
+        Observation attackTarget = null;
+
         if (enemy.GetAttackTarget() != null) return;
         int pathScore = 0;
         foreach (var defense in enemy.DefenseTypeToScore)
@@ -34,7 +36,10 @@ public class GetBestAttackTarget : ActionBase
             scores.Add(new TargetScore(path.corners.Length, enemiesWithSameTarget, enemy, closestObservation, defense.Value + pathScore, MaxEnemiesToAttackOneTarget));
             pathScore = 0;
         }
-        var attackTarget = scores.OrderByDescending(x => x.TotalScore).First().Observation;
+        if (scores.Count() != 0)
+            attackTarget = scores.OrderByDescending(x => x.TotalScore).First().Observation;
+        else
+            attackTarget = Enemies.AIManager.Instance.GetClosest(c.Enemy);
         Debug.LogError(string.Format("ENEMY: {0} TARGET: {1}", enemy.name, attackTarget.Defense.gameObject.name));
         c.Enemy.SetAttackTarget(attackTarget);
         scores.Clear();

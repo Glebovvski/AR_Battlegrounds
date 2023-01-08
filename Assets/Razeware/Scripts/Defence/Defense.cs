@@ -25,6 +25,7 @@ namespace Defendable
         public DefenseType Type => SO.Type;
         public BoxCollider Collider { get; private set; }
         protected DamageReceiver DamageReceiver;
+        public event Action OnDefenseSet;
 
         public event Action OnDeath;
 
@@ -82,5 +83,7 @@ namespace Defendable
             DamageReceiver.OnDeath -= OnDeath;
             PoolManager.Instance.ReturnToPool(this.gameObject, DefenseTypeToPoolType(Type));
         }
+
+        public void DefenseSet() => OnDefenseSet?.Invoke();
     }
 }

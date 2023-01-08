@@ -124,6 +124,7 @@ public class GameGrid : MonoBehaviour
         if (SelectedDefence == PoolObjectType.None) return;
 
         var defence = PoolManager.Instance.GetFromPool<Defense>(SelectedDefence);
+        defence.transform.SetParent(plane.transform);
         if (defence.GetSize() == Vector2Int.one)
         {
             defence.transform.position = GetWorldPositionFromGrid(cell.Pos, Mathf.CeilToInt(-yPos));
@@ -138,7 +139,6 @@ public class GameGrid : MonoBehaviour
             defence.transform.position = GetWorldPositionFromGrid(centre, selectedPair[0].Height);
             selectedPair.ForEach(x => x.SetDefence(defence));
         }
-        defence.transform.SetParent(plane.transform);
         SelectDefence(SelectedDefence);
         // if (!cell.IsUpper)
         //     RebuildNavMesh();
@@ -178,12 +178,6 @@ public class GameGrid : MonoBehaviour
                 GridList.Add(grid[x, z]);
             }
         }
-        // planeObstacle.position = this.transform.position + new Vector3(width / 2, 0.5f, length / 2);
-        // planeObstacle.localScale = new Vector3(width, 2, length);
-        // var obstacle = planeObstacle.gameObject.AddComponent<NavMeshObstacle>();
-        // obstacle.carving = true;
-        // obstacle.carveOnlyStationary = false;
-        // plane.BuildNavMesh();
         TryChangeHeight();
         SpawnCastleAtCentre();
         RebuildNavMesh();
@@ -191,8 +185,6 @@ public class GameGrid : MonoBehaviour
 
     private void RebuildNavMesh()
     {
-        // GridList.ForEach(x => x.BuildNavMesh());
-        // gridSurface.BuildNavMesh();
         plane.BuildNavMesh();
     }
 

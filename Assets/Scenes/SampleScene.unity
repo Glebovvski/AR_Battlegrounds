@@ -989,7 +989,7 @@ MonoBehaviour:
     <Defence>k__BackingField: {fileID: 8956900902844347426, guid: a68667cd162fe4f718f39e0285bc4b6c,
       type: 3}
   - <Type>k__BackingField: 104
-    <Defence>k__BackingField: {fileID: 4571142364349343047, guid: b58fdf950bf832348af4bfaa2fd9f743,
+    <Defence>k__BackingField: {fileID: 7701070337700045403, guid: b58fdf950bf832348af4bfaa2fd9f743,
       type: 3}
 --- !u!114 &568455788
 MonoBehaviour:
@@ -1462,7 +1462,8 @@ MonoBehaviour:
     pool: []
   - type: 104
     amount: 10
-    prefab: {fileID: 1498791207746926, guid: b58fdf950bf832348af4bfaa2fd9f743, type: 3}
+    prefab: {fileID: 8219011498549825608, guid: b58fdf950bf832348af4bfaa2fd9f743,
+      type: 3}
     container: {fileID: 745831102}
     pool: []
 --- !u!4 &745831104
@@ -2791,7 +2792,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -1638.5, y: 0}
+  m_AnchoredPosition: {x: -1616.5002, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &2079989270
