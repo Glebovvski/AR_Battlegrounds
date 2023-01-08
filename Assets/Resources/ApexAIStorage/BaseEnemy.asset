@@ -28,7 +28,7 @@ MonoBehaviour:
     ApexAI"}},{"@type":"Apex.AI.ScoreSelector, ApexAI","_id":c08d73242bb44a78898f5c609849213c,"_qualifiers":[{"@type":"Apex.AI.CompositeScoreQualifier,
     ApexAI","action":{"@type":"MoveToTarget, Assembly-CSharp"},"_scorers":[]},{"@type":"Apex.AI.CompositeScoreQualifier,
     ApexAI","action":{"@type":"MoveUnderCover, Assembly-CSharp"},"_scorers":[{"@type":"IsTankInRange,
-    Assembly-CSharp"}]}],"_defaultQualifier":{"@type":"Apex.AI.DefaultQualifier,
+    Assembly-CSharp"},{"@type":"IsActiveDefensesInSight, Assembly-CSharp"}]}],"_defaultQualifier":{"@type":"Apex.AI.DefaultQualifier,
     ApexAI"}}]}'
   editorConfiguration: '{"offset":{"@x":335,"@y":112},"zoom":1,"SelectorView":{"ViewArea":{"@left":315,"@top":132,"@width":200,"@height":160},"QualifierView":{"Name":"Should
     Move Closer","ActionView":{"@connectorType":"Selector"}},"DefaultQualifier":{"Name":"Move
