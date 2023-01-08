@@ -176,6 +176,8 @@ GameObject:
   - component: {fileID: 2030329169051206031}
   - component: {fileID: 2030329169060564755}
   - component: {fileID: 2923120969308187169}
+  - component: {fileID: 6214786488536445034}
+  - component: {fileID: 8341249109370848062}
   m_Layer: 0
   m_Name: Bull
   m_TagString: Untagged
@@ -190,8 +192,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2030329169060672013}
-  m_LocalRotation: {x: 0, y: -0.9943876, z: 0, w: -0.10579848}
-  m_LocalPosition: {x: 1.2514572, y: 0, z: -18.503109}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1, y: 0, z: 0}
   m_LocalScale: {x: 4.921592, y: 4.9215927, z: 4.9215927}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -257,6 +259,32 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!65 &6214786488536445034
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2030329169060672013}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.559666, z: 1.0270683}
+  m_Center: {x: 0, y: 0.75543845, z: 0.013534135}
+--- !u!114 &8341249109370848062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2030329169060672013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 939582531, guid: 6012f3241c1c1f7409c44769fc0a1db7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aiConfigs: []
 --- !u!1 &2030329169060672209
 GameObject:
   m_ObjectHideFlags: 0
