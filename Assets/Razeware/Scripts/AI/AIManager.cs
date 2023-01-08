@@ -50,7 +50,7 @@ namespace Enemies
         }
 
         public Observation GetClosest(IEnemy enemy) => GetClosest(enemy, Observations);
-        
+
         public Enemy GetClosestEnemyByType(IEnemy enemy, EnemyType type) => Enemies.Where(x => (x.Position - enemy.Position).sqrMagnitude < enemy.ScanRange*2 && x.EnemyType == type).OrderByDescending(x=>x.CurrentHealth).First();
 
         public Observation GetClosestByType(IEnemy enemy, DefenseType type)
@@ -61,6 +61,8 @@ namespace Enemies
 
             return GetClosest(enemy, observations);
         }
+
+        public List<Observation> GetActiveDefenses() => Observations.Where(x => x.Defense.IsActiveDefence).ToList();
 
         public T RegisterEnemy<T>(PoolObjectType enemyType) where T : Enemy
         {

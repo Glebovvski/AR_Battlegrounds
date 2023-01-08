@@ -11,7 +11,7 @@ namespace Defendable
 
         public int Health { get; private set; }
         public float CurrentHealth => DamageReceiver.CurrentHealth;
-        protected bool IsActiveDefence { get; private set; }
+        public bool IsActiveDefence { get; private set; }
         protected int AttackRange { get; private set; }
         protected int AttackForce { get; private set; }
         public Vector2Int Size { get; private set; }
