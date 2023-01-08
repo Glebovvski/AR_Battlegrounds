@@ -1451,6 +1451,12 @@ MonoBehaviour:
     prefab: {fileID: 497068949028825284, guid: b8d098908aa552f4899c294aecff83ec, type: 3}
     container: {fileID: 745831102}
     pool: []
+  - type: 103
+    amount: 1
+    prefab: {fileID: 5324471234119408620, guid: 9da5711b230035747a1644dc18578fd7,
+      type: 3}
+    container: {fileID: 745831102}
+    pool: []
 --- !u!4 &745831104
 Transform:
   m_ObjectHideFlags: 0
