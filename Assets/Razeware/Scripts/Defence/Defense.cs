@@ -68,6 +68,8 @@ namespace Defendable
                     return PoolObjectType.CannonTower;
                 case DefenseType.Laser:
                     return PoolObjectType.LaserTower;
+                case DefenseType.Trap:
+                    return PoolObjectType.TrapTower;
                 default:
                     return PoolObjectType.None;
             }

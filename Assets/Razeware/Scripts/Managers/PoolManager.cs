@@ -102,6 +102,7 @@ public enum PoolObjectType
     WallTower,
     LaserTower,
     CastleTower,
+    TrapTower,
     Enemy = 100,
     SpyEnemy,
     CannonBullet = 300,

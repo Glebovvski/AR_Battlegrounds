@@ -26,6 +26,7 @@ public enum DefenseType
     Wall = 1,
     Cannon = 2,
     Laser = 3,
+    Trap = 4,
 }
 
 public static class ConditionsData
