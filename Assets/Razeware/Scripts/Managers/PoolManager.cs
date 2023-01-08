@@ -128,6 +128,7 @@ public enum PoolObjectType
     TrapTower,
     Enemy = 100,
     SpyEnemy,
+    BullEnemy,
     CannonBullet = 300,
     DecorTree01 = 1000,
     DecorTree02,

@@ -24,4 +24,4 @@ MonoBehaviour:
   AttackCastleScore: 60
   AttackTrapScore: 0
   EnemyType: 0
-  Type: 0
+  Type: 102
