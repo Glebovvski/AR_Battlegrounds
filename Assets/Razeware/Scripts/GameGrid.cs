@@ -210,7 +210,8 @@ public class GameGrid : MonoBehaviour
     private void SpawnCastleAtCentre()
     {
         Vector2 centre = GetCentreOfPair(centreCells);
-        var castle = Instantiate(castlePrefab, GetWorldPositionFromGrid(centre, centreCells[0].Height), Quaternion.identity);
+        var castle = PoolManager.Instance.GetFromPool<CastleDefence>(PoolObjectType.CastleTower); //Instantiate(castlePrefab, GetWorldPositionFromGrid(centre, centreCells[0].Height), Quaternion.identity);
+        castle.transform.position = GetWorldPositionFromGrid(centre, centreCells[0].Height);
         castle.transform.SetParent(plane.transform);
         centreCells.ForEach(x => x.SetDefence(castle));
     }
