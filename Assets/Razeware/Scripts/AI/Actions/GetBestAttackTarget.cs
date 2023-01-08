@@ -10,12 +10,12 @@ using UnityEngine.AI;
 public class GetBestAttackTarget : ActionBase
 {
     [ApexSerialization] private int MaxEnemiesToAttackOneTarget = 3;
-    List<TargetScore> scores = new List<TargetScore>();
     public override void Execute(IAIContext context)
     {
         var c = (AIContext)context;
         var enemy = c.Enemy;
         c.Enemy.NavMeshAgent.enabled = true;
+        List<TargetScore> scores = new List<TargetScore>();
 
         if (enemy.GetAttackTarget() != null) return;
         int pathScore = 0;
