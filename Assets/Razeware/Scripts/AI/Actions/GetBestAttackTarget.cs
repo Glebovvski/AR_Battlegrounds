@@ -25,7 +25,9 @@ public class GetBestAttackTarget : ActionBase
             var closestObservation = Enemies.AIManager.Instance.GetClosestByType(enemy, defense.Key);
             if (closestObservation == null)
                 continue;
-            closestObservation.SetPosition(closestObservation.Defense.transform.right * 2f);
+            var offset = (closestObservation.Position - enemy.transform.position).normalized;
+            // closestObservation.SetPosition(closestObservation.Defense.transform.right * 2f);
+            closestObservation.SetPosition(offset * 2f);
             var path = enemy.GetCalculatedPath(closestObservation);
             if (path.status != NavMeshPathStatus.PathComplete)
                 continue;

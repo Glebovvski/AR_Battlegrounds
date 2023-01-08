@@ -76,6 +76,7 @@ namespace Enemies
 
         private void Update()
         {
+            this.transform.LookAt(AttackTarget.Defense.transform);
             animationController.UpdateState();
         }
 
