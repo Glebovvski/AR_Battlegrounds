@@ -17,7 +17,10 @@ namespace Defendable
             var bullet = PoolManager.Instance.GetFromPool<LaunchableMissile>(PoolObjectType.LaunchableMissile);
             bullet.transform.position = cannon.position;
             bullet.transform.rotation = tower.rotation;
-            var approxPos = EnemyTimePositionInfo.CalculateInterceptCourse(enemyPositions.Last().Position, (enemyPositions.Last().Position - enemyPositions.First().Position), bullet.transform.position, bullet.Speed);
+            var enemyDistance = (enemyPositions.Last().Position - enemyPositions.First().Position);
+            var time = (enemyPositions.Last().Timestamp - enemyPositions.First().Timestamp);
+            var enemySpeed = enemyDistance / time;
+            var approxPos = EnemyTimePositionInfo.CalculateInterceptCourse(enemyPositions.Last().Position, enemySpeed, bullet.transform.position, bullet.Speed);
             //var target = enemy.transform.position;
             bullet.Launch(approxPos);
             lastShotTime = Time.time;
