@@ -3396,6 +3396,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8341249109370848062, guid: 00445ded5dfd59649b1e0363b6c822a3,
         type: 3}
+      propertyPath: aiConfigs.Array.data[0].isActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8341249109370848062, guid: 00445ded5dfd59649b1e0363b6c822a3,
+        type: 3}
       propertyPath: aiConfigs.Array.data[1].isActive
       value: 1
       objectReference: {fileID: 0}

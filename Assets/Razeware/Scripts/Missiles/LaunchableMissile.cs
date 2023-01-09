@@ -12,7 +12,7 @@ namespace Missiles
         private Vector3 InitPos { get; set; }
         public override void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.layer == LayerMask.GetMask("Default") || other.gameObject.layer == LayerMask.GetMask("Enemy"))
+            if (other.gameObject.layer == LayerMask.GetMask("Grid") || other.gameObject.layer == LayerMask.GetMask("Enemy"))
             {
                 Explode();
             }
@@ -27,6 +27,7 @@ namespace Missiles
                 {
                     enemy.TakeDamage(Damage);
                 }
+                PoolManager.Instance.ReturnToPool(this.gameObject, PoolObjectType.LaunchableMissile);
             }
         }
 
@@ -40,12 +41,11 @@ namespace Missiles
         private IEnumerator LaunchRoutine()
         {
             float t = 0;
-            var time = Vector3.Distance(this.transform.position, Target) / Speed;
+            var time = 1;// Vector3.Distance(this.transform.position, Target) / Speed;
             while (t < time)
             {
-                float x = Speed * t * Mathf.Cos(60);
-                float y = Speed * t * Mathf.Sin(60) - (1f / 2f) * -Physics.gravity.y * Mathf.Pow(t, 2);
-                transform.position = new Vector3(x, y, 0);
+                var position = CalculatePosition(t, Target);
+                transform.position = position;// Vector3.Slerp(transform.position, position, t);
 
                 t += Time.deltaTime;
                 yield return null;
@@ -58,7 +58,7 @@ namespace Missiles
             float tt = t * t;
             float uu = u * u;
 
-            Vector3 middle = (target - InitPos) / 2 + new Vector3(0, 10, 0);
+            Vector3 middle = InitPos + (target - InitPos) / 2f + new Vector3(0, 10, 0);
 
             return uu * this.transform.position + 2 * u * t * middle + tt * target;
 

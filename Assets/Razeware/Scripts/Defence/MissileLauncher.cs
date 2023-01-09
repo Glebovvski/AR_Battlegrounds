@@ -15,7 +15,8 @@ namespace Defendable
             var bullet = PoolManager.Instance.GetFromPool<LaunchableMissile>(PoolObjectType.LaunchableMissile);
             bullet.transform.position = cannon.position;
             bullet.transform.rotation = tower.rotation;
-            bullet.Launch(enemy.transform.position);
+            var target = enemy.transform.position;
+            bullet.Launch(target);
             lastShotTime = Time.time;
         }
 
