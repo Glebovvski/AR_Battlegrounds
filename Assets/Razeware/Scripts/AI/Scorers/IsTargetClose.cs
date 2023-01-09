@@ -13,6 +13,6 @@ public class IsTargetClose : ContextualScorerBase
 
         if(enemy.GetAttackTarget() == null)
             return 0;
-        return (enemy.GetAttackTarget().Position - enemy.Position).sqrMagnitude - enemy.ScanRange;
+        return (enemy.GetAttackTarget().Position - enemy.Position).sqrMagnitude - (enemy.ScanRange*enemy.ScanRange);
     }
 }

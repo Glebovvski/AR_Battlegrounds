@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Enemies;
 using Missiles;
 using UnityEngine;
@@ -46,4 +47,15 @@ public class EnemyTimePositionInfo
         Timestamp = time;
         Position = position;
     }
+
+    // public static Vector3 GetApproximatePosition(List<EnemyTimePositionInfo> list)
+    // {
+    //     var firstDetectedPos = list.First();
+    //     var lastDetectedPos = list.Last();
+    //     var time = lastDetectedPos.Timestamp - firstDetectedPos.Timestamp;
+    //     var direction = lastDetectedPos.Position - firstDetectedPos.Position;
+
+    //     var speed = direction/time;
+
+    // }
 }

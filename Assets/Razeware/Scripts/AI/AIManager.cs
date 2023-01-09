@@ -51,7 +51,7 @@ namespace Enemies
 
         public Observation GetClosest(IEnemy enemy) => GetClosest(enemy, Observations);
 
-        public Enemy GetClosestEnemyByType(IEnemy enemy, EnemyType type) => Enemies.Where(x => (x.Position - enemy.Position).sqrMagnitude < enemy.ScanRange*2 && x.EnemyType == type).OrderByDescending(x=>x.CurrentHealth).FirstOrDefault();
+        public Enemy GetClosestEnemyByType(IEnemy enemy, EnemyType type) => Enemies.Where(x => (x.Position - enemy.Position).sqrMagnitude < enemy.ScanRange*enemy.ScanRange && x.EnemyType == type).OrderByDescending(x=>x.CurrentHealth).FirstOrDefault();
 
         public Observation GetClosestByType(IEnemy enemy, DefenseType type)
         {
@@ -79,7 +79,7 @@ namespace Enemies
 
         public IEnumerable<Enemy> GetEnemiesAttackingObservation(Observation observation) => Enemies.Where(x => x.GetAttackTarget() == observation);
 
-        public IEnumerable<Enemy> GetClosestEnemiesWithSameTarget(Enemy enemy) => Enemies.Where(x => (x.Position - enemy.Position).sqrMagnitude < enemy.ScanRange && x.GetAttackTarget() == enemy.GetAttackTarget());
+        public IEnumerable<Enemy> GetClosestEnemiesWithSameTarget(Enemy enemy) => Enemies.Where(x => (x.Position - enemy.Position).sqrMagnitude < enemy.ScanRange * enemy.ScanRange && x.GetAttackTarget() == enemy.GetAttackTarget());
 
         private Observation GetClosest(IEnemy enemy, List<Observation> observations)
         {
