@@ -17,12 +17,14 @@ namespace Defendable
             var bullet = PoolManager.Instance.GetFromPool<LaunchableMissile>(PoolObjectType.LaunchableMissile);
             bullet.transform.position = cannon.position;
             bullet.transform.rotation = tower.rotation;
-            var enemyDistance = (enemyPositions.Last().Position - enemyPositions.First().Position);
-            var time = (enemyPositions.Last().Timestamp - enemyPositions.First().Timestamp);
-            var enemySpeed = enemyDistance / time;
-            var approxPos = EnemyTimePositionInfo.CalculateInterceptCourse(enemyPositions.Last().Position, enemySpeed, bullet.transform.position, bullet.Speed);
-            //var target = enemy.transform.position;
-            bullet.Launch(approxPos);
+            var enemyDistance = (enemyPositions.Last().Position - enemyPositions.First().Position).normalized;
+            var time = (enemyPositions.Last().Timestamp - enemyPositions.First().Timestamp) * Time.deltaTime;
+            var enemySpeed = (enemyDistance * time);
+            var approxPos = EnemyTimePositionInfo.CalculateInterceptionPoint3D(bullet.transform.position, bullet.Speed, enemy.Position, enemySpeed);
+            if (approxPos == Vector3.zero)
+                bullet.Launch(enemy.Position);
+            else
+                bullet.Launch(approxPos);
             lastShotTime = Time.time;
         }
 
@@ -57,55 +59,33 @@ public class EnemyTimePositionInfo
         Position = position;
     }
 
-    public static float GetApproximateSpeed(List<EnemyTimePositionInfo> list)
+    public static Vector3 CalculateInterceptionPoint3D(Vector3 PC, float SC, Vector3 PR, Vector3 VR)
     {
-        var firstDetectedPos = list.First();
-        var lastDetectedPos = list.Last();
-        var time = lastDetectedPos.Timestamp - firstDetectedPos.Timestamp;
-        var direction = (lastDetectedPos.Position - firstDetectedPos.Position).sqrMagnitude;
+        //! Distance between turret and target
+        Vector3 D = PC - PR;
 
-        return direction / time;
+        //! Scale of distance vector
+        float d = D.magnitude;
 
-    }
+        //! Speed of target scale of VR
+        float SR = VR.magnitude;
 
-    public static float FindClosestPointOfApproach(Vector3 aPos1, Vector3 aSpeed1, Vector3 aPos2, Vector3 aSpeed2)
-    {
-        Vector3 PVec = aPos1 - aPos2;
-        Vector3 SVec = aSpeed1 - aSpeed2;
-        float d = SVec.sqrMagnitude;
-        // if d is 0 then the distance between Pos1 and Pos2 is never changing
-        // so there is no point of closest approach... return 0
-        // 0 means the closest approach is now!
-        if (d >= -0.0001f && d <= 0.0002f)
-            return 0.0f;
-        return (-Vector3.Dot(PVec, SVec) / d);
-    }
+        //% Quadratic EQUATION members = (ax)^2 + bx + c = 0
 
-    public static Vector3 CalculateInterceptCourse(Vector3 aTargetPos, Vector3 aTargetSpeed, Vector3 aInterceptorPos, float aInterceptorSpeed)
-    {
-        Vector3 targetDir = aTargetPos - aInterceptorPos;
-        float iSpeed2 = aInterceptorSpeed * aInterceptorSpeed;
-        float tSpeed2 = aTargetSpeed.sqrMagnitude;
-        float fDot1 = Vector3.Dot(targetDir, aTargetSpeed);
-        float targetDist2 = targetDir.sqrMagnitude;
-        float d = (fDot1 * fDot1) - targetDist2 * (tSpeed2 - iSpeed2);
-        if (d < 0.1f)  // negative == no possible course because the interceptor isn't fast enough
-            return Vector3.zero;
-        float sqrt = Mathf.Sqrt(d);
-        float S1 = (-fDot1 - sqrt) / targetDist2;
-        float S2 = (-fDot1 + sqrt) / targetDist2;
-        if (S1 < 0.0001f)
+        float a = Mathf.Pow(SC, 2) - Mathf.Pow(SR, 2);
+
+        float b = 2 * Vector3.Dot(D, VR);
+
+        float c = -Vector3.Dot(D, D);
+
+        if ((Mathf.Pow(b, 2) - (4 * (a * c))) < 0) //% The QUADRATIC FORMULA will not return a real number because sqrt(-value) is not a real number thus no interception
         {
-            if (S2 < 0.0001f)
-                return Vector3.zero;
-            else
-                return (S2) * targetDir + aTargetSpeed;
+            return Vector2.zero;//TODO: HERE, PREVENT TURRET FROM FIRING LASERS INSTEAD OF MAKING LASERS FIRE AT ZERO!
         }
-        else if (S2 < 0.0001f)
-            return (S1) * targetDir + aTargetSpeed;
-        else if (S1 < S2)
-            return (S2) * targetDir + aTargetSpeed;
-        else
-            return (S1) * targetDir + aTargetSpeed;
+        //% Quadratic FORMULA = x = (  -b+sqrt( ((b)^2) * 4*a*c )  ) / 2a
+        float t = (-(b) + Mathf.Sqrt(Mathf.Pow(b, 2) - (4 * (a * c)))) / (2 * a);//% x = time to reach interception point w$$anonymous$$ch is = t
+
+        //% Calculate point of interception as vector from calculating distance between target and interception by t * VelocityVector
+        return ((t * VR) + PR);
     }
 }

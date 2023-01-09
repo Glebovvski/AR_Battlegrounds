@@ -51,7 +51,7 @@ namespace Enemies
 
         public Observation GetClosest(IEnemy enemy) => GetClosest(enemy, Observations);
 
-        public Enemy GetClosestEnemyByType(IEnemy enemy, EnemyType type) => Enemies.Where(x => (x.Position - enemy.Position).sqrMagnitude < enemy.ScanRange*enemy.ScanRange && x.EnemyType == type).OrderByDescending(x=>x.CurrentHealth).FirstOrDefault();
+        public Enemy GetClosestEnemyByType(IEnemy enemy, EnemyType type) => Enemies.Where(x => (x.Position - enemy.Position).sqrMagnitude < enemy.ScanRange * enemy.ScanRange && x.EnemyType == type).FirstOrDefault();
 
         public Observation GetClosestByType(IEnemy enemy, DefenseType type)
         {

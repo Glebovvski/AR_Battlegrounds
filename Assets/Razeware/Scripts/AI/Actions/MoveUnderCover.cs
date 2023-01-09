@@ -15,7 +15,7 @@ public class MoveUnderCover : ActionBase
 
         var closeEnemies = Enemies.AIManager.Instance.GetClosestEnemiesWithSameTarget(enemy).ToList();
         var tankEnemy = Enemies.AIManager.Instance.GetClosestEnemyByType(enemy, EnemyType.Mono);
-        if (closeEnemies.Count > 0 && tankEnemy != null)
+        if (closeEnemies.Count > 0 && tankEnemy.isActiveAndEnabled)
         {
             enemy.FollowTarget = tankEnemy;
             enemy.MoveTo(enemy.FollowTarget.Position);
