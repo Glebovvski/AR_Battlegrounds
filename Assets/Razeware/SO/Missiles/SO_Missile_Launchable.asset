@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: SO_Missile_Launchable
   m_EditorClassIdentifier: 
   Damage: 30
-  Speed: 5
+  Speed: 0.2
   IsFromPool: 1
   HitRadius: 10
