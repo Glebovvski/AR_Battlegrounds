@@ -16,18 +16,18 @@ namespace Defendable
         private float lastShotTime;
         protected override bool IsReady { get => Time.time - lastShotTime > RelaodTime; set => IsReady = value; }
 
-        private void Awake()
+        public void Awake()
         {
             base.Awake();
             Detection.SetAttackRange(AttackRange);
         }
 
-        private void Update()
+        public void Update()
         {
             RotateAndAttack(Detection.Enemy);
         }
 
-        private void RotateAndAttack(Enemy enemy)
+        protected void RotateAndAttack(Enemy enemy)
         {
             if(enemy == null) return;
             
@@ -35,7 +35,7 @@ namespace Defendable
                 Attack(enemy);
         }
 
-        private void Attack(Enemy enemy)
+        protected void Attack(Enemy enemy)
         {
             var bullet = PoolManager.Instance.GetFromPool<CannonBullet>(PoolObjectType.CannonBullet);
             bullet.transform.position = cannon.position;
@@ -44,7 +44,7 @@ namespace Defendable
             lastShotTime = Time.time;
         }
 
-        private bool RotateToEnemy(Enemy enemy)
+        protected virtual bool RotateToEnemy(Enemy enemy)
         {
             var direction = (enemy.transform.position - tower.transform.position);
             var targetRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z), tower.up);
