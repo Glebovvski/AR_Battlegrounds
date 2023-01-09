@@ -25,15 +25,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7620354427594210477}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.7137947, z: 0.003403197}
+  m_LocalRotation: {x: -0.5055165, y: -0, z: -0, w: 0.862817}
+  m_LocalPosition: {x: 0, y: 1.7137947, z: 0.0034031968}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7625972925815383461}
-  m_Father: {fileID: 7623313734830839559}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Father: {fileID: 7623250293054145475}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: -60.731, y: 0, z: 0}
 --- !u!33 &7615890234901532383
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -114,7 +114,6 @@ Transform:
   m_Children:
   - {fileID: 7623250293054145475}
   - {fileID: 7625761693159541533}
-  - {fileID: 7623021078638707301}
   m_Father: {fileID: 7625896698026256499}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -143,11 +142,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7620434090022791335}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 7623021078638707301}
   m_Father: {fileID: 7623313734830839559}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -252,7 +252,7 @@ MonoBehaviour:
   <SO>k__BackingField: {fileID: 11400000, guid: b81942901f4537043a48f03aee2da85c,
     type: 2}
   Detection: {fileID: 1003297824756587480}
-  tower: {fileID: 7623021078638707301}
+  tower: {fileID: 7623250293054145475}
   rotationSpeed: 10
   angleThreshold: 5
   cannon: {fileID: 7625972925815383461}
@@ -270,7 +270,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 126
+  m_Constraints: 14
   m_CollisionDetection: 0
 --- !u!65 &1480206803045842089
 BoxCollider:

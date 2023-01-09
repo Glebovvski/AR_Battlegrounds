@@ -13,7 +13,7 @@ namespace Defendable
         protected override bool RotateToEnemy(Enemy enemy)
         {
             var direction = (enemy.transform.position - tower.transform.position);
-            var targetRotation = Quaternion.LookRotation(new Vector3(-69f, direction.y, direction.z), tower.up);
+            var targetRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z), tower.up);
             tower.rotation = Quaternion.RotateTowards(tower.rotation, targetRotation, rotationSpeed * Time.deltaTime);
 
             if (Quaternion.Angle(targetRotation, tower.rotation) <= angleThreshold) return true;
