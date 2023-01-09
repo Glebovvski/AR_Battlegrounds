@@ -1547,6 +1547,11 @@ MonoBehaviour:
       type: 3}
     container: {fileID: 745831102}
     pool: []
+  - type: 301
+    amount: 10
+    prefab: {fileID: 1240887441953726, guid: 393ccbce233151d438d7d0059c23e706, type: 3}
+    container: {fileID: 745831102}
+    pool: []
   decorList:
   - type: 1000
     amount: 10
