@@ -17,20 +17,26 @@ namespace Defendable
             var bullet = PoolManager.Instance.GetFromPool<LaunchableMissile>(PoolObjectType.LaunchableMissile);
             bullet.transform.position = cannon.position;
             bullet.transform.rotation = tower.rotation;
-            var target = enemy.transform.position;
-            bullet.Launch(target);
+            var approxPos = EnemyTimePositionInfo.CalculateInterceptCourse(enemyPositions.Last().Position, (enemyPositions.Last().Position - enemyPositions.First().Position), bullet.transform.position, bullet.Speed);
+            //var target = enemy.transform.position;
+            bullet.Launch(approxPos);
             lastShotTime = Time.time;
         }
 
         protected override bool RotateToEnemy(Enemy enemy)
         {
+            if (enemyPositions.Count == 0)
+                enemyPositions.Add(new EnemyTimePositionInfo(Time.time, enemy.Position));
             var direction = (enemy.transform.position - tower.transform.position);
             var targetRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z), tower.up);
             tower.rotation = Quaternion.RotateTowards(tower.rotation, targetRotation, rotationSpeed * Time.deltaTime);
 
-            enemyPositions.Add(new EnemyTimePositionInfo(Time.time, enemy.Position));
 
-            if (Quaternion.Angle(targetRotation, tower.rotation) <= angleThreshold) return true;
+            if (Quaternion.Angle(targetRotation, tower.rotation) <= angleThreshold)
+            {
+                enemyPositions.Add(new EnemyTimePositionInfo(Time.time, enemy.Position));
+                return true;
+            }
             return false;
         }
     }
@@ -48,16 +54,16 @@ public class EnemyTimePositionInfo
         Position = position;
     }
 
-    // public static Vector3 GetApproximatePosition(List<EnemyTimePositionInfo> list)
-    // {
-    //     var firstDetectedPos = list.First();
-    //     var lastDetectedPos = list.Last();
-    //     var time = lastDetectedPos.Timestamp - firstDetectedPos.Timestamp;
-    //     var direction = lastDetectedPos.Position - firstDetectedPos.Position;
+    public static float GetApproximateSpeed(List<EnemyTimePositionInfo> list)
+    {
+        var firstDetectedPos = list.First();
+        var lastDetectedPos = list.Last();
+        var time = lastDetectedPos.Timestamp - firstDetectedPos.Timestamp;
+        var direction = (lastDetectedPos.Position - firstDetectedPos.Position).sqrMagnitude;
 
-    //     var speed = direction / time;
+        return direction / time;
 
-    // }
+    }
 
     public static float FindClosestPointOfApproach(Vector3 aPos1, Vector3 aSpeed1, Vector3 aPos2, Vector3 aSpeed2)
     {
