@@ -25,8 +25,8 @@ namespace Missiles
                 {
                     enemy.TakeDamage(Damage);
                 }
-                PoolManager.Instance.ReturnToPool(this.gameObject, PoolObjectType.LaunchableMissile);
             }
+            PoolManager.Instance.ReturnToPool(this.gameObject, PoolObjectType.LaunchableMissile);
         }
 
         public void Launch(Vector3 target)
