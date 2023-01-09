@@ -1,11 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using AI;
 using Apex.AI;
-using UnityEngine;
+using Apex.Serialization;
 
 public class IsTankInRange : ContextualScorerBase
 {
+    [ApexSerialization] private bool not;
     public override float Score(IAIContext context)
     {
         var c = (AIContext)context;
@@ -13,8 +12,8 @@ public class IsTankInRange : ContextualScorerBase
 
         var tank = Enemies.AIManager.Instance.GetClosestEnemyByType(enemy, Enemies.EnemyType.Mono);
         if (tank != null)
-            return 100;
+            return not ? -100 : 100;
         else
-            return 0;
+            return not ? 100 : -100;
     }
 }
