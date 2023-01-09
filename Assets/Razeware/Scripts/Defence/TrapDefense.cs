@@ -17,8 +17,9 @@ namespace Defendable
 
         private NavMeshSurface surface;
 
-        private void OnEnable()
+        public override void OnEnable()
         {
+            base.OnEnable();
             OnDefenseSet += UpdateNavMesh;
         }
 
