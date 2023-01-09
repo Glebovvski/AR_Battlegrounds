@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SO_Defence_Trap
   m_EditorClassIdentifier: 
   Health: 20
-  IsActiveDefence: 1
+  IsActiveDefence: 0
   AttackForce: 15
   AttackRange: 0
   RelaodTime: 3
