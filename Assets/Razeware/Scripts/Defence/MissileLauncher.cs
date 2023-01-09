@@ -10,6 +10,15 @@ namespace Defendable
     {
         protected override bool IsReady { get => Time.time - lastShotTime > RelaodTime; set => IsReady = value; }
 
+        protected override void Attack(Enemy enemy)
+        {
+            var bullet = PoolManager.Instance.GetFromPool<LaunchableMissile>(PoolObjectType.LaunchableMissile);
+            bullet.transform.position = cannon.position;
+            bullet.transform.rotation = tower.rotation;
+            bullet.Launch(enemy.transform.position);
+            lastShotTime = Time.time;
+        }
+
         protected override bool RotateToEnemy(Enemy enemy)
         {
             var direction = (enemy.transform.position - tower.transform.position);

@@ -13,7 +13,7 @@ namespace Missiles
         public bool IsFromPool => SO.IsFromPool;
         public float HitRadius => SO.HitRadius;
 
-        public void Fire(Vector3 direction)
+        public virtual void Fire(Vector3 direction)
         {
             Direction = direction;
         }

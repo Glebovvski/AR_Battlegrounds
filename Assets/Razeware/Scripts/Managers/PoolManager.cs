@@ -131,6 +131,7 @@ public enum PoolObjectType
     SpyEnemy,
     BullEnemy,
     CannonBullet = 300,
+    LaunchableMissile,
     DecorTree01 = 1000,
     DecorTree02,
     DecorAppleTree01,

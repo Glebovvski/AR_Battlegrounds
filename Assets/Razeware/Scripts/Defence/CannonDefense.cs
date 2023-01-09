@@ -35,7 +35,7 @@ namespace Defendable
                 Attack(enemy);
         }
 
-        protected void Attack(Enemy enemy)
+        protected virtual void Attack(Enemy enemy)
         {
             var bullet = PoolManager.Instance.GetFromPool<CannonBullet>(PoolObjectType.CannonBullet);
             bullet.transform.position = cannon.position;
