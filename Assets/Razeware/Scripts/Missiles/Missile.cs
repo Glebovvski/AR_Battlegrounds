@@ -11,6 +11,7 @@ namespace Missiles
         public int Damage => SO.Damage;
         public float Speed => SO.Speed;
         public bool IsFromPool => SO.IsFromPool;
+        public float HitRadius => SO.HitRadius;
 
         public void Fire(Vector3 direction)
         {
