@@ -28,6 +28,7 @@ namespace Missiles
                     enemy.TakeDamage(Damage);
                 }
             }
+            PoolManager.Instance.ReturnToPool(targetFX.gameObject, PoolObjectType.TargetFX);
             PoolManager.Instance.ReturnToPool(this.gameObject, PoolObjectType.LaunchableMissile);
         }
 
