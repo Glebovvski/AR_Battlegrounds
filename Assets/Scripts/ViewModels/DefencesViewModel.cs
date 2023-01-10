@@ -3,12 +3,19 @@ using System.Collections;
 using System.Collections.Generic;
 using Defendable;
 using UnityEngine;
+using Zenject;
 
 public class DefencesViewModel : MonoBehaviour
 {
-    [SerializeField] private DefencesModel defencesModel;
+    private DefensesModel DefensesModel { get; set; }
 
-    public List<ScriptableDefence> GetDefencesList() => defencesModel.List;
+    [Inject]
+    private void Construct(DefensesModel defensesModel)
+    {
+        DefensesModel = defensesModel;
+    }
+
+    public List<ScriptableDefence> GetDefencesList() => DefensesModel.List;
 
     public event Action<PoolObjectType> OnDefenseSelected;
     public void DefenseSelected(PoolObjectType type) => OnDefenseSelected?.Invoke(type);

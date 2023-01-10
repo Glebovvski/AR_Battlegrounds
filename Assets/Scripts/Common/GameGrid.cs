@@ -11,7 +11,6 @@ public class GameGrid : MonoBehaviour
     private const float yPos = -0.99f;
 
     [SerializeField] private DefencesViewModel defencesViewModel;
-    [SerializeField] private DefencesModel defencesModel;
     [SerializeField] private NavMeshSurface plane;
     [SerializeField] private NavMeshSurface gridSurface;
     [SerializeField] private Transform planeObstacle;

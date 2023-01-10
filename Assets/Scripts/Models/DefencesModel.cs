@@ -3,12 +3,12 @@ using UnityEngine;
 
 namespace Defendable
 {
-    public class DefencesModel
+    public class DefensesModel
     {
-        [SerializeField] private List<ScriptableDefence> defenses = new List<ScriptableDefence>();
+        private List<ScriptableDefence> defenses = new List<ScriptableDefence>();
         public List<ScriptableDefence> List => defenses;
 
-        public DefencesModel()
+        public DefensesModel()
         {
             GetDefensesInfo();
         }
