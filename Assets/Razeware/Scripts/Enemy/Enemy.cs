@@ -32,6 +32,7 @@ namespace Enemies
         public DamageReceiver DamageReceiver;
         public PoolObjectType Type => SO.Type;
         public float AttackRange => SO.AttackRange;
+        public float AttackRadius => SO.AttackRadius;
         public EnemyType EnemyType => SO.EnemyType;
 
         public int AttackWallScore => SO.AttackWallScore;

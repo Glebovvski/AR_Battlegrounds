@@ -12,6 +12,7 @@ public class ScriptableEnemy : ScriptableObject
     public int Speed;
     public float ScanRange;
     public float AttackRange;
+    public float AttackRadius;
 
     [Space(10)]
     public int AttackWallScore;

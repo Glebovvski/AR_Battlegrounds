@@ -17,7 +17,7 @@ namespace Enemies
         private void Explode()
         {
             defenseMask = LayerMask.GetMask("Defense");
-            var colliders = Physics.OverlapSphere(this.transform.position, AttackRange, defenseMask);
+            var colliders = Physics.OverlapSphere(this.transform.position, AttackRadius, defenseMask);
             foreach (var collider in colliders)
             {
                 if(collider.TryGetComponent<Defense>(out var defense))
