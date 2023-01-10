@@ -62,7 +62,9 @@ namespace Enemies
             return GetClosest(enemy, observations);
         }
 
-        public List<Observation> GetActiveDefenses() => Observations.Where(x => x.Defense.IsActiveDefence).ToList();
+        public List<Observation> GetObservationsOfType(DefenseType type) => Observations.Where(x => x.Defense.Type == type).ToList();
+
+        public List<Observation> GetActiveDefenses(DefenseType except = DefenseType.None) => Observations.Where(x => x.Defense.IsActiveDefence && x.Defense.Type != except).ToList();
 
         public T RegisterEnemy<T>(PoolObjectType enemyType) where T : Enemy
         {

@@ -22,6 +22,7 @@ public class ScriptableDefence : ScriptableObject
 
 public enum DefenseType
 {
+    None,
     Castle = 0,
     Wall = 1,
     Cannon = 2,
