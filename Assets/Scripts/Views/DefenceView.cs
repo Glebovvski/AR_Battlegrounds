@@ -22,6 +22,8 @@ public class DefenceView : MonoBehaviour
         button.onClick.AddListener(delegate{SelectDefence(info.PoolType);});
     }
 
+    public void UpdateButton(bool active) => button.enabled = active;
+
     private void SelectDefence(PoolObjectType type) => DefencesViewModel.DefenseSelected(type);
 
 }
