@@ -6,8 +6,8 @@ namespace Defendable
 {
     public class DefensesModel
     {
-        private List<ScriptableDefence> defenses = new List<ScriptableDefence>();
-        public List<ScriptableDefence> List => defenses;
+        private List<ScriptableDefense> defenses = new List<ScriptableDefense>();
+        public List<ScriptableDefense> List => defenses;
 
         public DefensesModel()
         {
@@ -16,7 +16,7 @@ namespace Defendable
 
         private void GetDefensesInfo()
         {
-            defenses = Resources.LoadAll<ScriptableDefence>("SO/Defense").ToList();
+            defenses = Resources.LoadAll<ScriptableDefense>("SO/Defense").ToList();
         }
     }
 

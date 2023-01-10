@@ -6,7 +6,7 @@ using System.Linq;
 using UnityEngine.UI;
 
 [CreateAssetMenu(fileName = "SO_Defence_", menuName = "ScriptableDefence", order = 0)]
-public class ScriptableDefence : ScriptableObject
+public class ScriptableDefense : ScriptableObject
 {
     public string Name;
     public Image Image;

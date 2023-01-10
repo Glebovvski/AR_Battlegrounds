@@ -10,7 +10,7 @@ namespace Defendable
     {
         [SerializeField] private CFXR_Effect destroyFX;
         [SerializeField] private GameObject defenseMesh;
-        [field: SerializeField] public ScriptableDefence SO { get; set; }
+        [field: SerializeField] public ScriptableDefense SO { get; set; }
 
         public int Health { get; private set; }
         public float CurrentHealth => DamageReceiver.CurrentHealth;

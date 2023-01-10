@@ -14,7 +14,7 @@ public class DefenseView : MonoBehaviour
 
     private DefencesViewModel DefencesViewModel { get; set; }
 
-    public void Init(ScriptableDefence info, DefencesViewModel defensesViewModel)
+    public void Init(ScriptableDefense info, DefencesViewModel defensesViewModel)
     {
         DefencesViewModel = defensesViewModel;
         text.text = info.Type.ToString();
