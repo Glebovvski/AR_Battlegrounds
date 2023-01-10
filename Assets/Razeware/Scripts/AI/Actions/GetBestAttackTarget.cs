@@ -40,7 +40,6 @@ public class GetBestAttackTarget : ActionBase
             attackTarget = scores.OrderByDescending(x => x.TotalScore).First().Observation;
         else
             attackTarget = Enemies.AIManager.Instance.GetClosest(c.Enemy);
-        Debug.LogError(string.Format("ENEMY: {0} TARGET: {1}", enemy.name, attackTarget.Defense.gameObject.name));
         c.Enemy.SetAttackTarget(attackTarget);
         scores.Clear();
     }

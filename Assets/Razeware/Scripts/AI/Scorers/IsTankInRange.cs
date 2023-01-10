@@ -11,7 +11,7 @@ public class IsTankInRange : ContextualScorerBase
         var enemy = c.Enemy;
 
         var tank = Enemies.AIManager.Instance.GetClosestEnemyByType(enemy, Enemies.EnemyType.Mono);
-        if (tank != null)
+        if (tank != null && tank.isActiveAndEnabled)
             return not ? -100 : 100;
         else
             return not ? 100 : -100;

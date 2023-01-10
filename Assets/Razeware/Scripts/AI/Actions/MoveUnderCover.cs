@@ -19,6 +19,7 @@ public class MoveUnderCover : ActionBase
         {
             enemy.FollowTarget = tankEnemy;
             enemy.MoveTo(enemy.FollowTarget.Position);
+            Debug.LogError(string.Format("{0} goes to {1}", c.Enemy.name, enemy.FollowTarget.name));
         }
     }
 }
