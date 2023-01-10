@@ -84,7 +84,7 @@ public class GameGrid : MonoBehaviour
 
     public void SelectDefence(ScriptableDefense info)
     {
-        SelectedDefence = info.PoolType;
+        SelectedDefence = info;
         DeselectAllCells();
         if (info.Size == Vector2.one)
         {
@@ -114,14 +114,14 @@ public class GameGrid : MonoBehaviour
     public void DeselectDefense()
     {
         DeselectAllCells();
-        SelectedDefence = PoolObjectType.None;
+        SelectedDefence = null;
     }
 
     public void SpawnDefence(GridCell cell)
     {
-        if (SelectedDefence == PoolObjectType.None) return;
+        if (SelectedDefence == null) return;
 
-        var defence = PoolManager.Instance.GetFromPool<Defense>(SelectedDefence);
+        var defence = PoolManager.Instance.GetFromPool<Defense>(SelectedDefence.PoolType);
         defence.transform.SetParent(plane.transform);
         if (defence.GetSize() == Vector2Int.one)
         {
