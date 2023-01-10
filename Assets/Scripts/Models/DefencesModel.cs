@@ -1,20 +1,36 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Defendable
 {
-    public class DefencesModel : MonoBehaviour
+    public class DefencesModel
     {
-        [SerializeField] private List<DefenceInfo> defences = new List<DefenceInfo>();
-        public List<DefenceInfo> List => defences;
+        [SerializeField] private List<ScriptableDefence> defenses = new List<ScriptableDefence>();
+        public List<ScriptableDefence> List => defenses;
+
+        public DefencesModel()
+        {
+            GetDefensesInfo();
+        }
+
+        private void GetDefensesInfo()
+        {
+            var defences = Resources.LoadAll<ScriptableDefence>("SO/Defense");
+        }
     }
 
-    [Serializable]
-    public class DefenceInfo
+    public class DefenseInfo
     {
-        [field:SerializeField] public PoolObjectType Type {get;set;}
-        [field:SerializeField] public Defense Defence {get;set;}
+        public DefenseInfo(PoolObjectType type, Defense defense, int price)
+        {
+            Type = type;
+            Defence = defense;
+            Price = price;    
+        }
+
+        public PoolObjectType Type { get; set; }
+        public Defense Defence { get; set; }
+        public int Price { get; set; }
+        public bool IsAffordable { get; private set; }
     }
 }

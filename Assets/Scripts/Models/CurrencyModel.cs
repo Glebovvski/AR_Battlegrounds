@@ -1,10 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
-public class CurrencyModel : MonoBehaviour
+public class CurrencyModel
 {
-    public int Gold { get; private set; }
+    public event Action OnGoldAmountChanged;
+    public int Gold
+    {
+        get => Gold; 
+        private set
+        {
+            Gold = value;
+            PlayerPrefs.SetInt("Gold", value);
+            OnGoldAmountChanged?.Invoke();
+        }
+    }
 
     private void Awake()
     {
@@ -13,6 +22,6 @@ public class CurrencyModel : MonoBehaviour
 
     public void Buy(int price)
     {
-        
+        Gold -= price;
     }
 }

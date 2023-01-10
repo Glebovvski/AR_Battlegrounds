@@ -13,7 +13,7 @@ public class DefencesView : MonoBehaviour
         foreach (var defense in defencesViewModel.GetDefencesList())
         {
             var button = Instantiate(buttonPrefab, content);
-            button.Init(defense.Type, defencesViewModel);
+            button.Init(defense, defencesViewModel);
         }
     }
 

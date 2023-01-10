@@ -3,10 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.UI;
 
 [CreateAssetMenu(fileName = "SO_Defence_", menuName = "ScriptableDefence", order = 0)]
 public class ScriptableDefence : ScriptableObject
 {
+    public string Name;
+    public Image Image;
     public int Price;
 
     [Space(10)]
@@ -18,6 +21,7 @@ public class ScriptableDefence : ScriptableObject
     public float ProjectileSpeed;
     public Vector2Int Size;
     public Conditions Condition;
+    public PoolObjectType PoolType;
     public DefenseType Type;
 
     public Predicate<GridCell> GetCondition() => ConditionsData.ConditionData.FirstOrDefault(x => x.Name == Condition).Condition;
