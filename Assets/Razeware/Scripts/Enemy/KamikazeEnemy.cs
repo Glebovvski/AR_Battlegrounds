@@ -10,10 +10,13 @@ namespace Enemies
     public class KamikazeEnemy : Enemy
     {
         [SerializeField] private CFXR_Effect explosionFX;
+        [SerializeField] private GameObject goblinMesh;
         private LayerMask defenseMask;
 
-        private void OnEnable()
+        public override void OnEnable()
         {
+            base.OnEnable();
+            goblinMesh.SetActive(true);
             explosionFX.gameObject.SetActive(false);
             explosionFX.OnFinish += ReturnToPool;
         }
@@ -24,6 +27,8 @@ namespace Enemies
 
         private void Explode()
         {
+            goblinMesh.SetActive(false);
+            explosionFX.transform.localScale = new Vector3(AttackRadius, AttackRadius, AttackRadius);
             explosionFX.gameObject.SetActive(true);
             defenseMask = LayerMask.GetMask("Defense");
             var colliders = Physics.OverlapSphere(this.transform.position, AttackRadius, defenseMask);
@@ -43,6 +48,7 @@ namespace Enemies
 
         private void OnDisable()
         {
+            goblinMesh.SetActive(true);
             explosionFX.gameObject.SetActive(false);
             explosionFX.OnFinish -= ReturnToPool;
         }

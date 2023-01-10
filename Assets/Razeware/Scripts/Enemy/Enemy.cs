@@ -74,7 +74,7 @@ namespace Enemies
             DefenseTypeToScore = DefenseTypeToScore.OrderByDescending(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
         }
 
-        private void OnEnable()
+        public virtual void OnEnable()
         {
             Init();
         }
