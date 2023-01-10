@@ -1151,6 +1151,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3542729159110747700}
   - component: {fileID: 3490048671990609001}
+  - component: {fileID: 6954393173802913672}
   - component: {fileID: 3490048671990609014}
   - component: {fileID: 3490048671990609015}
   - component: {fileID: 3490048671990609000}
@@ -1191,7 +1192,28 @@ MonoBehaviour:
   m_Script: {fileID: 939582531, guid: 6012f3241c1c1f7409c44769fc0a1db7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aiConfigs: []
+  aiConfigs:
+  - aiId: d577944b-8970-4326-9f56-4493640e6fbe
+    intervalMin: 1
+    intervalMax: 1
+    startDelayMin: 0
+    startDelayMax: 0
+    isActive: 1
+--- !u!114 &6954393173802913672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3548670066037240548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe6da9f298107054580c10b375d5af7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SO: {fileID: 0}
+  navMeshAgent: {fileID: 3490048671990609000}
+  animator: {fileID: 3490048671990609014}
 --- !u!95 &3490048671990609014
 Animator:
   serializedVersion: 5
