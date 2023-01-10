@@ -147,7 +147,8 @@ public class GameGrid : MonoBehaviour
             selectedPair.ForEach(x => x.SetDefence(defence));
         }
         CurrencyModel.Buy(SelectedDefence.Price);
-        SelectDefence(SelectedDefence);
+        if (CurrencyModel.Gold >= SelectedDefence.Price)
+            SelectDefence(SelectedDefence);
         // if (!cell.IsUpper)
         //     RebuildNavMesh();
     }
