@@ -11,6 +11,8 @@ namespace Missiles
         public Vector3 Target { get; private set; }
         private Vector3 InitPos { get; set; }
         private Vector3 middle;
+        private Transform targetFX;
+
         public override void OnTriggerEnter(Collider other)
         {
             Explode();
@@ -31,6 +33,8 @@ namespace Missiles
 
         public void Launch(Vector3 target)
         {
+            targetFX = PoolManager.Instance.GetFromPool<Transform>(PoolObjectType.TargetFX);
+            targetFX.position = target;
             middle = InitPos + (target - InitPos) / 2f + new Vector3(0, 20, 0);
             InitPos = this.transform.position;
             Target = target;

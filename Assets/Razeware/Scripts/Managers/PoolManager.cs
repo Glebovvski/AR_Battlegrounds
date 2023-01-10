@@ -70,7 +70,7 @@ public class PoolManager : MonoBehaviour
         go.transform.SetParent(poolInfo.container.transform);
     }
 
-    public T GetFromPool<T>(PoolObjectType type) where T :MonoBehaviour
+    public T GetFromPool<T>(PoolObjectType type)
     {
         GameObject go;
         var poolInfo = GetPoolInfoByType(type);
