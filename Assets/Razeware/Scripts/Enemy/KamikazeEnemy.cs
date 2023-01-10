@@ -9,7 +9,14 @@ namespace Enemies
 {
     public class KamikazeEnemy : Enemy
     {
+        [SerializeField] private CFXR_Effect explosionFX;
         private LayerMask defenseMask;
+
+        private void OnEnable()
+        {
+            explosionFX.gameObject.SetActive(false);
+            explosionFX.OnFinish += ReturnToPool;
+        }
         public override void StartAttack()
         {
             Explode();
@@ -17,8 +24,7 @@ namespace Enemies
 
         private void Explode()
         {
-            var explosionFX = PoolManager.Instance.GetFromPool<CFXR_Effect>(PoolObjectType.KamikazeExplosionFX);
-            explosionFX.OnFinish += (GameObject go) => PoolManager.Instance.ReturnToPool(go, PoolObjectType.KamikazeExplosionFX);
+            explosionFX.gameObject.SetActive(true);
             defenseMask = LayerMask.GetMask("Defense");
             var colliders = Physics.OverlapSphere(this.transform.position, AttackRadius, defenseMask);
             foreach (var collider in colliders)
@@ -28,7 +34,17 @@ namespace Enemies
                     defense.TakeDamage(AttackForce);
                 }
             }
+        }
+
+        private void ReturnToPool(GameObject go)
+        {
             PoolManager.Instance.ReturnToPool(this.gameObject, PoolObjectType.KamikazeEnemy);
+        }
+
+        private void OnDisable()
+        {
+            explosionFX.gameObject.SetActive(false);
+            explosionFX.OnFinish -= ReturnToPool;
         }
     }
 }

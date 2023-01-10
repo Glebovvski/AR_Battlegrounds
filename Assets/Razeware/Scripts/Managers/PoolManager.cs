@@ -144,6 +144,5 @@ public enum PoolObjectType
     DecorPine03,
     DecorPine04,
     TargetFX = 1100,
-    KamikazeExplosionFX,
-    
+
 }
