@@ -19,7 +19,6 @@ public class DefensesView : MonoBehaviour
         CurrencyModel = currencyModel;
     }
 
-
     private void Start()
     {
         foreach (var defense in defencesViewModel.GetDefencesList())

@@ -19,10 +19,10 @@ public class DefencesViewModel : MonoBehaviour
 
     public List<ScriptableDefense> GetDefencesList() => DefensesModel.List;
 
-    public event Action<PoolObjectType> OnDefenseSelected;
-    public void DefenseSelected(PoolObjectType type)
+    public event Action<ScriptableDefense> OnDefenseSelected;
+    public void DefenseSelected(ScriptableDefense info)
     {
-        OnDefenseSelected?.Invoke(type);
+        OnDefenseSelected?.Invoke(info);
     }
 
     public event Action OnDefenseDeselected;

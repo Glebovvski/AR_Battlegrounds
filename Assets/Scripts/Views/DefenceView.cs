@@ -19,11 +19,11 @@ public class DefenseView : MonoBehaviour
         DefencesViewModel = defensesViewModel;
         text.text = info.Type.ToString();
         price.text = info.Price.ToString();
-        button.onClick.AddListener(delegate{SelectDefence(info.PoolType);});
+        button.onClick.AddListener(delegate{SelectDefence(info);});
     }
 
     public void UpdateButton(bool active) => button.enabled = active;
 
-    private void SelectDefence(PoolObjectType type) => DefencesViewModel.DefenseSelected(type);
+    private void SelectDefence(ScriptableDefense info) => DefencesViewModel.DefenseSelected(info);
 
 }
