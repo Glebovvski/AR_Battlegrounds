@@ -1,12 +1,15 @@
 using System;
 using System.Collections;
 using System.Linq;
+using CartoonFX;
 using UnityEngine;
 
 namespace Defendable
 {
     public abstract class Defense : MonoBehaviour
     {
+        [SerializeField] private CFXR_Effect destroyFX;
+        [SerializeField] private GameObject defenseMesh;
         [field: SerializeField] public ScriptableDefence SO { get; set; }
 
         public int Health { get; private set; }
@@ -41,6 +44,8 @@ namespace Defendable
 
         public virtual void OnEnable()
         {
+            destroyFX.gameObject.SetActive(false);
+            defenseMesh.SetActive(true);
             DamageReceiver = new DamageReceiver(Health);
             DamageReceiver.OnDeath += Death;
         }
@@ -78,6 +83,8 @@ namespace Defendable
 
         IEnumerator WaitForDeathAnimationFinish()
         {
+            defenseMesh.SetActive(false);
+            destroyFX.gameObject.SetActive(true);
             yield return new WaitForSeconds(1);
             OnDeath?.Invoke();
             DamageReceiver.OnDeath -= OnDeath;
