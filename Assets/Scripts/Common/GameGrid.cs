@@ -29,7 +29,7 @@ public class GameGrid : MonoBehaviour
 
     private List<List<GridCell>> pairCells = new List<List<GridCell>>();
 
-    public PoolObjectType SelectedDefence { get; private set; }
+    public ScriptableDefense SelectedDefence { get; private set; }
 
     public Vector3 Centre => this.transform.position + new Vector3(width / 2f, 0, length / 2f);
     public Vector3 Position => this.transform.position;
@@ -82,21 +82,18 @@ public class GameGrid : MonoBehaviour
         // return new Vector3(x, 0, y);
     }
 
-    public void SelectDefence(PoolObjectType type)
+    public void SelectDefence(ScriptableDefense info)
     {
-        SelectedDefence = type;
-        var defense = PoolManager.Instance.GetFromPool<Defense>(type);
-        var defenseInfo = defense.SO;
-        PoolManager.Instance.ReturnToPool(defense.gameObject, type);
+        SelectedDefence = info.PoolType;
         DeselectAllCells();
-        if (defenseInfo.Size == Vector2.one)
+        if (info.Size == Vector2.one)
         {
-            var match = GridList.FindAll(defenseInfo.GetCondition()).FindAll(ConditionsData.IsEmptyCell);
+            var match = GridList.FindAll(info.GetCondition()).FindAll(ConditionsData.IsEmptyCell);
             match.ForEach(x => x.SetSelected());
         }
         else
         {
-            var pairs = GetCellGroupsBySize(defenseInfo.Size);
+            var pairs = GetCellGroupsBySize(info.Size);
             pairCells = new List<List<GridCell>>();
             foreach (var pair in pairs)
             {
