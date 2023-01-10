@@ -79,7 +79,7 @@ public class TargetScore
         {
             case EnemyType.Mono:
                 {
-                    score = 0;// -100 - IsHealthLowScore();
+                    score = 0;
                     break;
                 }
             case EnemyType.Any:
@@ -89,8 +89,7 @@ public class TargetScore
                 }
             case EnemyType.Team:
                 {
-                    // Debug.LogError("ENEMIES ATTACKING TARGET: "+enemiesAttackingTarget);
-                    var enemiesAttackingTargetScore = enemiesAttackingTarget <= maxEnemies ? enemiesAttackingTarget : -extraScore;
+                    var enemiesAttackingTargetScore = enemiesAttackingTarget <= maxEnemies ? enemiesAttackingTarget : -enemiesAttackingTarget*100;
                     score = enemiesAttackingTargetScore * 100 - IsHealthLowScore();
                     break;
                 }

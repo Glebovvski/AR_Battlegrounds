@@ -15,4 +15,4 @@ MonoBehaviour:
   Damage: 30
   Speed: 0.5
   IsFromPool: 1
-  HitRadius: 10
+  HitRadius: 5
