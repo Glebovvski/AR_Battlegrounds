@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Apex.AI.Components;
 using CartoonFX;
 using Defendable;
 using UnityEngine;
@@ -9,6 +10,7 @@ namespace Enemies
 {
     public class KamikazeEnemy : Enemy
     {
+        [SerializeField] private UtilityAIComponent aiClient;
         [SerializeField] private CFXR_Effect explosionFX;
         [SerializeField] private GameObject goblinMesh;
         private LayerMask defenseMask;
@@ -16,6 +18,7 @@ namespace Enemies
         public override void OnEnable()
         {
             base.OnEnable();
+            aiClient.Resume();
             goblinMesh.SetActive(true);
             explosionFX.gameObject.SetActive(false);
             explosionFX.OnFinish += ReturnToPool;
@@ -27,6 +30,8 @@ namespace Enemies
 
         private void Explode()
         {
+            aiClient.Pause();
+            NavMeshAgent.enabled = false;
             goblinMesh.SetActive(false);
             explosionFX.transform.localScale = new Vector3(AttackRadius, AttackRadius, AttackRadius);
             explosionFX.gameObject.SetActive(true);

@@ -85,7 +85,8 @@ namespace Defendable
         {
             defenseMesh.SetActive(false);
             destroyFX.gameObject.SetActive(true);
-            yield return new WaitForSeconds(1);
+            yield return null;
+            // yield return new WaitForSeconds(1);
             OnDeath?.Invoke();
             DamageReceiver.OnDeath -= OnDeath;
             PoolManager.Instance.ReturnToPool(this.gameObject, DefenseTypeToPoolType(Type));

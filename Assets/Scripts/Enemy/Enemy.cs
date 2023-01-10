@@ -61,6 +61,7 @@ namespace Enemies
             DamageReceiver = new DamageReceiver(Health);
             animationController = new AnimationController(animator, navMeshAgent, DamageReceiver);
             DamageReceiver.OnDeath += Death;
+            NavMeshAgent.enabled = true;
         }
 
         private void PopulateDictionary()
@@ -127,6 +128,7 @@ namespace Enemies
         private void Death()
         {
             DamageReceiver.OnDeath -= Death;
+            NavMeshAgent.enabled = false;
             StartCoroutine(WaitForDeathAnimationToFinish());
         }
 
