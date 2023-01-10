@@ -5,12 +5,15 @@ using System.Linq;
 using Defendable;
 using UnityEngine;
 using UnityEngine.AI;
+using Zenject;
 
 public class GameGrid : MonoBehaviour
 {
     private const float yPos = -0.99f;
 
+    private CurrencyModel CurrencyModel { get; set; }
     [SerializeField] private DefencesViewModel defencesViewModel;
+
     [SerializeField] private NavMeshSurface plane;
     [SerializeField] private NavMeshSurface gridSurface;
     [SerializeField] private Transform planeObstacle;
@@ -35,6 +38,12 @@ public class GameGrid : MonoBehaviour
     public Vector3 Position => this.transform.position;
 
     public event Action OnGridCreated;
+
+    [Inject]
+    private void Construct(CurrencyModel currencyModel)
+    {
+        CurrencyModel = currencyModel;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -137,6 +146,7 @@ public class GameGrid : MonoBehaviour
             defence.transform.position = GetWorldPositionFromGrid(centre, selectedPair[0].Height);
             selectedPair.ForEach(x => x.SetDefence(defence));
         }
+        CurrencyModel.Buy(SelectedDefence.Price);
         SelectDefence(SelectedDefence);
         // if (!cell.IsUpper)
         //     RebuildNavMesh();
