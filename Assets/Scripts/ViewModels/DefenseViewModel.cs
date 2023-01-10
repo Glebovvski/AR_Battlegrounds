@@ -5,4 +5,9 @@ using UnityEngine;
 
 public class DefenseViewModel
 {
+    
+    public DefenseViewModel(Parameters)
+    {
+        
+    }
 }

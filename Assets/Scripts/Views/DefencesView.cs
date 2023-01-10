@@ -8,10 +8,10 @@ public class DefensesView : MonoBehaviour
     private CurrencyModel CurrencyModel { get; set; }
 
     [SerializeField] private DefencesViewModel defencesViewModel;
-    [SerializeField] private DefenceView buttonPrefab;
+    [SerializeField] private DefenseView buttonPrefab;
     [SerializeField] private Transform content;
 
-    List<DefenceView> buttons = new List<DefenceView>();
+    List<DefencesViewModel> defenseViews = new List<DefencesViewModel>();
 
     [Inject]
     private void Construct(CurrencyModel currencyModel)
@@ -27,7 +27,7 @@ public class DefensesView : MonoBehaviour
         {
             var button = Instantiate(buttonPrefab, content);
             button.Init(defense, defencesViewModel);
-            buttons.Add(button);
+            defenseViews.Add(new DefencesViewModel())
         }
     }
 
