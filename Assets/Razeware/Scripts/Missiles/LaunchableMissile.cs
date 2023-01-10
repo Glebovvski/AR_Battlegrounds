@@ -36,6 +36,7 @@ namespace Missiles
         {
             targetFX = PoolManager.Instance.GetFromPool<Transform>(PoolObjectType.TargetFX);
             targetFX.position = target;
+            targetFX.localScale = new Vector3(HitRadius, targetFX.localScale.y, HitRadius);
             middle = InitPos + (target - InitPos) / 2f + new Vector3(0, 20, 0);
             InitPos = this.transform.position;
             Target = target;
