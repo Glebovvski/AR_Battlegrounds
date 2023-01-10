@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19107361ee02a4112b22a99fa5e449da, type: 3}
   m_Name: SO_Defence_LaserTower
   m_EditorClassIdentifier: 
+  Name: Laser
+  Image: {fileID: 0}
+  Price: 700
   Health: 25
   IsActiveDefence: 1
   AttackForce: 0
@@ -20,4 +23,5 @@ MonoBehaviour:
   ProjectileSpeed: 100
   Size: {x: 2, y: 2}
   Condition: 0
-  Type: 3
+  PoolType: 102
+  Type: 4

@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19107361ee02a4112b22a99fa5e449da, type: 3}
   m_Name: SO_Defence_Wall
   m_EditorClassIdentifier: 
+  Name: Wall
+  Image: {fileID: 0}
+  Price: 100
   Health: 10
   IsActiveDefence: 0
   AttackForce: 0
@@ -20,4 +23,5 @@ MonoBehaviour:
   ProjectileSpeed: 0
   Size: {x: 1, y: 1}
   Condition: 1
-  Type: 1
+  PoolType: 101
+  Type: 2

@@ -277,6 +277,7 @@ MonoBehaviour:
   text: {fileID: 4850164162693190004}
   image: {fileID: 4850164163317048173}
   button: {fileID: 4850164163317048172}
+  price: {fileID: 2189517008357724245}
 --- !u!114 &4850164163317048173
 MonoBehaviour:
   m_ObjectHideFlags: 0

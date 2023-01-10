@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19107361ee02a4112b22a99fa5e449da, type: 3}
   m_Name: SO_Defence_Cannon
   m_EditorClassIdentifier: 
+  Name: Cannon
+  Image: {fileID: 0}
+  Price: 250
   Health: 25
   IsActiveDefence: 1
   AttackForce: 0
@@ -20,4 +23,5 @@ MonoBehaviour:
   ProjectileSpeed: 5
   Size: {x: 1, y: 1}
   Condition: 2
-  Type: 2
+  PoolType: 100
+  Type: 3

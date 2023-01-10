@@ -30,12 +30,12 @@ public class ScriptableDefence : ScriptableObject
 public enum DefenseType
 {
     None,
-    Castle = 0,
-    Wall = 1,
-    Cannon = 2,
-    Laser = 3,
-    Trap = 4,
-    MissileLauncher = 5,
+    Castle = 1,
+    Wall = 2,
+    Cannon = 3,
+    Laser = 4,
+    Trap = 5,
+    MissileLauncher = 6,
 }
 
 public static class ConditionsData

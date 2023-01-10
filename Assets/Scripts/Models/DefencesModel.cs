@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Defendable
@@ -15,7 +16,7 @@ namespace Defendable
 
         private void GetDefensesInfo()
         {
-            var defences = Resources.LoadAll<ScriptableDefence>("SO/Defense");
+            defenses = Resources.LoadAll<ScriptableDefence>("SO/Defense").ToList();
         }
     }
 

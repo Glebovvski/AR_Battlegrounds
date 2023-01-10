@@ -12,10 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19107361ee02a4112b22a99fa5e449da, type: 3}
   m_Name: SO_Defence_Castle
   m_EditorClassIdentifier: 
+  Name: Castle
+  Image: {fileID: 0}
+  Price: 0
   Health: 50
   IsActiveDefence: 0
   AttackForce: 0
   AttackRange: 0
   RelaodTime: 0
+  ProjectileSpeed: 0
   Size: {x: 2, y: 2}
   Condition: 0
+  PoolType: 103
+  Type: 1
