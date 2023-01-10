@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: SO_Enemy_Kamikaze
   m_EditorClassIdentifier: 
   Health: 50
-  AttackForce: 15
+  AttackForce: 5
   GoldToDrop: 40
   Speed: 5
   ScanRange: 25
   AttackRange: 1
-  AttackRadius: 5
+  AttackRadius: 10
   AttackWallScore: 0
   AttackCannonScore: 10
   AttackLaserScore: 20
