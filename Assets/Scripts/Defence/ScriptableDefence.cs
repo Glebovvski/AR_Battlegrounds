@@ -7,6 +7,9 @@ using System.Linq;
 [CreateAssetMenu(fileName = "SO_Defence_", menuName = "ScriptableDefence", order = 0)]
 public class ScriptableDefence : ScriptableObject
 {
+    public int Price;
+
+    [Space(10)]
     public int Health;
     public bool IsActiveDefence;
     public int AttackForce;
