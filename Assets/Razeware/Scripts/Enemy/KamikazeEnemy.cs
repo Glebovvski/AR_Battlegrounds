@@ -25,6 +25,7 @@ namespace Enemies
                     defense.TakeDamage(AttackForce);
                 }
             }
+            PoolManager.Instance.ReturnToPool(this.gameObject, PoolObjectType.KamikazeEnemy);
         }
     }
 }

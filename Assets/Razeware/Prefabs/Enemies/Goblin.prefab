@@ -1199,6 +1199,12 @@ MonoBehaviour:
     startDelayMin: 0
     startDelayMax: 0
     isActive: 1
+  - aiId: f8302355-e2b6-4b15-8f31-cdb656017bf3
+    intervalMin: 1
+    intervalMax: 1
+    startDelayMin: 0
+    startDelayMax: 0
+    isActive: 1
 --- !u!114 &6954393173802913672
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1224,7 +1230,7 @@ Animator:
   m_GameObject: {fileID: 3548670066037240548}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: ef7ff960f0bc4f94a993f80d1e51ba97, type: 3}
-  m_Controller: {fileID: 9100000, guid: 41b237aee868de1458848ecedd5a7811, type: 2}
+  m_Controller: {fileID: 9100000, guid: 960278ddb988abc489a6ee005ce36aae, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

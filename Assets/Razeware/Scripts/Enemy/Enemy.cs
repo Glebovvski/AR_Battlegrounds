@@ -148,6 +148,7 @@ namespace Enemies
     {
         Mono = 0, //for big enemies or spies
         Team = 1, //for small mobs
-        Any = 2
+        Kamikaze = 2,
+        Any = 3
     }
 }
