@@ -12,6 +12,7 @@ public class GameGrid : MonoBehaviour
     private const float yPos = -0.99f;
 
     private CurrencyModel CurrencyModel { get; set; }
+    private DefensesModel DefensesModel { get; set; }
     [SerializeField] private DefencesViewModel defencesViewModel;
 
     [SerializeField] private NavMeshSurface plane;
@@ -40,9 +41,10 @@ public class GameGrid : MonoBehaviour
     public event Action OnGridCreated;
 
     [Inject]
-    private void Construct(CurrencyModel currencyModel)
+    private void Construct(CurrencyModel currencyModel, DefensesModel defensesModel)
     {
         CurrencyModel = currencyModel;
+        DefensesModel = defensesModel;
     }
 
     // Start is called before the first frame update
@@ -131,6 +133,7 @@ public class GameGrid : MonoBehaviour
         if (SelectedDefence == null) return;
 
         var defence = PoolManager.Instance.GetFromPool<Defense>(SelectedDefence.PoolType);
+        defence.Init(DefensesModel.List.Where(x => x.PoolType == SelectedDefence.PoolType).First());
         defence.transform.SetParent(plane.transform);
         if (defence.GetSize() == Vector2Int.one)
         {
@@ -239,10 +242,12 @@ public class GameGrid : MonoBehaviour
             {
                 if (!centreCells.Contains(cell))
                 {
-                    var tower = PoolManager.Instance.GetFromPool<WallDefence>(PoolObjectType.WallTower);
-                    tower.transform.position = GetWorldPositionFromGrid(cell);
-                    tower.transform.SetParent(plane.transform);
-                    cell.SetDefence(tower);
+                    SelectedDefence = DefensesModel.List.Where(x => x.PoolType == PoolObjectType.WallTower).FirstOrDefault();
+                    SpawnDefence(cell);
+                    // var tower = PoolManager.Instance.GetFromPool<WallDefence>(PoolObjectType.WallTower);
+                    // tower.transform.position = GetWorldPositionFromGrid(cell);
+                    // tower.transform.SetParent(plane.transform);
+                    // cell.SetDefence(tower);
                 }
                 continue;
             }

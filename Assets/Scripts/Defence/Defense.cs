@@ -32,8 +32,9 @@ namespace Defendable
 
         public event Action OnDeath;
 
-        private void GetData()
+        public void Init(ScriptableDefense so)
         {
+            SO = so;
             IsActiveDefence = SO.IsActiveDefence;
             AttackRange = SO.AttackRange;
             AttackForce = SO.AttackForce;
@@ -52,7 +53,6 @@ namespace Defendable
 
         protected void Awake()
         {
-            GetData();
             Collider = GetComponent<BoxCollider>();
         }
         public void TakeDamage(float value) => DamageReceiver.TakeDamage(value);

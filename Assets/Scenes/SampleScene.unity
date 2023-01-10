@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641234, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -665,7 +665,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 581853323}
   m_Direction: 0
   m_Value: 0
-  m_Size: 1
+  m_Size: 0
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1477,12 +1477,12 @@ MonoBehaviour:
       type: 3}
     container: {fileID: 745831102}
     pool: []
-  - type: 100
+  - type: 200
     amount: 20
     prefab: {fileID: 497068949028825284, guid: 8fb30d3c8ee29284a90ff1949abe00c9, type: 3}
     container: {fileID: 745831102}
     pool: []
-  - type: 101
+  - type: 201
     amount: 20
     prefab: {fileID: 497068949028825284, guid: b8d098908aa552f4899c294aecff83ec, type: 3}
     container: {fileID: 745831102}
@@ -1499,13 +1499,7 @@ MonoBehaviour:
       type: 3}
     container: {fileID: 745831102}
     pool: []
-  - type: 104
-    amount: 10
-    prefab: {fileID: 8219011498549825608, guid: b58fdf950bf832348af4bfaa2fd9f743,
-      type: 3}
-    container: {fileID: 745831102}
-    pool: []
-  - type: 102
+  - type: 202
     amount: 5
     prefab: {fileID: 2030329169060672013, guid: 00445ded5dfd59649b1e0363b6c822a3,
       type: 3}
@@ -1525,12 +1519,6 @@ MonoBehaviour:
   - type: 1100
     amount: 10
     prefab: {fileID: 3049428253405200621, guid: 3ebac05d447151349bd00ca0a0ab7764,
-      type: 3}
-    container: {fileID: 745831102}
-    pool: []
-  - type: 1101
-    amount: 5
-    prefab: {fileID: 4593184484909914552, guid: 2e1e9506f5904a64b81744324fb7cd50,
       type: 3}
     container: {fileID: 745831102}
     pool: []
@@ -2912,10 +2900,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe82b80a71d05b742be0d62fdd3597e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defencesViewModel: {fileID: 568455788}
-  buttonPrefab: {fileID: 4483443709593768808, guid: 37f702ddc31ec51498753a3fb0f5b513,
-    type: 3}
-  content: {fileID: 2079989269}
 --- !u!1 &1642313312 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 497068949028825284, guid: 8fb30d3c8ee29284a90ff1949abe00c9,
@@ -3281,7 +3265,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -1638.5, y: 0}
+  m_AnchoredPosition: {x: -748, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &2079989270
