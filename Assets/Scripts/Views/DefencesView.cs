@@ -35,7 +35,7 @@ public class DefensesView : MonoBehaviour
     {
         foreach (var button in buttons)
         {
-            // if (button.)
+            button.UpdateButton()
         }
     }
 
