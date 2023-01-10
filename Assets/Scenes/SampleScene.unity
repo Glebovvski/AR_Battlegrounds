@@ -665,7 +665,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 581853323}
   m_Direction: 0
   m_Value: 0
-  m_Size: 0
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1555,6 +1555,12 @@ MonoBehaviour:
   - type: 1100
     amount: 10
     prefab: {fileID: 3049428253405200621, guid: 3ebac05d447151349bd00ca0a0ab7764,
+      type: 3}
+    container: {fileID: 745831102}
+    pool: []
+  - type: 1101
+    amount: 5
+    prefab: {fileID: 4593184484909914552, guid: 2e1e9506f5904a64b81744324fb7cd50,
       type: 3}
     container: {fileID: 745831102}
     pool: []

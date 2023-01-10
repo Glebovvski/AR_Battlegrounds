@@ -15,6 +15,7 @@
 //--------------------------------------------------------------------------------------------------------------------------------
 
 using UnityEngine;
+using System;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -43,7 +44,8 @@ namespace CartoonFX
 		{
 			None,
 			Disable,
-			Destroy
+			Destroy,
+			InvokeEvent
 		}
 
 		[System.Serializable]
@@ -457,6 +459,8 @@ namespace CartoonFX
 		[System.NonSerialized] MaterialPropertyBlock materialPropertyBlock;
 		[System.NonSerialized] Renderer particleRenderer;
 
+		public event Action<GameObject> OnFinish;
+
 		// ================================================================================================================================
 
 		public void ResetState()
@@ -559,6 +563,8 @@ namespace CartoonFX
 						}
 						else
 						{
+							if(clearBehavior == ClearBehavior.InvokeEvent)
+								OnFinish?.Invoke(this.gameObject);
 							this.gameObject.SetActive(false);
 						}
 					}
