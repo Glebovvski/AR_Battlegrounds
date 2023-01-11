@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -18,20 +19,14 @@ namespace Defendable
         {
             defenses = Resources.LoadAll<ScriptableDefense>("SO/Defense").ToList();
         }
-    }
 
-    public class DefenseInfo
-    {
-        public DefenseInfo(PoolObjectType type, Defense defense, int price)
+        public event Action<ScriptableDefense> OnDefenseSelected;
+        public void DefenseSelected(ScriptableDefense info)
         {
-            Type = type;
-            Defence = defense;
-            Price = price;    
+            OnDefenseSelected?.Invoke(info);
         }
 
-        public PoolObjectType Type { get; set; }
-        public Defense Defence { get; set; }
-        public int Price { get; set; }
-        public bool IsAffordable { get; private set; }
+        public event Action OnDefenseDeselected;
+        public void DefenseDeselected() => OnDefenseDeselected?.Invoke();
     }
 }

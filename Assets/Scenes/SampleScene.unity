@@ -1004,7 +1004,7 @@ GameObject:
   - component: {fileID: 568455786}
   - component: {fileID: 568455788}
   m_Layer: 0
-  m_Name: DefencesModel
+  m_Name: DefensesViewModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1034,9 +1034,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 568455785}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 13dfa39324bca284eb412feaaa3d8bc7, type: 3}
+  m_Script: {fileID: 11500000, guid: 0b7e34a3947e644ba9b9cd983226ea6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  prefab: {fileID: 4483443709593768808, guid: 37f702ddc31ec51498753a3fb0f5b513, type: 3}
+  viewParent: {fileID: 2079989269}
 --- !u!1 &581853322
 GameObject:
   m_ObjectHideFlags: 0
@@ -2897,7 +2899,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1616942223}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe82b80a71d05b742be0d62fdd3597e4, type: 3}
+  m_Script: {fileID: 11500000, guid: 4d69cdf7305124d249f5cfe36b6fc166, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1642313312 stripped
@@ -3265,7 +3267,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -877, y: 0}
+  m_AnchoredPosition: {x: -738, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &2079989270

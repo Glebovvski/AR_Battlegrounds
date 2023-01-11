@@ -13,7 +13,7 @@ public class GameGrid : MonoBehaviour
 
     private CurrencyModel CurrencyModel { get; set; }
     private DefensesModel DefensesModel { get; set; }
-    [SerializeField] private DefencesViewModel defencesViewModel;
+    [SerializeField] private DefensesViewModel defencesViewModel;
 
     [SerializeField] private NavMeshSurface plane;
     [SerializeField] private NavMeshSurface gridSurface;
@@ -50,8 +50,8 @@ public class GameGrid : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        defencesViewModel.OnDefenseSelected += SelectDefence;
-        defencesViewModel.OnDefenseDeselected += DeselectDefense;
+        DefensesModel.OnDefenseSelected += SelectDefence;
+        DefensesModel.OnDefenseDeselected += DeselectDefense;
 
         CreateGrid();
     }
@@ -270,7 +270,7 @@ public class GameGrid : MonoBehaviour
 
     private void OnDestroy()
     {
-        defencesViewModel.OnDefenseSelected -= SelectDefence;
-        defencesViewModel.OnDefenseDeselected -= DeselectDefense;
+        DefensesModel.OnDefenseSelected -= SelectDefence;
+        DefensesModel.OnDefenseDeselected -= DeselectDefense;
     }
 }

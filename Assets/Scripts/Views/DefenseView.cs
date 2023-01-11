@@ -12,11 +12,11 @@ public class DefenseView : MonoBehaviour
     [SerializeField] private Button button;
     [SerializeField] private TextMeshProUGUI price;
 
-    private DefencesViewModel DefencesViewModel { get; set; }
+    private DefensesModel DefensesModel { get; set; }
 
-    public void Init(ScriptableDefense info, DefencesViewModel defensesViewModel)
+    public void Init(ScriptableDefense info, DefensesModel defensesModel)
     {
-        DefencesViewModel = defensesViewModel;
+        DefensesModel = defensesModel;
         text.text = info.Type.ToString();
         price.text = info.Price.ToString();
         button.onClick.AddListener(delegate{SelectDefence(info);});
@@ -24,6 +24,6 @@ public class DefenseView : MonoBehaviour
 
     public void UpdateButton(bool active) => button.enabled = active;
 
-    private void SelectDefence(ScriptableDefense info) => DefencesViewModel.DefenseSelected(info);
+    private void SelectDefence(ScriptableDefense info) => DefensesModel.DefenseSelected(info);
 
 }
