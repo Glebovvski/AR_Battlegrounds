@@ -10,18 +10,21 @@ public class DefensesViewModel : MonoBehaviour
     [SerializeField] private DefenseView prefab;
     [SerializeField] private Transform viewParent;
     private DefensesModel DefensesModel { get; set; }
+    private DiContainer Container { get; set; }
 
     [Inject]
-    private void Construct(DefensesModel defensesModel)
+    private void Construct(DefensesModel defensesModel, DiContainer container)
     {
+        Container = container;
         DefensesModel = defensesModel;
     }
 
     private void Start()
     {
+        DefenseViewFactory factory = Container.Resolve<DefenseViewFactory>();
         foreach (var defense in DefensesModel.List)
         {
-            DefenseViewFactory.CreateDefenseView(defense, prefab, viewParent, DefensesModel);
+            factory.CreateDefenseView(defense, prefab, viewParent, DefensesModel);
         }
     }
 }

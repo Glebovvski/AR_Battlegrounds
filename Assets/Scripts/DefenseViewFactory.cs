@@ -1,12 +1,21 @@
 using Defendable;
 using UnityEngine;
+using Zenject;
 
-public static class DefenseViewFactory
+public class DefenseViewFactory : PlaceholderFactory<DefenseView>
 {
-    public static DefenseView CreateDefenseView(ScriptableDefense defense, DefenseView prefab, Transform parent, DefensesModel model)
+    private CurrencyModel CurrencyModel { get; set; }
+
+    [Inject]
+    private void Construct(CurrencyModel currencyModel)
+    {
+        CurrencyModel = currencyModel;
+    }
+
+    public DefenseView CreateDefenseView(ScriptableDefense defense, DefenseView prefab, Transform parent, DefensesModel model)
     {
         var view = GameObject.Instantiate(prefab, parent);
-        DefenseViewModel vm = new DefenseViewModel(defense, view);
+        DefenseViewModel vm = new DefenseViewModel(defense, view, CurrencyModel);
         view.Init(defense, model);
         return view;
     }

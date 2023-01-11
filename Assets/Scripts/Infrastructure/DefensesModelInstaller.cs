@@ -7,5 +7,6 @@ public class DefensesModelInstaller : MonoInstaller
     {
         DefensesModel defensesModel = new DefensesModel();
         Container.Bind<DefensesModel>().FromInstance(defensesModel).AsSingle();
+        Container.BindFactory<DefenseView, DefenseViewFactory>().AsSingle();
     }
 }
