@@ -21,7 +21,6 @@ namespace Enemies
             aiClient.Resume();
             goblinMesh.SetActive(true);
             explosionFX.gameObject.SetActive(false);
-            explosionFX.OnFinish += ReturnToPool;
         }
         public override void StartAttack()
         {
@@ -56,7 +55,6 @@ namespace Enemies
         {
             goblinMesh.SetActive(true);
             explosionFX.gameObject.SetActive(false);
-            explosionFX.OnFinish -= ReturnToPool;
         }
     }
 }
