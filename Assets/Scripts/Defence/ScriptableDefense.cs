@@ -11,7 +11,7 @@ public class ScriptableDefense : ScriptableObject
     public Image Image;
     public int Price;
 
-    [Space(10)]
+    // [Space(10)]
     public int Health;
     public bool IsActiveDefence;
     public int AttackForce;
