@@ -85,9 +85,9 @@ namespace Defendable
 
         private void ReturnToPool(GameObject fx)
         {
-            OnDeath?.Invoke();
             DamageReceiver.OnDeath -= OnDeath;
             PoolManager.Instance.ReturnToPool(this.gameObject, DefenseTypeToPoolType(Type));
+            OnDeath?.Invoke();
         }
 
         public void DefenseSet() => OnDefenseSet?.Invoke();
