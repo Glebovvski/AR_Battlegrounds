@@ -9,10 +9,8 @@ public class DefencesViewModel : MonoBehaviour
 {
     private DefensesModel DefensesModel { get; set; }
 
-    public event Action OnGoldChanged;
-
     [Inject]
-    private void Construct(DefensesModel defensesModel, CurrencyModel currencyModel)
+    private void Construct(DefensesModel defensesModel)
     {
         DefensesModel = defensesModel;
     }

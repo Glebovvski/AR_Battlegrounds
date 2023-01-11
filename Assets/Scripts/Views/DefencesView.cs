@@ -5,19 +5,11 @@ using Zenject;
 
 public class DefensesView : MonoBehaviour
 {
-    private CurrencyModel CurrencyModel { get; set; }
-
     [SerializeField] private DefencesViewModel defencesViewModel;
     [SerializeField] private DefenseView buttonPrefab;
     [SerializeField] private Transform content;
 
     List<DefenseViewModel> defenseViews = new List<DefenseViewModel>();
-
-    [Inject]
-    private void Construct(CurrencyModel currencyModel)
-    {
-        CurrencyModel = currencyModel;
-    }
 
     private void Start()
     {

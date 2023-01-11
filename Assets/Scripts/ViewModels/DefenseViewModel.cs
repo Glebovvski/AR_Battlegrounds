@@ -1,8 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Defendable;
-using UnityEngine;
 using Zenject;
 
 public class DefenseViewModel
@@ -27,6 +22,6 @@ public class DefenseViewModel
 
     private void UpdateDefenseAffordable()
     {
-        DefenseView.UpdateButton(Defense.Price < CurrencyModel.Gold);
+        DefenseView.UpdateButton(Defense.Price <= CurrencyModel.Gold);
     }
 }
