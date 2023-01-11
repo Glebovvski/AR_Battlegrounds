@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
@@ -12,7 +11,7 @@ public class ScriptableDefense : ScriptableObject
     public Image Image;
     public int Price;
 
-    [Space(10)]
+    // [Space(10)]
     public int Health;
     public bool IsActiveDefence;
     public int AttackForce;
@@ -27,6 +26,7 @@ public class ScriptableDefense : ScriptableObject
     public Predicate<GridCell> GetCondition() => ConditionsData.ConditionData.FirstOrDefault(x => x.Name == Condition).Condition;
 }
 
+[Serializable]
 public enum DefenseType
 {
     None,
