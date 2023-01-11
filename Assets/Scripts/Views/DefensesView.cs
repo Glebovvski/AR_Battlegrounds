@@ -6,16 +6,10 @@ using Zenject;
 
 public class DefensesView : MonoBehaviour
 {
-    private DefensesModel DefensesModel { get; set; }
-
-    [Inject]
-    private void Construct(DefensesModel defensesModel)
-    {
-        DefensesModel = defensesModel;
-    }
+    [SerializeField] private DefensesViewModel DefensesViewModel;
 
     public void CancelSelection()
     {
-        DefensesModel.DefenseDeselected();
+        DefensesViewModel.DeselectDefense();
     }
 }

@@ -15,8 +15,8 @@ public class DefenseViewModel
         CurrencyModel.OnGoldAmountChanged += UpdateDefenseAffordable;
     }
 
-    private void UpdateDefenseAffordable()
+    private void UpdateDefenseAffordable(int gold)
     {
-        DefenseView.UpdateButton(Defense.Price <= CurrencyModel.Gold);
+        DefenseView.UpdateButton(Defense.Price <= gold);
     }
 }

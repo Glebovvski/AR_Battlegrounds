@@ -27,4 +27,9 @@ public class DefensesViewModel : MonoBehaviour
             factory.CreateDefenseView(defense, prefab, viewParent, DefensesModel);
         }
     }
+
+    public void DeselectDefense()
+    {
+        DefensesModel.DefenseDeselected();
+    }
 }

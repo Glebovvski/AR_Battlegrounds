@@ -6,5 +6,8 @@ public class CurrencyModelInstaller : MonoInstaller
     {
         CurrencyModel currencyModel = new CurrencyModel();
         Container.Bind<CurrencyModel>().FromInstance(currencyModel).AsSingle();
+        
+        GoldViewModel goldViewModel = new GoldViewModel(currencyModel);
+        Container.Bind<GoldViewModel>().FromInstance(goldViewModel).AsSingle();
     }
 }

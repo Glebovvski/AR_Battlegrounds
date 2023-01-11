@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class CurrencyModel
 {
-    public event Action OnGoldAmountChanged;
+    public event Action<int> OnGoldAmountChanged;
     private int _gold;
     public int Gold
     {
@@ -12,7 +12,7 @@ public class CurrencyModel
         {
             _gold = value;
             PlayerPrefs.SetInt("Gold", value);
-            OnGoldAmountChanged?.Invoke();
+            OnGoldAmountChanged?.Invoke(_gold);
         }
     }
 
