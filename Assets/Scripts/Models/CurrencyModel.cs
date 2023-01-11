@@ -26,4 +26,9 @@ public class CurrencyModel
     {
         Gold -= price;
     }
+
+    public void AddGold(int value)
+    {
+        Gold += value;
+    }
 }

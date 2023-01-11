@@ -21,6 +21,7 @@ namespace Enemies
         public float CurrentHealth => DamageReceiver.CurrentHealth;
         public int AttackForce { get; set; }
         public int Speed { get; set; }
+        public int GoldToDrop => SO.GoldToDrop;
         public bool IsAlive => !DamageReceiver.IsDead;
         public AIContext Context { get; private set; }
         public GameObject GameObject => this.gameObject;
@@ -83,7 +84,7 @@ namespace Enemies
         private void Update()
         {
             if (AttackTarget != null)
-            Vector3.RotateTowards(this.transform.rotation.eulerAngles, new Vector3(AttackTarget.Defense.transform.rotation.x, 0, AttackTarget.Defense.transform.rotation.z), 5, 5);
+                Vector3.RotateTowards(this.transform.rotation.eulerAngles, new Vector3(AttackTarget.Defense.transform.rotation.x, 0, AttackTarget.Defense.transform.rotation.z), 5, 5);
             animationController.UpdateState();
         }
 

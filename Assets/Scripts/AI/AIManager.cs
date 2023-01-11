@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Zenject;
 
 namespace Enemies
 {
@@ -10,9 +11,17 @@ namespace Enemies
     {
         public static AIManager Instance;
 
+        private CurrencyModel CurrencyModel { get; set; }
+
         [field: SerializeField] public GameGrid Grid { get; private set; }
         public List<Observation> Observations = new List<Observation>();
         [SerializeField] private List<Enemy> Enemies = new List<Enemy>();
+
+        [Inject]
+        private void Construct(CurrencyModel currencyModel)
+        {
+            CurrencyModel = currencyModel;
+        }
 
         private void Awake()
         {
@@ -69,6 +78,7 @@ namespace Enemies
         public T RegisterEnemy<T>(PoolObjectType enemyType) where T : Enemy
         {
             var enemy = PoolManager.Instance.GetFromPool<T>(enemyType);
+            enemy.OnDeath += GetGoldFromEnemy;
             Enemies.Add(enemy);
             return enemy;
         }
@@ -82,6 +92,11 @@ namespace Enemies
         public IEnumerable<Enemy> GetEnemiesAttackingObservation(Observation observation) => Enemies.Where(x => x.GetAttackTarget() == observation);
 
         public IEnumerable<Enemy> GetClosestEnemiesWithSameTarget(Enemy enemy) => Enemies.Where(x => (x.Position - enemy.Position).sqrMagnitude < enemy.ScanRange * enemy.ScanRange && x.GetAttackTarget() == enemy.GetAttackTarget());
+
+        private void GetGoldFromEnemy(Enemy enemy)
+        {
+            CurrencyModel.AddGold(enemy.GoldToDrop);
+        }
 
         private Observation GetClosest(IEnemy enemy, List<Observation> observations)
         {
