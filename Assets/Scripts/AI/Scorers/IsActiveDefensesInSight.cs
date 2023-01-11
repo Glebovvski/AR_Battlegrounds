@@ -24,6 +24,8 @@ public class IsActiveDefensesInSight : ContextualScorerBase
             float score = activeDefenses.Count * 100;
             return not ? -score : score;
         }
+        else if (exceptDefenses.Count == 0 && activeDefenses.Count == 0)
+            return not ? 100 : -100;
         else return not ? exceptDefenses.Count * 100 : 0;
     }
 }
