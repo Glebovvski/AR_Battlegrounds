@@ -43,6 +43,7 @@ namespace Defendable
             Size = SO.Size;
             DamageReceiver = new DamageReceiver(Health);
             DamageReceiver.OnDeath += Death;
+            destroyFX.OnFinish += ReturnToPool;
         }
 
         public virtual void OnEnable()
@@ -59,7 +60,8 @@ namespace Defendable
 
         private void Death()
         {
-            StartCoroutine(WaitForDeathAnimationFinish());
+            defenseMesh.SetActive(false);
+            destroyFX.gameObject.SetActive(true);
         }
 
         private PoolObjectType DefenseTypeToPoolType(DefenseType type)
@@ -81,12 +83,8 @@ namespace Defendable
             }
         }
 
-        IEnumerator WaitForDeathAnimationFinish()
+        private void ReturnToPool(GameObject fx)
         {
-            defenseMesh.SetActive(false);
-            destroyFX.gameObject.SetActive(true);
-            yield return null;
-            // yield return new WaitForSeconds(1);
             OnDeath?.Invoke();
             DamageReceiver.OnDeath -= OnDeath;
             PoolManager.Instance.ReturnToPool(this.gameObject, DefenseTypeToPoolType(Type));
