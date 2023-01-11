@@ -16,9 +16,10 @@ namespace Defendable
         protected float lastShotTime;
         protected override bool IsReady { get => Time.time - lastShotTime > ReloadTime; set => IsReady = value; }
 
-        public void Awake()
+        public override void Init(ScriptableDefense so)
         {
-            base.Awake();
+            base.Init(so);
+            lastShotTime = Time.time;
             Detection.SetAttackRange(AttackRange);
         }
 

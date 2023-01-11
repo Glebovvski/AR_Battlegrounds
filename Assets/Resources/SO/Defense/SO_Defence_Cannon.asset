@@ -16,10 +16,10 @@ MonoBehaviour:
   Image: {fileID: 0}
   Price: 250
   Health: 25
-  IsActiveDefence: 1
+  IsActiveDefense: 0
   AttackForce: 0
   AttackRange: 100
-  RelaodTime: 2
+  ReloadTime: 2
   ProjectileSpeed: 5
   Size: {x: 1, y: 1}
   Condition: 2

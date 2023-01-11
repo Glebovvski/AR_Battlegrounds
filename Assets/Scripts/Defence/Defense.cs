@@ -32,7 +32,7 @@ namespace Defendable
 
         public event Action OnDeath;
 
-        public void Init(ScriptableDefense so)
+        public virtual void Init(ScriptableDefense so)
         {
             SO = so;
             IsActiveDefense = SO.IsActiveDefense;
