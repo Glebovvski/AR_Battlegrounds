@@ -22,7 +22,7 @@ public class DefenseView : MonoBehaviour
         button.onClick.AddListener(delegate{SelectDefence(info);});
     }
 
-    public void UpdateButton(bool active) => button.enabled = active;
+    public void UpdateButton(bool active) => button.interactable = active;
 
     private void SelectDefence(ScriptableDefense info) => DefensesModel.DefenseSelected(info);
 
