@@ -7,17 +7,17 @@ public class DefenseViewModel
     private DefenseView DefenseView { get; set; }
     private ScriptableDefense Defense { get; set; }
 
-    [Inject]
-    private void Construct(CurrencyModel currencyModel)
-    {
-        CurrencyModel = currencyModel;
-    }
+    // [Inject]
+    // private void Construct(CurrencyModel currencyModel)
+    // {
+    //     CurrencyModel = currencyModel;
+    // }
 
     public DefenseViewModel(ScriptableDefense defense, DefenseView view)
     {
         Defense = defense;
         DefenseView = view;
-        CurrencyModel.OnGoldAmountChanged += UpdateDefenseAffordable;
+        // CurrencyModel.OnGoldAmountChanged += UpdateDefenseAffordable;
     }
 
     private void UpdateDefenseAffordable()

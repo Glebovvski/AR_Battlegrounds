@@ -11,8 +11,6 @@ public class DefensesViewModel : MonoBehaviour
     [SerializeField] private Transform viewParent;
     private DefensesModel DefensesModel { get; set; }
 
-    DefenseViewFactory factory;
-
     [Inject]
     private void Construct(DefensesModel defensesModel)
     {
@@ -21,10 +19,9 @@ public class DefensesViewModel : MonoBehaviour
 
     private void Start()
     {
-        factory = new DefenseViewFactory();
-        foreach (var defence in DefensesModel.List)
+        foreach (var defense in DefensesModel.List)
         {
-            factory.CreateDefenseView(defence, prefab, viewParent, DefensesModel);
+            DefenseViewFactory.CreateDefenseView(defense, prefab, viewParent, DefensesModel);
         }
     }
 }
