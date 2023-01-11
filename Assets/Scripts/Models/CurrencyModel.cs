@@ -4,20 +4,22 @@ using UnityEngine;
 public class CurrencyModel
 {
     public event Action OnGoldAmountChanged;
+    private int _gold;
     public int Gold
     {
-        get => Gold; 
+        get => _gold;
         private set
         {
-            Gold = value;
+            _gold = value;
             PlayerPrefs.SetInt("Gold", value);
             OnGoldAmountChanged?.Invoke();
         }
     }
 
-    private void Awake()
+    public CurrencyModel()
     {
-        Gold = PlayerPrefs.GetInt("Gold", 1000);
+        PlayerPrefs.DeleteAll();
+        Gold = PlayerPrefs.GetInt("Gold", 100000);
     }
 
     public void Buy(int price)

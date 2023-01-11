@@ -133,7 +133,7 @@ public class GameGrid : MonoBehaviour
         if (SelectedDefence == null) return;
 
         var defence = PoolManager.Instance.GetFromPool<Defense>(SelectedDefence.PoolType);
-        defence.Init(DefensesModel.List.Where(x => x.PoolType == SelectedDefence.PoolType).First());
+        defence.Init(DefensesModel.List.Where(x => x.PoolType == SelectedDefence.PoolType).FirstOrDefault());
         defence.transform.SetParent(plane.transform);
         if (defence.GetSize() == Vector2Int.one)
         {
@@ -244,13 +244,10 @@ public class GameGrid : MonoBehaviour
                 {
                     SelectedDefence = DefensesModel.List.Where(x => x.PoolType == PoolObjectType.WallTower).FirstOrDefault();
                     SpawnDefence(cell);
-                    // var tower = PoolManager.Instance.GetFromPool<WallDefence>(PoolObjectType.WallTower);
-                    // tower.transform.position = GetWorldPositionFromGrid(cell);
-                    // tower.transform.SetParent(plane.transform);
-                    // cell.SetDefence(tower);
                 }
                 continue;
             }
+            SelectedDefence = null;
             if (IsAnyDiagonalCellUp(cell))
                 continue;
             cell.SetHeight(UnityEngine.Random.Range(1, 3));

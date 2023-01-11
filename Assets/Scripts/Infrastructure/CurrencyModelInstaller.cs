@@ -1,4 +1,3 @@
-using UnityEngine;
 using Zenject;
 
 public class CurrencyModelInstaller : MonoInstaller
