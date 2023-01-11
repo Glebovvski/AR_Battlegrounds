@@ -14,6 +14,8 @@ public class DefenseViewFactory : PlaceholderFactory<DefenseView>
 
     public DefenseView CreateDefenseView(ScriptableDefense defense, DefenseView prefab, Transform parent, DefensesModel model)
     {
+        if(defense.Price == 0) return null;
+        
         var view = GameObject.Instantiate(prefab, parent);
         DefenseViewModel vm = new DefenseViewModel(defense, view, CurrencyModel);
         view.Init(defense, model);

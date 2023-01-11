@@ -18,10 +18,11 @@ MonoBehaviour:
   Speed: 6
   ScanRange: 50
   AttackRange: 0
+  AttackRadius: 0
   AttackWallScore: 0
   AttackCannonScore: 0
   AttackLaserScore: 0
   AttackCastleScore: 0
   AttackTrapScore: 0
   EnemyType: 0
-  Type: 101
+  Type: 201

@@ -137,7 +137,7 @@ public class GameGrid : MonoBehaviour
         defence.transform.SetParent(plane.transform);
         if (defence.GetSize() == Vector2Int.one)
         {
-            defence.transform.position = GetWorldPositionFromGrid(cell.Pos, Mathf.CeilToInt(-yPos));
+            defence.transform.position = GetWorldPositionFromGrid(cell.Pos, cell.IsUpper ? Mathf.CeilToInt(-yPos) : Mathf.FloorToInt(-yPos));
             cell.SetDefence(defence);
         }
         else
@@ -215,7 +215,7 @@ public class GameGrid : MonoBehaviour
     private void SpawnCastleAtCentre()
     {
         Vector2 centre = GetCentreOfPair(centreCells);
-        var castle = PoolManager.Instance.GetFromPool<CastleDefence>(PoolObjectType.CastleTower); //Instantiate(castlePrefab, GetWorldPositionFromGrid(centre, centreCells[0].Height), Quaternion.identity);
+        var castle = PoolManager.Instance.GetFromPool<CastleDefence>(PoolObjectType.CastleTower);
         castle.transform.position = GetWorldPositionFromGrid(centre, centreCells[0].Height);
         castle.transform.SetParent(plane.transform);
         centreCells.ForEach(x => x.SetDefence(castle));
@@ -247,7 +247,7 @@ public class GameGrid : MonoBehaviour
                 }
                 continue;
             }
-            SelectedDefence = null;
+            DeselectAllCells();
             if (IsAnyDiagonalCellUp(cell))
                 continue;
             cell.SetHeight(UnityEngine.Random.Range(1, 3));
