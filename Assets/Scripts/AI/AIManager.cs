@@ -64,7 +64,7 @@ namespace Enemies
 
         public List<Observation> GetObservationsOfType(DefenseType type) => Observations.Where(x => x.Defense.Type == type).ToList();
 
-        public List<Observation> GetActiveDefenses(DefenseType except = DefenseType.None) => Observations.Where(x => x.Defense.IsActiveDefence && x.Defense.Type != except).ToList();
+        public List<Observation> GetActiveDefenses(DefenseType except = DefenseType.None) => Observations.Where(x => x.Defense.IsActiveDefense && x.Defense.Type != except).ToList();
 
         public T RegisterEnemy<T>(PoolObjectType enemyType) where T : Enemy
         {

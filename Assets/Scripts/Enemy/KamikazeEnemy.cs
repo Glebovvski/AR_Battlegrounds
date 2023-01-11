@@ -25,6 +25,7 @@ namespace Enemies
         }
         public override void StartAttack()
         {
+            Debug.LogError("GOBLIN ATTACK");
             Explode();
         }
 

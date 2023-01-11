@@ -216,6 +216,7 @@ public class GameGrid : MonoBehaviour
     {
         Vector2 centre = GetCentreOfPair(centreCells);
         var castle = PoolManager.Instance.GetFromPool<CastleDefence>(PoolObjectType.CastleTower);
+        castle.Init(DefensesModel.List.Where(x=>x.Type == DefenseType.Castle).FirstOrDefault());
         castle.transform.position = GetWorldPositionFromGrid(centre, centreCells[0].Height);
         castle.transform.SetParent(plane.transform);
         centreCells.ForEach(x => x.SetDefence(castle));

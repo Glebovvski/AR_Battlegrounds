@@ -9,7 +9,7 @@ namespace Defendable
 {
     public class MissileLauncher : CannonDefense
     {
-        protected override bool IsReady { get => Time.time - lastShotTime > RelaodTime; set => IsReady = value; }
+        protected override bool IsReady { get => Time.time - lastShotTime > ReloadTime; set => IsReady = value; }
 
         private List<EnemyTimePositionInfo> enemyPositions = new List<EnemyTimePositionInfo>();
         protected override void Attack(Enemy enemy)

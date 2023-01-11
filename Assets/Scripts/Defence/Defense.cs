@@ -14,16 +14,16 @@ namespace Defendable
 
         public int Health { get; private set; }
         public float CurrentHealth => DamageReceiver.CurrentHealth;
-        public bool IsActiveDefence { get; private set; }
+        public bool IsActiveDefense { get; private set; }
         protected int AttackRange { get; private set; }
         protected int AttackForce { get; private set; }
         public Vector2Int Size { get; private set; }
-        protected int RelaodTime { get; set; }
+        protected int ReloadTime { get; set; }
         protected abstract bool IsReady { get; set; }
         protected Time ReloadStart { get; private set; }
         public Predicate<GridCell> ConditionToPlace => SO.GetCondition();
         public Predicate<GridCell[]> CanFit = (GridCell[] cells) => cells.All(x => x.IsUpper) || cells.All(x => !x.IsUpper);
-        public bool IsActionAvailable() => IsActiveDefence && IsReady;
+        public bool IsActionAvailable() => IsActiveDefense && IsReady;
         public Vector2Int GetSize() => SO.Size;
         public DefenseType Type => SO.Type;
         public BoxCollider Collider { get; private set; }
@@ -35,20 +35,20 @@ namespace Defendable
         public void Init(ScriptableDefense so)
         {
             SO = so;
-            IsActiveDefence = SO.IsActiveDefence;
+            IsActiveDefense = SO.IsActiveDefense;
             AttackRange = SO.AttackRange;
             AttackForce = SO.AttackForce;
             Health = SO.Health;
-            RelaodTime = SO.RelaodTime;
+            ReloadTime = SO.ReloadTime;
             Size = SO.Size;
+            DamageReceiver = new DamageReceiver(Health);
+            DamageReceiver.OnDeath += Death;
         }
 
         public virtual void OnEnable()
         {
             destroyFX.gameObject.SetActive(false);
             defenseMesh.SetActive(true);
-            DamageReceiver = new DamageReceiver(Health);
-            DamageReceiver.OnDeath += Death;
         }
 
         protected void Awake()

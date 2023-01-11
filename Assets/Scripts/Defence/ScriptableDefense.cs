@@ -13,10 +13,10 @@ public class ScriptableDefense : ScriptableObject
 
     // [Space(10)]
     public int Health;
-    public bool IsActiveDefence;
+    public bool IsActiveDefense;
     public int AttackForce;
     public int AttackRange;
-    public int RelaodTime;
+    public int ReloadTime;
     public float ProjectileSpeed;
     public Vector2Int Size;
     public Conditions Condition;

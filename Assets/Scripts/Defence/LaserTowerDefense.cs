@@ -14,7 +14,7 @@ namespace Defendable
         [SerializeField] private Laser laser;
 
         private float lastShotTime;
-        protected override bool IsReady { get => Time.time - lastShotTime > RelaodTime; set => IsReady = value; }
+        protected override bool IsReady { get => Time.time - lastShotTime > ReloadTime; set => IsReady = value; }
 
         [SerializeField] LineRenderer laserRenderer;
         private bool isAttacking = false;
