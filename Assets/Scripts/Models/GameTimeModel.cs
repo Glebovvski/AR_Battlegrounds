@@ -2,7 +2,7 @@ using Defendable;
 using UnityEngine;
 using Zenject;
 
-public class GameTimeModel : MonoBehaviour, IInitializable
+public class GameTimeModel : IInitializable
 {
     private DefensesModel DefensesModel { get; set; }
 
