@@ -30,6 +30,7 @@ namespace Enemies
 
         private void Explode()
         {
+            aiClient.Pause();
             NavMeshAgent.enabled = false;
             goblinMesh.SetActive(false);
             explosionFX.transform.localScale = new Vector3(AttackRadius, AttackRadius, AttackRadius);
