@@ -8,6 +8,7 @@ using Defendable;
 using UnityEngine;
 using UnityEngine.AI;
 using System.Linq;
+using CartoonFX;
 
 namespace Enemies
 {
@@ -16,6 +17,7 @@ namespace Enemies
         [SerializeField] private ScriptableEnemy SO;
         [SerializeField] private NavMeshAgent navMeshAgent;
         [SerializeField] private Animator animator;
+        [SerializeField] private CFXR_Effect fx;
 
         public int Health { get; private set; }
         public float CurrentHealth => DamageReceiver.CurrentHealth;
@@ -63,7 +65,10 @@ namespace Enemies
             animationController = new AnimationController(animator, navMeshAgent, DamageReceiver);
             DamageReceiver.OnDeath += Death;
             NavMeshAgent.enabled = true;
+            fx.OnFinish += RemoveEnemyFromField;
+            fx.gameObject.SetActive(false);
         }
+
 
         private void PopulateDictionary()
         {
@@ -130,14 +135,14 @@ namespace Enemies
         {
             DamageReceiver.OnDeath -= Death;
             NavMeshAgent.enabled = false;
-            StartCoroutine(WaitForDeathAnimationToFinish());
+            fx.gameObject.SetActive(true);
         }
 
-        IEnumerator WaitForDeathAnimationToFinish()
+        private void RemoveEnemyFromField(GameObject effect)
         {
-            yield return new WaitForSeconds(1);
             OnDeath?.Invoke(this);
             AIManager.Instance.UnregisterEnemy(this);
+            fx.OnFinish -= RemoveEnemyFromField;
         }
 
         private void ResetTarget()

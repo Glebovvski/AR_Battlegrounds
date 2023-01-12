@@ -16,7 +16,7 @@ MonoBehaviour:
   Image: {fileID: 0}
   Price: 250
   Health: 25
-  IsActiveDefense: 0
+  IsActiveDefense: 1
   AttackForce: 0
   AttackRange: 100
   ReloadTime: 2
