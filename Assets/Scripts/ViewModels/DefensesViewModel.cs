@@ -24,7 +24,7 @@ public class DefensesViewModel : MonoBehaviour
         DefenseViewFactory factory = Container.Resolve<DefenseViewFactory>();
         foreach (var defense in DefensesModel.List)
         {
-            factory.CreateDefenseView(defense, prefab, viewParent, DefensesModel);
+            factory.CreateDefenseView(defense, prefab, viewParent);
         }
     }
 

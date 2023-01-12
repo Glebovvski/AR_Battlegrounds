@@ -12,13 +12,13 @@ public class DefenseViewFactory : PlaceholderFactory<DefenseView>
         CurrencyModel = currencyModel;
     }
 
-    public DefenseView CreateDefenseView(ScriptableDefense defense, DefenseView prefab, Transform parent, DefensesModel model)
+    public DefenseView CreateDefenseView(ScriptableDefense defense, DefenseView prefab, Transform parent)
     {
         if(defense.Price == 0) return null;
         
         var view = GameObject.Instantiate(prefab, parent);
         DefenseViewModel vm = new DefenseViewModel(defense, view, CurrencyModel);
-        view.Init(defense, model);
+        view.Init(defense);
         return view;
     }
 }
