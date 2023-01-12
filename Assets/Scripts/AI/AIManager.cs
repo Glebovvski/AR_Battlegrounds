@@ -13,6 +13,9 @@ namespace Enemies
 
         private CurrencyModel CurrencyModel { get; set; }
 
+        [SerializeField] private Transform[] spawnPoints;
+        
+        
         [field: SerializeField] public GameGrid Grid { get; private set; }
         public List<Observation> Observations = new List<Observation>();
         [SerializeField] private List<Enemy> Enemies = new List<Enemy>();
