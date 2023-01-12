@@ -18,9 +18,9 @@ namespace Enemies
         public override void OnEnable()
         {
             base.OnEnable();
-            aiClient.Resume();
             goblinMesh.SetActive(true);
             explosionFX.gameObject.SetActive(false);
+            explosionFX.OnFinish += ReturnToPool;
         }
         public override void StartAttack()
         {
@@ -30,7 +30,6 @@ namespace Enemies
 
         private void Explode()
         {
-            aiClient.Pause();
             NavMeshAgent.enabled = false;
             goblinMesh.SetActive(false);
             explosionFX.transform.localScale = new Vector3(AttackRadius, AttackRadius, AttackRadius);
@@ -54,6 +53,7 @@ namespace Enemies
         private void OnDisable()
         {
             goblinMesh.SetActive(true);
+            explosionFX.OnFinish -= ReturnToPool;
             explosionFX.gameObject.SetActive(false);
         }
     }
