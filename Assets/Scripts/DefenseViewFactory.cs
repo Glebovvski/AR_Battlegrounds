@@ -18,7 +18,7 @@ public class DefenseViewFactory : PlaceholderFactory<DefenseView>
         
         var view = GameObject.Instantiate(prefab, parent);
         DefenseViewModel vm = new DefenseViewModel(defense, view, CurrencyModel);
-        view.Init(defense);
+        view.Init(defense, vm);
         return view;
     }
 }

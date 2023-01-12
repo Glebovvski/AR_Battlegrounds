@@ -15,8 +15,9 @@ public class DefenseView : MonoBehaviour
     [SerializeField] private Button button;
     [SerializeField] private TextMeshProUGUI price;
 
-    public void Init(ScriptableDefense info)
+    public void Init(ScriptableDefense info, DefenseViewModel defenseViewModel)
     {
+        DefenseViewModel = defenseViewModel;
         text.text = info.Type.ToString();
         price.text = info.Price.ToString();
         button.onClick.AddListener(SelectDefence);
