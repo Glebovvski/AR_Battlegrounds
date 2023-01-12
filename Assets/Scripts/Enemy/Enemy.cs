@@ -141,8 +141,8 @@ namespace Enemies
         private void RemoveEnemyFromField(GameObject effect)
         {
             OnDeath?.Invoke(this);
-            AIManager.Instance.UnregisterEnemy(this);
             fx.OnFinish -= RemoveEnemyFromField;
+            AIManager.Instance.UnregisterEnemy(this);
         }
 
         private void ResetTarget()
