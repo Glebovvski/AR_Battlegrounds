@@ -5,13 +5,14 @@ using Zenject;
 public class DefenseViewFactory : PlaceholderFactory<DefenseView>
 {
     private CurrencyModel CurrencyModel { get; set; }
-    private DiContainer DiContainer { get; set; }
+    private DefensesModel DefensesModel { get; set; }
+
 
     [Inject]
-    private void Construct(CurrencyModel currencyModel, DiContainer container)
+    private void Construct(CurrencyModel currencyModel, DefensesModel defensesModel)
     {
-        DiContainer = container;
         CurrencyModel = currencyModel;
+        DefensesModel = defensesModel;
     }
 
     public DefenseView CreateDefenseView(ScriptableDefense defense, DefenseView prefab, Transform parent)

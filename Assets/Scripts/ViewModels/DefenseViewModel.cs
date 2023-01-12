@@ -4,7 +4,6 @@ using Zenject;
 public class DefenseViewModel
 {
     private CurrencyModel CurrencyModel { get; set; }
-    private DefensesModel DefensesModel { get; set; }
 
     private DefenseView DefenseView { get; set; }
     private ScriptableDefense Defense { get; set; }
