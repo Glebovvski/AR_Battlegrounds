@@ -27,6 +27,6 @@ public class GameTimeModel : MonoBehaviour, IInitializable
     public void Initialize()
     {
         DefensesModel.OnDefenseDeselected += Resume;
-        DefensesModel.OnDefenseSelected += Pause;
+        DefensesModel.OnSelectDefense += Pause;
     }
 }
