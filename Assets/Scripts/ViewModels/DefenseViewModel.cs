@@ -4,18 +4,14 @@ using Zenject;
 public class DefenseViewModel
 {
     private CurrencyModel CurrencyModel { get; set; }
+    private DefensesModel DefensesModel { get; set; }
 
     private DefenseView DefenseView { get; set; }
     private ScriptableDefense Defense { get; set; }
 
-    [Inject]
-    private void Construct(DefensesModel defensesModel)
+    public DefenseViewModel(ScriptableDefense defense, DefenseView view, CurrencyModel currencyModel, DefensesModel defensesModel)
     {
         DefensesModel = defensesModel;
-    }
-
-    public DefenseViewModel(ScriptableDefense defense, DefenseView view, CurrencyModel currencyModel)
-    {
         CurrencyModel = currencyModel;
         Defense = defense;
         DefenseView = view;
