@@ -1,10 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using Defendable;
 using UnityEngine;
 using Zenject;
 
-public class GameTimeModel : MonoBehaviour
+public class GameTimeModel : MonoBehaviour, IInitializable
 {
     private DefensesModel DefensesModel { get; set; }
 
@@ -24,5 +22,11 @@ public class GameTimeModel : MonoBehaviour
     private void Resume()
     {
         Time.timeScale = 1;
+    }
+
+    public void Initialize()
+    {
+        DefensesModel.OnDefenseDeselected += Resume;
+        DefensesModel.OnDefenseSelected += Pause;
     }
 }
