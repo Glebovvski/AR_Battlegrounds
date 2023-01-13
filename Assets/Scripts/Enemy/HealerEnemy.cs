@@ -6,10 +6,11 @@ namespace Enemies
 {
     public class HealerEnemy : Enemy
     {
+        [SerializeField] private ParticleSystem healFx;
         public void Heal()
         {
             var colliders = Physics.OverlapSphere(Position, AttackRadius, LayerMask.GetMask("Enemy"));
-
+            healFx.Play();
             foreach (var collider in colliders)
             {
                 if(collider.TryGetComponent<Enemy>(out var enemy))
