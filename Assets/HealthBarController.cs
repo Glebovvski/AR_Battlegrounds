@@ -9,6 +9,7 @@ public class HealthBarController : MonoBehaviour
 
     private void Start()
     {
+        healthBar.gameObject.SetActive(false);
         canvas.worldCamera = Camera.main;
     }
 
@@ -19,6 +20,7 @@ public class HealthBarController : MonoBehaviour
 
     public void UpdateHealth(float health)
     {
+        healthBar.gameObject.SetActive(true);
         healthBar.fillAmount = health;
     }
 }
