@@ -12,6 +12,8 @@ public class DefensesViewModel : MonoBehaviour
     private DefensesModel DefensesModel { get; set; }
     private DiContainer Container { get; set; }
 
+    public event Action OnDefenseSelected;
+
     [Inject]
     private void Construct(DefensesModel defensesModel, DiContainer container)
     {
@@ -21,12 +23,15 @@ public class DefensesViewModel : MonoBehaviour
 
     private void Start()
     {
+        DefensesModel.OnSelectDefenseClick += DefenseSelected;
         DefenseViewFactory factory = Container.Resolve<DefenseViewFactory>();
         foreach (var defense in DefensesModel.List)
         {
             factory.CreateDefenseView(defense, prefab, viewParent);
         }
     }
+
+    public void DefenseSelected() => OnDefenseSelected?.Invoke();
 
     public void DeselectDefense()
     {

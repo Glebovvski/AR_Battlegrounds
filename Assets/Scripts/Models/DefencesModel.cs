@@ -21,11 +21,11 @@ namespace Defendable
         }
 
         public event Action<ScriptableDefense> OnDefenseSelected;
-        public event Action OnSelectDefense;
+        public event Action OnSelectDefenseClick;
         public void DefenseSelected(ScriptableDefense info)
         {
             OnDefenseSelected?.Invoke(info);
-            OnSelectDefense?.Invoke();
+            OnSelectDefenseClick?.Invoke();
         }
 
         public event Action OnDefenseDeselected;

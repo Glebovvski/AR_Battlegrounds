@@ -29,7 +29,7 @@ public class GameTimeModel : IInitializable
     public void Initialize()
     {
         DefensesModel.OnDefenseDeselected += Resume;
-        DefensesModel.OnSelectDefense += Pause;
+        DefensesModel.OnSelectDefenseClick += Pause;
         Grid.OnGridCreated += Pause;
     }
 }
