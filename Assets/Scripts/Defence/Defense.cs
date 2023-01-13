@@ -99,5 +99,10 @@ namespace Defendable
         }
 
         public void DefenseSet() => OnDefenseSet?.Invoke();
+
+        internal void SetAsAttackTarget()
+        {
+            healthBarController.UpdateHealth(CurrentHealth/Health);
+        }
     }
 }

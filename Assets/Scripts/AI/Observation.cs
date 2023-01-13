@@ -26,4 +26,9 @@ public class Observation : IEquatable<Observation>
     {
         offset = vector3;
     }
+
+    internal void SetAsAttackTarget()
+    {
+        Defense.SetAsAttackTarget();
+    }
 }

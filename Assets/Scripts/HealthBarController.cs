@@ -1,15 +1,17 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class HealthBarController : MonoBehaviour
 {
+    [SerializeField] private bool isAlwaysActive = false;
     [SerializeField] private Canvas canvas;
     [SerializeField] private Image healthBar;
     private Transform target;
 
     private void Start()
     {
-        healthBar.gameObject.SetActive(false);
+        if (!isAlwaysActive) healthBar.gameObject.SetActive(false);
         canvas.worldCamera = Camera.main;
     }
 
@@ -20,7 +22,7 @@ public class HealthBarController : MonoBehaviour
 
     public void UpdateHealth(float health)
     {
-        healthBar.gameObject.SetActive(true);
+        if (!isAlwaysActive) healthBar.gameObject.SetActive(true);
         healthBar.fillAmount = health;
     }
 }

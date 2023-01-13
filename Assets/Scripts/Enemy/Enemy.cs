@@ -98,6 +98,7 @@ namespace Enemies
             AttackTarget = observation;
             NavMeshAgent.stoppingDistance = AttackTarget.Size.x;
             AttackTarget.Defense.OnDeath += ResetTarget;
+            observation.SetAsAttackTarget();
         }
 
         public Observation GetAttackTarget() => AttackTarget;
