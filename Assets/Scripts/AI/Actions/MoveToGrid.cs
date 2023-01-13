@@ -8,7 +8,8 @@ namespace AI
         {
             var c = (AIContext)context;
             var position = Enemies.AIManager.Instance.Grid.Centre;
-            c.Enemy.MoveTo(position);
+            if (c.Enemy.GetAttackTarget() == null && c.Enemy.FollowTarget == null)
+                c.Enemy.MoveTo(position);
         }
     }
 }
