@@ -102,7 +102,11 @@ namespace Enemies
             CurrencyModel.AddGold(enemy.GoldToDrop);
         }
 
-        public List<Enemy> GetEnemiesInRangeInCurrentHealthOrder(Enemy enemy) => Enemies.Where(x => (x.Position - enemy.Position).sqrMagnitude < enemy.ScanRange * enemy.ScanRange).OrderBy(x => x.CurrentHealth / x.Health).ToList();
+        public List<Enemy> GetEnemiesInRangeWithHealthLowerThan(Enemy enemy, float percent) => Enemies.Where(x => (x.Position - enemy.Position).sqrMagnitude < enemy.ScanRange * enemy.ScanRange 
+        && (x.CurrentHealth / x.Health) <= percent)
+        .ToList();
+
+        public Enemy GetClosest(Enemy enemy, List<Enemy> selectedEnemies) => selectedEnemies.OrderBy(x => (x.Position - enemy.Position).sqrMagnitude).First();
 
         private Observation GetClosest(IEnemy enemy, List<Observation> observations)
         {
