@@ -20,7 +20,7 @@ public class GameGrid : MonoBehaviour
     [SerializeField] private Transform planeObstacle;
 
     [SerializeField] private GridCell gridCellPrefab;
-    [SerializeField] private CastleDefence castlePrefab;
+    [SerializeField] private CastleDefense castlePrefab;
     private int width = 15;
     private int length = 15;
     private float gridSpaceSize = 1f;
@@ -215,7 +215,7 @@ public class GameGrid : MonoBehaviour
     private void SpawnCastleAtCentre()
     {
         Vector2 centre = GetCentreOfPair(centreCells);
-        var castle = PoolManager.Instance.GetFromPool<CastleDefence>(PoolObjectType.CastleTower);
+        var castle = PoolManager.Instance.GetFromPool<CastleDefense>(PoolObjectType.CastleTower);
         castle.Init(DefensesModel.List.Where(x=>x.Type == DefenseType.Castle).FirstOrDefault());
         castle.transform.position = GetWorldPositionFromGrid(centre, centreCells[0].Height);
         castle.transform.SetParent(plane.transform);

@@ -10,6 +10,8 @@ namespace Defendable
     {
         [SerializeField] private CFXR_Effect destroyFX;
         [SerializeField] private GameObject defenseMesh;
+        [SerializeField] private HealthBarController healthBarController;
+
         [field: SerializeField] public ScriptableDefense SO { get; set; }
 
         public int Health { get; private set; }
@@ -43,7 +45,13 @@ namespace Defendable
             Size = SO.Size;
             DamageReceiver = new DamageReceiver(Health);
             DamageReceiver.OnDeath += Death;
+            DamageReceiver.OnTakeDamage += UpdateHealthBar;
             destroyFX.OnFinish += ReturnToPool;
+        }
+
+        private void UpdateHealthBar()
+        {
+            healthBarController.UpdateHealth(CurrentHealth / Health);
         }
 
         public virtual void OnEnable()
@@ -58,7 +66,7 @@ namespace Defendable
         }
         public void TakeDamage(float value) => DamageReceiver.TakeDamage(value);
 
-        private void Death()
+        protected virtual void Death()
         {
             defenseMesh.SetActive(false);
             destroyFX.gameObject.SetActive(true);
