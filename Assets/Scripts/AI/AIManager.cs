@@ -14,8 +14,8 @@ namespace Enemies
         private CurrencyModel CurrencyModel { get; set; }
 
         [SerializeField] private Transform[] spawnPoints;
-        
-        
+
+
         [field: SerializeField] public GameGrid Grid { get; private set; }
         public List<Observation> Observations = new List<Observation>();
         [SerializeField] private List<Enemy> Enemies = new List<Enemy>();
@@ -65,7 +65,8 @@ namespace Enemies
 
         public Enemy GetClosestEnemyByType(IEnemy enemy, EnemyType type) => Enemies.Where(x => (x.Position - enemy.Position).sqrMagnitude < enemy.ScanRange * enemy.ScanRange && x.EnemyType == type).FirstOrDefault();
 
-        public Observation GetClosestByType(IEnemy enemy, DefenseType type)
+
+        public Observation GetClosestObservationByType(IEnemy enemy, DefenseType type)
         {
             var observations = Observations.Where(x => x.Defense.Type == type).ToList();
             if (observations.Count == 0)
@@ -100,6 +101,8 @@ namespace Enemies
         {
             CurrencyModel.AddGold(enemy.GoldToDrop);
         }
+
+        public List<Enemy> GetEnemiesInRangeInCurrentHealthOrder(Enemy enemy) => Enemies.Where(x => (x.Position - enemy.Position).sqrMagnitude < enemy.ScanRange * enemy.ScanRange).OrderBy(x => x.CurrentHealth / x.Health).ToList();
 
         private Observation GetClosest(IEnemy enemy, List<Observation> observations)
         {

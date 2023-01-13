@@ -24,7 +24,7 @@ public class GetBestAttackTarget : ActionBase
         foreach (var defense in enemy.DefenseTypeToScore)
         {
             var bestDefenseType = defense;
-            var closestObservation = Enemies.AIManager.Instance.GetClosestByType(enemy, defense.Key);
+            var closestObservation = Enemies.AIManager.Instance.GetClosestObservationByType(enemy, defense.Key);
             if (closestObservation == null)
                 continue;
             var offset = (closestObservation.Position - enemy.transform.position).normalized;

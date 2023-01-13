@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1719459976, guid: 6012f3241c1c1f7409c44769fc0a1db7, type: 3}
+  m_Name: HealerAI
+  m_EditorClassIdentifier: 
+  description: 
+  version: 16779010
+  aiId: 6415ac96-54f2-405f-851d-aa2e3d6b1561
+  configuration: '{"@type":"Apex.AI.UtilityAI, ApexAI","_rootSelectorId":a0f37d62e51f4f9e9151ffa9299e30b0,"_id":6415ac9654f2405f851daa2e3d6b1561,"_selectors":[{"@type":"Apex.AI.ScoreSelector,
+    ApexAI","_id":a0f37d62e51f4f9e9151ffa9299e30b0,"_qualifiers":[{"@type":"Apex.AI.CompositeScoreQualifier,
+    ApexAI","_scorers":[{"@type":"IsCloseToGrid, Assembly-CSharp"}]}],"_defaultQualifier":{"@type":"Apex.AI.DefaultQualifier,
+    ApexAI","action":{"@type":"Apex.AI.CompositeAction, ApexAI","_actions":[{"@type":"AI.MoveToGrid,
+    Assembly-CSharp"}]}}}]}'
+  editorConfiguration: '{"offset":{"@x":0,"@y":0},"zoom":1,"SelectorView":{"ViewArea":{"@left":100,"@top":100,"@width":200,"@height":160},"QualifierView":{"Name":"Is
+    Close To Grid"},"DefaultQualifier":{"Name":"Move To Grid","ActionView":{"@connectorType":"Composite"}}}}'
