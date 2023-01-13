@@ -16,10 +16,11 @@ public class DefenseView : MonoBehaviour
 
     public event Action OnDefenseSelected;
 
-    public void Init(ScriptableDefense info)
+    public void Init(string DefenseType, string Price, Image Image)
     {
-        text.text = info.Type.ToString();
-        price.text = info.Price.ToString();
+        text.text = DefenseType;
+        price.text = Price;
+        // image = Image;
         button.onClick.AddListener(SelectDefence);
     }
 
