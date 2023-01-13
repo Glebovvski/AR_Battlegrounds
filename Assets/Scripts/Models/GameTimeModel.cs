@@ -5,13 +5,15 @@ using Zenject;
 public class GameTimeModel : IInitializable
 {
     private DefensesModel DefensesModel { get; set; }
+    private GameGrid Grid { get; set; }
 
     public bool IsPaused = Time.timeScale == 0;
 
     [Inject]
-    private void Construct(DefensesModel defensesModel)
+    private void Construct(DefensesModel defensesModel, GameGrid grid)
     {
         DefensesModel = defensesModel;
+        Grid = grid;
     }
 
     private void Pause()
@@ -28,5 +30,6 @@ public class GameTimeModel : IInitializable
     {
         DefensesModel.OnDefenseDeselected += Resume;
         DefensesModel.OnSelectDefense += Pause;
+        Grid.OnGridCreated += Pause;
     }
 }
