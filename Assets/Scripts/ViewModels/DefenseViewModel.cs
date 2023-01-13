@@ -15,6 +15,7 @@ public class DefenseViewModel
         CurrencyModel = currencyModel;
         Defense = defense;
         DefenseView = view;
+        DefenseView.OnDefenseSelected += SelectDefence;
         CurrencyModel.OnGoldAmountChanged += UpdateDefenseAffordable;
     }
 

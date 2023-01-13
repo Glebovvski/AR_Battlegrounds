@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Defendable;
@@ -8,16 +9,15 @@ using Zenject;
 
 public class DefenseView : MonoBehaviour
 {
-    private DefenseViewModel DefenseViewModel { get; set; }
-
     [SerializeField] private TextMeshProUGUI text;
     [SerializeField] private Image image;
     [SerializeField] private Button button;
     [SerializeField] private TextMeshProUGUI price;
 
-    public void Init(ScriptableDefense info, DefenseViewModel defenseViewModel)
+    public event Action OnDefenseSelected;
+
+    public void Init(ScriptableDefense info)
     {
-        DefenseViewModel = defenseViewModel;
         text.text = info.Type.ToString();
         price.text = info.Price.ToString();
         button.onClick.AddListener(SelectDefence);
@@ -25,6 +25,8 @@ public class DefenseView : MonoBehaviour
 
     public void UpdateButton(bool active) => button.interactable = active;
 
-    private void SelectDefence() => DefenseViewModel.SelectDefence();
-
+    private void SelectDefence()
+    {
+        OnDefenseSelected?.Invoke();
+    }
 }
