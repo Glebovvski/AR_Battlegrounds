@@ -21,7 +21,7 @@ MonoBehaviour:
     Assembly-CSharp"}]}],"_defaultQualifier":{"@type":"Apex.AI.DefaultQualifier,
     ApexAI","action":{"@type":"Apex.AI.CompositeAction, ApexAI","_actions":[{"@type":"AI.MoveToGrid,
     Assembly-CSharp"}]}}},{"@type":"Apex.AI.ScoreSelector, ApexAI","_id":246c0eb73cce42d7892cab2d5f0350cb,"_qualifiers":[],"_defaultQualifier":{"@type":"Apex.AI.DefaultQualifier,
-    ApexAI","action":{"@type":"HealerScan, Assembly-CSharp","healthPercent":0}}}]}'
+    ApexAI","action":{"@type":"HealerScan, Assembly-CSharp","healthPercent":0.89999998}}}]}'
   editorConfiguration: '{"offset":{"@x":0,"@y":0},"zoom":1,"SelectorView":{"ViewArea":{"@left":100,"@top":100,"@width":200,"@height":160},"QualifierView":{"Name":"Is
     Close To Grid","ActionView":{"@connectorType":"Selector"}},"DefaultQualifier":{"Name":"Move
     To Grid","ActionView":{"@connectorType":"Composite"}}},"SelectorView":{"ViewArea":{"@left":380,"@top":180,"@width":200,"@height":100},"DefaultQualifier":{"Name":"Move

@@ -14,6 +14,8 @@ public class HealerScan : ActionBase
         var enemy = c.Enemy;
 
         var enemiesInRange = Enemies.AIManager.Instance.GetEnemiesInRangeWithHealthLowerThan(enemy, healthPercent);
+        if (enemiesInRange.Count == 0)
+            return;
         var closestEnemy = Enemies.AIManager.Instance.GetClosest(enemy, enemiesInRange);
         enemy.FollowTarget = closestEnemy;
         enemy.MoveTo(enemy.FollowTarget.Position);

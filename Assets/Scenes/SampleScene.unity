@@ -2096,7 +2096,28 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 4157964375729501909, guid: 0458d88e1eb9e01448b00a1505d65315,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -22.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 4157964375729501909, guid: 0458d88e1eb9e01448b00a1505d65315,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 7.67
+      objectReference: {fileID: 0}
+    - target: {fileID: 4157964375729501941, guid: 0458d88e1eb9e01448b00a1505d65315,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.93379766
+      objectReference: {fileID: 0}
+    - target: {fileID: 4157964375729501941, guid: 0458d88e1eb9e01448b00a1505d65315,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.31382564
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 4157964375736654085, guid: 0458d88e1eb9e01448b00a1505d65315, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 0458d88e1eb9e01448b00a1505d65315, type: 3}
 --- !u!114 &933004060 stripped
 MonoBehaviour:

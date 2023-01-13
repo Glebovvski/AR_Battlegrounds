@@ -106,7 +106,7 @@ namespace Enemies
         && (x.CurrentHealth / x.Health) <= percent)
         .ToList();
 
-        public Enemy GetClosest(Enemy enemy, List<Enemy> selectedEnemies) => selectedEnemies.OrderBy(x => (x.Position - enemy.Position).sqrMagnitude).First();
+        public Enemy GetClosest(Enemy enemy, List<Enemy> selectedEnemies) => selectedEnemies.OrderBy(x => (x.Position - enemy.Position).sqrMagnitude).FirstOrDefault();
 
         private Observation GetClosest(IEnemy enemy, List<Observation> observations)
         {
