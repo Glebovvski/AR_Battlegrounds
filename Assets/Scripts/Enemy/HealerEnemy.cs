@@ -21,6 +21,7 @@ namespace Enemies
 
         public override void StartAttack()
         {
+            Heal();
         }
     }
 }
