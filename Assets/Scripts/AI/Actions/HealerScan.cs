@@ -13,8 +13,9 @@ public class HealerScan : ActionBase
         var c = (AIContext)context;
         var enemy = c.Enemy;
 
-        if (enemy.FollowTarget == null)
+        if (enemy.FollowTarget == null || !enemy.FollowTarget.IsAlive)
         {
+            enemy.FollowTarget = null;
             var enemiesInRange = Enemies.AIManager.Instance.GetEnemiesInRangeWithHealthLowerThan(enemy, healthPercent);
             if (enemiesInRange.Count == 0)
                 return;

@@ -23,8 +23,5 @@ public class BaseEnemyScan : ActionBase
         }
         Enemies.AIManager.Instance.AddObservation(defences);
         defences.Clear();
-
-
-        Debug.LogError("SCAN FINISHED");
     }
 }

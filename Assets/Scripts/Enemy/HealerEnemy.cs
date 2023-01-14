@@ -9,13 +9,15 @@ namespace Enemies
         [SerializeField] private ParticleSystem healFx;
         public void Heal()
         {
+            Debug.LogError("HEALER FOLLOW: "+this.FollowTarget.name);
             var colliders = Physics.OverlapSphere(Position, AttackRadius, LayerMask.GetMask("Enemy"));
             healFx.Play();
             foreach (var collider in colliders)
             {
                 if(collider.TryGetComponent<Enemy>(out var enemy))
                 {
-                    enemy.TakeDamage(Mathf.Clamp(-AttackForce, 0, enemy.Health));
+                    var healValue = Mathf.Clamp(AttackForce, 0, enemy.Health);
+                    enemy.TakeDamage(-healValue);
                 }
             }
         }

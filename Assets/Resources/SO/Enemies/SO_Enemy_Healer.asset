@@ -15,9 +15,9 @@ MonoBehaviour:
   Health: 100
   AttackForce: 20
   GoldToDrop: 45
-  Speed: 3
+  Speed: 5
   ScanRange: 70
-  AttackRange: 20
+  AttackRange: 1
   AttackRadius: 30
   AttackWallScore: 0
   AttackCannonScore: 0

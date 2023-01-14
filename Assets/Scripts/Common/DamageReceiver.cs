@@ -31,7 +31,7 @@ public class DamageReceiver : IDamageReceiver
         other.TryGetComponent<Missile>(out var missile);
         if(missile == null) return;
 
-        Debug.LogError("DAMAGE");
+        // Debug.LogError("DAMAGE");
         TakeDamage(missile.Damage);
     }
 }
