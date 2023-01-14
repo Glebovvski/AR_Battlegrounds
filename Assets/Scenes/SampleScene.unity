@@ -834,7 +834,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 581853323}
   m_Direction: 0
   m_Value: 0
-  m_Size: 1
+  m_Size: 0
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2049,7 +2049,7 @@ PrefabInstance:
     - target: {fileID: 4157964374149680065, guid: 0458d88e1eb9e01448b00a1505d65315,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -24.41
       objectReference: {fileID: 0}
     - target: {fileID: 4157964374149680065, guid: 0458d88e1eb9e01448b00a1505d65315,
         type: 3}
@@ -2059,7 +2059,7 @@ PrefabInstance:
     - target: {fileID: 4157964374149680065, guid: 0458d88e1eb9e01448b00a1505d65315,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 8.42
       objectReference: {fileID: 0}
     - target: {fileID: 4157964374149680065, guid: 0458d88e1eb9e01448b00a1505d65315,
         type: 3}
@@ -2099,12 +2099,12 @@ PrefabInstance:
     - target: {fileID: 4157964375729501909, guid: 0458d88e1eb9e01448b00a1505d65315,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -22.02
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4157964375729501909, guid: 0458d88e1eb9e01448b00a1505d65315,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 7.67
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4157964375729501941, guid: 0458d88e1eb9e01448b00a1505d65315,
         type: 3}

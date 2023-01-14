@@ -44,6 +44,7 @@ namespace Enemies
                     defense.TakeDamage(AttackForce);
                 }
             }
+            TakeDamage(1000);
         }
 
         private void ReturnToPool(GameObject go)
