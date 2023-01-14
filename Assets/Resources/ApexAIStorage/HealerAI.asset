@@ -15,15 +15,7 @@ MonoBehaviour:
   description: 
   version: 16779010
   aiId: 6415ac96-54f2-405f-851d-aa2e3d6b1561
-  configuration: '{"@type":"Apex.AI.UtilityAI, ApexAI","_rootSelectorId":a0f37d62e51f4f9e9151ffa9299e30b0,"_id":6415ac9654f2405f851daa2e3d6b1561,"_selectors":[{"@type":"Apex.AI.ScoreSelector,
-    ApexAI","_id":a0f37d62e51f4f9e9151ffa9299e30b0,"_qualifiers":[{"@type":"Apex.AI.CompositeScoreQualifier,
-    ApexAI","action":{"@type":"Apex.AI.SelectorAction, ApexAI","_selectorId":246c0eb73cce42d7892cab2d5f0350cb},"_scorers":[{"@type":"IsCloseToGrid,
-    Assembly-CSharp"}]}],"_defaultQualifier":{"@type":"Apex.AI.DefaultQualifier,
-    ApexAI","action":{"@type":"Apex.AI.CompositeAction, ApexAI","_actions":[{"@type":"AI.MoveToGrid,
-    Assembly-CSharp"}],"_connectorAction":{"@type":"Apex.AI.SelectorAction, ApexAI","_selectorId":246c0eb73cce42d7892cab2d5f0350cb}}}},{"@type":"Apex.AI.ScoreSelector,
-    ApexAI","_id":246c0eb73cce42d7892cab2d5f0350cb,"_qualifiers":[],"_defaultQualifier":{"@type":"Apex.AI.DefaultQualifier,
-    ApexAI","action":{"@type":"HealerScan, Assembly-CSharp","healthPercent":0.89999998}}}]}'
-  editorConfiguration: '{"offset":{"@x":0,"@y":0},"zoom":1,"SelectorView":{"ViewArea":{"@left":100,"@top":100,"@width":200,"@height":160},"QualifierView":{"Name":"Is
-    Close To Grid","ActionView":{"@connectorType":"Selector"}},"DefaultQualifier":{"Name":"Move
-    To Grid","ActionView":{"@connectorType":"Composite"}}},"SelectorView":{"ViewArea":{"@left":380,"@top":180,"@width":200,"@height":100},"DefaultQualifier":{"Name":"Move
-    to enemy","ActionView":{}}}}'
+  configuration: '{"@type":"Apex.AI.UtilityAI, ApexAI","_rootSelectorId":84e5e637a6394163bd70d7137574acdc,"_id":6415ac9654f2405f851daa2e3d6b1561,"_selectors":[{"@type":"Apex.AI.PrioritySelector,
+    ApexAI","_id":84e5e637a6394163bd70d7137574acdc,"_qualifiers":[],"_defaultQualifier":{"@type":"Apex.AI.DefaultQualifier,
+    ApexAI","action":{"@type":"HealerScan, Assembly-CSharp","healthPercent":0.94999999}}}]}'
+  editorConfiguration: '{"offset":{"@x":0,"@y":0},"zoom":1,"SelectorView":{"ViewArea":{"@left":120,"@top":280,"@width":200,"@height":100},"DefaultQualifier":{"ActionView":{}}}}'

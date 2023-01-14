@@ -123,7 +123,19 @@ MonoBehaviour:
   m_Script: {fileID: 939582531, guid: 6012f3241c1c1f7409c44769fc0a1db7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aiConfigs: []
+  aiConfigs:
+  - aiId: 6415ac96-54f2-405f-851d-aa2e3d6b1561
+    intervalMin: 1
+    intervalMax: 1
+    startDelayMin: 0
+    startDelayMax: 0
+    isActive: 1
+  - aiId: ce72fe61-d981-4271-aa01-40c6bbb20512
+    intervalMin: 1
+    intervalMax: 1
+    startDelayMin: 0
+    startDelayMax: 0
+    isActive: 1
 --- !u!1001 &3811703267125906569
 PrefabInstance:
   m_ObjectHideFlags: 0

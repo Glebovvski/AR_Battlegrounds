@@ -16,7 +16,7 @@ MonoBehaviour:
   AttackForce: 20
   GoldToDrop: 45
   Speed: 3
-  ScanRange: 30
+  ScanRange: 70
   AttackRange: 20
   AttackRadius: 30
   AttackWallScore: 0
@@ -24,5 +24,5 @@ MonoBehaviour:
   AttackLaserScore: 0
   AttackCastleScore: 0
   AttackTrapScore: 0
-  EnemyType: 0
+  EnemyType: 3
   Type: 204

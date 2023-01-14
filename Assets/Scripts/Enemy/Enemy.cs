@@ -20,7 +20,7 @@ namespace Enemies
         [SerializeField] private CFXR_Effect fx;
 
         public int Health { get; private set; }
-        public float CurrentHealth => DamageReceiver.CurrentHealth;
+        [property:SerializeField]public float CurrentHealth => DamageReceiver.CurrentHealth;
         public int AttackForce { get; set; }
         public int Speed { get; set; }
         public int GoldToDrop => SO.GoldToDrop;
@@ -159,6 +159,7 @@ namespace Enemies
         Mono = 0, //for big enemies or spies
         Team = 1, //for small mobs
         Kamikaze = 2,
-        Any = 3
+        Healer = 3,
+        Any = 4
     }
 }
