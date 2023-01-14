@@ -18,7 +18,7 @@ MonoBehaviour:
   Speed: 5
   ScanRange: 70
   AttackRange: 1
-  AttackRadius: 30
+  AttackRadius: 10
   TimeBetweenAttacks: 5
   AttackWallScore: 0
   AttackCannonScore: 0
