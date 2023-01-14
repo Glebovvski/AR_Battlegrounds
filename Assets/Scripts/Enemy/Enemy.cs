@@ -136,10 +136,9 @@ namespace Enemies
 
         public virtual void StartAttack(out bool isReady)
         {
-            if (!IsReadyToAttack)
-                isReady = false;
-            LastAttackTime = Time.time;
-            isReady = true;
+            isReady = IsReadyToAttack;
+            if (isReady)
+                LastAttackTime = Time.time;
         }
 
         private void OnTriggerEnter(Collider other)
