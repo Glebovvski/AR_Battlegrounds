@@ -20,7 +20,7 @@ namespace Enemies
         [SerializeField] private CFXR_Effect fx;
 
         public int Health { get; private set; }
-        [property:SerializeField]public float CurrentHealth => DamageReceiver.CurrentHealth;
+        public float CurrentHealth => DamageReceiver.CurrentHealth;
         public int AttackForce { get; set; }
         public int Speed { get; set; }
         public int GoldToDrop => SO.GoldToDrop;
@@ -37,12 +37,15 @@ namespace Enemies
         public float AttackRange => SO.AttackRange;
         public float AttackRadius => SO.AttackRadius;
         public EnemyType EnemyType => SO.EnemyType;
+        protected bool IsReadyToAttack => Time.time - LastAttackTime > SO.TimeBetweenAttacks;
 
         public int AttackWallScore => SO.AttackWallScore;
         public int AttackCannonScore => SO.AttackCannonScore;
         public int AttackLaserScore => SO.AttackLaserScore;
         public int AttackCastleScore => SO.AttackCastleScore;
         public int AttackTrapScore => SO.AttackTrapScore;
+
+        protected float LastAttackTime { get; private set; }
 
         public event Action<Enemy> OnDeath;
 
@@ -125,7 +128,11 @@ namespace Enemies
             return navMeshPath;
         }
 
-        public abstract void StartAttack();
+        public virtual void StartAttack()
+        {
+            if (!IsReadyToAttack) return;
+            LastAttackTime = Time.time;
+        }
 
         private void OnTriggerEnter(Collider other)
         {

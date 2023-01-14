@@ -8,6 +8,7 @@ namespace Enemies
     {
         public override void StartAttack()
         {
+            base.StartAttack();
             animationController.Attack();
         }
 
