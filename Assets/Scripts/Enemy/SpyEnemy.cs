@@ -8,8 +8,9 @@ namespace Enemies
     {
         public bool IsScanFinished { get; private set; } = false;
 
-        public override void StartAttack()
+        public override void StartAttack(out bool isReady)
         {
+            base.StartAttack(out isReady);
         }
 
         public void SetIsScanFinished(bool value) => IsScanFinished = value;

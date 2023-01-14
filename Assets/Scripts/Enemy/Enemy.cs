@@ -51,7 +51,7 @@ namespace Enemies
         public int AttackCastleScore => SO.AttackCastleScore;
         public int AttackTrapScore => SO.AttackTrapScore;
 
-        protected float LastAttackTime { get; private set; }
+        protected float LastAttackTime { get; set; }
 
         public event Action<Enemy> OnDeath;
 
@@ -134,10 +134,12 @@ namespace Enemies
             return navMeshPath;
         }
 
-        public virtual void StartAttack()
+        public virtual void StartAttack(out bool isReady)
         {
-            if (!IsReadyToAttack) return;
+            if (!IsReadyToAttack)
+                isReady = false;
             LastAttackTime = Time.time;
+            isReady = true;
         }
 
         private void OnTriggerEnter(Collider other)

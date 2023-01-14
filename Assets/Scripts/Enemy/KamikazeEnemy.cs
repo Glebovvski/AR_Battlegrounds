@@ -22,11 +22,11 @@ namespace Enemies
             explosionFX.gameObject.SetActive(false);
             explosionFX.OnFinish += ReturnToPool;
         }
-        public override void StartAttack()
+        public override void StartAttack(out bool isReady)
         {
-            base.StartAttack();
-            Debug.LogError("GOBLIN ATTACK");
-            Explode();
+            base.StartAttack(out isReady);
+            if (isReady)
+                Explode();
         }
 
         private void Explode()
