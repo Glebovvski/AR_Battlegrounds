@@ -20,5 +20,7 @@ namespace Defendable
         }
 
         public bool IsEnemyInRange(Enemy enemy) => Detection.IsEnemyInRange(enemy);
+
+        public void SetAttackTarget(Enemy enemy) => 
     }
 }

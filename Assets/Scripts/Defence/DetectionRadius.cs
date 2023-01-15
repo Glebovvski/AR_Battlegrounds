@@ -12,6 +12,7 @@ namespace Defendable
         [SerializeField] private SphereCollider Radius;
         private List<Enemy> enemiesInRange = new List<Enemy>();
         public Enemy Enemy => ClosestEnemy();
+        public Enemy AttackTarget { get; private set; } = null;
 
         public void SetAttackRange(int radius) => Radius.radius = radius;
 
