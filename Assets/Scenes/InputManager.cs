@@ -52,7 +52,10 @@ public class InputManager : MonoBehaviour
                 var defense = GetObjectOnScene<ActiveDefense>(DefenseLayer);
                 if ((!defense || !defense.IsActiveDefense) && !SelectedDefense) return;
                 if (SelectedDefense != defense && defense)
+                {
                     SelectedDefense = defense;
+                    return;
+                }
 
                 if (SelectedDefense)
                 {
@@ -60,6 +63,7 @@ public class InputManager : MonoBehaviour
                     if (!enemy || !enemy.IsAlive || !SelectedDefense || !SelectedDefense.IsEnemyInRange(enemy)) return;
                     SelectedDefense.SetAttackTarget(enemy);
                     OnEnemyClick?.Invoke();
+                    SelectedDefense = null;
                 }
             }
         }
