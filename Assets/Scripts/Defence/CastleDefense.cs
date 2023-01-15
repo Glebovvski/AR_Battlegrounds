@@ -11,6 +11,12 @@ namespace Defendable
 
         public event Action OnLose;
 
+        protected override void ReturnToPool(GameObject fx)
+        {
+            DamageReceiver.OnDeath -= OnDeath;
+            OnDeath?.Invoke();
+        }
+
         protected override void Death()
         {
             base.Death();
