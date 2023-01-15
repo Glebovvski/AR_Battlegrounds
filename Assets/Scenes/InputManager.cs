@@ -6,7 +6,7 @@ using Zenject;
 
 public class InputManager : MonoBehaviour
 {
-    private GameTimeModel GameTimeModel { get; set; }
+    private DefensesModel DefensesModel { get; set; }
     private GameGrid Grid { get; set; }
     private LayerMask GridLayer;
     private LayerMask DefenseLayer;
@@ -21,7 +21,7 @@ public class InputManager : MonoBehaviour
         get => _selectedDefense;
         set
         {
-            if(_selectedDefense) _selectedDefense.ToggleOutline(false); //set outline off for previous defense
+            if (_selectedDefense) _selectedDefense.ToggleOutline(false); //set outline off for previous defense
             _selectedDefense = value;
             if (_selectedDefense)
             {
@@ -32,9 +32,9 @@ public class InputManager : MonoBehaviour
     }
 
     [Inject]
-    private void Construct(GameGrid gameGrid, DiContainer container)
+    private void Construct(GameGrid gameGrid, DefensesModel defensesModel)
     {
-        // GameTimeModel = container.BindInitializableExecutionOrder<GameTimeModel>();
+        DefensesModel = defensesModel;
         Grid = gameGrid;
     }
 
@@ -47,13 +47,14 @@ public class InputManager : MonoBehaviour
 
     private void Update()
     {
-        // if (!GameTimeModel.IsPaused) return;
 
         if (Input.GetMouseButtonDown(0))
         {
             var cell = GetObjectOnScene<GridCell>(GridLayer);
             if (!TrySpawnOnCell(cell))
             {
+                if (DefensesModel.InDefenseSelectionMode) return;
+                
                 var defense = GetObjectOnScene<ActiveDefense>(DefenseLayer);
                 if ((!defense || !defense.IsActiveDefense) && !SelectedDefense) return;
                 if (SelectedDefense != defense && defense)

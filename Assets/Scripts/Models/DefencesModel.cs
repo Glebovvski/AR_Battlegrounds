@@ -9,6 +9,7 @@ namespace Defendable
     {
         private List<ScriptableDefense> defenses = new List<ScriptableDefense>();
         public List<ScriptableDefense> List => defenses;
+        public bool InDefenseSelectionMode { get; private set; } = false;
 
         public DefensesModel()
         {
@@ -24,11 +25,16 @@ namespace Defendable
         public event Action OnSelectDefenseClick;
         public void DefenseSelected(ScriptableDefense info)
         {
+            InDefenseSelectionMode = true;
             OnDefenseSelected?.Invoke(info);
             OnSelectDefenseClick?.Invoke();
         }
 
         public event Action OnDefenseDeselected;
-        public void DefenseDeselected() => OnDefenseDeselected?.Invoke();
+        public void DefenseDeselected()
+        {
+            InDefenseSelectionMode = false;
+            OnDefenseDeselected?.Invoke();
+        }
     }
 }
