@@ -13,6 +13,8 @@ public class GameGrid : MonoBehaviour
 
     private CurrencyModel CurrencyModel { get; set; }
     private DefensesModel DefensesModel { get; set; }
+    private CastleDefense Castle { get; set; }
+
     [SerializeField] private DefensesViewModel defencesViewModel;
 
     [SerializeField] private NavMeshSurface plane;
@@ -20,7 +22,7 @@ public class GameGrid : MonoBehaviour
     [SerializeField] private Transform planeObstacle;
 
     [SerializeField] private GridCell gridCellPrefab;
-    [SerializeField] private CastleDefense castlePrefab;
+
     private int width = 15;
     private int length = 15;
     private float gridSpaceSize = 1f;
@@ -41,10 +43,11 @@ public class GameGrid : MonoBehaviour
     public event Action OnGridCreated;
 
     [Inject]
-    private void Construct(CurrencyModel currencyModel, DefensesModel defensesModel)
+    private void Construct(CurrencyModel currencyModel, DefensesModel defensesModel, CastleDefense castleDefense)
     {
         CurrencyModel = currencyModel;
         DefensesModel = defensesModel;
+        Castle = castleDefense;
     }
 
     // Start is called before the first frame update
@@ -215,11 +218,10 @@ public class GameGrid : MonoBehaviour
     private void SpawnCastleAtCentre()
     {
         Vector2 centre = GetCentreOfPair(centreCells);
-        var castle = PoolManager.Instance.GetFromPool<CastleDefense>(PoolObjectType.CastleTower);
-        castle.Init(DefensesModel.List.Where(x=>x.Type == DefenseType.Castle).FirstOrDefault());
-        castle.transform.position = GetWorldPositionFromGrid(centre, centreCells[0].Height);
-        castle.transform.SetParent(plane.transform);
-        centreCells.ForEach(x => x.SetDefence(castle));
+        Castle.Init(DefensesModel.List.Where(x => x.Type == DefenseType.Castle).FirstOrDefault());
+        Castle.transform.position = GetWorldPositionFromGrid(centre, centreCells[0].Height);
+        Castle.transform.SetParent(plane.transform);
+        centreCells.ForEach(x => x.SetDefence(Castle));
     }
 
     private Vector2 GetCentreOfPair(List<GridCell> cells) => cells.Aggregate(Vector2.zero, (acc, v) => acc + v.Pos) / cells.Count;
