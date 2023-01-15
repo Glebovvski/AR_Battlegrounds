@@ -18,18 +18,20 @@ public class InputManager : MonoBehaviour
         var cell = GetObjectOnScene<GridCell>(GridLayer);
         if (!cell || !cell.IsSelected) return;
 
+        if (Input.GetMouseButtonDown(0))
+        {
+            SpawnOnCell(cell);
+        }
+
+        
         var defense = GetObjectOnScene<ActiveDefense>(DefenseLayer);
         if (!defense || !defense.IsActiveDefense) return;
         SelectedDefense = defense;
 
         var enemy = GetObjectOnScene<Enemy>(EnemyLayer);
         if(!enemy || !enemy.IsAlive || !SelectedDefense || !SelectedDefense.IsEnemyInRange(enemy)) return;
-        // SelectedDefense.SetAsAttackTarget(enemy);
+        SelectedDefense.SetAttackTarget(enemy);
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            SpawnOnCell(cell);
-        }
     }
 
     private void SpawnOnCell(GridCell cell)
