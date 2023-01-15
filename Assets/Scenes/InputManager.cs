@@ -22,7 +22,8 @@ public class InputManager : MonoBehaviour
         set
         {
             _selectedDefense = value;
-            OnActiveDefenseClick?.Invoke();
+            if (_selectedDefense)
+                OnActiveDefenseClick?.Invoke();
         }
     }
 
