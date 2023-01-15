@@ -7,7 +7,7 @@ namespace Defendable
 {
     public class CastleDefense : Defense
     {
-        protected override bool IsReady { get { return true; } set { IsReady = true; } }
+        protected override bool IsReady => true;
 
         public event Action OnLose;
 
