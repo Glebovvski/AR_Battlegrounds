@@ -1,12 +1,19 @@
 using UnityEngine;
+using Zenject;
 
 public class DecorManager : MonoBehaviour
 {
-    [SerializeField] private GameGrid grid;
+    private GameGrid Grid { get; set; }
+
+    [Inject]
+    private void Construct(GameGrid grid)
+    {
+        Grid = grid;
+    }
 
     private void Awake()
     {
-        grid.OnGridCreated += SetDecor;
+        Grid.OnGridCreated += SetDecor;
     }
 
     private void SetDecor()
@@ -22,9 +29,9 @@ public class DecorManager : MonoBehaviour
                 do
                 {
                     position = new Vector3(
-                        Random.Range(this.transform.position.x - this.transform.localScale.x*5, this.transform.position.x + this.transform.localScale.x*5),
+                        Random.Range(this.transform.position.x - this.transform.localScale.x * 5, this.transform.position.x + this.transform.localScale.x * 5),
                         0,
-                        Random.Range(this.transform.position.z - this.transform.localScale.z*5, this.transform.position.z + this.transform.localScale.z*5)
+                        Random.Range(this.transform.position.z - this.transform.localScale.z * 5, this.transform.position.z + this.transform.localScale.z * 5)
                     );
                 } while (IsOccupied(position));
 

@@ -12,18 +12,19 @@ namespace Enemies
         public static AIManager Instance;
 
         private CurrencyModel CurrencyModel { get; set; }
+        public GameGrid Grid { get; private set; }
 
         [SerializeField] private Transform[] spawnPoints;
 
 
-        [field: SerializeField] public GameGrid Grid { get; private set; }
         public List<Observation> Observations = new List<Observation>();
         [SerializeField] private List<Enemy> Enemies = new List<Enemy>();
 
         [Inject]
-        private void Construct(CurrencyModel currencyModel)
+        private void Construct(CurrencyModel currencyModel, GameGrid grid)
         {
             CurrencyModel = currencyModel;
+            Grid = grid;
         }
 
         private void Awake()

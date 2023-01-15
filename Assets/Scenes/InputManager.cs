@@ -2,10 +2,12 @@ using System;
 using Defendable;
 using Enemies;
 using UnityEngine;
+using Zenject;
 
 public class InputManager : MonoBehaviour
 {
-    private GameGrid Grid => AIManager.Instance.Grid;
+    private GameTimeModel GameTimeModel { get; set; }
+    private GameGrid Grid { get; set; }
     private LayerMask GridLayer;
     private LayerMask DefenseLayer;
     private LayerMask EnemyLayer;
@@ -23,6 +25,13 @@ public class InputManager : MonoBehaviour
         }
     }
 
+    [Inject]
+    private void Construct(GameGrid gameGrid)
+    {
+        // GameTimeModel = gameTimeModel;
+        Grid = gameGrid;
+    }
+
     private void Start()
     {
         GridLayer = LayerMask.GetMask("Grid");
@@ -32,38 +41,45 @@ public class InputManager : MonoBehaviour
 
     private void Update()
     {
-        var cell = GetObjectOnScene<GridCell>(GridLayer);
-        if (!cell || !cell.IsSelected) return;
+        // if (!GameTimeModel.IsPaused) return;
 
+        var cell = GetObjectOnScene<GridCell>(GridLayer);
         if (Input.GetMouseButtonDown(0))
         {
-            if (cell)
-                SpawnOnCell(cell);
-            else
+            if (!TrySpawnOnCell(cell))
             {
                 var defense = GetObjectOnScene<ActiveDefense>(DefenseLayer);
                 if (!defense || !defense.IsActiveDefense) return;
                 SelectedDefense = defense;
 
-                var enemy = GetObjectOnScene<Enemy>(EnemyLayer);
-                if (!enemy || !enemy.IsAlive || !SelectedDefense || !SelectedDefense.IsEnemyInRange(enemy)) return;
-                SelectedDefense.SetAttackTarget(enemy);
-                OnEnemyClick?.Invoke();
+                if (SelectedDefense)
+                {
+                    var enemy = GetObjectOnScene<Enemy>(EnemyLayer);
+                    if (!enemy || !enemy.IsAlive || !SelectedDefense || !SelectedDefense.IsEnemyInRange(enemy)) return;
+                    SelectedDefense.SetAttackTarget(enemy);
+                    OnEnemyClick?.Invoke();
+                }
             }
         }
+        // if (!cell || !cell.IsSelected) return;
+
+
     }
 
-    private void SpawnOnCell(GridCell cell)
+    private bool TrySpawnOnCell(GridCell cell)
     {
+        if (!cell || !cell.IsSelected)
+            return false;
         Grid.SpawnDefence(cell);
+        return true;
     }
 
     private T GetObjectOnScene<T>(LayerMask layer) where T : MonoBehaviour
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out var raycastHitGrid, layer))
+        if (Physics.Raycast(ray, out var raycastHit, layer))
         {
-            return raycastHitGrid.transform.GetComponent<T>();
+            return raycastHit.transform.GetComponent<T>();
         }
         return null;
     }
