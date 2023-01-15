@@ -9,8 +9,6 @@ namespace Defendable
 {
     public class MissileLauncher : CannonDefense
     {
-        protected override bool IsReady { get => Time.time - lastShotTime > ReloadTime; set => IsReady = value; }
-
         private List<EnemyTimePositionInfo> enemyPositions = new List<EnemyTimePositionInfo>();
         protected override void Attack(Enemy enemy)
         {
@@ -25,7 +23,7 @@ namespace Defendable
                 bullet.Launch(enemy.Position);
             else
                 bullet.Launch(approxPos);
-            lastShotTime = Time.time;
+            LastAttackTime = Time.time;
         }
 
         protected override bool RotateToEnemy(Enemy enemy)
