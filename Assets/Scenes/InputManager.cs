@@ -26,9 +26,9 @@ public class InputManager : MonoBehaviour
     }
 
     [Inject]
-    private void Construct(GameGrid gameGrid)
+    private void Construct(GameGrid gameGrid, DiContainer container)
     {
-        // GameTimeModel = gameTimeModel;
+        // GameTimeModel = container.BindInitializableExecutionOrder<GameTimeModel>();
         Grid = gameGrid;
     }
 
@@ -43,9 +43,9 @@ public class InputManager : MonoBehaviour
     {
         // if (!GameTimeModel.IsPaused) return;
 
-        var cell = GetObjectOnScene<GridCell>(GridLayer);
         if (Input.GetMouseButtonDown(0))
         {
+            var cell = GetObjectOnScene<GridCell>(GridLayer);
             if (!TrySpawnOnCell(cell))
             {
                 var defense = GetObjectOnScene<ActiveDefense>(DefenseLayer);
@@ -54,16 +54,14 @@ public class InputManager : MonoBehaviour
 
                 if (SelectedDefense)
                 {
-                    var enemy = GetObjectOnScene<Enemy>(EnemyLayer);
-                    if (!enemy || !enemy.IsAlive || !SelectedDefense || !SelectedDefense.IsEnemyInRange(enemy)) return;
-                    SelectedDefense.SetAttackTarget(enemy);
-                    OnEnemyClick?.Invoke();
+                    // var enemy = GetObjectOnScene<Enemy>(EnemyLayer);
+                    // if (!enemy || !enemy.IsAlive || !SelectedDefense || !SelectedDefense.IsEnemyInRange(enemy)) return;
+                    // SelectedDefense.SetAttackTarget(enemy);
+                    // OnEnemyClick?.Invoke();
                 }
             }
         }
         // if (!cell || !cell.IsSelected) return;
-
-
     }
 
     private bool TrySpawnOnCell(GridCell cell)
