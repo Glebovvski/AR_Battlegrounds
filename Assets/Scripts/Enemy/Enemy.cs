@@ -9,6 +9,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using System.Linq;
 using CartoonFX;
+using cakeslice;
 
 namespace Enemies
 {
@@ -18,6 +19,7 @@ namespace Enemies
         [SerializeField] private NavMeshAgent navMeshAgent;
         [SerializeField] private Animator animator;
         [SerializeField] private CFXR_Effect fx;
+        [SerializeField] private Outline outline;
 
         public int Health { get; private set; }
         public float CurrentHealth => DamageReceiver.CurrentHealth;
@@ -63,6 +65,7 @@ namespace Enemies
 
         private void Awake()
         {
+            outline.enabled = false;
             PopulateDictionary();
         }
 

@@ -55,6 +55,7 @@ MonoBehaviour:
   navMeshAgent: {fileID: 913328609120314539}
   animator: {fileID: 77060595961696933}
   fx: {fileID: 3851563886362752215}
+  outline: {fileID: 8836951317619487812}
   healFx: {fileID: 3982062925291495786}
 --- !u!95 &77060595961696933
 Animator:

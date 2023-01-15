@@ -1027,6 +1027,7 @@ MonoBehaviour:
   navMeshAgent: {fileID: 3490048671990609000}
   animator: {fileID: 3490048671990609014}
   fx: {fileID: 6540472480216839490}
+  outline: {fileID: 6111645530534904710}
   aiClient: {fileID: 3490048671990609001}
   explosionFX: {fileID: 5752907153260036612}
   goblinMesh: {fileID: 3546798462597186498}

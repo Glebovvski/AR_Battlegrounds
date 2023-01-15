@@ -239,6 +239,7 @@ MonoBehaviour:
   navMeshAgent: {fileID: 2923120969308187169}
   animator: {fileID: 2030329169051206031}
   fx: {fileID: 7732592605465956060}
+  outline: {fileID: 452151038968344386}
 --- !u!195 &2923120969308187169
 NavMeshAgent:
   m_ObjectHideFlags: 0
