@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using Defendable;
 using Enemies;
 using UnityEngine;
@@ -11,7 +10,18 @@ public class InputManager : MonoBehaviour
     [SerializeField] private LayerMask DefenseLayer;
     [SerializeField] private LayerMask EnemyLayer;
 
-    private ActiveDefense SelectedDefense { get; set; }
+    public event Action OnActiveDefenseClick;
+    public event Action OnEnemyClick;
+
+    private ActiveDefense SelectedDefense
+    {
+        get => SelectedDefense; 
+        set
+        {
+            SelectedDefense = value;
+            OnActiveDefenseClick?.Invoke();
+        }
+    }
 
     private void Update()
     {
@@ -23,14 +33,15 @@ public class InputManager : MonoBehaviour
             SpawnOnCell(cell);
         }
 
-        
+
         var defense = GetObjectOnScene<ActiveDefense>(DefenseLayer);
         if (!defense || !defense.IsActiveDefense) return;
         SelectedDefense = defense;
 
         var enemy = GetObjectOnScene<Enemy>(EnemyLayer);
-        if(!enemy || !enemy.IsAlive || !SelectedDefense || !SelectedDefense.IsEnemyInRange(enemy)) return;
+        if (!enemy || !enemy.IsAlive || !SelectedDefense || !SelectedDefense.IsEnemyInRange(enemy)) return;
         SelectedDefense.SetAttackTarget(enemy);
+        OnEnemyClick?.Invoke();
 
     }
 
