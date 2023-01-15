@@ -100,7 +100,7 @@ namespace Defendable
 
         public void DefenseSet() => OnDefenseSet?.Invoke();
 
-        internal void SetAsAttackTarget()
+        internal void SetAsTargetToAttack()
         {
             healthBarController.UpdateHealth(CurrentHealth/Health);
         }

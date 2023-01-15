@@ -29,6 +29,6 @@ public class Observation : IEquatable<Observation>
 
     internal void SetAsAttackTarget()
     {
-        Defense.SetAsAttackTarget();
+        Defense.SetAsTargetToAttack();
     }
 }
