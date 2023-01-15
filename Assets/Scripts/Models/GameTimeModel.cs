@@ -6,14 +6,16 @@ public class GameTimeModel : IInitializable
 {
     private DefensesModel DefensesModel { get; set; }
     private GameGrid Grid { get; set; }
+    private InputManager InputManager { get; set; }
 
     public bool IsPaused = Time.timeScale == 0;
 
     [Inject]
-    private void Construct(DefensesModel defensesModel, GameGrid grid)
+    private void Construct(DefensesModel defensesModel, GameGrid grid, InputManager inputManager)
     {
         DefensesModel = defensesModel;
         Grid = grid;
+        InputManager = inputManager;
     }
 
     private void Pause()
@@ -28,8 +30,11 @@ public class GameTimeModel : IInitializable
 
     public void Initialize()
     {
-        DefensesModel.OnDefenseDeselected += Resume;
         DefensesModel.OnSelectDefenseClick += Pause;
         Grid.OnGridCreated += Pause;
+        InputManager.OnActiveDefenseClick += Pause;
+
+        InputManager.OnEnemyClick += Resume;
+        DefensesModel.OnDefenseDeselected += Resume;
     }
 }
