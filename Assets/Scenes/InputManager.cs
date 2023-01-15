@@ -15,12 +15,13 @@ public class InputManager : MonoBehaviour
     public event Action OnActiveDefenseClick;
     public event Action OnEnemyClick;
 
+    private ActiveDefense _selectedDefense;
     private ActiveDefense SelectedDefense
     {
-        get => SelectedDefense;
+        get => _selectedDefense;
         set
         {
-            SelectedDefense = value;
+            _selectedDefense = value;
             OnActiveDefenseClick?.Invoke();
         }
     }
@@ -49,15 +50,16 @@ public class InputManager : MonoBehaviour
             if (!TrySpawnOnCell(cell))
             {
                 var defense = GetObjectOnScene<ActiveDefense>(DefenseLayer);
-                if (!defense || !defense.IsActiveDefense) return;
-                SelectedDefense = defense;
+                if ((!defense || !defense.IsActiveDefense) && !SelectedDefense) return;
+                if (SelectedDefense != defense && defense)
+                    SelectedDefense = defense;
 
                 if (SelectedDefense)
                 {
-                    // var enemy = GetObjectOnScene<Enemy>(EnemyLayer);
-                    // if (!enemy || !enemy.IsAlive || !SelectedDefense || !SelectedDefense.IsEnemyInRange(enemy)) return;
-                    // SelectedDefense.SetAttackTarget(enemy);
-                    // OnEnemyClick?.Invoke();
+                    var enemy = GetObjectOnScene<Enemy>(EnemyLayer);
+                    if (!enemy || !enemy.IsAlive || !SelectedDefense || !SelectedDefense.IsEnemyInRange(enemy)) return;
+                    SelectedDefense.SetAttackTarget(enemy);
+                    OnEnemyClick?.Invoke();
                 }
             }
         }
