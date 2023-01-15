@@ -21,7 +21,7 @@ namespace Defendable
         protected int AttackForce { get; private set; }
         public Vector2Int Size { get; private set; }
         protected int ReloadTime { get; set; }
-        protected abstract bool IsReady { get; set; }
+        protected abstract bool IsReady { get; }
         protected Time ReloadStart { get; private set; }
         public Predicate<GridCell> ConditionToPlace => SO.GetCondition();
         public Predicate<GridCell[]> CanFit = (GridCell[] cells) => cells.All(x => x.IsUpper) || cells.All(x => !x.IsUpper);

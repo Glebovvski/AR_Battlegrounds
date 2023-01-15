@@ -6,22 +6,12 @@ using UnityEngine;
 
 namespace Defendable
 {
-    public class CannonDefense : Defense
+    public class CannonDefense : ActiveDefense
     {
-        [SerializeField] protected DetectionRadius Detection;
         [SerializeField] protected Transform tower;
         [SerializeField] protected float rotationSpeed = 10f;
         [SerializeField] protected float angleThreshold = 5f;
         [SerializeField] protected Transform cannon;
-        protected float lastShotTime;
-        protected override bool IsReady { get => Time.time - lastShotTime > ReloadTime; set => IsReady = value; }
-
-        public override void Init(ScriptableDefense so)
-        {
-            base.Init(so);
-            lastShotTime = Time.time;
-            Detection.SetAttackRange(AttackRange);
-        }
 
         public void Update()
         {
@@ -42,7 +32,7 @@ namespace Defendable
             bullet.transform.position = cannon.position;
             bullet.transform.rotation = tower.rotation;
             bullet.Fire((enemy.transform.position - cannon.transform.position).normalized);
-            lastShotTime = Time.time;
+            LastAttackTime = Time.time;
         }
 
         protected virtual bool RotateToEnemy(Enemy enemy)
