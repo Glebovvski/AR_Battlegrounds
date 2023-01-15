@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 77060595961696933}
   - component: {fileID: 913328609120314539}
   - component: {fileID: 3225368283004231948}
-  - component: {fileID: 24189394487994424}
+  - component: {fileID: 7458834448377187364}
   m_Layer: 9
   m_Name: Healer
   m_TagString: Untagged
@@ -111,7 +111,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1.39922, z: 1}
   m_Center: {x: 0, y: 0.7053616, z: 0}
---- !u!114 &24189394487994424
+--- !u!114 &7458834448377187364
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -120,22 +120,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 4157964374149680064}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 939582531, guid: 6012f3241c1c1f7409c44769fc0a1db7, type: 3}
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aiConfigs:
-  - aiId: 6415ac96-54f2-405f-851d-aa2e3d6b1561
-    intervalMin: 1
-    intervalMax: 1
-    startDelayMin: 0
-    startDelayMax: 0
-    isActive: 1
-  - aiId: ce72fe61-d981-4271-aa01-40c6bbb20512
-    intervalMin: 1
-    intervalMax: 1
-    startDelayMin: 0
-    startDelayMax: 0
-    isActive: 1
+  m_EffectColor: {r: 1, g: 0, b: 0, a: 0.99607843}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1001 &3811703267125906569
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -401,6 +391,26 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 9500000, guid: 7ed3e345f07e89940ae0c1e00eeb7d1d, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 7ed3e345f07e89940ae0c1e00eeb7d1d, type: 3}
+--- !u!1 &4157964375729269417 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100044, guid: 7ed3e345f07e89940ae0c1e00eeb7d1d,
+    type: 3}
+  m_PrefabInstance: {fileID: 4157964375729368165}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8836951317619487812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4157964375729269417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 0
+  eraseRenderer: 0
 --- !u!4 &4157964375729501909 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400048, guid: 7ed3e345f07e89940ae0c1e00eeb7d1d,

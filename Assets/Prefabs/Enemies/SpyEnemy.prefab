@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 497068949028825283}
   - component: {fileID: 497068949028825282}
   - component: {fileID: 7875034080553232178}
+  - component: {fileID: 5499198097549435784}
   m_Layer: 9
   m_Name: SpyEnemy
   m_TagString: Untagged
@@ -158,6 +159,21 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &5499198097549435784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 497068949028825284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 0, b: 0, a: 0.99607843}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1001 &1295094053243580430
 PrefabInstance:
   m_ObjectHideFlags: 0

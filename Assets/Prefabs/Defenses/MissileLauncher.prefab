@@ -213,6 +213,7 @@ GameObject:
   - component: {fileID: 6163342814809858710}
   - component: {fileID: 1506430673013904291}
   - component: {fileID: 1480206803045842089}
+  - component: {fileID: 2303882210388169181}
   m_Layer: 7
   m_Name: MissileLauncher
   m_TagString: Untagged
@@ -290,6 +291,21 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 2, z: 1}
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &2303882210388169181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7620467801476734995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 0, b: 0, a: 0.99607843}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &7620680206275804191
 GameObject:
   m_ObjectHideFlags: 0
