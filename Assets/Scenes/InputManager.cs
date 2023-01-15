@@ -11,19 +11,19 @@ public class InputManager : MonoBehaviour
     [SerializeField] private LayerMask DefenseLayer;
     [SerializeField] private LayerMask EnemyLayer;
 
-    private Defense SelectedDefense { get; set; }
+    private ActiveDefense SelectedDefense { get; set; }
 
     private void Update()
     {
         var cell = GetObjectOnScene<GridCell>(GridLayer);
         if (!cell || !cell.IsSelected) return;
 
-        var defense = GetObjectOnScene<Defense>(DefenseLayer);
+        var defense = GetObjectOnScene<ActiveDefense>(DefenseLayer);
         if (!defense || !defense.IsActiveDefense) return;
         SelectedDefense = defense;
 
         var enemy = GetObjectOnScene<Enemy>(EnemyLayer);
-        if(!enemy || !enemy.IsAlive || !SelectedDefense) return;
+        if(!enemy || !enemy.IsAlive || !SelectedDefense || !SelectedDefense.IsEnemyInRange(enemy)) return;
         // SelectedDefense.SetAsAttackTarget(enemy);
 
         if (Input.GetMouseButtonDown(0))
