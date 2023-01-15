@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7623021078638707301}
   - component: {fileID: 7615890234901532383}
   - component: {fileID: 7608380552572876811}
+  - component: {fileID: 1951606939666002595}
   m_Layer: 7
   m_Name: HM_cannon_pivot1
   m_TagString: Untagged
@@ -84,6 +85,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &1951606939666002595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7620354427594210477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 1
+  eraseRenderer: 0
 --- !u!1 &7620430094423512339
 GameObject:
   m_ObjectHideFlags: 0
@@ -128,6 +143,7 @@ GameObject:
   - component: {fileID: 7623250293054145475}
   - component: {fileID: 7616511453757012877}
   - component: {fileID: 7608307634575080579}
+  - component: {fileID: 5543409490490551163}
   m_Layer: 7
   m_Name: HM_cannon1
   m_TagString: Untagged
@@ -201,6 +217,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &5543409490490551163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7620434090022791335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 1
+  eraseRenderer: 0
 --- !u!1 &7620467801476734995
 GameObject:
   m_ObjectHideFlags: 0
@@ -258,6 +288,9 @@ MonoBehaviour:
   <SO>k__BackingField: {fileID: 11400000, guid: b81942901f4537043a48f03aee2da85c,
     type: 2}
   Detection: {fileID: 1003297824756587480}
+  outline:
+  - {fileID: 5543409490490551163}
+  - {fileID: 1951606939666002595}
   tower: {fileID: 7623250293054145475}
   rotationSpeed: 10
   angleThreshold: 5

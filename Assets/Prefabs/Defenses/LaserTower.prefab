@@ -107,6 +107,10 @@ MonoBehaviour:
   <SO>k__BackingField: {fileID: 11400000, guid: 10e628533f2d940d08d538cf37e68018,
     type: 2}
   Detection: {fileID: 5761795795681420580}
+  outline:
+  - {fileID: 4057849952085418012}
+  - {fileID: 8570570656214650727}
+  - {fileID: 7136970358647756023}
   laserStartPos: {fileID: 2000405459349629931}
   laser: {fileID: 2798623944747758323}
   laserRenderer: {fileID: 660372190114267916}
@@ -866,6 +870,66 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 8878342317748861890}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &8878342317748816658 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 110800, guid: 77a599bd67f72e24999e1d5d60f433d0,
+    type: 3}
+  m_PrefabInstance: {fileID: 8878342317748861890}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7136970358647756023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8878342317748816658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 1
+  eraseRenderer: 0
+--- !u!1 &8878342317748980892 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 145246, guid: 77a599bd67f72e24999e1d5d60f433d0,
+    type: 3}
+  m_PrefabInstance: {fileID: 8878342317748861890}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4057849952085418012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8878342317748980892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 1
+  eraseRenderer: 0
+--- !u!1 &8878342317749035462 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 186884, guid: 77a599bd67f72e24999e1d5d60f433d0,
+    type: 3}
+  m_PrefabInstance: {fileID: 8878342317748861890}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8570570656214650727
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8878342317749035462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 1
+  eraseRenderer: 0
 --- !u!1 &8878342317749036492 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 187918, guid: 77a599bd67f72e24999e1d5d60f433d0,

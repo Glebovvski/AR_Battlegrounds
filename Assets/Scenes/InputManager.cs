@@ -21,9 +21,13 @@ public class InputManager : MonoBehaviour
         get => _selectedDefense;
         set
         {
+            if(_selectedDefense) _selectedDefense.ToggleOutline(false); //set outline off for previous defense
             _selectedDefense = value;
             if (_selectedDefense)
+            {
+                _selectedDefense.ToggleOutline(true);
                 OnActiveDefenseClick?.Invoke();
+            }
         }
     }
 
