@@ -5,5 +5,6 @@ public class InputManagerInstaller : MonoInstaller
 {
     public override void InstallBindings()
     {
+        Container.Bind<InputManager>().AsSingle();
     }
 }
