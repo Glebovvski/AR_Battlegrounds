@@ -3,7 +3,7 @@ using Defendable;
 using Enemies;
 using UnityEngine;
 
-public class InputManager
+public class InputManager : MonoBehaviour
 {
     private GameGrid grid = AIManager.Instance.Grid;
     private LayerMask GridLayer = LayerMask.GetMask("Grid");

@@ -2662,13 +2662,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 523bca0f823c64437b0da73c38fdf47e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  grid: {fileID: 1796738231}
-  GridLayer:
-    m_Bits: 64
-  DefenseLayer:
-    m_Bits: 0
-  EnemyLayer:
-    m_Bits: 0
 --- !u!1 &1214692913
 GameObject:
   m_ObjectHideFlags: 0
@@ -3063,6 +3056,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f01a571ce1af29541999ebec5c0abbff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inputManager: {fileID: 1146544327}
 --- !u!1 &1521220381
 GameObject:
   m_ObjectHideFlags: 0
