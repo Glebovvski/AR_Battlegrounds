@@ -3,12 +3,12 @@ using Defendable;
 using Enemies;
 using UnityEngine;
 
-public class InputManager : MonoBehaviour
+public class InputManager
 {
-    [SerializeField] private GameGrid grid;
-    [SerializeField] private LayerMask GridLayer;
-    [SerializeField] private LayerMask DefenseLayer;
-    [SerializeField] private LayerMask EnemyLayer;
+    private GameGrid grid = AIManager.Instance.Grid;
+    private LayerMask GridLayer = LayerMask.GetMask("Grid");
+    private LayerMask DefenseLayer = LayerMask.GetMask("Defense");
+    private LayerMask EnemyLayer = LayerMask.GetMask("Enemy");
 
     public event Action OnActiveDefenseClick;
     public event Action OnEnemyClick;
