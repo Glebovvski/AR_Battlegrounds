@@ -18,6 +18,8 @@ namespace Defendable
 
         public bool IsEnemyInRange(Enemy enemy) => enemiesInRange.Contains(enemy);
 
+        public void SetAttackTarget(Enemy enemy) => AttackTarget = enemy;
+
         private Enemy ClosestEnemy()
         {
             float minDistance = 100;
