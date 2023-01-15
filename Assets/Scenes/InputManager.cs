@@ -5,22 +5,29 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
-    private GameGrid grid = AIManager.Instance.Grid;
-    private LayerMask GridLayer = LayerMask.GetMask("Grid");
-    private LayerMask DefenseLayer = LayerMask.GetMask("Defense");
-    private LayerMask EnemyLayer = LayerMask.GetMask("Enemy");
+    private GameGrid Grid => AIManager.Instance.Grid;
+    private LayerMask GridLayer;
+    private LayerMask DefenseLayer;
+    private LayerMask EnemyLayer;
 
     public event Action OnActiveDefenseClick;
     public event Action OnEnemyClick;
 
     private ActiveDefense SelectedDefense
     {
-        get => SelectedDefense; 
+        get => SelectedDefense;
         set
         {
             SelectedDefense = value;
             OnActiveDefenseClick?.Invoke();
         }
+    }
+
+    private void Start()
+    {
+        GridLayer = LayerMask.GetMask("Grid");
+        DefenseLayer = LayerMask.GetMask("Defense");
+        EnemyLayer = LayerMask.GetMask("Enemy");
     }
 
     private void Update()
@@ -47,7 +54,7 @@ public class InputManager : MonoBehaviour
 
     private void SpawnOnCell(GridCell cell)
     {
-        grid.SpawnDefence(cell);
+        Grid.SpawnDefence(cell);
     }
 
     private T GetObjectOnScene<T>(LayerMask layer) where T : MonoBehaviour
