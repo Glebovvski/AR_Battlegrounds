@@ -7,24 +7,13 @@ using UnityEngine;
 
 namespace Defendable
 {
-    public class LaserTowerDefense : Defense
+    public class LaserTowerDefense : ActiveDefense
     {
-        [SerializeField] private DetectionRadius Detection;
         [SerializeField] private Transform laserStartPos;
         [SerializeField] private Laser laser;
 
-        private float lastShotTime;
-        protected override bool IsReady { get => Time.time - lastShotTime > ReloadTime; set => IsReady = value; }
-
         [SerializeField] LineRenderer laserRenderer;
         private bool isAttacking = false;
-
-        public override void Init(ScriptableDefense so)
-        {
-            base.Init(so);
-            lastShotTime = Time.time;
-            Detection.SetAttackRange(AttackRange);
-        }
 
         private void Update()
         {
@@ -70,7 +59,7 @@ namespace Defendable
 
         private void ResetLaser()
         {
-            if (IsReady) lastShotTime = Time.time;
+            if (IsReady) LastAttackTime = Time.time;
             isAttacking = false;
             laserRenderer.SetPositions(new Vector3[2] { Vector3.zero, Vector3.zero });
         }
