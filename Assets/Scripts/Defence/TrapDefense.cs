@@ -13,7 +13,7 @@ namespace Defendable
         [SerializeField] private Animator animator;
         private float lastShotTime;
 
-        protected override bool IsReady { get => Time.time - lastShotTime > ReloadTime; set => IsReady = value; }
+        protected override bool IsReady { get => Time.time - lastShotTime > ReloadTime; }
 
         private NavMeshSurface surface;
 
