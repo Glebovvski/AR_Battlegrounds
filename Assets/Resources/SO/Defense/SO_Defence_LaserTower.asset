@@ -17,7 +17,7 @@ MonoBehaviour:
   Price: 700
   Health: 25
   IsActiveDefense: 1
-  AttackForce: 100
+  AttackForce: 1
   AttackRange: 20
   ReloadTime: 0
   ProjectileSpeed: 100
