@@ -32,7 +32,7 @@ namespace Defendable
         protected DamageReceiver DamageReceiver;
         public event Action OnDefenseSet;
 
-        public event Action OnDeath;
+        public virtual event Action OnDeath;
 
         public virtual void Init(ScriptableDefense so)
         {

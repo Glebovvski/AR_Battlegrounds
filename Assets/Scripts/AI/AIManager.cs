@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Defendable;
 using UnityEngine;
 using Zenject;
 
@@ -12,6 +13,7 @@ namespace Enemies
         public static AIManager Instance;
 
         private CurrencyModel CurrencyModel { get; set; }
+        private CastleDefense Castle { get; set; }
         public GameGrid Grid { get; private set; }
 
         [SerializeField] private Transform[] spawnPoints;
@@ -21,10 +23,11 @@ namespace Enemies
         [SerializeField] private List<Enemy> Enemies = new List<Enemy>();
 
         [Inject]
-        private void Construct(CurrencyModel currencyModel, GameGrid grid)
+        private void Construct(CurrencyModel currencyModel, GameGrid grid, CastleDefense castle)
         {
             CurrencyModel = currencyModel;
             Grid = grid;
+            Castle = castle;
         }
 
         private void Awake()
@@ -39,6 +42,11 @@ namespace Enemies
             }
 
             DontDestroyOnLoad(gameObject);
+        }
+
+        private void Start()
+        {
+            Castle.OnLose += ReturnAllEnemiesToPool;
         }
 
         public void AddObservation(Observation observation)
@@ -103,7 +111,7 @@ namespace Enemies
             CurrencyModel.AddGold(enemy.GoldToDrop);
         }
 
-        public List<Enemy> GetEnemiesInRangeWithHealthLowerThan(Enemy enemy, float percent) => Enemies.Where(x => (x.Position - enemy.Position).sqrMagnitude < enemy.ScanRange * enemy.ScanRange 
+        public List<Enemy> GetEnemiesInRangeWithHealthLowerThan(Enemy enemy, float percent) => Enemies.Where(x => (x.Position - enemy.Position).sqrMagnitude < enemy.ScanRange * enemy.ScanRange
         && (x.CurrentHealth / x.Health) <= percent)
         .ToList();
 
@@ -124,6 +132,19 @@ namespace Enemies
                 }
             }
             return closest;
+        }
+
+        private void ReturnAllEnemiesToPool()
+        {
+            foreach (var enemy in Enemies)
+            {
+                PoolManager.Instance.ReturnToPool(enemy.GameObject, enemy.Type);
+            }
+        }
+
+        private void OnDestroy()
+        {
+            Castle.OnLose -= ReturnAllEnemiesToPool;
         }
     }
 }

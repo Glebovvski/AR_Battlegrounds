@@ -10,6 +10,8 @@ namespace Defendable
         protected override bool IsReady => true;
 
         public event Action OnLose;
+        public override event Action OnDeath;
+
 
         protected override void ReturnToPool(GameObject fx)
         {

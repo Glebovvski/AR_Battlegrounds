@@ -8,7 +8,7 @@ public class GameTimeModel : IInitializable
     private GameGrid Grid { get; set; }
     private InputManager InputManager { get; set; }
 
-    public bool IsPaused = Time.timeScale == 0;
+    public bool IsPaused = Time.timeScale < 1;
 
     [Inject]
     private void Construct(DefensesModel defensesModel, GameGrid grid, InputManager inputManager)
@@ -20,7 +20,7 @@ public class GameTimeModel : IInitializable
 
     private void Pause()
     {
-        Time.timeScale = 0;
+        Time.timeScale = 0.05f;
     }
 
     private void Resume()
