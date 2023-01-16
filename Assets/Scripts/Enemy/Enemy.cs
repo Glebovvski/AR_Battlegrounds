@@ -80,7 +80,7 @@ namespace Enemies
             PopulateDictionary();
         }
 
-        private void Init()
+        protected virtual void Init()
         {
             GetData();
             DamageReceiver = new DamageReceiver(Health);

@@ -22,7 +22,6 @@ public class HealerScan : ActionBase
             var closestEnemy = Enemies.AIManager.Instance.GetClosest(enemy, enemiesInRange);
             enemy.FollowTarget = closestEnemy;
         }
-        Debug.LogError("HEALER MOVE TO " + enemy.FollowTarget.name);
         enemy.MoveTo(enemy.FollowTarget.Position);
     }
 }

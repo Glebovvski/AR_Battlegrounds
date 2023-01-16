@@ -8,6 +8,13 @@ namespace Enemies
     {
         [SerializeField] private ParticleSystem healFx;
         private bool isHealFxPlaying = false;
+
+        protected override void Init()
+        {
+            base.Init();
+            healFx.gameObject.transform.localScale = new Vector3(AttackRange, 1, AttackRange);
+        }
+
         public void Heal()
         {
             Debug.LogError("HEALER FOLLOW: " + this.FollowTarget.name);
