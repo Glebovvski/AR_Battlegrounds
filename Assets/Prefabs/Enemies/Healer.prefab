@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4157964374149680065}
   - component: {fileID: 3837689221716929163}
+  - component: {fileID: 7030934732679303755}
   - component: {fileID: 77060595961696933}
   - component: {fileID: 913328609120314539}
   - component: {fileID: 3225368283004231948}
@@ -57,6 +58,31 @@ MonoBehaviour:
   fx: {fileID: 3851563886362752215}
   outline: {fileID: 8836951317619487812}
   healFx: {fileID: 3982062925291495786}
+--- !u!114 &7030934732679303755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4157964374149680064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 939582531, guid: 6012f3241c1c1f7409c44769fc0a1db7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aiConfigs:
+  - aiId: 6415ac96-54f2-405f-851d-aa2e3d6b1561
+    intervalMin: 1
+    intervalMax: 1
+    startDelayMin: 0
+    startDelayMax: 0
+    isActive: 1
+  - aiId: ce72fe61-d981-4271-aa01-40c6bbb20512
+    intervalMin: 1
+    intervalMax: 1
+    startDelayMin: 0
+    startDelayMax: 0
+    isActive: 1
 --- !u!95 &77060595961696933
 Animator:
   serializedVersion: 5
