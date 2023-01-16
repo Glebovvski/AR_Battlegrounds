@@ -3316,6 +3316,7 @@ GameObject:
   - component: {fileID: 1253050445}
   - component: {fileID: 1253050446}
   - component: {fileID: 1253050447}
+  - component: {fileID: 1253050448}
   m_Layer: 0
   m_Name: SceneContext
   m_TagString: Untagged
@@ -3355,6 +3356,7 @@ MonoBehaviour:
   - {fileID: 1253050444}
   - {fileID: 1253050445}
   - {fileID: 1253050447}
+  - {fileID: 1253050448}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -3451,6 +3453,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   castlePrefab: {fileID: 1590232634354658162, guid: 9da5711b230035747a1644dc18578fd7,
     type: 3}
+--- !u!114 &1253050448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1253050439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d18d40df10ce4ec99218e8047404d71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1305984231 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2030329169060720167, guid: 00445ded5dfd59649b1e0363b6c822a3,
