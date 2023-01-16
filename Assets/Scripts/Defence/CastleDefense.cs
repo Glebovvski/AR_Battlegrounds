@@ -29,10 +29,5 @@ namespace Defendable
             base.Death();
             OnLose?.Invoke();
         }
-
-        private void Update()
-        {
-            Debug.LogError("HEALTH: " + CurrentHealth);
-        }
     }
 }
