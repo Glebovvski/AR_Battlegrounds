@@ -31,11 +31,11 @@ MonoBehaviour:
     Assembly-CSharp","not":true,"except":MissileLauncher,"ExceptTypeThreshold":0}]},{"@type":"Apex.AI.CompositeAllOrNothingQualifier,
     ApexAI","action":{"@type":"MoveUnderCover, Assembly-CSharp"},"threshold":1,"_scorers":[{"@type":"IsTankInRange,
     Assembly-CSharp","not":false},{"@type":"IsActiveDefensesInSight, Assembly-CSharp","not":false,"except":None,"ExceptTypeThreshold":2}]},{"@type":"Apex.AI.CompositeAllOrNothingQualifier,
-    ApexAI","_scorers":[{"@type":"IsHealerInRange, Assembly-CSharp"},{"@type":"IsHealthBelowAmount,
-    Assembly-CSharp","healthThreshold":0.40000001}]}],"_defaultQualifier":{"@type":"Apex.AI.DefaultQualifier,
+    ApexAI","action":{"@type":"MoveToHealer, Assembly-CSharp"},"_scorers":[{"@type":"IsHealerInRange,
+    Assembly-CSharp"},{"@type":"IsHealthBelowAmount, Assembly-CSharp","healthThreshold":0.40000001}]}],"_defaultQualifier":{"@type":"Apex.AI.DefaultQualifier,
     ApexAI","score":-1}}]}'
   editorConfiguration: '{"offset":{"@x":335,"@y":112},"zoom":1,"SelectorView":{"ViewArea":{"@left":315,"@top":132,"@width":200,"@height":160},"QualifierView":{"Name":"Should
     Move Closer","ActionView":{"@connectorType":"Selector"}},"DefaultQualifier":{"Name":"Move
     To Grid","ActionView":{"@connectorType":"Composite"}}},"SelectorView":{"ViewArea":{"@left":595,"@top":232,"@width":200,"@height":160},"QualifierView":{"ActionView":{"@connectorType":"Composite"}},"DefaultQualifier":{}},"SelectorView":{"ViewArea":{"@left":875,"@top":312,"@width":200,"@height":280},"QualifierView":{"Name":"Straight
     move","ActionView":{}},"QualifierView":{"Name":"Move Behind Cover","ActionView":{}},"QualifierView":{"Name":"Move
-    to healer"},"DefaultQualifier":{}}}'
+    to healer","ActionView":{}},"DefaultQualifier":{}}}'
