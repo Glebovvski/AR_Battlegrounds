@@ -47,6 +47,8 @@ namespace Defendable
             DamageReceiver.OnDeath += Death;
             DamageReceiver.OnTakeDamage += UpdateHealthBar;
             destroyFX.OnFinish += ReturnToPool;
+            destroyFX.gameObject.SetActive(false);
+            defenseMesh.SetActive(true);
         }
 
         private void UpdateHealthBar()
@@ -72,7 +74,7 @@ namespace Defendable
             destroyFX.gameObject.SetActive(true);
         }
 
-        private PoolObjectType DefenseTypeToPoolType(DefenseType type)
+        public PoolObjectType DefenseTypeToPoolType(DefenseType type)
         {
             switch (type)
             {

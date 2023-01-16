@@ -13,9 +13,10 @@ public class LoseViewModel : MonoBehaviour
     [SerializeField] private LoseView view;
 
     [Inject]
-    private void Construct(CastleDefense castle)
+    private void Construct(CastleDefense castle, LoseModel loseModel)
     {
         Castle = castle;
+        LoseModel = loseModel;
     }
 
     private void Start()

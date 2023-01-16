@@ -14,6 +14,7 @@ public class GameGrid : MonoBehaviour
     private CurrencyModel CurrencyModel { get; set; }
     private DefensesModel DefensesModel { get; set; }
     private CastleDefense Castle { get; set; }
+    private LoseModel LoseModel { get; set; }
 
     [SerializeField] private DefensesViewModel defencesViewModel;
 
@@ -43,11 +44,12 @@ public class GameGrid : MonoBehaviour
     public event Action OnGridCreated;
 
     [Inject]
-    private void Construct(CurrencyModel currencyModel, DefensesModel defensesModel, CastleDefense castleDefense)
+    private void Construct(CurrencyModel currencyModel, DefensesModel defensesModel, CastleDefense castleDefense, LoseModel loseModel)
     {
         CurrencyModel = currencyModel;
         DefensesModel = defensesModel;
         Castle = castleDefense;
+        LoseModel = loseModel;
     }
 
     // Start is called before the first frame update
@@ -55,6 +57,7 @@ public class GameGrid : MonoBehaviour
     {
         DefensesModel.OnDefenseSelected += SelectDefence;
         DefensesModel.OnDefenseDeselected += DeselectDefense;
+        LoseModel.OnRestart += RemoveAllDefenses;
 
         CreateGrid();
     }
@@ -179,20 +182,26 @@ public class GameGrid : MonoBehaviour
         return cells;
     }
 
-    private void CreateGrid()
+    public void CreateGrid()
     {
-        grid = new GridCell[width, length];
-        for (int x = 0; x < width; x++)
+        if (grid == null)
         {
-            for (int z = 0; z < length; z++)
+            grid = new GridCell[width, length];
+            for (int x = 0; x < width; x++)
             {
-                grid[x, z] = Instantiate(gridCellPrefab, new Vector3(x * gridSpaceSize, yPos, z * gridSpaceSize), Quaternion.identity, this.transform);
-                grid[x, z].Init(x, z);
-                grid[x, z].gameObject.name = string.Format("Cell {0}:{1}", x, z);
-                grid[x, z].OnFreeCell += RebuildNavMesh;
-                GridList.Add(grid[x, z]);
+                for (int z = 0; z < length; z++)
+                {
+                    grid[x, z] = Instantiate(gridCellPrefab, new Vector3(x * gridSpaceSize, yPos, z * gridSpaceSize), Quaternion.identity, this.transform);
+                    grid[x, z].Init(x, z);
+                    grid[x, z].gameObject.name = string.Format("Cell {0}:{1}", x, z);
+                    grid[x, z].OnFreeCell += RebuildNavMesh;
+                    GridList.Add(grid[x, z]);
+                }
             }
         }
+        else
+            GridList.ForEach(cell => cell.SetHeight(1));
+
         TryChangeHeight();
         SpawnCastleAtCentre();
         RebuildNavMesh();
@@ -269,11 +278,22 @@ public class GameGrid : MonoBehaviour
                 || grid[cell.Pos.x + 1, cell.Pos.y + 1].IsUpper || grid[cell.Pos.x + 1, cell.Pos.y - 1].IsUpper;
     }
 
+    public void RemoveAllDefenses()
+    {
+        foreach (var cell in GridList)
+        {
+            if(cell.IsFree) continue;
+            if (cell.Defence.Type != DefenseType.Castle)
+                PoolManager.Instance.ReturnToPool(cell.Defence.gameObject, cell.Defence.DefenseTypeToPoolType(cell.Defence.Type));
+        }
+    }
+
     private void DeselectAllCells() => GridList.ForEach(x => x.DeselectCell());
 
     private void OnDestroy()
     {
         DefensesModel.OnDefenseSelected -= SelectDefence;
         DefensesModel.OnDefenseDeselected -= DeselectDefense;
+        LoseModel.OnRestart -= RemoveAllDefenses;
     }
 }
