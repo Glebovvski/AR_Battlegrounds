@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Defendable;
@@ -6,16 +7,7 @@ using Zenject;
 
 public class LoseModel : MonoBehaviour
 {
-    private CastleDefense Castle { get; set; }
+    public event Action OnRestart;
 
-    [Inject]
-    private void Construct(CastleDefense castle)
-    {
-        Castle = castle;
-    }
-
-    private void Start()
-    {
-        // Castle.OnDeath +=
-    }
+    public void Restart() => OnRestart?.Invoke();
 }

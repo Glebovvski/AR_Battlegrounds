@@ -8,8 +8,9 @@ using Zenject;
 public class LoseViewModel : MonoBehaviour
 {
     private CastleDefense Castle { get; set; }
+    private LoseModel LoseModel { get; set; }
 
-    [SerializeField] LoseView view;
+    [SerializeField] private LoseView view;
 
     [Inject]
     private void Construct(CastleDefense castle)
@@ -20,11 +21,18 @@ public class LoseViewModel : MonoBehaviour
     private void Start()
     {
         Castle.OnDeath += ShowLoseView;
+        view.OnTryAgainClick += TryAgain;
     }
 
     private void ShowLoseView()
     {
         view.gameObject.SetActive(true);
+    }
+
+    public void TryAgain()
+    {
+        LoseModel.Restart();
+        view.gameObject.SetActive(false);
     }
 
     private void OnDestroy()
