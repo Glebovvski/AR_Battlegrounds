@@ -102,6 +102,6 @@ public class TargetScore
         return score;
     }
 
-    private int IsHealthLowScore() => Observation.Defense.CurrentHealth < Observation.Defense.Health / 2f ? 100 : 0;
+    private int IsHealthLowScore() => Observation.Defense.CurrentHealth/ Observation.Defense.Health <= 0.3f ? 100 : 0;
 
 }

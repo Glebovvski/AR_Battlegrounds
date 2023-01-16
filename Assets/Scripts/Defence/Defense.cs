@@ -10,7 +10,7 @@ namespace Defendable
     {
         [SerializeField] private CFXR_Effect destroyFX;
         [SerializeField] private GameObject defenseMesh;
-        [SerializeField] private HealthBarController healthBarController;
+        [SerializeField] protected HealthBarController healthBarController;
 
         [field: SerializeField] public ScriptableDefense SO { get; set; }
 
@@ -51,7 +51,7 @@ namespace Defendable
             defenseMesh.SetActive(true);
         }
 
-        private void UpdateHealthBar()
+        protected void UpdateHealthBar()
         {
             healthBarController.UpdateHealth(CurrentHealth / Health);
         }

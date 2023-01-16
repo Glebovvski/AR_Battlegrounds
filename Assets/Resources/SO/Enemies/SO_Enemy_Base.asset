@@ -17,7 +17,7 @@ MonoBehaviour:
   GoldToDrop: 1
   Speed: 3
   ScanRange: 25
-  AttackRange: 2
+  AttackRange: 0.5
   AttackRadius: 0
   TimeBetweenAttacks: 1.5
   AttackWallScore: 5

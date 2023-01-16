@@ -12,6 +12,11 @@ namespace Defendable
         public event Action OnLose;
         public override event Action OnDeath;
 
+        public override void Init(ScriptableDefense so)
+        {
+            base.Init(so);
+            UpdateHealthBar();
+        }
 
         protected override void ReturnToPool(GameObject fx)
         {
@@ -23,6 +28,11 @@ namespace Defendable
         {
             base.Death();
             OnLose?.Invoke();
+        }
+
+        private void Update()
+        {
+            Debug.LogError("HEALTH: " + CurrentHealth);
         }
     }
 }

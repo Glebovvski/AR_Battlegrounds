@@ -15,11 +15,11 @@ MonoBehaviour:
   Name: Castle
   Image: {fileID: 0}
   Price: 0
-  Health: 50
-  IsActiveDefence: 0
+  Health: 500
+  IsActiveDefense: 0
   AttackForce: 0
   AttackRange: 0
-  RelaodTime: 0
+  ReloadTime: 0
   ProjectileSpeed: 0
   Size: {x: 2, y: 2}
   Condition: 0
