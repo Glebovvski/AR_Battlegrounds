@@ -82,9 +82,9 @@ namespace Enemies
 
         private void Init()
         {
-            Context = new AIContext(this);
             GetData();
             DamageReceiver = new DamageReceiver(Health);
+            Context = new AIContext(this);
             animationController = new AnimationController(animator, navMeshAgent, DamageReceiver);
             DamageReceiver.OnDeath += Death;
             NavMeshAgent.enabled = true;

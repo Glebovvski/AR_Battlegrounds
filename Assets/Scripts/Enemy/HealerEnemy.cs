@@ -29,6 +29,7 @@ namespace Enemies
             base.StartAttack(out isReady);
             if (isReady)
                 Heal();
+            else Debug.LogError("HEALER NOT READY");
         }
 
         public void HealFX()
