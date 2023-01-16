@@ -31,7 +31,8 @@ MonoBehaviour:
     Assembly-CSharp","not":true,"except":MissileLauncher,"ExceptTypeThreshold":0}]},{"@type":"Apex.AI.CompositeAllOrNothingQualifier,
     ApexAI","action":{"@type":"MoveUnderCover, Assembly-CSharp"},"threshold":1,"_scorers":[{"@type":"IsTankInRange,
     Assembly-CSharp","not":false},{"@type":"IsActiveDefensesInSight, Assembly-CSharp","not":false,"except":None,"ExceptTypeThreshold":2}]},{"@type":"Apex.AI.CompositeAllOrNothingQualifier,
-    ApexAI","_scorers":[{"@type":"IsHealerInRange, Assembly-CSharp"}]}],"_defaultQualifier":{"@type":"Apex.AI.DefaultQualifier,
+    ApexAI","_scorers":[{"@type":"IsHealerInRange, Assembly-CSharp"},{"@type":"IsHealthBelowAmount,
+    Assembly-CSharp","healthThreshold":0.40000001}]}],"_defaultQualifier":{"@type":"Apex.AI.DefaultQualifier,
     ApexAI","score":-1}}]}'
   editorConfiguration: '{"offset":{"@x":335,"@y":112},"zoom":1,"SelectorView":{"ViewArea":{"@left":315,"@top":132,"@width":200,"@height":160},"QualifierView":{"Name":"Should
     Move Closer","ActionView":{"@connectorType":"Selector"}},"DefaultQualifier":{"Name":"Move
