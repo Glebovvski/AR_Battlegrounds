@@ -49,6 +49,7 @@ namespace Defendable
             destroyFX.OnFinish += ReturnToPool;
             destroyFX.gameObject.SetActive(false);
             defenseMesh.SetActive(true);
+            healthBarController.UpdateHealth(1, false);
         }
 
         protected void UpdateHealthBar()

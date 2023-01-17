@@ -128,7 +128,7 @@ namespace Enemies
         }
 
         public List<Enemy> GetEnemiesInRangeWithHealthLowerThan(Enemy enemy, float percent) => Enemies.Where(x => (x.Position - enemy.Position).sqrMagnitude < enemy.ScanRange * enemy.ScanRange
-        && (x.CurrentHealth / x.Health) <= percent)
+        && (x.CurrentHealth / x.Health) <= percent && x.CurrentHealth > 0)
         .ToList();
 
         public Enemy GetClosest(Enemy enemy, List<Enemy> selectedEnemies) => selectedEnemies.OrderBy(x => (x.Position - enemy.Position).sqrMagnitude).FirstOrDefault();

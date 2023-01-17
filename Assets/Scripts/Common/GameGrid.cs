@@ -36,7 +36,7 @@ public class GameGrid : MonoBehaviour
 
     private List<List<GridCell>> pairCells = new List<List<GridCell>>();
 
-    public ScriptableDefense SelectedDefence { get; private set; }
+    public ScriptableDefense SelectedDefense { get; private set; }
 
     public Vector3 Centre => this.transform.position + new Vector3(width / 2f, 0, length / 2f);
     public Vector3 Position => this.transform.position;
@@ -101,7 +101,7 @@ public class GameGrid : MonoBehaviour
 
     public void SelectDefence(ScriptableDefense info)
     {
-        SelectedDefence = info;
+        SelectedDefense = info;
         DeselectAllCells();
         if (info.Size == Vector2.one)
         {
@@ -114,7 +114,6 @@ public class GameGrid : MonoBehaviour
             pairCells = new List<List<GridCell>>();
             foreach (var pair in pairs)
             {
-                // pair = pair.FindAll(defenseInfo.GetCondition()).ToList();
                 if (pair.All(ConditionsData.IsEmptyCell))
                     pairCells.Add(pair);
             }
@@ -131,15 +130,15 @@ public class GameGrid : MonoBehaviour
     public void DeselectDefense()
     {
         DeselectAllCells();
-        SelectedDefence = null;
+        SelectedDefense = null;
     }
 
     public void SpawnDefence(GridCell cell)
     {
-        if (SelectedDefence == null) return;
+        if (SelectedDefense == null) return;
 
-        var defence = PoolManager.Instance.GetFromPool<Defense>(SelectedDefence.PoolType);
-        defence.Init(DefensesModel.List.Where(x => x.PoolType == SelectedDefence.PoolType).FirstOrDefault());
+        var defence = PoolManager.Instance.GetFromPool<Defense>(SelectedDefense.PoolType);
+        defence.Init(SelectedDefense);//DefensesModel.List.Where(x => x.PoolType == SelectedDefence.PoolType).FirstOrDefault());
         defence.transform.SetParent(plane.transform);
         if (defence.GetSize() == Vector2Int.one)
         {
@@ -155,11 +154,9 @@ public class GameGrid : MonoBehaviour
             defence.transform.position = GetWorldPositionFromGrid(centre, selectedPair[0].Height);
             selectedPair.ForEach(x => x.SetDefence(defence));
         }
-        CurrencyModel.Buy(SelectedDefence.Price);
-        if (CurrencyModel.Gold >= SelectedDefence.Price)
-            SelectDefence(SelectedDefence);
-        // if (!cell.IsUpper)
-        //     RebuildNavMesh();
+        CurrencyModel.Buy(SelectedDefense.Price);
+        if (CurrencyModel.Gold >= SelectedDefense.Price)
+            SelectDefence(SelectedDefense);
     }
 
     private List<List<GridCell>> GetCellGroupsBySize(Vector2Int size)
@@ -254,7 +251,7 @@ public class GameGrid : MonoBehaviour
             {
                 if (!centreCells.Contains(cell))
                 {
-                    SelectedDefence = DefensesModel.List.Where(x => x.PoolType == PoolObjectType.WallTower).FirstOrDefault();
+                    SelectedDefense = DefensesModel.List.Where(x => x.PoolType == PoolObjectType.WallTower).FirstOrDefault();
                     SpawnDefence(cell);
                 }
                 continue;

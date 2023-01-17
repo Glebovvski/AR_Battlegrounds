@@ -15,7 +15,6 @@ public class GetBestAttackTarget : ActionBase
     {
         var c = (AIContext)context;
         var enemy = c.Enemy;
-        c.Enemy.NavMeshAgent.enabled = true;
 
         Observation attackTarget = null;
 

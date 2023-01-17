@@ -20,9 +20,9 @@ public class HealthBarController : MonoBehaviour
         this.transform.LookAt(Camera.main.transform);
     }
 
-    public void UpdateHealth(float health)
+    public void UpdateHealth(float health, bool shouldShow = true)
     {
-        if (!isAlwaysActive) healthBar.gameObject.SetActive(true);
+        if (!isAlwaysActive && shouldShow) healthBar.gameObject.SetActive(true);
         healthBar.fillAmount = health;
     }
 }
