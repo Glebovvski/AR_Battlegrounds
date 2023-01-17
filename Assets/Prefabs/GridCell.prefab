@@ -244,8 +244,37 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 2778112910930920202, guid: 76600f1ee3be7ab41874fdbbac5ddc1f, type: 3}
+    - target: {fileID: 8278875148468709024, guid: 76600f1ee3be7ab41874fdbbac5ddc1f,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8278875148468709024, guid: 76600f1ee3be7ab41874fdbbac5ddc1f,
+        type: 3}
+      propertyPath: m_MotionVectors
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8278875148468709024, guid: 76600f1ee3be7ab41874fdbbac5ddc1f,
+        type: 3}
+      propertyPath: m_ReceiveShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8278875148468709024, guid: 76600f1ee3be7ab41874fdbbac5ddc1f,
+        type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8278875148468709024, guid: 76600f1ee3be7ab41874fdbbac5ddc1f,
+        type: 3}
+      propertyPath: m_LightProbeUsage
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8278875148468709024, guid: 76600f1ee3be7ab41874fdbbac5ddc1f,
+        type: 3}
+      propertyPath: m_ReflectionProbeUsage
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 76600f1ee3be7ab41874fdbbac5ddc1f, type: 3}
 --- !u!1 &687798207804888661 stripped
 GameObject:
@@ -336,6 +365,36 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4310614304489658, guid: 5cbae0602ce9acf41a98fda3a353569a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23171872687087456, guid: 5cbae0602ce9acf41a98fda3a353569a,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23171872687087456, guid: 5cbae0602ce9acf41a98fda3a353569a,
+        type: 3}
+      propertyPath: m_MotionVectors
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 23171872687087456, guid: 5cbae0602ce9acf41a98fda3a353569a,
+        type: 3}
+      propertyPath: m_ReceiveShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23171872687087456, guid: 5cbae0602ce9acf41a98fda3a353569a,
+        type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23171872687087456, guid: 5cbae0602ce9acf41a98fda3a353569a,
+        type: 3}
+      propertyPath: m_LightProbeUsage
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23171872687087456, guid: 5cbae0602ce9acf41a98fda3a353569a,
+        type: 3}
+      propertyPath: m_ReflectionProbeUsage
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 33740650818424486, guid: 5cbae0602ce9acf41a98fda3a353569a,
