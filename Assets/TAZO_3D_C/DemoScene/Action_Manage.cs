@@ -14,7 +14,7 @@ public class Action_Manage : MonoBehaviour {
 	
 	}
 	void ClearAllBool(){
-		myAnimator.SetBool ("defy", false);
+		myAnimator.SetBool ("inspire", false);
 		myAnimator.SetBool ("idle",  false);
 		myAnimator.SetBool ("dizzy", false);
 		myAnimator.SetBool ("walk", false);
@@ -26,7 +26,11 @@ public class Action_Manage : MonoBehaviour {
 		myAnimator.SetBool ("attack_01", false);
 		myAnimator.SetBool ("attack_03", false);
 		myAnimator.SetBool ("attack_02", false);
+		myAnimator.SetBool ("attack_04", false);
+		myAnimator.SetBool ("attack_05", false);
 		myAnimator.SetBool ("damage", false);
+		myAnimator.SetBool ("down", false);
+		myAnimator.SetBool ("up", false);
 	}
 	public void Pressed_damage(){
 		ClearAllBool();
@@ -36,9 +40,9 @@ public class Action_Manage : MonoBehaviour {
 		ClearAllBool();
 		myAnimator.SetBool ("idle", true);
 	}
-	public void Pressed_defy(){
+	public void Pressed_inspire(){
 		ClearAllBool();
-		myAnimator.SetBool ("defy", true);
+		myAnimator.SetBool ("inspire", true);
 	}
 	public void Pressed_dizzy(){
 		ClearAllBool();
@@ -79,5 +83,21 @@ public class Action_Manage : MonoBehaviour {
 	public void Pressed_attack_03(){
 		ClearAllBool();
 		myAnimator.SetBool ("attack_03", true);
+	}
+	public void Pressed_attack_04(){
+		ClearAllBool();
+		myAnimator.SetBool ("attack_04", true);
+	}
+	public void Pressed_attack_05(){
+		ClearAllBool();
+		myAnimator.SetBool ("attack_05", true);
+	}
+	public void Pressed_up(){
+		ClearAllBool();
+		myAnimator.SetBool ("up", true);
+	}
+	public void Pressed_down(){
+		ClearAllBool();
+		myAnimator.SetBool ("down", true);
 	}
 }

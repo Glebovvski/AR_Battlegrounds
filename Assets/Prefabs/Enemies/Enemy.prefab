@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 497068949028825285}
   - component: {fileID: 1268749569857544637}
   - component: {fileID: 1676730273298610360}
-  - component: {fileID: 1422560749250579817}
   m_Layer: 9
   m_Name: Enemy
   m_TagString: Untagged
@@ -136,27 +135,6 @@ MonoBehaviour:
     startDelayMin: 0
     startDelayMax: 0
     isActive: 1
-  - aiId: fec13c95-8eac-47d6-9475-bca0b4de0018
-    intervalMin: 1
-    intervalMax: 10
-    startDelayMin: 0
-    startDelayMax: 0
-    isActive: 0
---- !u!114 &1422560749250579817
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 497068949028825284}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_EffectColor: {r: 1, g: 0, b: 0, a: 0.99607843}
-  m_EffectDistance: {x: 1, y: -1}
-  m_UseGraphicAlpha: 1
 --- !u!1001 &1023234597623140352
 PrefabInstance:
   m_ObjectHideFlags: 0

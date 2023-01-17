@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 77060595961696933}
   - component: {fileID: 913328609120314539}
   - component: {fileID: 3225368283004231948}
-  - component: {fileID: 7458834448377187364}
   m_Layer: 9
   m_Name: Healer
   m_TagString: Untagged
@@ -138,21 +137,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1.39922, z: 1}
   m_Center: {x: 0, y: 0.7053616, z: 0}
---- !u!114 &7458834448377187364
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4157964374149680064}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_EffectColor: {r: 1, g: 0, b: 0, a: 0.99607843}
-  m_EffectDistance: {x: 1, y: -1}
-  m_UseGraphicAlpha: 1
 --- !u!1001 &3811703267125906569
 PrefabInstance:
   m_ObjectHideFlags: 0
