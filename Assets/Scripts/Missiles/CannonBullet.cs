@@ -11,7 +11,6 @@ namespace Missiles
             if(!IsFromPool) return;
 
             PoolManager.Instance.ReturnToPool(this.gameObject, PoolObjectType.CannonBullet);
-            Debug.LogError("RETURN TO POOL");
         }
     }
 }

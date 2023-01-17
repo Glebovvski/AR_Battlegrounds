@@ -87,7 +87,7 @@ public class InputManager : MonoBehaviour
     private T GetObjectOnScene<T>(LayerMask layer) where T : MonoBehaviour
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out var raycastHit, layer))
+        if (Physics.Raycast(ray, out var raycastHit, 1000f, layer))
         {
             return raycastHit.transform.GetComponent<T>();
         }
