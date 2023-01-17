@@ -54,7 +54,7 @@ MonoBehaviour:
   navMeshAgent: {fileID: 7875034080553232178}
   animator: {fileID: 2144508340}
   fx: {fileID: 1184299580648212560}
-  outline: {fileID: 1547750768220479170}
+  outline: {fileID: 1846276493}
 --- !u!114 &683039605362336157
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -85,8 +85,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 2.5931587, y: 2.3063421, z: 2.3331203}
+  m_Center: {x: -0.07849312, y: 2.5696287, z: 0.070204735}
 --- !u!195 &7875034080553232178
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -196,7 +196,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 95766226996078928, guid: 92ea0fdec1e3d2b4082219a3842bfe5b, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 92ea0fdec1e3d2b4082219a3842bfe5b, type: 3}
 --- !u!1 &1501352356539133 stripped
 GameObject:
@@ -204,7 +205,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 858350705}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1547750768220479170
+--- !u!114 &1846276493
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

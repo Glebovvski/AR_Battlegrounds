@@ -719,7 +719,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 581853323}
   m_Direction: 0
   m_Value: 0
-  m_Size: 0
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -4508,9 +4508,9 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2144508340, guid: b8d098908aa552f4899c294aecff83ec, type: 3}
-      propertyPath: m_Controller
+      propertyPath: m_Avatar
       value: 
-      objectReference: {fileID: 9100000, guid: b77d61a41517bde43b8f7dd3c18e8ded, type: 2}
+      objectReference: {fileID: 9000000, guid: 85a2874592b04e145be6efe4b2931317, type: 3}
     - target: {fileID: 497068949028825281, guid: b8d098908aa552f4899c294aecff83ec,
         type: 3}
       propertyPath: m_RootOrder
@@ -4566,69 +4566,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 497068949028825282, guid: b8d098908aa552f4899c294aecff83ec,
-        type: 3}
-      propertyPath: m_Size.x
-      value: 2.5931587
-      objectReference: {fileID: 0}
-    - target: {fileID: 497068949028825282, guid: b8d098908aa552f4899c294aecff83ec,
-        type: 3}
-      propertyPath: m_Size.y
-      value: 2.3063421
-      objectReference: {fileID: 0}
-    - target: {fileID: 497068949028825282, guid: b8d098908aa552f4899c294aecff83ec,
-        type: 3}
-      propertyPath: m_Size.z
-      value: 2.3331203
-      objectReference: {fileID: 0}
-    - target: {fileID: 497068949028825282, guid: b8d098908aa552f4899c294aecff83ec,
-        type: 3}
-      propertyPath: m_Center.x
-      value: -0.07849312
-      objectReference: {fileID: 0}
-    - target: {fileID: 497068949028825282, guid: b8d098908aa552f4899c294aecff83ec,
-        type: 3}
-      propertyPath: m_Center.y
-      value: 2.5696287
-      objectReference: {fileID: 0}
-    - target: {fileID: 497068949028825282, guid: b8d098908aa552f4899c294aecff83ec,
-        type: 3}
-      propertyPath: m_Center.z
-      value: 0.070204735
-      objectReference: {fileID: 0}
     - target: {fileID: 497068949028825284, guid: b8d098908aa552f4899c294aecff83ec,
         type: 3}
       propertyPath: m_Name
       value: SpyEnemy
       objectReference: {fileID: 0}
-    - target: {fileID: 1391045341283484148, guid: b8d098908aa552f4899c294aecff83ec,
-        type: 3}
-      propertyPath: outline
-      value: 
-      objectReference: {fileID: 1846276493}
-    m_RemovedComponents:
-    - {fileID: 95766227820858657, guid: b8d098908aa552f4899c294aecff83ec, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b8d098908aa552f4899c294aecff83ec, type: 3}
---- !u!1 &1846276491 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1501352356539133, guid: b8d098908aa552f4899c294aecff83ec,
-    type: 3}
-  m_PrefabInstance: {fileID: 1846276490}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1846276493
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1846276491}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  color: 0
-  eraseRenderer: 0
 --- !u!1 &1856635384
 GameObject:
   m_ObjectHideFlags: 0
