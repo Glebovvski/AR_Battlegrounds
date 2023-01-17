@@ -3737,7 +3737,7 @@ GameObject:
   - component: {fileID: 1314439501}
   - component: {fileID: 1314439502}
   m_Layer: 12
-  m_Name: poolCollider
+  m_Name: MissileCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
