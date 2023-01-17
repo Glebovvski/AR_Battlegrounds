@@ -47,6 +47,19 @@ namespace Enemies
         private void Start()
         {
             Castle.OnLose += ReturnAllEnemiesToPool;
+
+            TestSpawn();
+        }
+
+        private void TestSpawn()
+        {
+            var bull = RegisterEnemy<BullEnemy>(PoolObjectType.BullEnemy, spawnPoints[0]);
+            var goblin = RegisterEnemy<KamikazeEnemy>(PoolObjectType.KamikazeEnemy,spawnPoints[3]);
+            var healer = RegisterEnemy<HealerEnemy>(PoolObjectType.HealerEnemy, spawnPoints[2]);
+            for(int i = 0; i< 8;i++)
+            {
+                var BaseEnemy = RegisterEnemy<BaseEnemy>(PoolObjectType.Enemy, spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Length - 1)]);
+            }
         }
 
         public void AddObservation(Observation observation)
@@ -88,9 +101,11 @@ namespace Enemies
 
         public List<Observation> GetActiveDefenses(DefenseType except = DefenseType.None) => Observations.Where(x => x.Defense.IsActiveDefense && x.Defense.Type != except).ToList();
 
-        public T RegisterEnemy<T>(PoolObjectType enemyType) where T : Enemy
+        public T RegisterEnemy<T>(PoolObjectType enemyType, Transform parent) where T : Enemy
         {
             var enemy = PoolManager.Instance.GetFromPool<T>(enemyType);
+            enemy.transform.SetParent(parent);
+            enemy.transform.position = parent.position;
             enemy.OnDeath += GetGoldFromEnemy;
             Enemies.Add(enemy);
             return enemy;

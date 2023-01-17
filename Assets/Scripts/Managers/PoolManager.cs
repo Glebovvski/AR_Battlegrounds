@@ -4,9 +4,12 @@ using System.Collections.Generic;
 using System.Linq;
 using Missiles;
 using UnityEngine;
+using Zenject;
 
 public class PoolManager : MonoBehaviour
 {
+    private DiContainer Container { get; set; }
+
     public static PoolManager Instance { get; private set; }
 
     private Dictionary<PoolObjectType, Type> TypeDictionary = new Dictionary<PoolObjectType, Type>();
@@ -14,6 +17,12 @@ public class PoolManager : MonoBehaviour
     [SerializeField] private List<PoolInfo> poolList;
     [SerializeField] public List<PoolInfo> decorList;
     [SerializeField] private Type type;
+
+    [Inject]
+    private void Construct(DiContainer container)
+    {
+        Container = container;
+    }
 
     private void Awake()
     {
@@ -42,7 +51,7 @@ public class PoolManager : MonoBehaviour
         {
             FillPool(poolList[i]);
         }
-         for (int i = 0; i < decorList.Count; i++)
+        for (int i = 0; i < decorList.Count; i++)
         {
             FillPool(decorList[i]);
         }
@@ -53,7 +62,7 @@ public class PoolManager : MonoBehaviour
         for (int i = 0; i < info.amount; i++)
         {
             GameObject go = null;
-            go = Instantiate(info.prefab, this.transform);
+            go = Container.InstantiatePrefab(info.prefab, this.transform);// Instantiate(;
             go.SetActive(false);
             info.pool.Add(go);
         }
