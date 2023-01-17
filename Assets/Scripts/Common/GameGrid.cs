@@ -282,9 +282,12 @@ public class GameGrid : MonoBehaviour
     {
         foreach (var cell in GridList)
         {
-            if(cell.IsFree) continue;
+            if (cell.IsFree) continue;
             if (cell.Defence.Type != DefenseType.Castle)
+            {
                 PoolManager.Instance.ReturnToPool(cell.Defence.gameObject, cell.Defence.DefenseTypeToPoolType(cell.Defence.Type));
+                cell.FreeCell();
+            }
         }
     }
 

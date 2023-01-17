@@ -55,7 +55,7 @@ public class GridCell : MonoBehaviour
     public void BuildNavMesh() => surface.BuildNavMesh();
 
     internal void DeselectCell() => quadRenderer.material.color = defaultCellColor;
-    private void FreeCell()
+    public void FreeCell()
     {
         Defence.OnDeath -= FreeCell;
         Defence = null;
