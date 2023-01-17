@@ -15,6 +15,7 @@ namespace Enemies
         private CurrencyModel CurrencyModel { get; set; }
         private CastleDefense Castle { get; set; }
         public GameGrid Grid { get; private set; }
+        private LoseModel LoseModel { get; set; }
 
         [SerializeField] private Transform[] spawnPoints;
         [SerializeField] private Transform plane;
@@ -24,11 +25,12 @@ namespace Enemies
         [SerializeField] private List<Enemy> Enemies = new List<Enemy>();
 
         [Inject]
-        private void Construct(CurrencyModel currencyModel, GameGrid grid, CastleDefense castle)
+        private void Construct(CurrencyModel currencyModel, GameGrid grid, CastleDefense castle, LoseModel loseModel)
         {
             CurrencyModel = currencyModel;
             Grid = grid;
             Castle = castle;
+            LoseModel = loseModel;
         }
 
         private void Awake()
@@ -48,6 +50,7 @@ namespace Enemies
         private void Start()
         {
             Castle.OnLose += ReturnAllEnemiesToPool;
+            LoseModel.OnRestart += TestSpawn;
 
             TestSpawn();
         }
@@ -55,9 +58,9 @@ namespace Enemies
         private void TestSpawn()
         {
             var bull = RegisterEnemy<BullEnemy>(PoolObjectType.BullEnemy, spawnPoints[0]);
-            var goblin = RegisterEnemy<KamikazeEnemy>(PoolObjectType.KamikazeEnemy,spawnPoints[3]);
+            var goblin = RegisterEnemy<KamikazeEnemy>(PoolObjectType.KamikazeEnemy, spawnPoints[3]);
             var healer = RegisterEnemy<HealerEnemy>(PoolObjectType.HealerEnemy, spawnPoints[2]);
-            for(int i = 0; i< 8;i++)
+            for (int i = 0; i < 8; i++)
             {
                 var BaseEnemy = RegisterEnemy<BaseEnemy>(PoolObjectType.Enemy, spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Length - 1)]);
             }
@@ -161,6 +164,7 @@ namespace Enemies
         private void OnDestroy()
         {
             Castle.OnLose -= ReturnAllEnemiesToPool;
+            LoseModel.OnRestart -= TestSpawn;
         }
     }
 }
