@@ -17,6 +17,7 @@ namespace Enemies
         public GameGrid Grid { get; private set; }
 
         [SerializeField] private Transform[] spawnPoints;
+        [SerializeField] private Transform plane;
 
 
         public List<Observation> Observations = new List<Observation>();
@@ -104,7 +105,7 @@ namespace Enemies
         public T RegisterEnemy<T>(PoolObjectType enemyType, Transform parent) where T : Enemy
         {
             var enemy = PoolManager.Instance.GetFromPool<T>(enemyType);
-            enemy.transform.SetParent(parent);
+            enemy.transform.SetParent(plane);
             enemy.transform.position = parent.position;
             enemy.OnDeath += GetGoldFromEnemy;
             Enemies.Add(enemy);
