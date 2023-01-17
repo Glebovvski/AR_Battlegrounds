@@ -12,12 +12,6 @@ namespace Defendable
         public event Action OnLose;
         public override event Action OnDeath;
 
-        public override void Init(ScriptableDefense so)
-        {
-            base.Init(so);
-            UpdateHealthBar();
-        }
-
         protected override void ReturnToPool(GameObject fx)
         {
             DamageReceiver.OnDeath -= OnDeath;
