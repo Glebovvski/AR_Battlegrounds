@@ -25,5 +25,5 @@ MonoBehaviour:
   AttackLaserScore: 20
   AttackCastleScore: 50
   AttackTrapScore: 10
-  EnemyType: 0
+  EnemyType: 2
   Type: 203

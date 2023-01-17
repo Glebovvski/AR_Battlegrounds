@@ -22,5 +22,5 @@ public class MoveUnderCover : ActionBase
         }
     }
 
-    private bool IsGoingSameWay(Enemy tank, Enemy enemy) => Vector3.Dot(tank.transform.forward, enemy.transform.forward) > 0f;
+    private bool IsGoingSameWay(Enemy tank, Enemy enemy) => Vector3.Dot(tank.transform.forward, enemy.transform.forward) >= 0f;
 }
