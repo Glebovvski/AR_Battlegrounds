@@ -11,6 +11,7 @@ namespace Enemies
             base.StartAttack(out isReady);
             if (isReady)
                 animationController.Attack();
+            else Debug.LogError("BULL NOT READY");
         }
 
         public void Attack()

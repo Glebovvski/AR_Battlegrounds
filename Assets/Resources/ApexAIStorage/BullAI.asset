@@ -28,7 +28,7 @@ MonoBehaviour:
     ApexAI"}},{"@type":"Apex.AI.ScoreSelector, ApexAI","_id":e8b3374bb556448c9128fa393271773e,"_qualifiers":[{"@type":"Apex.AI.FixedScoreQualifier,
     ApexAI","action":{"@type":"MoveToTarget, Assembly-CSharp"}}],"_defaultQualifier":{"@type":"Apex.AI.DefaultQualifier,
     ApexAI","score":0}}]}'
-  editorConfiguration: '{"offset":{"@x":94,"@y":15},"zoom":1,"SelectorView":{"ViewArea":{"@left":254,"@top":195,"@width":200,"@height":160},"QualifierView":{"Name":"Should
+  editorConfiguration: '{"offset":{"@x":-237,"@y":-50},"zoom":1,"SelectorView":{"ViewArea":{"@left":-77,"@top":130,"@width":200,"@height":160},"QualifierView":{"Name":"Should
     Move Closer","ActionView":{"@connectorType":"Selector"}},"DefaultQualifier":{"Name":"Move
-    To Grid","ActionView":{"@connectorType":"Composite"}}},"SelectorView":{"ViewArea":{"@left":534,"@top":275,"@width":200,"@height":160},"QualifierView":{"ActionView":{"@connectorType":"Composite"}},"DefaultQualifier":{}},"SelectorView":{"ViewArea":{"@left":834,"@top":335,"@width":200,"@height":160},"QualifierView":{"Name":"Straight
+    To Grid","ActionView":{"@connectorType":"Composite"}}},"SelectorView":{"ViewArea":{"@left":203,"@top":210,"@width":200,"@height":160},"QualifierView":{"ActionView":{"@connectorType":"Composite"}},"DefaultQualifier":{}},"SelectorView":{"ViewArea":{"@left":503,"@top":270,"@width":200,"@height":160},"QualifierView":{"Name":"Straight
     move","ActionView":{}},"DefaultQualifier":{}}}'

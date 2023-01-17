@@ -254,7 +254,7 @@ NavMeshAgent:
   m_Acceleration: 1
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 1
+  m_StoppingDistance: 2
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -289,6 +289,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aiConfigs:
   - aiId: ba617324-be08-4f7f-924d-7597bbf3ad42
+    intervalMin: 1
+    intervalMax: 1
+    startDelayMin: 0
+    startDelayMax: 0
+    isActive: 1
+  - aiId: f8302355-e2b6-4b15-8f31-cdb656017bf3
     intervalMin: 1
     intervalMax: 1
     startDelayMin: 0
