@@ -32,7 +32,7 @@ namespace Enemies
 
             foreach (var defense in defensesInRange)
             {
-                defense.TakeDamage(AttackForce);
+                defense.TakeDamage(AttackForce * Time.deltaTime);
             }
         }
 
