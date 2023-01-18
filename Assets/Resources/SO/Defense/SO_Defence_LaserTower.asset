@@ -19,7 +19,7 @@ MonoBehaviour:
   IsActiveDefense: 1
   AttackForce: 1
   AttackRange: 20
-  ReloadTime: 0
+  ReloadTime: 10
   ProjectileSpeed: 100
   Size: {x: 2, y: 2}
   Condition: 0

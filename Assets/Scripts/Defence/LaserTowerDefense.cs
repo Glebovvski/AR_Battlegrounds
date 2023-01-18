@@ -14,24 +14,22 @@ namespace Defendable
 
         [SerializeField] LineRenderer laserRenderer;
         private bool isAttacking = false;
+        private Enemy enemyToAttack;
+
+        private bool CanAttack => IsReady && Detection.Enemy != null;
+        private bool IsAttackTargetChanged => enemyToAttack != Detection.Enemy && enemyToAttack && Detection.Enemy;
 
         private void Update()
         {
-            if (!IsReady || Detection.Enemy == null)
-            {
-                ResetLaser();
-                return;
-            }
-
-            if (!isAttacking)
+            if (!isAttacking && CanAttack)
                 Attack();
         }
 
         public void Attack()
         {
             isAttacking = true;
-            var enemy = Detection.Enemy;
-            StartCoroutine(LaserShot(enemy));
+            enemyToAttack = Detection.Enemy;
+            StartCoroutine(LaserShot(enemyToAttack));
         }
 
         IEnumerator LaserShot(Enemy enemy)
@@ -50,7 +48,6 @@ namespace Defendable
 
             while (enemy.IsAlive && Detection.IsEnemyInRange(enemy))
             {
-                Debug.LogError("LASER SHOOT");
                 UpdateLaser(enemy);
                 yield return new WaitForFixedUpdate();
             }
@@ -61,14 +58,15 @@ namespace Defendable
         {
             if (IsReady) LastAttackTime = Time.time;
             isAttacking = false;
-            laserRenderer.SetPositions(new Vector3[2] { Vector3.zero, Vector3.zero });
+            laserRenderer.SetPositions(new Vector3[2] { laserStartPos.position, laserStartPos.position });
         }
 
         private void UpdateLaser(Enemy enemy)
         {
             laserRenderer.SetPosition(0, laserStartPos.position);
             laserRenderer.SetPosition(1, enemy.transform.position);
-            enemy.TakeDamage(laser.Damage / Time.deltaTime);
+            var Damage = laser.Damage * Time.deltaTime;
+            enemy.TakeDamage(Damage);
         }
     }
 }
