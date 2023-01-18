@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SO_Defence_Cannon
   m_EditorClassIdentifier: 
   Name: Cannon
-  Image: {fileID: 0}
+  Image: {fileID: 21300000, guid: 8be37592c501e7d47908ec7cfcb2b789, type: 3}
   Price: 250
   Health: 25
   IsActiveDefense: 1

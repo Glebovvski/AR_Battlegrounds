@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class ScriptableDefense : ScriptableObject
 {
     public string Name;
-    public Image Image;
+    public Sprite Image;
     public int Price;
 
     // [Space(10)]

@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: SO_Defence_Wall
   m_EditorClassIdentifier: 
   Name: Wall
-  Image: {fileID: 0}
+  Image: {fileID: 21300000, guid: 4578f3ab370dd67488583826fbeba522, type: 3}
   Price: 100
   Health: 10
-  IsActiveDefence: 0
+  IsActiveDefense: 0
   AttackForce: 0
   AttackRange: 0
-  RelaodTime: 0
+  ReloadTime: 0
   ProjectileSpeed: 0
   Size: {x: 1, y: 1}
   Condition: 1

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SO_Defence_MissileLauncher
   m_EditorClassIdentifier: 
   Name: Missile Launcher
-  Image: {fileID: 0}
+  Image: {fileID: 21300000, guid: e2acc2835432868498776b594f68f65c, type: 3}
   Price: 1000
   Health: 40
   IsActiveDefense: 1
