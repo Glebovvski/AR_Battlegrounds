@@ -141,6 +141,7 @@ public enum PoolObjectType
     BullEnemy,
     KamikazeEnemy,
     HealerEnemy,
+    FlamerEnemy,
     CannonBullet = 300,
     LaunchableMissile,
     DecorTree01 = 1000,

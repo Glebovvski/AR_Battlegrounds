@@ -549,7 +549,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 581853323}
   m_Direction: 0
   m_Value: 0
-  m_Size: 0.99998134
+  m_Size: 0
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1439,6 +1439,12 @@ MonoBehaviour:
   - type: 203
     amount: 10
     prefab: {fileID: 3548670066037240548, guid: 5c6a2ca1856b8aa43bac6912f743c3e8,
+      type: 3}
+    container: {fileID: 745831102}
+    pool: []
+  - type: 205
+    amount: 10
+    prefab: {fileID: 1250945995193587213, guid: 3640b8ba2499fce4d959c92477dadcae,
       type: 3}
     container: {fileID: 745831102}
     pool: []
@@ -3492,7 +3498,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -1605.4999, y: 0}
+  m_AnchoredPosition: {x: -1617.4999, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &2079989270
