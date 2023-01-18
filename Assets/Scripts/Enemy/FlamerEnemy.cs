@@ -12,6 +12,8 @@ namespace Enemies
 
         private bool IsAttacking { get; set; } = false;
 
+        private float startAttackTime = 0;
+
         public override void StartAttack(out bool isReady)
         {
             base.StartAttack(out isReady);
@@ -21,8 +23,10 @@ namespace Enemies
 
         public void StartAttack()
         {
+            startAttackTime = Time.time;
             fire.SetActive(true);
             IsAttacking = true;
+
         }
 
         private void Update()
@@ -30,6 +34,9 @@ namespace Enemies
             if (!IsAttacking)
                 return;
 
+            if (Time.time - startAttackTime > 1)
+                StopAttack();
+                
             foreach (var defense in defensesInRange)
             {
                 defense.TakeDamage(AttackForce * Time.deltaTime);
