@@ -135,7 +135,8 @@ namespace Enemies
 
         public void MoveTo(Vector3 destination)
         {
-            NavMeshAgent.destination = destination;
+            if (NavMeshAgent.enabled)
+                NavMeshAgent.destination = destination;
         }
 
         public void TakeDamage(float value) => DamageReceiver.TakeDamage(value);
