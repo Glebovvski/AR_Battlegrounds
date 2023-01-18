@@ -16,9 +16,8 @@ public class DefenseView : MonoBehaviour
 
     public event Action OnDefenseSelected;
 
-    public void Init(string DefenseType, string Price, Sprite Image)
+    public void Init(string Price, Sprite Image)
     {
-        text.text = DefenseType;
         price.text = Price;
         image.sprite = Image;
         button.onClick.AddListener(SelectDefence);
