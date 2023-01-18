@@ -60,6 +60,7 @@ namespace Enemies
             var bull = RegisterEnemy<BullEnemy>(PoolObjectType.BullEnemy, spawnPoints[0]);
             var goblin = RegisterEnemy<KamikazeEnemy>(PoolObjectType.KamikazeEnemy, spawnPoints[3]);
             var healer = RegisterEnemy<HealerEnemy>(PoolObjectType.HealerEnemy, spawnPoints[2]);
+            var flamer = RegisterEnemy<FlamerEnemy>(PoolObjectType.FlamerEnemy, spawnPoints[3]);
             for (int i = 0; i < 8; i++)
             {
                 var BaseEnemy = RegisterEnemy<BaseEnemy>(PoolObjectType.Enemy, spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Length - 1)]);
