@@ -17,7 +17,6 @@ namespace Enemies
 
         public void Heal()
         {
-            Debug.LogError("HEALER FOLLOW: " + this.FollowTarget.name);
             var colliders = Physics.OverlapSphere(Position, AttackRadius, LayerMask.GetMask("Enemy"));
             if (!isHealFxPlaying)
                 HealFX();
@@ -36,7 +35,6 @@ namespace Enemies
             base.StartAttack(out isReady);
             if (isReady)
                 Heal();
-            else Debug.LogError("HEALER NOT READY");
         }
 
         public void HealFX()

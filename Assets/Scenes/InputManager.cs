@@ -54,7 +54,7 @@ public class InputManager : MonoBehaviour
             if (!TrySpawnOnCell(cell))
             {
                 if (DefensesModel.InDefenseSelectionMode) return;
-                
+
                 var defense = GetObjectOnScene<ActiveDefense>(DefenseLayer);
                 if ((!defense || !defense.IsActiveDefense) && !SelectedDefense) return;
                 if (SelectedDefense != defense && defense)

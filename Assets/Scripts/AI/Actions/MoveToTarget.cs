@@ -9,6 +9,6 @@ public class MoveToTarget : ActionBase
     public override void Execute(IAIContext context)
     {
         var c = (AIContext)context;
-        c.Enemy.MoveTo(c.Enemy.GetAttackTarget().Position);
+        c.Enemy.MoveTo(c.Enemy.AttackTarget.Position);
     }
 }

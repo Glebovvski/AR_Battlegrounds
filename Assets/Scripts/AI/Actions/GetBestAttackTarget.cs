@@ -16,9 +16,11 @@ public class GetBestAttackTarget : ActionBase
         var c = (AIContext)context;
         var enemy = c.Enemy;
 
+        if (!enemy.IsAlive) return;
+
         Observation attackTarget = null;
 
-        if (enemy.GetAttackTarget() != null) return;
+        if (enemy.AttackTarget != null) return;
         int pathScore = 0;
         foreach (var defense in enemy.DefenseTypeToScore)
         {
@@ -101,6 +103,6 @@ public class TargetScore
         return score;
     }
 
-    private int IsHealthLowScore() => Observation.Defense.CurrentHealth/ Observation.Defense.Health <= 0.3f ? 100 : 0;
+    private int IsHealthLowScore() => Observation.Defense.CurrentHealth / Observation.Defense.Health <= 0.3f ? 100 : 0;
 
 }

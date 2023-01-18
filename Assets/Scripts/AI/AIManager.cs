@@ -121,9 +121,9 @@ namespace Enemies
             PoolManager.Instance.ReturnToPool(enemy.GameObject, enemy.Type);
         }
 
-        public IEnumerable<Enemy> GetEnemiesAttackingObservation(Observation observation) => Enemies.Where(x => x.GetAttackTarget() == observation);
+        public IEnumerable<Enemy> GetEnemiesAttackingObservation(Observation observation) => Enemies.Where(x => x.AttackTarget == observation);
 
-        public IEnumerable<Enemy> GetClosestEnemiesWithSameTarget(Enemy enemy) => Enemies.Where(x => (x.Position - enemy.Position).sqrMagnitude < enemy.ScanRange * enemy.ScanRange && x.GetAttackTarget() == enemy.GetAttackTarget());
+        public IEnumerable<Enemy> GetClosestEnemiesWithSameTarget(Enemy enemy) => Enemies.Where(x => (x.Position - enemy.Position).sqrMagnitude < enemy.ScanRange * enemy.ScanRange && x.AttackTarget == enemy.AttackTarget);
 
         private void GetGoldFromEnemy(Enemy enemy)
         {

@@ -11,8 +11,8 @@ public class IsTargetClose : ContextualScorerBase
         var c = (AIContext)context;
         var enemy = c.Enemy;
 
-        if(enemy.GetAttackTarget() == null)
+        if(enemy.AttackTarget == null)
             return 0;
-        return (enemy.GetAttackTarget().Position - enemy.Position).sqrMagnitude - (enemy.ScanRange*enemy.ScanRange);
+        return (enemy.AttackTarget.Position - enemy.Position).sqrMagnitude - (enemy.ScanRange*enemy.ScanRange);
     }
 }

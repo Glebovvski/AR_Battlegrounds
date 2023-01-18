@@ -24,6 +24,8 @@ namespace Enemies
         [SerializeField] private CFXR_Effect fx;
         [SerializeField] private Outline outline;
 
+        [property: SerializeField] public string DebugTargetName => AttackTarget.Defense.name;
+
         public int Health { get; private set; }
         public float CurrentHealth => DamageReceiver.CurrentHealth;
         public int AttackForce { get; set; }
@@ -33,7 +35,7 @@ namespace Enemies
         public AIContext Context { get; private set; }
         public GameObject GameObject => this.gameObject;
         public NavMeshAgent NavMeshAgent => navMeshAgent;
-        protected Observation AttackTarget { get; set; }
+        public Observation AttackTarget { get; private set; }
         public Enemy FollowTarget { get; set; }
         public float ScanRange => SO.ScanRange;
         public Vector3 Position => this.gameObject.transform.position;
@@ -122,8 +124,6 @@ namespace Enemies
             AttackTarget.Defense.OnDeath += ResetTarget;
             observation.SetAsAttackTarget();
         }
-
-        public Observation GetAttackTarget() => AttackTarget;
 
         public void GetData()
         {

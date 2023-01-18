@@ -11,7 +11,7 @@ public class HasAttackTargetInRange : ContextualScorerBase
     {
         var c = (AIContext)context;
         var enemy = c.Enemy;
-        var attackTarget = enemy.GetAttackTarget();
+        var attackTarget = enemy.AttackTarget;
         if (attackTarget == null) return 0;
         if (!attackTarget.IsAlive) return 0;
         if (IsNotInAttackRange(enemy)) return 0;
@@ -21,7 +21,7 @@ public class HasAttackTargetInRange : ContextualScorerBase
 
     private bool IsNotInAttackRange(Enemy enemy)
     {
-        var result = (enemy.GetAttackTarget().Position - enemy.Position).sqrMagnitude > enemy.AttackRange*enemy.AttackRange;
+        var result = (enemy.AttackTarget.Position - enemy.Position).sqrMagnitude > enemy.AttackRange*enemy.AttackRange;
         return result;
     }
 }
