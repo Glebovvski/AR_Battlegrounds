@@ -16,6 +16,8 @@ public class GameGrid : MonoBehaviour
     private CastleDefense Castle { get; set; }
     private LoseModel LoseModel { get; set; }
 
+    [SerializeField] private GridType gridType;
+
     [SerializeField] private DefensesViewModel defencesViewModel;
 
     [SerializeField] private NavMeshSurface plane;
@@ -24,8 +26,8 @@ public class GameGrid : MonoBehaviour
 
     [SerializeField] private GridCell gridCellPrefab;
 
-    private int width = 15;
-    private int length = 15;
+    [SerializeField] private int width;
+    [SerializeField] private int length;
     private float gridSpaceSize = 1f;
 
     public List<GridCell> GridList = new List<GridCell>();
@@ -138,7 +140,7 @@ public class GameGrid : MonoBehaviour
         if (SelectedDefense == null) return;
 
         var defence = PoolManager.Instance.GetFromPool<Defense>(SelectedDefense.PoolType);
-        defence.Init(SelectedDefense);//DefensesModel.List.Where(x => x.PoolType == SelectedDefence.PoolType).FirstOrDefault());
+        defence.Init(SelectedDefense);
         defence.transform.SetParent(plane.transform);
         if (defence.GetSize() == Vector2Int.one)
         {
@@ -183,17 +185,14 @@ public class GameGrid : MonoBehaviour
     {
         if (grid == null)
         {
-            grid = new GridCell[width, length];
-            for (int x = 0; x < width; x++)
+            switch (gridType)
             {
-                for (int z = 0; z < length; z++)
-                {
-                    grid[x, z] = Instantiate(gridCellPrefab, new Vector3(x * gridSpaceSize, yPos, z * gridSpaceSize), Quaternion.identity, this.transform);
-                    grid[x, z].Init(x, z);
-                    grid[x, z].gameObject.name = string.Format("Cell {0}:{1}", x, z);
-                    grid[x, z].OnFreeCell += RebuildNavMesh;
-                    GridList.Add(grid[x, z]);
-                }
+                case (GridType.Rectangle):
+                    CreateRectangleGrid();
+                    break;
+                case (GridType.Circle):
+                    CreateCircleGrid();
+                    break;
             }
         }
         else
@@ -203,6 +202,45 @@ public class GameGrid : MonoBehaviour
         SpawnCastleAtCentre();
         RebuildNavMesh();
         OnGridCreated?.Invoke();
+    }
+
+    private void CreateRectangleGrid()
+    {
+        grid = new GridCell[width, length];
+        for (int x = 0; x < width; x++)
+        {
+            for (int z = 0; z < length; z++)
+            {
+                grid[x, z] = Instantiate(gridCellPrefab, new Vector3(x * gridSpaceSize, yPos, z * gridSpaceSize), Quaternion.identity, this.transform);
+                grid[x, z].Init(x, z);
+                grid[x, z].gameObject.name = string.Format("Cell {0}:{1}", x, z);
+                grid[x, z].OnFreeCell += RebuildNavMesh;
+                GridList.Add(grid[x, z]);
+            }
+        }
+    }
+
+    private void CreateCircleGrid()
+    {
+        int radius = width / 2;
+
+        int square = radius * radius;
+
+        grid = new GridCell[width, length];
+
+        for (int x = -radius; x <= radius; ++x)
+        {
+            for (int z = -radius; z <= radius; ++z)
+            {
+                if (new Vector2(x, z).sqrMagnitude > square) continue;
+                
+                var cell = Instantiate(gridCellPrefab, new Vector3(x * gridSpaceSize, yPos, z * gridSpaceSize), Quaternion.identity, this.transform);
+                cell.Init(x, z);
+                cell.gameObject.name = string.Format("Cell {0}:{1}", x, z);
+                cell.OnFreeCell += RebuildNavMesh;
+                GridList.Add(cell);
+            }
+        }
     }
 
     private void RebuildNavMesh()
@@ -249,11 +287,11 @@ public class GameGrid : MonoBehaviour
         {
             if (IsMustHaveGroundHeight(cell))
             {
-                if (!centreCells.Contains(cell))
-                {
-                    SelectedDefense = DefensesModel.List.Where(x => x.PoolType == PoolObjectType.WallTower).FirstOrDefault();
-                    SpawnDefence(cell);
-                }
+                // if (!centreCells.Contains(cell))
+                // {
+                //     SelectedDefense = DefensesModel.List.Where(x => x.PoolType == PoolObjectType.WallTower).FirstOrDefault();
+                //     SpawnDefence(cell);
+                // }
                 continue;
             }
             DeselectAllCells();
@@ -296,4 +334,11 @@ public class GameGrid : MonoBehaviour
         DefensesModel.OnDefenseDeselected -= DeselectDefense;
         LoseModel.OnRestart -= RemoveAllDefenses;
     }
+}
+
+public enum GridType
+{
+    Rectangle = 0,
+    Circle = 1,
+    Star = 2,
 }

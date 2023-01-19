@@ -20,9 +20,9 @@ public class GetBestAttackTarget : ActionBase
 
         Observation attackTarget = null;
 
-        if(enemy.Type == PoolObjectType.FlamerEnemy)
+        if (enemy.Type == PoolObjectType.FlamerEnemy)
         {
-            
+
         }
 
         if (enemy.AttackTarget != null) return;
@@ -46,6 +46,8 @@ public class GetBestAttackTarget : ActionBase
             attackTarget = scores.OrderByDescending(x => x.TotalScore).First().Observation;
         else
             attackTarget = Enemies.AIManager.Instance.GetClosest(c.Enemy);
+
+        if (attackTarget == null) return;
         c.Enemy.SetAttackTarget(attackTarget);
         scores.Clear();
     }
