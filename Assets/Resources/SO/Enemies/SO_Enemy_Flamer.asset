@@ -19,11 +19,11 @@ MonoBehaviour:
   ScanRange: 10
   AttackRange: 10
   AttackRadius: 15
-  TimeBetweenAttacks: 5
+  TimeBetweenAttacks: 2
   AttackWallScore: 100
   AttackCannonScore: 100
-  AttackLaserScore: 200
-  AttackCastleScore: 300
+  AttackLaserScore: 100
+  AttackCastleScore: 100
   AttackTrapScore: 100
   EnemyType: 0
   Type: 205

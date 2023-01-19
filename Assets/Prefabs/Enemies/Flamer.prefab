@@ -112,13 +112,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aiConfigs:
-  - aiId: b733226d-9e53-4c8f-be29-f8abc9712f69
+  - aiId: f8302355-e2b6-4b15-8f31-cdb656017bf3
     intervalMin: 1
     intervalMax: 1
     startDelayMin: 0
     startDelayMax: 0
     isActive: 1
-  - aiId: f8302355-e2b6-4b15-8f31-cdb656017bf3
+  - aiId: c2f7f769-1996-4d97-9479-77dcaba7e68b
     intervalMin: 1
     intervalMax: 1
     startDelayMin: 0

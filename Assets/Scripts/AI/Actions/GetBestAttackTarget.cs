@@ -20,6 +20,11 @@ public class GetBestAttackTarget : ActionBase
 
         Observation attackTarget = null;
 
+        if(enemy.Type == PoolObjectType.FlamerEnemy)
+        {
+            
+        }
+
         if (enemy.AttackTarget != null) return;
         int pathScore = 0;
         foreach (var defense in enemy.DefenseTypeToScore)
