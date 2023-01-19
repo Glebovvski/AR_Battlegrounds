@@ -348,17 +348,10 @@ public class GameGrid : MonoBehaviour
 
     private bool IsAnyDiagonalCellUp(GridCell cell)
     {
-        switch (gridType)
-        {
-            case (GridType.Rectangle):
-                return grid[cell.Pos.x - 1][cell.Pos.y - 1].IsUpper || grid[cell.Pos.x - 1][cell.Pos.y + 1].IsUpper
-                || grid[cell.Pos.x + 1][cell.Pos.y + 1].IsUpper || grid[cell.Pos.x + 1][cell.Pos.y - 1].IsUpper;
-            case (GridType.Circle):
-                return true;
-            default:
-                return false;
-        }
+        return grid[cell.Pos.x - 1][cell.Pos.y - 1].IsUpper || grid[cell.Pos.x - 1][cell.Pos.y + 1].IsUpper
+        || grid[cell.Pos.x + 1][cell.Pos.y + 1].IsUpper || grid[cell.Pos.x + 1][cell.Pos.y - 1].IsUpper;
     }
+
 
     public void RemoveAllDefenses()
     {
