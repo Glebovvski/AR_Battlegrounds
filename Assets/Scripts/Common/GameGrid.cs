@@ -239,7 +239,7 @@ public class GameGrid : MonoBehaviour
             var z_list = new List<GridCell>();
             for (int z = -radius; z <= radius; ++z)
             {
-                if (new Vector2(x, z).sqrMagnitude > square) continue;
+                if (new Vector2(x, z).sqrMagnitude >= square) continue;
 
                 var cell = Instantiate(gridCellPrefab, new Vector3(x * gridSpaceSize, yPos, z * gridSpaceSize), Quaternion.identity, this.transform);
                 int z_index = z + radius;
