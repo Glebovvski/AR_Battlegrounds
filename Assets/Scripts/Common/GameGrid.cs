@@ -28,11 +28,13 @@ public class GameGrid : MonoBehaviour
 
     [SerializeField] private int width;
     [SerializeField] private int length;
+
     private float gridSpaceSize = 1f;
 
     public List<GridCell> GridList = new List<GridCell>();
 
-    private GridCell[,] grid;
+    // private GridCell[,] grid;
+    private List<List<GridCell>> grid;
 
     private List<GridCell> centreCells;
 
@@ -169,10 +171,10 @@ public class GameGrid : MonoBehaviour
             for (int j = 0; j < length - 1; j++)
             {
                 var possiblePairs = new List<GridCell>();
-                possiblePairs.Add(grid[i, j]);
-                possiblePairs.Add(grid[i, j + 1]);
-                possiblePairs.Add(grid[i + 1, j]);
-                possiblePairs.Add(grid[i + 1, j + 1]);
+                possiblePairs.Add(grid[i][j]);
+                possiblePairs.Add(grid[i][j + 1]);
+                possiblePairs.Add(grid[i + 1][j]);
+                possiblePairs.Add(grid[i + 1][j + 1]);
 
                 if (possiblePairs.All(pair => !pair.IsUpper) || possiblePairs.All(pair => pair.IsUpper))
                     cells.Add(possiblePairs);
@@ -206,17 +208,20 @@ public class GameGrid : MonoBehaviour
 
     private void CreateRectangleGrid()
     {
-        grid = new GridCell[width, length];
+        grid = new List<List<GridCell>>();
         for (int x = 0; x < width; x++)
         {
+            var z_list = new List<GridCell>();
             for (int z = 0; z < length; z++)
             {
-                grid[x, z] = Instantiate(gridCellPrefab, new Vector3(x * gridSpaceSize, yPos, z * gridSpaceSize), Quaternion.identity, this.transform);
-                grid[x, z].Init(x, z);
-                grid[x, z].gameObject.name = string.Format("Cell {0}:{1}", x, z);
-                grid[x, z].OnFreeCell += RebuildNavMesh;
-                GridList.Add(grid[x, z]);
+                var cell = Instantiate(gridCellPrefab, new Vector3(x * gridSpaceSize, yPos, z * gridSpaceSize), Quaternion.identity, this.transform);
+                cell.Init(x, z);
+                cell.gameObject.name = string.Format("Cell {0}:{1}", x, z);
+                cell.OnFreeCell += RebuildNavMesh;
+                z_list.Add(cell);
             }
+            grid.Add(z_list);
+            GridList.AddRange(grid[x]);
         }
     }
 
@@ -226,20 +231,25 @@ public class GameGrid : MonoBehaviour
 
         int square = radius * radius;
 
-        grid = new GridCell[width, length];
+        grid = new List<List<GridCell>>();
 
         for (int x = -radius; x <= radius; ++x)
         {
+            int x_index = x + radius;
+            var z_list = new List<GridCell>();
             for (int z = -radius; z <= radius; ++z)
             {
                 if (new Vector2(x, z).sqrMagnitude > square) continue;
-                
+
                 var cell = Instantiate(gridCellPrefab, new Vector3(x * gridSpaceSize, yPos, z * gridSpaceSize), Quaternion.identity, this.transform);
+                int z_index = z < 0 ? Mathf.Abs(z) : z * 2;
                 cell.Init(x, z);
-                cell.gameObject.name = string.Format("Cell {0}:{1}", x, z);
+                cell.gameObject.name = string.Format("Cell {0}:{1}", x_index, z_index);
                 cell.OnFreeCell += RebuildNavMesh;
-                GridList.Add(cell);
+                z_list.Add(cell);
             }
+            grid.Add(z_list);
+            GridList.AddRange(grid[x_index]);
         }
     }
 
@@ -272,12 +282,10 @@ public class GameGrid : MonoBehaviour
 
     private void TryChangeHeight()
     {
-        int centre = GridList.Count / 2;
-
-        var gridCell1 = GridList[centre];
-        var gridCell2 = grid[gridCell1.Pos.x, gridCell1.Pos.y - 1];
-        var gridCell3 = grid[gridCell1.Pos.x + 1, gridCell1.Pos.y];
-        var gridCell4 = grid[gridCell1.Pos.x + 1, gridCell1.Pos.y - 1];
+        var gridCell1 = grid[width / 2][length / 2];
+        var gridCell2 = grid[gridCell1.Pos.x][gridCell1.Pos.y - 1];
+        var gridCell3 = grid[gridCell1.Pos.x + 1][gridCell1.Pos.y];
+        var gridCell4 = grid[gridCell1.Pos.x + 1][gridCell1.Pos.y - 1];
         centreCells = new List<GridCell>()
         {
             gridCell1, gridCell2, gridCell3, gridCell4
@@ -309,8 +317,8 @@ public class GameGrid : MonoBehaviour
 
     private bool IsAnyDiagonalCellUp(GridCell cell)
     {
-        return grid[cell.Pos.x - 1, cell.Pos.y - 1].IsUpper || grid[cell.Pos.x - 1, cell.Pos.y + 1].IsUpper
-                || grid[cell.Pos.x + 1, cell.Pos.y + 1].IsUpper || grid[cell.Pos.x + 1, cell.Pos.y - 1].IsUpper;
+        return grid[cell.Pos.x - 1][cell.Pos.y - 1].IsUpper || grid[cell.Pos.x - 1][cell.Pos.y + 1].IsUpper
+                || grid[cell.Pos.x + 1][cell.Pos.y + 1].IsUpper || grid[cell.Pos.x + 1][cell.Pos.y - 1].IsUpper;
     }
 
     public void RemoveAllDefenses()
