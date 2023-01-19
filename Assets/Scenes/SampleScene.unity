@@ -549,7 +549,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 581853323}
   m_Direction: 0
   m_Value: 0
-  m_Size: 0
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -988,7 +988,7 @@ PrefabInstance:
     - target: {fileID: 6261986795282757049, guid: 91ba00481d9194bd4974e9dcc125242e,
         type: 3}
       propertyPath: width
-      value: 14
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 6261986795282757049, guid: 91ba00481d9194bd4974e9dcc125242e,
         type: 3}
@@ -998,7 +998,7 @@ PrefabInstance:
     - target: {fileID: 6261986795282757049, guid: 91ba00481d9194bd4974e9dcc125242e,
         type: 3}
       propertyPath: length
-      value: 14
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 6261986795282757049, guid: 91ba00481d9194bd4974e9dcc125242e,
         type: 3}
@@ -1008,7 +1008,7 @@ PrefabInstance:
     - target: {fileID: 6261986795282757049, guid: 91ba00481d9194bd4974e9dcc125242e,
         type: 3}
       propertyPath: gridType
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6261986795282757049, guid: 91ba00481d9194bd4974e9dcc125242e,
         type: 3}
@@ -3513,7 +3513,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -1615.5, y: 0}
+  m_AnchoredPosition: {x: -1617.5, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &2079989270

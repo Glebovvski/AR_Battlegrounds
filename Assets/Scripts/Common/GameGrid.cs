@@ -242,8 +242,8 @@ public class GameGrid : MonoBehaviour
                 if (new Vector2(x, z).sqrMagnitude > square) continue;
 
                 var cell = Instantiate(gridCellPrefab, new Vector3(x * gridSpaceSize, yPos, z * gridSpaceSize), Quaternion.identity, this.transform);
-                int z_index = z < 0 ? Mathf.Abs(z) : z * 2;
-                cell.Init(x, z);
+                int z_index = z + radius;
+                cell.Init(x_index, z_index);
                 cell.gameObject.name = string.Format("Cell {0}:{1}", x_index, z_index);
                 cell.OnFreeCell += RebuildNavMesh;
                 z_list.Add(cell);
@@ -319,6 +319,16 @@ public class GameGrid : MonoBehaviour
     {
         return grid[cell.Pos.x - 1][cell.Pos.y - 1].IsUpper || grid[cell.Pos.x - 1][cell.Pos.y + 1].IsUpper
                 || grid[cell.Pos.x + 1][cell.Pos.y + 1].IsUpper || grid[cell.Pos.x + 1][cell.Pos.y - 1].IsUpper;
+        switch (gridType)
+        {
+            case (GridType.Rectangle):
+                return grid[cell.Pos.x - 1][cell.Pos.y - 1].IsUpper || grid[cell.Pos.x - 1][cell.Pos.y + 1].IsUpper
+                || grid[cell.Pos.x + 1][cell.Pos.y + 1].IsUpper || grid[cell.Pos.x + 1][cell.Pos.y - 1].IsUpper;
+            case (GridType.Circle):
+                return true;
+            default:
+                return false;
+        }
     }
 
     public void RemoveAllDefenses()
