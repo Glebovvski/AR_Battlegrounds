@@ -21,9 +21,9 @@ MonoBehaviour:
   AttackRadius: 15
   TimeBetweenAttacks: 2
   AttackWallScore: 100
-  AttackCannonScore: 100
-  AttackLaserScore: 100
-  AttackCastleScore: 100
+  AttackCannonScore: 300
+  AttackLaserScore: 500
+  AttackCastleScore: 600
   AttackTrapScore: 100
   EnemyType: 0
   Type: 205
