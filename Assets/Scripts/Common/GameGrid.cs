@@ -312,13 +312,20 @@ public class GameGrid : MonoBehaviour
 
     private bool IsMustHaveGroundHeight(GridCell cell)
     {
-        return cell.Pos.x == 0 || cell.Pos.y == 0 || cell.Pos.x == width - 1 || cell.Pos.y == length - 1 || centreCells.Contains(cell);
+        switch (gridType)
+        {
+            case (GridType.Rectangle):
+                return cell.Pos.x == 0 || cell.Pos.y == 0 || cell.Pos.x == width - 1 || cell.Pos.y == length - 1 || centreCells.Contains(cell);
+            case GridType.Circle:
+                return centreCells.Contains(cell) || grid[cell.Pos.x].First().Pos.y == cell.Pos.y || grid[cell.Pos.x].Last().Pos.y == cell.Pos.y;
+            default:
+                return false;
+
+        }
     }
 
     private bool IsAnyDiagonalCellUp(GridCell cell)
     {
-        return grid[cell.Pos.x - 1][cell.Pos.y - 1].IsUpper || grid[cell.Pos.x - 1][cell.Pos.y + 1].IsUpper
-                || grid[cell.Pos.x + 1][cell.Pos.y + 1].IsUpper || grid[cell.Pos.x + 1][cell.Pos.y - 1].IsUpper;
         switch (gridType)
         {
             case (GridType.Rectangle):
