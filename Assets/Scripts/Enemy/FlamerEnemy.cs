@@ -23,6 +23,7 @@ namespace Enemies
 
         public void StartAttack()
         {
+            transform.LookAt(AttackTarget.Defense.transform);
             startAttackTime = Time.time;
             fire.SetActive(true);
             IsAttacking = true;
