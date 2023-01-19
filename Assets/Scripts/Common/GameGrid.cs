@@ -324,16 +324,16 @@ public class GameGrid : MonoBehaviour
             case GridType.Circle:
                 var firstX = grid[cell.Pos.x].First();
                 var lastX = grid[cell.Pos.x].Last();
-                var firstY = grid.First()[cell.Pos.y];
-                var lastY = grid.Last()[cell.Pos.y];
+                // var firstY = grid.First()[cell.Pos.y];
+                // var lastY = grid.Last()[cell.Pos.y];
                 try
                 {
                     return
                        centreCells.Contains(cell)
                     || firstX == cell
-                    || lastX == cell
-                    || firstY == cell
-                    || lastY == cell;
+                    || lastX == cell;
+                    // || firstY == cell
+                    // || lastY == cell;
                 }
                 catch
                 {
