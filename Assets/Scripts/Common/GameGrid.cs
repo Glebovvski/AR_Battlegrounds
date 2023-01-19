@@ -239,7 +239,7 @@ public class GameGrid : MonoBehaviour
             var z_list = new List<GridCell>();
             for (int z = -radius; z <= radius; ++z)
             {
-                if (new Vector2(x, z).sqrMagnitude >= square) continue;
+                if (new Vector2(x, z).sqrMagnitude > square) continue;
 
                 var cell = Instantiate(gridCellPrefab, new Vector3(x * gridSpaceSize, yPos, z * gridSpaceSize), Quaternion.identity, this.transform);
                 int z_index = z + radius;
@@ -282,10 +282,13 @@ public class GameGrid : MonoBehaviour
 
     private void TryChangeHeight()
     {
-        var gridCell1 = grid[width / 2][length / 2];
-        var gridCell2 = grid[gridCell1.Pos.x][gridCell1.Pos.y - 1];
-        var gridCell3 = grid[gridCell1.Pos.x + 1][gridCell1.Pos.y];
-        var gridCell4 = grid[gridCell1.Pos.x + 1][gridCell1.Pos.y - 1];
+        int centreX = width / 2 - 1;
+        int centreY = length / 2 - 1;
+        var gridCell1 = grid[centreX][centreY];
+        var gridCell2 = grid[centreX][centreY+1];
+        var gridCell3 = grid[centreX + 1][centreY];
+        var gridCell4 = grid[centreX + 1][centreY + 1];
+        
         centreCells = new List<GridCell>()
         {
             gridCell1, gridCell2, gridCell3, gridCell4
@@ -352,11 +355,15 @@ public class GameGrid : MonoBehaviour
     {
         try
         {
-            return false;
-        //     grid[cell.Pos.x - 1][cell.Pos.y - 1].IsUpper
-        // || grid[cell.Pos.x - 1][cell.Pos.y + 1].IsUpper
-        // || grid[cell.Pos.x + 1][cell.Pos.y + 1].IsUpper
-        // || grid[cell.Pos.x + 1][cell.Pos.y - 1].IsUpper;
+            int index = grid[cell.Pos.x].IndexOf(cell);
+            Debug.LogError(string.Format("INDEX OF {0} is {1}", cell.name, index));
+            int x = cell.Pos.x;
+            int y = cell.Pos.y;
+            return 
+                grid[cell.Pos.x - 1][cell.Pos.y - 1].IsUpper
+                || grid[cell.Pos.x - 1][cell.Pos.y + 1].IsUpper
+                || grid[cell.Pos.x + 1][cell.Pos.y + 1].IsUpper
+                || grid[cell.Pos.x + 1][cell.Pos.y - 1].IsUpper;
         }
         catch (System.Exception)
         {
