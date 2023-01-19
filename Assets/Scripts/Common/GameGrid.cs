@@ -322,24 +322,26 @@ public class GameGrid : MonoBehaviour
                 || cell.Pos.y == length - 1
                 || centreCells.Contains(cell);
             case GridType.Circle:
-                var firstX = grid[cell.Pos.x].First();
-                var lastX = grid[cell.Pos.x].Last();
-                // var firstY = grid.First()[cell.Pos.y];
-                // var lastY = grid.Last()[cell.Pos.y];
-                try
+                if (grid.First().Count == 0) grid.Remove(grid.First());
+                if (grid.Last().Count == 0) grid.Remove(grid.Last());
+
+                bool isLastRow = grid.Last().Contains(cell);
+                bool isFirstRow = grid.First().Contains(cell);
+                bool isLastOrFirctCellInRow = false;
+                foreach (var row in grid)
                 {
-                    return
-                       centreCells.Contains(cell)
-                    || firstX == cell
-                    || lastX == cell;
-                    // || firstY == cell
-                    // || lastY == cell;
+                    if (row.Count == 0) continue;
+                    if (row.First() == cell || row.Last() == cell)
+                    {
+                        isLastOrFirctCellInRow = true;
+                        break;
+                    }
                 }
-                catch
-                {
-                    Debug.LogError(cell.name);
-                    return true;
-                }
+                return
+                   centreCells.Contains(cell)
+                   || isLastRow
+                   || isFirstRow
+                   || isLastOrFirctCellInRow;
             default:
                 return false;
 
@@ -350,11 +352,11 @@ public class GameGrid : MonoBehaviour
     {
         try
         {
-            return
-            grid[cell.Pos.x - 1][cell.Pos.y - 1].IsUpper
-        || grid[cell.Pos.x - 1][cell.Pos.y + 1].IsUpper
-        || grid[cell.Pos.x + 1][cell.Pos.y + 1].IsUpper
-        || grid[cell.Pos.x + 1][cell.Pos.y - 1].IsUpper;
+            return false;
+        //     grid[cell.Pos.x - 1][cell.Pos.y - 1].IsUpper
+        // || grid[cell.Pos.x - 1][cell.Pos.y + 1].IsUpper
+        // || grid[cell.Pos.x + 1][cell.Pos.y + 1].IsUpper
+        // || grid[cell.Pos.x + 1][cell.Pos.y - 1].IsUpper;
         }
         catch (System.Exception)
         {
