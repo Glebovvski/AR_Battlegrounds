@@ -89,6 +89,8 @@ namespace Defendable
                     return PoolObjectType.LaserTower;
                 case DefenseType.Trap:
                     return PoolObjectType.TrapTower;
+                case DefenseType.MissileLauncher:
+                    return PoolObjectType.MissileLauncher;
                 default:
                     return PoolObjectType.None;
             }
@@ -105,7 +107,7 @@ namespace Defendable
 
         internal void SetAsTargetToAttack()
         {
-            healthBarController.UpdateHealth(CurrentHealth/Health);
+            healthBarController.UpdateHealth(CurrentHealth / Health);
         }
     }
 }
