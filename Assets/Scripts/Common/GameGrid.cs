@@ -305,7 +305,7 @@ public class GameGrid : MonoBehaviour
             DeselectAllCells();
             if (IsAnyDiagonalCellUp(cell))
                 continue;
-            cell.SetHeight(UnityEngine.Random.Range(1, 3));
+            cell.SetHeight(2);//UnityEngine.Random.Range(1, 3));
         }
 
     }
