@@ -315,9 +315,20 @@ public class GameGrid : MonoBehaviour
         switch (gridType)
         {
             case (GridType.Rectangle):
-                return cell.Pos.x == 0 || cell.Pos.y == 0 || cell.Pos.x == width - 1 || cell.Pos.y == length - 1 || centreCells.Contains(cell);
+                return 
+                   cell.Pos.x == 0 
+                || cell.Pos.y == 0 
+                || cell.Pos.x == width - 1 
+                || cell.Pos.y == length - 1 
+                || centreCells.Contains(cell);
             case GridType.Circle:
-                return centreCells.Contains(cell) || grid[cell.Pos.x].First().Pos.y == cell.Pos.y || grid[cell.Pos.x].Last().Pos.y == cell.Pos.y || grid.First()[cell.Pos.y].Pos.x == cell.Pos.x || grid.Last()[cell.Pos.y].Pos.x == cell.Pos.x;
+                return 
+                   centreCells.Contains(cell)
+                || grid[cell.Pos.x].First().Pos.y == cell.Pos.y 
+                || grid[cell.Pos.x].Last().Pos.y == cell.Pos.y 
+                || grid.First()[cell.Pos.y].Pos.x == cell.Pos.x 
+                || grid.Last()[cell.Pos.y].Pos.x == cell.Pos.x;
+
             default:
                 return false;
 
