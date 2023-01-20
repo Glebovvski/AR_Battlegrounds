@@ -100,7 +100,7 @@ public class GameGrid : MonoBehaviour
         float y = position.y * gridSpaceSize;
 
         // return new Vector3(x, height + yPos, y);
-        return new Vector3(x, height , y);
+        return new Vector3(x, height, y);
         // return new Vector3(x, 0, y);
     }
 
@@ -173,6 +173,8 @@ public class GameGrid : MonoBehaviour
         {
             for (int j = 0; j < length - 1; j++)
             {
+                if (i >= width - 1 && j >= length - 1) continue;
+
                 var possiblePairs = new List<GridCell>();
                 possiblePairs.Add(grid[i][j]);
                 possiblePairs.Add(grid[i][j + 1]);
