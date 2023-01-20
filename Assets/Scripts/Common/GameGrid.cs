@@ -285,10 +285,10 @@ public class GameGrid : MonoBehaviour
         int centreX = width / 2 - 1;
         int centreY = length / 2 - 1;
         var gridCell1 = grid[centreX][centreY];
-        var gridCell2 = grid[centreX][centreY+1];
+        var gridCell2 = grid[centreX][centreY + 1];
         var gridCell3 = grid[centreX + 1][centreY];
         var gridCell4 = grid[centreX + 1][centreY + 1];
-        
+
         centreCells = new List<GridCell>()
         {
             gridCell1, gridCell2, gridCell3, gridCell4
@@ -330,21 +330,13 @@ public class GameGrid : MonoBehaviour
 
                 bool isLastRow = grid.Last().Contains(cell);
                 bool isFirstRow = grid.First().Contains(cell);
-                bool isLastOrFirctCellInRow = false;
-                foreach (var row in grid)
-                {
-                    if (row.Count == 0) continue;
-                    if (row.First() == cell || row.Last() == cell)
-                    {
-                        isLastOrFirctCellInRow = true;
-                        break;
-                    }
-                }
+                var square = (width / 2) * (width / 2);
+                bool isLastInColumn = new Vector2(cell.Pos.x - width / 2, cell.Pos.y - length / 2).sqrMagnitude > square - width * gridSpaceSize;
                 return
                    centreCells.Contains(cell)
                    || isLastRow
                    || isFirstRow
-                   || isLastOrFirctCellInRow;
+                   || isLastInColumn;
             default:
                 return false;
 
@@ -353,17 +345,21 @@ public class GameGrid : MonoBehaviour
 
     private bool IsAnyDiagonalCellUp(GridCell cell)
     {
+        return false;
         try
         {
-            int index = grid[cell.Pos.x].IndexOf(cell);
-            Debug.LogError(string.Format("INDEX OF {0} is {1}", cell.name, index));
-            int x = cell.Pos.x;
-            int y = cell.Pos.y;
-            return 
-                grid[cell.Pos.x - 1][cell.Pos.y - 1].IsUpper
-                || grid[cell.Pos.x - 1][cell.Pos.y + 1].IsUpper
-                || grid[cell.Pos.x + 1][cell.Pos.y + 1].IsUpper
-                || grid[cell.Pos.x + 1][cell.Pos.y - 1].IsUpper;
+            int x_index = cell.Pos.x;
+            int y_index = grid[cell.Pos.x].IndexOf(cell);
+            Debug.LogError(string.Format("INDEX OF {0} is {1}{2}", cell.name, x_index, y_index));
+            return
+                   // grid[cell.Pos.x - 1][cell.Pos.y - 1].IsUpper
+                   // || grid[cell.Pos.x - 1][cell.Pos.y + 1].IsUpper
+                   // || grid[cell.Pos.x + 1][cell.Pos.y + 1].IsUpper
+                   // || grid[cell.Pos.x + 1][cell.Pos.y - 1].IsUpper;
+                   grid[x_index - 1][y_index - 1].IsUpper
+                || grid[x_index - 1][y_index + 1].IsUpper
+                || grid[x_index + 1][y_index + 1].IsUpper
+                || grid[x_index + 1][y_index - 1].IsUpper;
         }
         catch (System.Exception)
         {
