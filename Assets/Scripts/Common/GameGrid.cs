@@ -147,8 +147,8 @@ public class GameGrid : MonoBehaviour
         if (defence.GetSize() == Vector2Int.one)
         {
             var position = new Vector2(cell.transform.position.x, cell.transform.position.z);
-            // defence.transform.position = GetWorldPositionFromGrid(cell.Pos, cell.IsUpper ? Mathf.CeilToInt(-yPos) : Mathf.FloorToInt(-yPos));
-            defence.transform.position = GetWorldPositionFromGrid(cell.Pos, cell.IsUpper ? Mathf.CeilToInt(-yPos) : Mathf.FloorToInt(-yPos));
+            // defence.transform.position = GetWorldPositionFromGrid(position, cell.IsUpper ? Mathf.CeilToInt(-yPos) : Mathf.FloorToInt(-yPos));
+            defence.transform.position = GetWorldPositionFromGrid(position, Mathf.CeilToInt(-yPos));
             cell.SetDefence(defence);
         }
         else
@@ -280,7 +280,7 @@ public class GameGrid : MonoBehaviour
         centreCells.ForEach(x => x.SetDefence(Castle));
     }
 
-    private Vector2 GetCentreOfPair(List<GridCell> cells) => cells.Aggregate(Vector2.zero, (acc, v) => acc + v.Pos) / cells.Count;
+    private Vector2 GetCentreOfPair(List<GridCell> cells) => cells.Aggregate(Vector2.zero, (acc, v) => acc + new Vector2(v.transform.position.x, v.transform.position.z)) / cells.Count;
 
     private void TryChangeHeight()
     {
@@ -300,17 +300,17 @@ public class GameGrid : MonoBehaviour
         {
             if (IsMustHaveGroundHeight(cell))
             {
-                // if (!centreCells.Contains(cell))
-                // {
-                //     SelectedDefense = DefensesModel.List.Where(x => x.PoolType == PoolObjectType.WallTower).FirstOrDefault();
-                //     SpawnDefence(cell);
-                // }
+                if (!centreCells.Contains(cell))
+                {
+                    SelectedDefense = DefensesModel.List.Where(x => x.PoolType == PoolObjectType.WallTower).FirstOrDefault();
+                    SpawnDefence(cell);
+                }
                 continue;
             }
             DeselectAllCells();
             if (IsAnyDiagonalCellUp(cell))
                 continue;
-            cell.SetHeight(2);//UnityEngine.Random.Range(1, 3));
+            cell.SetHeight(UnityEngine.Random.Range(1, 3));
         }
 
     }
@@ -347,7 +347,7 @@ public class GameGrid : MonoBehaviour
 
     private bool IsAnyDiagonalCellUp(GridCell cell)
     {
-        return false;
+        // return false;
         try
         {
             int x_index = cell.Pos.x;
