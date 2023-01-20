@@ -175,8 +175,8 @@ public class GameGrid : MonoBehaviour
             {
                 try
                 {
-                    // if (grid[i].Count - 1 < j || !grid[i][j].IsFree) continue;
-                    if (grid[i].Count - 1 < j+1 ) continue;
+                    if (grid[i].Count - 1 < j || !grid[i][j].IsFree || grid[i].Count < 2) continue;
+                    // if (grid[i].Count - 1 < j+1 ) continue;
                     var possiblePairs = new List<GridCell>();
                     possiblePairs.Add(grid[i][j]);
                     possiblePairs.Add(grid[i][j + 1]);
@@ -310,11 +310,11 @@ public class GameGrid : MonoBehaviour
         {
             if (IsMustHaveGroundHeight(cell))
             {
-                if (!centreCells.Contains(cell))
-                {
-                    SelectedDefense = DefensesModel.List.Where(x => x.PoolType == PoolObjectType.WallTower).FirstOrDefault();
-                    SpawnDefence(cell);
-                }
+                // if (!centreCells.Contains(cell))
+                // {
+                //     SelectedDefense = DefensesModel.List.Where(x => x.PoolType == PoolObjectType.WallTower).FirstOrDefault();
+                //     SpawnDefence(cell);
+                // }
                 continue;
             }
             DeselectAllCells();
