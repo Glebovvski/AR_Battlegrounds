@@ -169,240 +169,285 @@ public class GameGrid : MonoBehaviour
     private List<List<GridCell>> GetCellGroupsBySize(Vector2Int size)
     {
         List<List<GridCell>> cells = new List<List<GridCell>>();
-        for (int i = 0; i < width - 1; i++)
+        var possiblePairs = new List<GridCell>();
+        if (gridType == GridType.Rectangle)
         {
-            for (int j = 0; j < length - 1; j++)
+            for (int i = 0; i < width - 1; i++)
             {
-                try
+                for (int j = 0; j < length - 1; j++)
                 {
-                    if (grid[i].Count - 1 < j || !grid[i][j].IsFree || grid[i].Count < 2) continue;
-                    // if (grid[i].Count - 1 < j+1 ) continue;
-                    var possiblePairs = new List<GridCell>();
-                    possiblePairs.Add(grid[i][j]);
-                    possiblePairs.Add(grid[i][j + 1]);
-                    possiblePairs.Add(grid[i + 1][j]);
-                    possiblePairs.Add(grid[i + 1][j + 1]);
+                    // int z_index = grid[i].IndexOf()
+                    try
+                    {
+                        if (grid[i].Count - 1 < j || !grid[i][j].IsFree || grid[i].Count < 2) continue;
+                        // if (grid[i].Count - 1 < j+1 ) continue;
+                        possiblePairs.Add(grid[i][j]);
+                        possiblePairs.Add(grid[i][j + 1]);
+                        possiblePairs.Add(grid[i + 1][j]);
+                        possiblePairs.Add(grid[i + 1][j + 1]);
 
-                    if (possiblePairs.All(pair => !pair.IsUpper))
-                        cells.Add(possiblePairs);
-                }
-                catch
-                {
-                    Debug.LogError(grid[i][j].name);
+                        if (possiblePairs.All(pair => !pair.IsUpper))
+                            cells.Add(possiblePairs);
+                    }
+                    catch
+                    {
+                        Debug.LogError(grid[i][j].name);
+                    }
                 }
             }
         }
+        else if (gridType == GridType.Circle)
+        {
+            for (int i = 0; i < grid.Count - 1; i += 2)
+            {
+                for (int j = 0; j < grid[i].Count - 1; j++)
+                {
+                    try
+                    {
+                        int nextIndex = grid[i].Count > grid[i + 1].Count ? (grid[i].Count - grid[i + 1].Count) / 2 : (grid[i + 1].Count - grid[i].Count)/ 2;
+            if (grid[i].Count < 2) continue;
+            if (!grid[i][j].IsFree) continue;
+            if (grid[i][j].IsUpper) continue;
+            possiblePairs.Add(grid[i][j]);
+            possiblePairs.Add(grid[i][j + 1]);
+            // if(grid[i + 1].Count < j)
+            possiblePairs.Add(grid[i + 1][j + nextIndex]);
+            if (grid[i + 1].Count <= j + 1) continue;
+            possiblePairs.Add(grid[i + 1][j + 1]);
+
+            // var neighborCells = Physics.OverlapBox(grid[i][j].transform.position + new Vector3(1, 0, 1), new Vector3(2, 2, 2), Quaternion.identity, LayerMask.GetMask("Grid"));
+            // if (neighborCells.Count() < 3) continue;
+            // foreach (var collider in neighborCells)
+            // {
+            //     if (collider.TryGetComponent<GridCell>(out var cell))
+            //     {
+            //         possiblePairs.Add(cell);
+            //     }
+            //     // else continue;
+            // }
+
+            if (possiblePairs.All(pair => !pair.IsUpper))
+                cells.Add(possiblePairs);
+        }
+                    catch
+        {
+            Debug.LogError(grid[i][j].name);
+        }
+    }
+}
+        }
+
         return cells;
     }
 
     public void CreateGrid()
+{
+    if (grid == null)
     {
-        if (grid == null)
+        switch (gridType)
         {
-            switch (gridType)
-            {
-                case (GridType.Rectangle):
-                    CreateRectangleGrid();
-                    break;
-                case (GridType.Circle):
-                    CreateCircleGrid();
-                    break;
-            }
-        }
-        else
-            GridList.ForEach(cell => cell.SetHeight(1));
-
-        TryChangeHeight();
-        SpawnCastleAtCentre();
-        RebuildNavMesh();
-        OnGridCreated?.Invoke();
-    }
-
-    private void CreateRectangleGrid()
-    {
-        grid = new List<List<GridCell>>();
-        for (int x = 0; x < width; x++)
-        {
-            var z_list = new List<GridCell>();
-            for (int z = 0; z < length; z++)
-            {
-                var cell = Instantiate(gridCellPrefab, new Vector3(x * gridSpaceSize, yPos, z * gridSpaceSize), Quaternion.identity, this.transform);
-                cell.Init(x, z);
-                cell.gameObject.name = string.Format("Cell {0}:{1}", x, z);
-                cell.OnFreeCell += RebuildNavMesh;
-                z_list.Add(cell);
-            }
-            grid.Add(z_list);
-            GridList.AddRange(grid[x]);
+            case (GridType.Rectangle):
+                CreateRectangleGrid();
+                break;
+            case (GridType.Circle):
+                CreateCircleGrid();
+                break;
         }
     }
+    else
+        GridList.ForEach(cell => cell.SetHeight(1));
 
-    private void CreateCircleGrid()
+    TryChangeHeight();
+    SpawnCastleAtCentre();
+    RebuildNavMesh();
+    OnGridCreated?.Invoke();
+}
+
+private void CreateRectangleGrid()
+{
+    grid = new List<List<GridCell>>();
+    for (int x = 0; x < width; x++)
     {
-        int radius = width / 2;
-
-        int square = radius * radius;
-
-        grid = new List<List<GridCell>>();
-
-        for (int x = -radius; x <= radius; ++x)
+        var z_list = new List<GridCell>();
+        for (int z = 0; z < length; z++)
         {
-            int x_index = x + radius;
-            var z_list = new List<GridCell>();
-            for (int z = -radius; z <= radius; ++z)
-            {
-                if (new Vector2(x, z).sqrMagnitude > square) continue;
-
-                var cell = Instantiate(gridCellPrefab, new Vector3(x * gridSpaceSize, yPos, z * gridSpaceSize), Quaternion.identity, this.transform);
-                int z_index = z + radius;
-                cell.Init(x_index, z_index);
-                cell.gameObject.name = string.Format("Cell {0}:{1}", x_index, z_index);
-                cell.OnFreeCell += RebuildNavMesh;
-                z_list.Add(cell);
-            }
-            grid.Add(z_list);
-            GridList.AddRange(grid[x_index]);
+            var cell = Instantiate(gridCellPrefab, new Vector3(x * gridSpaceSize, yPos, z * gridSpaceSize), Quaternion.identity, this.transform);
+            cell.Init(x, z);
+            cell.gameObject.name = string.Format("Cell {0}:{1}", x, z);
+            cell.OnFreeCell += RebuildNavMesh;
+            z_list.Add(cell);
         }
+        grid.Add(z_list);
+        GridList.AddRange(grid[x]);
     }
+}
 
-    private void RebuildNavMesh()
+private void CreateCircleGrid()
+{
+    int radius = width / 2;
+
+    int square = radius * radius;
+
+    grid = new List<List<GridCell>>();
+
+    for (int x = -radius; x <= radius; ++x)
     {
-        plane.BuildNavMesh();
+        int x_index = x + radius;
+        var z_list = new List<GridCell>();
+        for (int z = -radius; z <= radius; ++z)
+        {
+            if (new Vector2(x, z).sqrMagnitude > square) continue;
+
+            var cell = Instantiate(gridCellPrefab, new Vector3(x * gridSpaceSize, yPos, z * gridSpaceSize), Quaternion.identity, this.transform);
+            int z_index = z + radius;
+            cell.Init(x_index, z_index);
+            cell.gameObject.name = string.Format("Cell {0}:{1}", x_index, z_index);
+            cell.OnFreeCell += RebuildNavMesh;
+            z_list.Add(cell);
+        }
+        grid.Add(z_list);
+        GridList.AddRange(grid[x_index]);
     }
+}
 
-    public List<Vector3> Corners()
-    {
-        return new List<Vector3>()
+private void RebuildNavMesh()
+{
+    plane.BuildNavMesh();
+}
+
+public List<Vector3> Corners()
+{
+    return new List<Vector3>()
         {
             this.transform.position,
             this.transform.position + new Vector3(width, 0, 0),
             this.transform.position + new Vector3(width,0, length),
             this.transform.position + new Vector3(0, 0, length)
         };
-    }
+}
 
-    private void SpawnCastleAtCentre()
-    {
-        Vector2 centre = GetCentreOfPair(centreCells);
-        Castle.Init(DefensesModel.List.Where(x => x.Type == DefenseType.Castle).FirstOrDefault());
-        Castle.transform.position = GetWorldPositionFromGrid(centre, 0);
-        Castle.transform.SetParent(plane.transform);
-        centreCells.ForEach(x => x.SetDefence(Castle));
-    }
+private void SpawnCastleAtCentre()
+{
+    Vector2 centre = GetCentreOfPair(centreCells);
+    Castle.Init(DefensesModel.List.Where(x => x.Type == DefenseType.Castle).FirstOrDefault());
+    Castle.transform.position = GetWorldPositionFromGrid(centre, 0);
+    Castle.transform.SetParent(plane.transform);
+    centreCells.ForEach(x => x.SetDefence(Castle));
+}
 
-    private Vector2 GetCentreOfPair(List<GridCell> cells) => cells.Aggregate(Vector2.zero, (acc, v) => acc + new Vector2(v.transform.position.x, v.transform.position.z)) / cells.Count;
+private Vector2 GetCentreOfPair(List<GridCell> cells) => cells.Aggregate(Vector2.zero, (acc, v) => acc + new Vector2(v.transform.position.x, v.transform.position.z)) / cells.Count;
 
-    private void TryChangeHeight()
-    {
-        int centreX = width / 2 - 1;
-        int centreY = length / 2 - 1;
-        var gridCell1 = grid[centreX][centreY];
-        var gridCell2 = gridType == GridType.Rectangle ? grid[centreX][centreY + 1] : grid[centreX][centreY - 1];
-        var gridCell3 = grid[centreX + 1][centreY];
-        var gridCell4 = grid[centreX + 1][centreY + 1];
+private void TryChangeHeight()
+{
+    int centreX = width / 2 - 1;
+    int centreY = length / 2 - 1;
+    var gridCell1 = grid[centreX][centreY];
+    var gridCell2 = gridType == GridType.Rectangle ? grid[centreX][centreY + 1] : grid[centreX][centreY - 1];
+    var gridCell3 = grid[centreX + 1][centreY];
+    var gridCell4 = grid[centreX + 1][centreY + 1];
 
-        centreCells = new List<GridCell>()
+    centreCells = new List<GridCell>()
         {
             gridCell1, gridCell2, gridCell3, gridCell4
         };
 
-        foreach (var cell in GridList)
+    foreach (var cell in GridList)
+    {
+        if (IsMustHaveGroundHeight(cell))
         {
-            if (IsMustHaveGroundHeight(cell))
-            {
-                // if (!centreCells.Contains(cell))
-                // {
-                //     SelectedDefense = DefensesModel.List.Where(x => x.PoolType == PoolObjectType.WallTower).FirstOrDefault();
-                //     SpawnDefence(cell);
-                // }
-                continue;
-            }
-            DeselectAllCells();
-            if (IsAnyDiagonalCellUp(cell))
-                continue;
-            cell.SetHeight(UnityEngine.Random.Range(1, 3));
+            // if (!centreCells.Contains(cell))
+            // {
+            //     SelectedDefense = DefensesModel.List.Where(x => x.PoolType == PoolObjectType.WallTower).FirstOrDefault();
+            //     SpawnDefence(cell);
+            // }
+            continue;
         }
-
+        DeselectAllCells();
+        if (IsAnyDiagonalCellUp(cell))
+            continue;
+        cell.SetHeight(UnityEngine.Random.Range(1, 3));
     }
 
-    private bool IsMustHaveGroundHeight(GridCell cell)
+}
+
+private bool IsMustHaveGroundHeight(GridCell cell)
+{
+    switch (gridType)
     {
-        switch (gridType)
-        {
-            case (GridType.Rectangle):
-                return
-                   cell.Pos.x == 0
-                || cell.Pos.y == 0
-                || cell.Pos.x == width - 1
-                || cell.Pos.y == length - 1
-                || centreCells.Contains(cell);
-            case GridType.Circle:
-                if (grid.First().Count == 0) grid.Remove(grid.First());
-                if (grid.Last().Count == 0) grid.Remove(grid.Last());
-
-                bool isLastRow = grid.Last().Contains(cell);
-                bool isFirstRow = grid.First().Contains(cell);
-                var square = (width / 2) * (width / 2);
-                bool isLastInColumn = new Vector2(cell.Pos.x - width / 2, cell.Pos.y - length / 2).sqrMagnitude > square - 2 * width * gridSpaceSize;
-                return
-                   centreCells.Contains(cell)
-                   || isLastRow
-                   || isFirstRow
-                   || isLastInColumn;
-            default:
-                return false;
-
-        }
-    }
-
-    private bool IsAnyDiagonalCellUp(GridCell cell)
-    {
-        // return false;
-        try
-        {
-            int x_index = cell.Pos.x;
-            int y_index = grid[cell.Pos.x].IndexOf(cell);
-            // Debug.LogError(string.Format("INDEX OF {0} is {1}{2}", cell.name, x_index, y_index));
+        case (GridType.Rectangle):
             return
-                   // grid[cell.Pos.x - 1][cell.Pos.y - 1].IsUpper
-                   // || grid[cell.Pos.x - 1][cell.Pos.y + 1].IsUpper
-                   // || grid[cell.Pos.x + 1][cell.Pos.y + 1].IsUpper
-                   // || grid[cell.Pos.x + 1][cell.Pos.y - 1].IsUpper;
-                   grid[x_index - 1][y_index - 1].IsUpper
-                || grid[x_index - 1][y_index + 1].IsUpper
-                || grid[x_index + 1][y_index + 1].IsUpper
-                || grid[x_index + 1][y_index - 1].IsUpper;
-        }
-        catch (System.Exception)
-        {
-            Debug.LogError(cell.name);
-            return true;
-        }
+               cell.Pos.x == 0
+            || cell.Pos.y == 0
+            || cell.Pos.x == width - 1
+            || cell.Pos.y == length - 1
+            || centreCells.Contains(cell);
+        case GridType.Circle:
+            if (grid.First().Count == 0) grid.Remove(grid.First());
+            if (grid.Last().Count == 0) grid.Remove(grid.Last());
+
+            bool isLastRow = grid.Last().Contains(cell);
+            bool isFirstRow = grid.First().Contains(cell);
+            var square = (width / 2) * (width / 2);
+            bool isLastInColumn = new Vector2(cell.Pos.x - width / 2, cell.Pos.y - length / 2).sqrMagnitude > square - 2 * width * gridSpaceSize;
+            return
+               centreCells.Contains(cell)
+               || isLastRow
+               || isFirstRow
+               || isLastInColumn;
+        default:
+            return false;
 
     }
+}
 
-
-    public void RemoveAllDefenses()
+private bool IsAnyDiagonalCellUp(GridCell cell)
+{
+    // return false;
+    try
     {
-        foreach (var cell in GridList)
+        int x_index = cell.Pos.x;
+        int y_index = grid[cell.Pos.x].IndexOf(cell);
+        // Debug.LogError(string.Format("INDEX OF {0} is {1}{2}", cell.name, x_index, y_index));
+        return
+               // grid[cell.Pos.x - 1][cell.Pos.y - 1].IsUpper
+               // || grid[cell.Pos.x - 1][cell.Pos.y + 1].IsUpper
+               // || grid[cell.Pos.x + 1][cell.Pos.y + 1].IsUpper
+               // || grid[cell.Pos.x + 1][cell.Pos.y - 1].IsUpper;
+               grid[x_index - 1][y_index - 1].IsUpper
+            || grid[x_index - 1][y_index + 1].IsUpper
+            || grid[x_index + 1][y_index + 1].IsUpper
+            || grid[x_index + 1][y_index - 1].IsUpper;
+    }
+    catch (System.Exception)
+    {
+        Debug.LogError(cell.name);
+        return true;
+    }
+
+}
+
+
+public void RemoveAllDefenses()
+{
+    foreach (var cell in GridList)
+    {
+        if (cell.IsFree) continue;
+        if (cell.Defence.Type != DefenseType.Castle)
         {
-            if (cell.IsFree) continue;
-            if (cell.Defence.Type != DefenseType.Castle)
-            {
-                PoolManager.Instance.ReturnToPool(cell.Defence.gameObject, cell.Defence.DefenseTypeToPoolType(cell.Defence.Type));
-                cell.FreeCell();
-            }
+            PoolManager.Instance.ReturnToPool(cell.Defence.gameObject, cell.Defence.DefenseTypeToPoolType(cell.Defence.Type));
+            cell.FreeCell();
         }
     }
+}
 
-    private void DeselectAllCells() => GridList.ForEach(x => x.DeselectCell());
+private void DeselectAllCells() => GridList.ForEach(x => x.DeselectCell());
 
-    private void OnDestroy()
-    {
-        DefensesModel.OnDefenseSelected -= SelectDefence;
-        DefensesModel.OnDefenseDeselected -= DeselectDefense;
-        LoseModel.OnRestart -= RemoveAllDefenses;
-    }
+private void OnDestroy()
+{
+    DefensesModel.OnDefenseSelected -= SelectDefence;
+    DefensesModel.OnDefenseDeselected -= DeselectDefense;
+    LoseModel.OnRestart -= RemoveAllDefenses;
+}
 }
 
 public enum GridType
