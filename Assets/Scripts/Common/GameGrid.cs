@@ -146,6 +146,8 @@ public class GameGrid : MonoBehaviour
         defence.transform.SetParent(plane.transform);
         if (defence.GetSize() == Vector2Int.one)
         {
+            var position = new Vector2(cell.transform.position.x, cell.transform.position.z);
+            // defence.transform.position = GetWorldPositionFromGrid(cell.Pos, cell.IsUpper ? Mathf.CeilToInt(-yPos) : Mathf.FloorToInt(-yPos));
             defence.transform.position = GetWorldPositionFromGrid(cell.Pos, cell.IsUpper ? Mathf.CeilToInt(-yPos) : Mathf.FloorToInt(-yPos));
             cell.SetDefence(defence);
         }
@@ -285,7 +287,7 @@ public class GameGrid : MonoBehaviour
         int centreX = width / 2 - 1;
         int centreY = length / 2 - 1;
         var gridCell1 = grid[centreX][centreY];
-        var gridCell2 = grid[centreX][centreY + 1];
+        var gridCell2 = gridType == GridType.Rectangle ? grid[centreX][centreY + 1] : grid[centreX][centreY - 1];
         var gridCell3 = grid[centreX + 1][centreY];
         var gridCell4 = grid[centreX + 1][centreY + 1];
 
@@ -331,7 +333,7 @@ public class GameGrid : MonoBehaviour
                 bool isLastRow = grid.Last().Contains(cell);
                 bool isFirstRow = grid.First().Contains(cell);
                 var square = (width / 2) * (width / 2);
-                bool isLastInColumn = new Vector2(cell.Pos.x - width / 2, cell.Pos.y - length / 2).sqrMagnitude > square - width * gridSpaceSize;
+                bool isLastInColumn = new Vector2(cell.Pos.x - width / 2, cell.Pos.y - length / 2).sqrMagnitude > square - 2 * width * gridSpaceSize;
                 return
                    centreCells.Contains(cell)
                    || isLastRow
@@ -350,7 +352,7 @@ public class GameGrid : MonoBehaviour
         {
             int x_index = cell.Pos.x;
             int y_index = grid[cell.Pos.x].IndexOf(cell);
-            Debug.LogError(string.Format("INDEX OF {0} is {1}{2}", cell.name, x_index, y_index));
+            // Debug.LogError(string.Format("INDEX OF {0} is {1}{2}", cell.name, x_index, y_index));
             return
                    // grid[cell.Pos.x - 1][cell.Pos.y - 1].IsUpper
                    // || grid[cell.Pos.x - 1][cell.Pos.y + 1].IsUpper
