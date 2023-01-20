@@ -173,7 +173,7 @@ public class GameGrid : MonoBehaviour
         {
             for (int j = 0; j < length - 1; j++)
             {
-                if (i >= width - 1 && j >= length - 1) continue;
+                if (i >= width - 1 || j >= length - 1) continue;
 
                 var possiblePairs = new List<GridCell>();
                 possiblePairs.Add(grid[i][j]);
