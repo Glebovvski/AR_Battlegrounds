@@ -308,10 +308,11 @@ public class GameGrid : MonoBehaviour
             var z_list = new List<GridCell>();
             for (int z = -z_radius; z <= z_radius; ++z)
             {
-                if ((z_square * x * x + x_square * z * z) / (x_square * z_square) >= 1) continue;
+                // if ((z_square * x * x + x_square * z * z) / (x_square * z_square) > 1f) continue;
+                if ((z_square * x * x + x_square * z * z) > (x_square * z_square)) continue;
 
                 var cell = Instantiate(gridCellPrefab, new Vector3(x * gridSpaceSize, yPos, z * gridSpaceSize), Quaternion.identity, this.transform);
-                int z_index = z + x_radius;
+                int z_index = z + z_radius;
                 cell.Init(x_index, z_index);
                 cell.gameObject.name = string.Format("Cell {0}:{1}", x_index, z_index);
                 cell.OnFreeCell += RebuildNavMesh;
@@ -394,17 +395,24 @@ public class GameGrid : MonoBehaviour
                 || cell.Pos.y == length - 1
                 || centreCells.Contains(cell);
             case GridType.Circle:
-                bool isLastRow = grid.Last().Contains(cell);
-                bool isFirstRow = grid.First().Contains(cell);
-                var square = (width / 2) * (width / 2);
-                bool isLastInColumn = new Vector2(cell.Pos.x - width / 2, cell.Pos.y - length / 2).sqrMagnitude > square - 2 * width * gridSpaceSize;
+                bool isLastRowCircle = grid.Last().Contains(cell);
+                bool isFirstRowCircle = grid.First().Contains(cell);
+                var square_circle = (width / 2) * (width / 2);
+                bool isLastInColumnCircle = new Vector2(cell.Pos.x - width / 2, cell.Pos.y - length / 2).sqrMagnitude > square_circle - 2 * width * gridSpaceSize;
                 return
                    centreCells.Contains(cell)
-                   || isLastRow
-                   || isFirstRow
-                   || isLastInColumn;
+                   || isLastRowCircle
+                   || isFirstRowCircle
+                   || isLastInColumnCircle;
             case GridType.Ellipse:
-
+                bool isLastRowEllipse = grid.Last().Contains(cell);
+                bool isFirstRowEllipse = grid.First().Contains(cell);
+                var x_square_ellipse = (width / 2) * (width / 2);
+                var z_square_ellipse = (length / 2) * (length / 2);
+                return
+                   centreCells.Contains(cell)
+                   || isLastRowEllipse
+                   || isFirstRowEllipse;
             default:
                 return true;
 
