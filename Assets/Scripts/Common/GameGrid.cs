@@ -195,10 +195,7 @@ public class GameGrid : MonoBehaviour
                 {
                     var possiblePairs = new List<GridCell>();
 
-                    // try
-                    // {
-                    int nextIndex = grid[i].Count > grid[i + 1].Count ? (grid[i].Count - grid[i + 1].Count) / 2 : (grid[i + 1].Count - grid[i].Count) / 2;
-                    // int nextIndex = Mathf.Abs(grid[i].Count - grid[i + 1].Count) / 2;// : (grid[i + 1].Count - grid[i].Count) / 2;
+                    int nextIndex = Mathf.Abs(grid[i].Count - grid[i + 1].Count) / 2;
                     int sign = grid[i].Count > grid[i + 1].Count ? 1 : -1;
                     if (grid[i].Count < 2) continue;
                     if (!grid[i][j].IsFree) continue;
@@ -206,7 +203,7 @@ public class GameGrid : MonoBehaviour
 
                     possiblePairs.Add(grid[i][j]);
                     possiblePairs.Add(grid[i][j + 1]);
-                    // if (grid[i + 1].Count <= nextIndex + 1 || j - sign * nextIndex <= 0 || j - sign * nextIndex >= grid[i + 1].Count) continue;
+
                     if (j - sign * nextIndex < 0 || j - sign * nextIndex >= grid[i + 1].Count)
                         continue;
                     possiblePairs.Add(grid[i + 1][j - sign * nextIndex]);
@@ -216,12 +213,6 @@ public class GameGrid : MonoBehaviour
 
                     if (possiblePairs.All(pair => !pair.IsUpper))
                         cells.Add(possiblePairs);
-
-                    // }
-                    // catch
-                    // {
-                    //     Debug.LogError(grid[i][j].name);
-                    // }
                 }
             }
         }
