@@ -407,12 +407,21 @@ public class GameGrid : MonoBehaviour
             case GridType.Ellipse:
                 bool isLastRowEllipse = grid.Last().Contains(cell);
                 bool isFirstRowEllipse = grid.First().Contains(cell);
-                var x_square_ellipse = (width / 2) * (width / 2);
-                var z_square_ellipse = (length / 2) * (length / 2);
+                if (isFirstRowEllipse || isLastRowEllipse)
+                    return true;
+
+                var index = grid[cell.Pos.x].IndexOf(cell);
+                bool isFirstOrLastInColumn = index == 0 || index == grid[cell.Pos.x].Count - 1;
+                int prevIndex = (grid[cell.Pos.x].Count - grid[cell.Pos.x - 1].Count) / 2;
+                int sign = grid[cell.Pos.x - 1].Count > grid[cell.Pos.x].Count ? 1 : -1;
+                bool isPrevIndexNotExist = grid[cell.Pos.x - 1].Count < cell.Pos.y + prevIndex * sign;
+
                 return
                    centreCells.Contains(cell)
                    || isLastRowEllipse
-                   || isFirstRowEllipse;
+                   || isFirstRowEllipse
+                   || isFirstOrLastInColumn
+                   || isPrevIndexNotExist;
             default:
                 return true;
 
