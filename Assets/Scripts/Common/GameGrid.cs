@@ -176,23 +176,14 @@ public class GameGrid : MonoBehaviour
                 for (int j = 0; j < length - 1; j++)
                 {
                     var possiblePairs = new List<GridCell>();
-                    // int z_index = grid[i].IndexOf()
-                    try
-                    {
-                        // if (grid[i].Count - 1 < j || !grid[i][j].IsFree || grid[i].Count < 2) continue;
-                        // if (grid[i].Count - 1 < j+1 ) continue;
-                        possiblePairs.Add(grid[i][j]);
-                        possiblePairs.Add(grid[i][j + 1]);
-                        possiblePairs.Add(grid[i + 1][j]);
-                        possiblePairs.Add(grid[i + 1][j + 1]);
 
-                        if (possiblePairs.All(pair => !pair.IsUpper))
-                            cells.Add(possiblePairs);
-                    }
-                    catch
-                    {
-                        Debug.LogError(grid[i][j].name);
-                    }
+                    possiblePairs.Add(grid[i][j]);
+                    possiblePairs.Add(grid[i][j + 1]);
+                    possiblePairs.Add(grid[i + 1][j]);
+                    possiblePairs.Add(grid[i + 1][j + 1]);
+
+                    if (possiblePairs.All(pair => !pair.IsUpper))
+                        cells.Add(possiblePairs);
                 }
             }
         }
