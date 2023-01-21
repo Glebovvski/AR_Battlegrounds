@@ -169,17 +169,17 @@ public class GameGrid : MonoBehaviour
     private List<List<GridCell>> GetCellGroupsBySize(Vector2Int size)
     {
         List<List<GridCell>> cells = new List<List<GridCell>>();
-        var possiblePairs = new List<GridCell>();
         if (gridType == GridType.Rectangle)
         {
             for (int i = 0; i < width - 1; i++)
             {
                 for (int j = 0; j < length - 1; j++)
                 {
+                    var possiblePairs = new List<GridCell>();
                     // int z_index = grid[i].IndexOf()
                     try
                     {
-                        if (grid[i].Count - 1 < j || !grid[i][j].IsFree || grid[i].Count < 2) continue;
+                        // if (grid[i].Count - 1 < j || !grid[i][j].IsFree || grid[i].Count < 2) continue;
                         // if (grid[i].Count - 1 < j+1 ) continue;
                         possiblePairs.Add(grid[i][j]);
                         possiblePairs.Add(grid[i][j + 1]);
@@ -198,37 +198,34 @@ public class GameGrid : MonoBehaviour
         }
         else if (gridType == GridType.Circle)
         {
-            for (int i = 0; i < grid.Count - 1; i += 2)
+            for (int i = 0; i < grid.Count - 1; i++)
             {
                 for (int j = 0; j < grid[i].Count - 1; j++)
                 {
+                    var possiblePairs = new List<GridCell>();
+
                     // try
                     // {
-                        int nextIndex = grid[i].Count > grid[i + 1].Count ? (grid[i].Count - grid[i + 1].Count) / 2 : (grid[i + 1].Count - grid[i].Count) / 2;
-                        nextIndex += j;
-                        if (grid[i].Count < 2) continue;
-                        if (!grid[i][j].IsFree) continue;
-                        if (grid[i][j].IsUpper) continue;
-                        possiblePairs.Add(grid[i][j]);
-                        possiblePairs.Add(grid[i][j + 1]);
-                        if(grid[i + 1].Count > nextIndex + 1)
-                        possiblePairs.Add(grid[i + 1][nextIndex + 1]);
-                        if (grid[i + 1].Count <= j + 1) continue;
-                        possiblePairs.Add(grid[i + 1][j + 1]);
+                    int nextIndex = grid[i].Count > grid[i + 1].Count ? (grid[i].Count - grid[i + 1].Count) / 2 : (grid[i + 1].Count - grid[i].Count) / 2;
+                    // int nextIndex = Mathf.Abs(grid[i].Count - grid[i + 1].Count) / 2;// : (grid[i + 1].Count - grid[i].Count) / 2;
+                    int sign = grid[i].Count > grid[i + 1].Count ? 1 : -1;
+                    if (grid[i].Count < 2) continue;
+                    if (!grid[i][j].IsFree) continue;
+                    if (grid[i][j].IsUpper) continue;
 
-                        // var neighborCells = Physics.OverlapBox(grid[i][j].transform.position + new Vector3(1, 0, 1), new Vector3(2, 2, 2), Quaternion.identity, LayerMask.GetMask("Grid"));
-                        // if (neighborCells.Count() < 3) continue;
-                        // foreach (var collider in neighborCells)
-                        // {
-                        //     if (collider.TryGetComponent<GridCell>(out var cell))
-                        //     {
-                        //         possiblePairs.Add(cell);
-                        //     }
-                        //     // else continue;
-                        // }
+                    possiblePairs.Add(grid[i][j]);
+                    possiblePairs.Add(grid[i][j + 1]);
+                    // if (grid[i + 1].Count <= nextIndex + 1 || j - sign * nextIndex <= 0 || j - sign * nextIndex >= grid[i + 1].Count) continue;
+                    if (j - sign * nextIndex < 0 || j - sign * nextIndex >= grid[i + 1].Count)
+                        continue;
+                    possiblePairs.Add(grid[i + 1][j - sign * nextIndex]);
+                    if (grid[i + 1].Count <= j - sign * nextIndex + 1)
+                        continue;
+                    possiblePairs.Add(grid[i + 1][j - sign * nextIndex + 1]);
 
-                        if (possiblePairs.All(pair => !pair.IsUpper))
-                            cells.Add(possiblePairs);
+                    if (possiblePairs.All(pair => !pair.IsUpper))
+                        cells.Add(possiblePairs);
+
                     // }
                     // catch
                     // {
