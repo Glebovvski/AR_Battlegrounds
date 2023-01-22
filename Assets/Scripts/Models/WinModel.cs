@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WinModel : MonoBehaviour
+public class WinModel
 {
     public event Action OnWin;
 
