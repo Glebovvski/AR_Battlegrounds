@@ -18,6 +18,7 @@ public class ScriptableDefense : ScriptableObject
     public int AttackRange;
     public int ReloadTime;
     public float ProjectileSpeed;
+    public float RotationSpeed;
     public Vector2Int Size;
     public Conditions Condition;
     public PoolObjectType PoolType;

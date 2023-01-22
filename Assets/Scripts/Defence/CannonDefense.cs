@@ -9,7 +9,6 @@ namespace Defendable
     public class CannonDefense : ActiveDefense
     {
         [SerializeField] protected Transform tower;
-        [SerializeField] protected float rotationSpeed = 10f;
         [SerializeField] protected float angleThreshold = 5f;
         [SerializeField] protected Transform cannon;
 
@@ -39,7 +38,7 @@ namespace Defendable
         {
             var direction = (enemy.transform.position - tower.transform.position);
             var targetRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z), tower.up);
-            tower.rotation = Quaternion.RotateTowards(tower.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            tower.rotation = Quaternion.RotateTowards(tower.rotation, targetRotation, SO.RotationSpeed * Time.deltaTime);
 
             if (Quaternion.Angle(targetRotation, tower.rotation) <= angleThreshold) return true;
             return false;
