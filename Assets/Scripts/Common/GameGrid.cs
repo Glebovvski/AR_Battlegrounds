@@ -420,10 +420,10 @@ public class GameGrid : MonoBehaviour
                 if (isNextIndexNotExist || isPrevIndexNotExist)
                     return true;
 
-                bool isPrevLowerIndexNotExist = cell.Pos.y - prevIndex * sign - 1 < 0; //diagonal left lower check
-                bool isPrevHigherIndexNotExist = cell.Pos.y - prevIndex * sign + 1 >= grid[cell.Pos.x - 1].Count; //diagonal left higher check
-                bool isNextLowerIndexNotExist = cell.Pos.y + nextIndex * sign - 1 < 0; //diagonal right lower check
-                bool isNextHigherIndexNotExist = cell.Pos.y + prevIndex * sign + 1 >= grid[cell.Pos.x + 1].Count; //diagonal right higher check
+                bool isPrevLowerIndexNotExist = index + prevIndex * sign - 1 < 0; //diagonal left lower check
+                bool isPrevHigherIndexNotExist = index + prevIndex * sign + 1 >= grid[cell.Pos.x - 1].Count; //diagonal left higher check
+                bool isNextLowerIndexNotExist = index + nextIndex * sign - 1 < 0; //diagonal right lower check
+                bool isNextHigherIndexNotExist = index + prevIndex * sign + 1 >= grid[cell.Pos.x + 1].Count; //diagonal right higher check
 
                 return
                     centreCells.Contains(cell)
