@@ -16,10 +16,10 @@ public class InputManager : MonoBehaviour
     public event Action OnEnemyClick;
 
     private ActiveDefense _selectedDefense;
-    private ActiveDefense SelectedDefense
+    public ActiveDefense SelectedDefense
     {
         get => _selectedDefense;
-        set
+        private set
         {
             if (_selectedDefense) _selectedDefense.SelectDefense(false); //set outline off for previous defense
             _selectedDefense = value;
