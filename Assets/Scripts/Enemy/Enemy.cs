@@ -181,11 +181,7 @@ namespace Enemies
             AttackTarget = null;
         }
 
-        private void OutlineEnemy()
-        {
-            if (InputManager.SelectedDefense.IsEnemyInRange(this))
-                outline.enabled = true;
-        }
+        private void OutlineEnemy() => outline.enabled = true;
 
         private void CancelOutline() => outline.enabled = false;
 

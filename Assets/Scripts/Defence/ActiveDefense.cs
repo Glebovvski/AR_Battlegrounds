@@ -21,7 +21,7 @@ namespace Defendable
             LastAttackTime = Time.time;
             Detection.SetAttackRange(AttackRange);
             SelectDefense(false);
-            hitRadius.localScale = new Vector3(AttackRange, AttackRange, 1);
+            hitRadius.localScale = new Vector3(AttackRange * 2, AttackRange * 2, 1);
         }
 
         public bool IsEnemyInRange(Enemy enemy) => Detection.IsEnemyInRange(enemy);
