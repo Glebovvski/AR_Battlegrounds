@@ -20,7 +20,7 @@ namespace Defendable
             base.Init(so);
             LastAttackTime = Time.time;
             Detection.SetAttackRange(AttackRange);
-            ToggleOutline(false);
+            SelectDefense(false);
             hitRadius.localScale = new Vector3(AttackRange, AttackRange, 1);
         }
 
@@ -28,6 +28,10 @@ namespace Defendable
 
         public void SetAttackTarget(Enemy enemy) => Detection.SetAttackTarget(enemy);
 
-        public void ToggleOutline(bool value) => outline.ForEach(x => x.enabled = value);
+        public void SelectDefense(bool value)
+        {
+            outline.ForEach(x => x.enabled = value);
+            hitRadius.gameObject.SetActive(value);
+        }
     }
 }
