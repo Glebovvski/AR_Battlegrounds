@@ -417,6 +417,8 @@ public class GameGrid : MonoBehaviour
                 int sign = grid[cell.Pos.x - 1].Count > grid[cell.Pos.x].Count ? 1 : -1;
                 bool isPrevIndexNotExist = grid[cell.Pos.x - 1].Count < cell.Pos.y + prevIndex * sign;
                 bool isNextIndexNotExist = grid[cell.Pos.x + 1].Count < cell.Pos.y + nextIndex * sign;
+                if (isNextIndexNotExist || isPrevIndexNotExist)
+                    return true;
 
                 bool isPrevLowerIndexNotExist = cell.Pos.y - prevIndex * sign - 1 < 0;
                 bool isPrevHigherIndexNotExist = cell.Pos.y - prevIndex * sign + 1 >= grid[cell.Pos.x - 1].Count;
