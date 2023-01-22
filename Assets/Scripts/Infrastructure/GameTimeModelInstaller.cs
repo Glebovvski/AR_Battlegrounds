@@ -5,6 +5,6 @@ public class GameTimeModelInstaller : MonoInstaller
 {
     public override void InstallBindings()
     {
-        Container.Bind<IInitializable>().To<GameTimeModel>().FromNew().AsSingle();
+        Container.BindInterfacesAndSelfTo<GameTimeModel>().FromNew().AsSingle();
     }
 }
