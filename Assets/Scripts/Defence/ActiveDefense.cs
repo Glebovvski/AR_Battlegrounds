@@ -10,6 +10,7 @@ namespace Defendable
     {
         [SerializeField] protected DetectionRadius Detection;
         [SerializeField] protected List<Outline> outline = new List<Outline>();
+        [SerializeField] private Transform hitRadius;
 
         protected override bool IsReady => Time.time - LastAttackTime > ReloadTime;
         protected float LastAttackTime;
@@ -20,6 +21,7 @@ namespace Defendable
             LastAttackTime = Time.time;
             Detection.SetAttackRange(AttackRange);
             ToggleOutline(false);
+            hitRadius.localScale = new Vector3(AttackRange, AttackRange, 1);
         }
 
         public bool IsEnemyInRange(Enemy enemy) => Detection.IsEnemyInRange(enemy);
