@@ -9,21 +9,24 @@ public class GameTimeModel : IInitializable, ITickable
     private InputManager InputManager { get; set; }
     private CastleDefense Castle { get; set; }
     private CurrencyModel CurrencyModel { get; set; }
+    private WinModel WinModel { get; set; }
 
     private float lastDropTime = 0;
     private float secondsToDropGold = 5f;
     private float goldPercent = 2f;
 
     public bool IsPaused = Time.timeScale != 1;
+    private bool isWon = false;
 
     [Inject]
-    private void Construct(DefensesModel defensesModel, GameGrid grid, InputManager inputManager, CastleDefense castle, CurrencyModel currencyModel)
+    private void Construct(DefensesModel defensesModel, GameGrid grid, InputManager inputManager, CastleDefense castle, CurrencyModel currencyModel, WinModel winModel)
     {
         DefensesModel = defensesModel;
         Grid = grid;
         InputManager = inputManager;
         Castle = castle;
         CurrencyModel = currencyModel;
+        WinModel = winModel;
     }
 
     private void Pause()
@@ -42,14 +45,18 @@ public class GameTimeModel : IInitializable, ITickable
         Grid.OnGridCreated += Pause;
         InputManager.OnActiveDefenseClick += Pause;
 
+        WinModel.OnWin += Win;
+
         InputManager.OnEnemyClick += Resume;
         DefensesModel.OnDefenseDeselected += Resume;
         Castle.OnLose += Resume;
     }
 
+    private void Win() => isWon = true;
+
     public void Tick()
     {
-        if (IsPaused || !Castle.IsAlive) return;
+        if (IsPaused || !Castle.IsAlive || isWon) return;
 
         if (Time.time - lastDropTime > secondsToDropGold)
         {
