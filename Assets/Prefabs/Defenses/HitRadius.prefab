@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5079616329466418860}
   - component: {fileID: 5079616329466418859}
   - component: {fileID: 5079616329466418858}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: HitRadius
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51,7 +51,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
+  m_DynamicOccludee: 0
   m_StaticShadowCaster: 0
   m_MotionVectors: 2
   m_LightProbeUsage: 0
