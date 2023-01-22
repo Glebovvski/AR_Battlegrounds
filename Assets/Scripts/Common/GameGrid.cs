@@ -418,13 +418,23 @@ public class GameGrid : MonoBehaviour
                 bool isPrevIndexNotExist = grid[cell.Pos.x - 1].Count < cell.Pos.y + prevIndex * sign;
                 bool isNextIndexNotExist = grid[cell.Pos.x + 1].Count < cell.Pos.y + nextIndex * sign;
 
+                bool isPrevLowerIndexNotExist = cell.Pos.y - prevIndex * sign - 1 < 0;
+                bool isPrevHigherIndexNotExist = cell.Pos.y - prevIndex * sign + 1 < 0;
+                bool isNextLowerIndexNotExist = cell.Pos.y + nextIndex * sign - 1 < 0;
+                bool isNextHigherIndexNotExist = cell.Pos.y + prevIndex * sign + 1 < 0;
+
                 return
-                   centreCells.Contains(cell)
-                   || isLastRowEllipse
-                   || isFirstRowEllipse
-                   || isFirstOrLastInColumn
-                   || isPrevIndexNotExist
-                   || isNextIndexNotExist;
+                    centreCells.Contains(cell)
+                    || isLastRowEllipse
+                    || isFirstRowEllipse
+                    || isFirstOrLastInColumn
+                    || isPrevIndexNotExist
+                    || isNextIndexNotExist
+                    || isPrevLowerIndexNotExist
+                    || isPrevHigherIndexNotExist
+                    || isNextLowerIndexNotExist
+                    || isNextHigherIndexNotExist;
+
             default:
                 return true;
 
