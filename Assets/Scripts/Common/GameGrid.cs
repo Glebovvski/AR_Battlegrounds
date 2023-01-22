@@ -412,16 +412,19 @@ public class GameGrid : MonoBehaviour
 
                 var index = grid[cell.Pos.x].IndexOf(cell);
                 bool isFirstOrLastInColumn = index == 0 || index == grid[cell.Pos.x].Count - 1;
-                int prevIndex = (grid[cell.Pos.x].Count - grid[cell.Pos.x - 1].Count) / 2;
+                int prevIndex = Mathf.Abs((grid[cell.Pos.x].Count - grid[cell.Pos.x - 1].Count) / 2);
+                int nextIndex = Mathf.Abs((grid[cell.Pos.x].Count - grid[cell.Pos.x + 1].Count) / 2);
                 int sign = grid[cell.Pos.x - 1].Count > grid[cell.Pos.x].Count ? 1 : -1;
                 bool isPrevIndexNotExist = grid[cell.Pos.x - 1].Count < cell.Pos.y + prevIndex * sign;
+                bool isNextIndexNotExist = grid[cell.Pos.x + 1].Count < cell.Pos.y + nextIndex * sign;
 
                 return
                    centreCells.Contains(cell)
                    || isLastRowEllipse
                    || isFirstRowEllipse
                    || isFirstOrLastInColumn
-                   || isPrevIndexNotExist;
+                   || isPrevIndexNotExist
+                   || isNextIndexNotExist;
             default:
                 return true;
 
@@ -435,16 +438,20 @@ public class GameGrid : MonoBehaviour
         {
             int x_index = cell.Pos.x;
             int y_index = grid[cell.Pos.x].IndexOf(cell);
+
+            int prevIndex = Mathf.Abs((grid[cell.Pos.x].Count - grid[cell.Pos.x - 1].Count) / 2);
+            int nextIndex = Mathf.Abs((grid[cell.Pos.x].Count - grid[cell.Pos.x + 1].Count) / 2);
+            int sign = grid[cell.Pos.x - 1].Count > grid[cell.Pos.x].Count ? 1 : -1;
             // Debug.LogError(string.Format("INDEX OF {0} is {1}{2}", cell.name, x_index, y_index));
             return
                    // grid[cell.Pos.x - 1][cell.Pos.y - 1].IsUpper
                    // || grid[cell.Pos.x - 1][cell.Pos.y + 1].IsUpper
                    // || grid[cell.Pos.x + 1][cell.Pos.y + 1].IsUpper
                    // || grid[cell.Pos.x + 1][cell.Pos.y - 1].IsUpper;
-                   grid[x_index - 1][y_index - 1].IsUpper
-                || grid[x_index - 1][y_index + 1].IsUpper
-                || grid[x_index + 1][y_index + 1].IsUpper
-                || grid[x_index + 1][y_index - 1].IsUpper;
+                   grid[x_index - 1][y_index + prevIndex * sign - 1].IsUpper
+                || grid[x_index - 1][y_index + prevIndex * sign + 1].IsUpper
+                || grid[x_index + 1][y_index + nextIndex * sign + 1].IsUpper
+                || grid[x_index + 1][y_index + nextIndex * sign - 1].IsUpper;
         }
         catch (System.Exception)
         {
