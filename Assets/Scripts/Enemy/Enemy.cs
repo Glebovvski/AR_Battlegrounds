@@ -106,8 +106,8 @@ namespace Enemies
         private void Update()
         {
             if (AttackTarget != null)
-                this.transform.LookAt(AttackTarget.Defense.transform);
-            // Vector3.RotateTowards(this.transform.rotation.eulerAngles, new Vector3(AttackTarget.Defense.transform.rotation.x, 0, AttackTarget.Defense.transform.rotation.z), 5, 5);
+                Vector3.RotateTowards(this.transform.rotation.eulerAngles, new Vector3(AttackTarget.Defense.transform.rotation.x, 0, AttackTarget.Defense.transform.rotation.z), 5, 5);
+                // this.transform.LookAt(AttackTarget.Defense.transform);
             animationController.UpdateState();
         }
 
