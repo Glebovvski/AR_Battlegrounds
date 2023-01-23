@@ -32,6 +32,8 @@ namespace Enemies
         public List<Observation> Observations = new List<Observation>();
         [SerializeField] private List<Enemy> Enemies = new List<Enemy>();
 
+        private Dictionary<PoolObjectType, int> enemyCoefs = new Dictionary<PoolObjectType, int>();
+
         [Inject]
         private void Construct(CurrencyModel currencyModel, GameGrid grid, CastleDefense castle, LoseModel loseModel)
         {
@@ -61,6 +63,13 @@ namespace Enemies
             LoseModel.OnRestart += SpawnEnemies;
 
             SpawnEnemies();
+
+            enemyCoefs.Add(PoolObjectType.Enemy, maxBaseEnemies);
+            enemyCoefs.Add(PoolObjectType.SpyEnemy, maxSpyEnemies);
+            enemyCoefs.Add(PoolObjectType.FlamerEnemy, maxFlamerEnemies);
+            enemyCoefs.Add(PoolObjectType.BullEnemy, maxBullEnemies);
+            enemyCoefs.Add(PoolObjectType.HealerEnemy, maxHealerEnemies);
+            enemyCoefs.Add(PoolObjectType.KamikazeEnemy, maxKamikazeEnemies);
         }
 
         private void SpawnEnemies()
