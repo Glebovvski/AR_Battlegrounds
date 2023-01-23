@@ -33,7 +33,6 @@ public class GameGrid : MonoBehaviour
 
     public List<GridCell> GridList = new List<GridCell>();
 
-    // private GridCell[,] grid;
     private List<List<GridCell>> grid;
 
     private List<GridCell> centreCells;
@@ -83,7 +82,6 @@ public class GameGrid : MonoBehaviour
         float y = cell.Pos.y * gridSpaceSize;
 
         return new Vector3(x, cell.Height + yPos, y);
-        // return new Vector3(x, 0, y);
     }
 
     public Vector3 GetWorldPositionFromGrid(Vector2Int position, int height)
@@ -101,7 +99,6 @@ public class GameGrid : MonoBehaviour
 
         // return new Vector3(x, height + yPos, y);
         return new Vector3(x, height, y);
-        // return new Vector3(x, 0, y);
     }
 
     public void SelectDefence(ScriptableDefense info)
@@ -149,7 +146,6 @@ public class GameGrid : MonoBehaviour
         {
             var position = new Vector2(cell.transform.position.x, cell.transform.position.z);
             defence.transform.position = GetWorldPositionFromGrid(position, cell.IsUpper ? Mathf.CeilToInt(-yPos) : Mathf.FloorToInt(-yPos));
-            // defence.transform.position = GetWorldPositionFromGrid(position, Mathf.FloorToInt(-yPos));
             cell.SetDefence(defence);
         }
         else
@@ -308,7 +304,6 @@ public class GameGrid : MonoBehaviour
             var z_list = new List<GridCell>();
             for (int z = -z_radius; z <= z_radius; ++z)
             {
-                // if ((z_square * x * x + x_square * z * z) / (x_square * z_square) > 1f) continue;
                 if ((z_square * x * x + x_square * z * z) > (x_square * z_square)) continue;
 
                 var cell = Instantiate(gridCellPrefab, new Vector3(x * gridSpaceSize, yPos, z * gridSpaceSize), Quaternion.identity, this.transform);
@@ -367,17 +362,12 @@ public class GameGrid : MonoBehaviour
         foreach (var cell in GridList)
         {
             if (IsMustHaveGroundHeight(cell))
-            {
-                // if (!centreCells.Contains(cell))
-                // {
-                //     SelectedDefense = DefensesModel.List.Where(x => x.PoolType == PoolObjectType.WallTower).FirstOrDefault();
-                //     SpawnDefence(cell);
-                // }
                 continue;
-            }
+
             DeselectAllCells();
             if (IsAnyDiagonalCellUp(cell))
                 continue;
+                
             cell.SetHeight(UnityEngine.Random.Range(1, 3));
         }
 
