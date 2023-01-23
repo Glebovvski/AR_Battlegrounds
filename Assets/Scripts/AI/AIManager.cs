@@ -75,6 +75,10 @@ namespace Enemies
         private void SpawnEnemies()
         {
             var parent = spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Length - 1)];
+            foreach (var enemy in enemyCoefs)
+            {
+                var enemiesOnMap = Enemies.Where(x => x.Type == enemy.Key).Count();   
+            }
             var groups = Enemies.GroupBy(x => x.Type).ToList();
             if (groups.Count > 0)
             {
