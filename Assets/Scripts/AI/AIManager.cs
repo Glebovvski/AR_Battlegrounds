@@ -17,6 +17,13 @@ namespace Enemies
         public GameGrid Grid { get; private set; }
         private LoseModel LoseModel { get; set; }
 
+        [SerializeField] private int maxBaseEnemies;
+        [SerializeField] private int maxBullEnemies;
+        [SerializeField] private int maxHealerEnemies;
+        [SerializeField] private int maxSpyEnemies;
+        [SerializeField] private int maxKamikazeEnemies;
+        [SerializeField] private int maxFlamerEnemies;
+
         [SerializeField] private Transform[] spawnPoints;
         [SerializeField] private Transform plane;
 
@@ -58,13 +65,13 @@ namespace Enemies
         private void TestSpawn()
         {
             var bull = RegisterEnemy<BullEnemy>(PoolObjectType.BullEnemy, spawnPoints[0]);
-            var goblin = RegisterEnemy<KamikazeEnemy>(PoolObjectType.KamikazeEnemy, spawnPoints[3]);
-            var healer = RegisterEnemy<HealerEnemy>(PoolObjectType.HealerEnemy, spawnPoints[2]);
+            // var goblin = RegisterEnemy<KamikazeEnemy>(PoolObjectType.KamikazeEnemy, spawnPoints[3]);
+            // var healer = RegisterEnemy<HealerEnemy>(PoolObjectType.HealerEnemy, spawnPoints[2]);
             var flamer = RegisterEnemy<FlamerEnemy>(PoolObjectType.FlamerEnemy, spawnPoints[3]);
-            for (int i = 0; i < 8; i++)
-            {
-                var BaseEnemy = RegisterEnemy<BaseEnemy>(PoolObjectType.Enemy, spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Length - 1)]);
-            }
+            // for (int i = 0; i < 8; i++)
+            // {
+            //     var BaseEnemy = RegisterEnemy<BaseEnemy>(PoolObjectType.Enemy, spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Length - 1)]);
+            // }
         }
 
         public void AddObservation(Observation observation)
