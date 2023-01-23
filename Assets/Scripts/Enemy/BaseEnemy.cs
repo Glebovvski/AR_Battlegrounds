@@ -11,7 +11,6 @@ namespace Enemies
             base.StartAttack(out isReady);
             if (isReady)
                 animationController.Attack();
-                else Debug.LogError("ENEMY NOT READY");
         }
 
         public void Attack()
