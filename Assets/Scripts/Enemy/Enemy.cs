@@ -43,7 +43,7 @@ namespace Enemies
         public float AttackRadius => SO.AttackRadius;
         public EnemyType EnemyType => SO.EnemyType;
         protected bool IsReadyToAttack => Time.time - LastAttackTime > SO.TimeBetweenAttacks;
-        
+
         public int AttackWallScore => SO.AttackWallScore;
         public int AttackCannonScore => SO.AttackCannonScore;
         public int AttackLaserScore => SO.AttackLaserScore;
@@ -106,7 +106,8 @@ namespace Enemies
         private void Update()
         {
             if (AttackTarget != null)
-                Vector3.RotateTowards(this.transform.rotation.eulerAngles, new Vector3(AttackTarget.Defense.transform.rotation.x, 0, AttackTarget.Defense.transform.rotation.z), 5, 5);
+                this.transform.LookAt(AttackTarget.Defense.transform);
+            // Vector3.RotateTowards(this.transform.rotation.eulerAngles, new Vector3(AttackTarget.Defense.transform.rotation.x, 0, AttackTarget.Defense.transform.rotation.z), 5, 5);
             animationController.UpdateState();
         }
 
