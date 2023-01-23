@@ -549,7 +549,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 581853323}
   m_Direction: 0
   m_Value: 0
-  m_Size: 0
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2073,6 +2073,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bee20a85bf219f489155c289061f2ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxBaseEnemies: 10
+  maxBullEnemies: 1
+  maxHealerEnemies: 2
+  maxSpyEnemies: 2
+  maxKamikazeEnemies: 1
+  maxFlamerEnemies: 1
   spawnPoints:
   - {fileID: 4555737984256998628}
   - {fileID: 1599919936}

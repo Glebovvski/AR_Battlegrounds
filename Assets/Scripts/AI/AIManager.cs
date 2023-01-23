@@ -67,30 +67,41 @@ namespace Enemies
         {
             var parent = spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Length - 1)];
             var groups = Enemies.GroupBy(x => x.Type).ToList();
-            foreach (var group in groups)
+            if (groups.Count > 0)
             {
-                switch (group.Key)
+                foreach (var group in groups)
                 {
-                    case PoolObjectType.Enemy:
-                        if (group.Count() < maxBaseEnemies)
-                            RegisterEnemy<BaseEnemy>(group.Key, parent);
-                        break;
-                    case PoolObjectType.FlamerEnemy:
-                        if (group.Count() < maxFlamerEnemies)
-                            RegisterEnemy<FlamerEnemy>(group.Key, parent);
-                        break;
-                    case PoolObjectType.HealerEnemy:
-                        if (group.Count() < maxHealerEnemies)
-                            RegisterEnemy<BaseEnemy>(group.Key, parent);
-                        break;
-                    case PoolObjectType.KamikazeEnemy:
-                        if (group.Count() < maxKamikazeEnemies)
-                            RegisterEnemy<BaseEnemy>(group.Key, parent);
-                        break;
-                    case PoolObjectType.BullEnemy:
-                        if (group.Count() < maxBullEnemies)
-                            RegisterEnemy<BaseEnemy>(group.Key, parent);
-                        break;
+                    switch (group.Key)
+                    {
+                        case PoolObjectType.Enemy:
+                            if (group.Count() < maxBaseEnemies)
+                                RegisterEnemy<BaseEnemy>(group.Key, parent);
+                            break;
+                        case PoolObjectType.FlamerEnemy:
+                            if (group.Count() < maxFlamerEnemies)
+                                RegisterEnemy<FlamerEnemy>(group.Key, parent);
+                            break;
+                        case PoolObjectType.HealerEnemy:
+                            if (group.Count() < maxHealerEnemies)
+                                RegisterEnemy<BaseEnemy>(group.Key, parent);
+                            break;
+                        case PoolObjectType.KamikazeEnemy:
+                            if (group.Count() < maxKamikazeEnemies)
+                                RegisterEnemy<BaseEnemy>(group.Key, parent);
+                            break;
+                        case PoolObjectType.BullEnemy:
+                            if (group.Count() < maxBullEnemies)
+                                RegisterEnemy<BaseEnemy>(group.Key, parent);
+                            break;
+                    }
+                }
+            }
+            else
+            {
+                for (int i = 0; i < 5; i++)
+                {
+                    parent = spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Length - 1)];
+                    RegisterEnemy<BaseEnemy>(PoolObjectType.Enemy, parent);
                 }
             }
         }
