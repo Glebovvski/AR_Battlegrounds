@@ -62,61 +62,25 @@ namespace Enemies
             Castle.OnLose += ReturnAllEnemiesToPool;
             LoseModel.OnRestart += SpawnEnemies;
 
-            SpawnEnemies();
-
             enemyCoefs.Add(PoolObjectType.Enemy, maxBaseEnemies);
             enemyCoefs.Add(PoolObjectType.SpyEnemy, maxSpyEnemies);
             enemyCoefs.Add(PoolObjectType.FlamerEnemy, maxFlamerEnemies);
             enemyCoefs.Add(PoolObjectType.BullEnemy, maxBullEnemies);
             enemyCoefs.Add(PoolObjectType.HealerEnemy, maxHealerEnemies);
             enemyCoefs.Add(PoolObjectType.KamikazeEnemy, maxKamikazeEnemies);
+
+            SpawnEnemies();
         }
 
         private void SpawnEnemies()
         {
-            var parent = spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Length - 1)];
             foreach (var enemy in enemyCoefs)
             {
-                var enemiesOnMap = Enemies.Where(x => x.Type == enemy.Key).Count();   
-            }
-            var groups = Enemies.GroupBy(x => x.Type).ToList();
-            if (groups.Count > 0)
-            {
-                foreach (var group in groups)
+                var enemiesOnMap = Enemies.Where(x => x.Type == enemy.Key).Count();
+                if (enemiesOnMap < enemy.Value)
                 {
-                    switch (group.Key)
-                    {
-                        case PoolObjectType.Enemy:
-                            if (group.Count() < maxBaseEnemies)
-                                RegisterEnemy<BaseEnemy>(group.Key, parent);
-                            break;
-                        case PoolObjectType.FlamerEnemy:
-                            if (group.Count() < maxFlamerEnemies)
-                                RegisterEnemy<FlamerEnemy>(group.Key, parent);
-                            break;
-                        case PoolObjectType.HealerEnemy:
-                            if (group.Count() < maxHealerEnemies)
-                                RegisterEnemy<BaseEnemy>(group.Key, parent);
-                            break;
-                        case PoolObjectType.KamikazeEnemy:
-                            if (group.Count() < maxKamikazeEnemies)
-                                RegisterEnemy<BaseEnemy>(group.Key, parent);
-                            break;
-                        case PoolObjectType.BullEnemy:
-                            if (group.Count() < maxBullEnemies)
-                                RegisterEnemy<BaseEnemy>(group.Key, parent);
-                            break;
-                    }
-                }
-            }
-            else
-            {
-                RegisterEnemy<SpyEnemy>(PoolObjectType.SpyEnemy, parent);
-                int count = UnityEngine.Random.Range(1, maxBaseEnemies);
-                for (int i = 0; i < count; i++)
-                {
-                    parent = spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Length - 1)];
-                    RegisterEnemy<BaseEnemy>(PoolObjectType.Enemy, parent);
+                    var parent = spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Length - 1)];
+                    RegisterEnemy(enemy.Key, parent);
                 }
             }
         }
@@ -160,9 +124,9 @@ namespace Enemies
 
         public List<Observation> GetActiveDefenses(DefenseType except = DefenseType.None) => Observations.Where(x => x.Defense.IsActiveDefense && x.Defense.Type != except).ToList();
 
-        public T RegisterEnemy<T>(PoolObjectType enemyType, Transform parent) where T : Enemy
+        public Enemy RegisterEnemy(PoolObjectType enemyType, Transform parent)
         {
-            var enemy = PoolManager.Instance.GetFromPool<T>(enemyType);
+            var enemy = PoolManager.Instance.GetFromPool<Enemy>(enemyType);
             enemy.transform.SetParent(plane);
             enemy.transform.position = parent.position;
             enemy.OnDeath += GetGoldFromEnemy;
