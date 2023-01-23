@@ -24,8 +24,6 @@ namespace Enemies
         [SerializeField] private CFXR_Effect fx;
         [SerializeField] private Outline outline;
 
-        [property: SerializeField] public string DebugTargetName => AttackTarget.Defense.name;
-
         public int Health { get; private set; }
         public float CurrentHealth => DamageReceiver.CurrentHealth;
         public int AttackForce { get; set; }
@@ -44,14 +42,8 @@ namespace Enemies
         public float AttackRange => SO.AttackRange;
         public float AttackRadius => SO.AttackRadius;
         public EnemyType EnemyType => SO.EnemyType;
-        protected bool IsReadyToAttack
-        {
-            get
-            {
-                var timedif = Time.time - LastAttackTime;
-                return timedif > SO.TimeBetweenAttacks;
-            }
-        }
+        protected bool IsReadyToAttack => Time.time - LastAttackTime > SO.TimeBetweenAttacks;
+        
         public int AttackWallScore => SO.AttackWallScore;
         public int AttackCannonScore => SO.AttackCannonScore;
         public int AttackLaserScore => SO.AttackLaserScore;
