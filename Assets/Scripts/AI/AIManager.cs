@@ -17,6 +17,7 @@ namespace Enemies
         public GameGrid Grid { get; private set; }
         private LoseModel LoseModel { get; set; }
 
+        [Header("Enemies coefficient to spawn")]
         [SerializeField] private int maxBaseEnemies;
         [SerializeField] private int maxBullEnemies;
         [SerializeField] private int maxHealerEnemies;
