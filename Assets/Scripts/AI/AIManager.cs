@@ -98,7 +98,9 @@ namespace Enemies
             }
             else
             {
-                for (int i = 0; i < 5; i++)
+                RegisterEnemy<SpyEnemy>(PoolObjectType.SpyEnemy, parent);
+                int count = UnityEngine.Random.Range(1, maxBaseEnemies);
+                for (int i = 0; i < count; i++)
                 {
                     parent = spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Length - 1)];
                     RegisterEnemy<BaseEnemy>(PoolObjectType.Enemy, parent);
