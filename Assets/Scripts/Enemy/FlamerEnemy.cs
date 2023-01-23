@@ -18,7 +18,10 @@ namespace Enemies
         {
             base.StartAttack(out isReady);
             if (isReady)
+            {
                 StartAttack();
+                animationController.Attack();
+            }
         }
 
         public void StartAttack()
@@ -30,14 +33,16 @@ namespace Enemies
 
         }
 
-        private void Update()
+        public override void Update()
         {
+            base.Update();
+
             if (!IsAttacking)
                 return;
 
             if (Time.time - startAttackTime > 1)
                 StopAttack();
-                
+
             foreach (var defense in defensesInRange)
             {
                 defense.TakeDamage(AttackForce * Time.deltaTime);
