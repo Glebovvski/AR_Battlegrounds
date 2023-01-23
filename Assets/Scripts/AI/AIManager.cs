@@ -57,21 +57,9 @@ namespace Enemies
         private void Start()
         {
             Castle.OnLose += ReturnAllEnemiesToPool;
-            LoseModel.OnRestart += TestSpawn;
+            LoseModel.OnRestart += SpawnEnemies;
 
-            TestSpawn();
-        }
-
-        private void TestSpawn()
-        {
-            var bull = RegisterEnemy<BullEnemy>(PoolObjectType.BullEnemy, spawnPoints[0]);
-            // var goblin = RegisterEnemy<KamikazeEnemy>(PoolObjectType.KamikazeEnemy, spawnPoints[3]);
-            // var healer = RegisterEnemy<HealerEnemy>(PoolObjectType.HealerEnemy, spawnPoints[2]);
-            var flamer = RegisterEnemy<FlamerEnemy>(PoolObjectType.FlamerEnemy, spawnPoints[3]);
-            // for (int i = 0; i < 8; i++)
-            // {
-            //     var BaseEnemy = RegisterEnemy<BaseEnemy>(PoolObjectType.Enemy, spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Length - 1)]);
-            // }
+            SpawnEnemies();
         }
 
         private void SpawnEnemies()
@@ -159,6 +147,7 @@ namespace Enemies
         {
             Enemies.Remove(enemy);
             PoolManager.Instance.ReturnToPool(enemy.GameObject, enemy.Type);
+            SpawnEnemies();
         }
 
         public IEnumerable<Enemy> GetEnemiesAttackingObservation(Observation observation) => Enemies.Where(x => x.AttackTarget == observation);
@@ -204,7 +193,7 @@ namespace Enemies
         private void OnDestroy()
         {
             Castle.OnLose -= ReturnAllEnemiesToPool;
-            LoseModel.OnRestart -= TestSpawn;
+            LoseModel.OnRestart -= SpawnEnemies;
         }
     }
 }
