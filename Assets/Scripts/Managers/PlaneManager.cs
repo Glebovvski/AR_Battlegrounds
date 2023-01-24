@@ -13,7 +13,7 @@ public class PlaneManager : MonoBehaviour
 
     private void Start()
     {
-        Grid.SetActive(false)ж
+        Grid.SetActive(false);
     }
 
     private void Update()
