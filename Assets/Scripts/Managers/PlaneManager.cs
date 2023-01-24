@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
+using UnityEngine.XR.ARSubsystems;
 
 public class PlaneManager : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class PlaneManager : MonoBehaviour
         if(obj.added.Count == 0) return;
 
         var plane = obj.added[0];
-        origin.MakeContentAppearAt(this.transform, Vector3.zero, Quaternion.identity);
+        origin.MakeContentAppearAt(this.transform, plane.center, Quaternion.identity);
+        planeManager.requestedDetectionMode = PlaneDetectionMode.None;
     }
 }
