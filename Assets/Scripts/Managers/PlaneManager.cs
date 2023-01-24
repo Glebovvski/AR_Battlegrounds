@@ -9,6 +9,12 @@ public class PlaneManager : MonoBehaviour
 {
     [SerializeField] private ARPlaneManager planeManager;
     [SerializeField] private ARSessionOrigin origin;
+    [SerializeField] private GameObject Grid;
+
+    private void Start()
+    {
+        Grid.SetActive(false)ж
+    }
 
     private void Update()
     {
@@ -24,6 +30,7 @@ public class PlaneManager : MonoBehaviour
                 {
                     origin.MakeContentAppearAt(this.transform, plane.center, Quaternion.identity);
                     planeManager.requestedDetectionMode = PlaneDetectionMode.None;
+                    Grid.SetActive(true);
                 }
             }
         }
