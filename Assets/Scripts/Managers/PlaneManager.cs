@@ -12,6 +12,8 @@ public class PlaneManager : MonoBehaviour
 
     private void Update()
     {
+        if (Input.touchCount == 0) return;
+
         var touch = Input.GetTouch(0);
         if (touch.phase == TouchPhase.Began)
         {

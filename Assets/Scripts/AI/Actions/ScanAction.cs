@@ -27,8 +27,6 @@ namespace AI
             defences.Clear();
 
             Enemy.SetIsScanFinished(true);
-
-            Debug.LogError("SCAN FINISHED");
         }
     }
 }
