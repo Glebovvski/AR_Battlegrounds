@@ -74,7 +74,7 @@ namespace Enemies
             PopulateDictionary();
         }
 
-        protected virtual void Init()
+        public virtual void Init()
         {
             GetData();
             DamageReceiver = new DamageReceiver(Health);
@@ -98,16 +98,16 @@ namespace Enemies
             DefenseTypeToScore = DefenseTypeToScore.OrderByDescending(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
         }
 
-        public virtual void OnEnable()
-        {
-            Init();
-        }
+        // public virtual void OnEnable()
+        // {
+        //     Init();
+        // }
 
         public virtual void Update()
         {
             if (AttackTarget != null)
                 Vector3.RotateTowards(this.transform.rotation.eulerAngles, new Vector3(AttackTarget.Defense.transform.rotation.x, 0, AttackTarget.Defense.transform.rotation.z), 5, 5);
-                // this.transform.LookAt(AttackTarget.Defense.transform);
+            // this.transform.LookAt(AttackTarget.Defense.transform);
             animationController.UpdateState();
         }
 
@@ -125,6 +125,8 @@ namespace Enemies
             Speed = SO.Speed;
             navMeshAgent.speed = SO.Speed;
         }
+
+        public bool IsNewDestination(Vector3 destination) => Vector3.Distance(NavMeshAgent.destination, destination) > 0.1f;
 
         public void MoveTo(Vector3 destination)
         {
@@ -156,7 +158,7 @@ namespace Enemies
         private void Death()
         {
             DamageReceiver.OnDeath -= Death;
-            NavMeshAgent.enabled = false;
+            // NavMeshAgent.enabled = false;
             fx.gameObject.SetActive(true);
         }
 

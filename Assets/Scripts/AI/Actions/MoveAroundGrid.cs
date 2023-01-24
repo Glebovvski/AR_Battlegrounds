@@ -16,7 +16,8 @@ namespace AI
 
             var corners = Enemies.AIManager.Instance.Grid.Corners();
             int closest = GetClosestCornerIndex(corners, enemy);
-            enemy.MoveTo(corners[closest]);
+            if (enemy.IsNewDestination(corners[closest]))
+                enemy.MoveTo(corners[closest]);
             enemy.SetIsScanFinished(false);
         }
 

@@ -15,9 +15,9 @@ namespace Enemies
         [SerializeField] private GameObject goblinMesh;
         private LayerMask defenseMask;
 
-        public override void OnEnable()
+        public void OnEnable()
         {
-            base.OnEnable();
+            // base.OnEnable();
             goblinMesh.SetActive(true);
             explosionFX.gameObject.SetActive(false);
             explosionFX.OnFinish += ReturnToPool;

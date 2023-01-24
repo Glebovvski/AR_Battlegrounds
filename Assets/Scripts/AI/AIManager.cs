@@ -127,6 +127,7 @@ namespace Enemies
         public Enemy RegisterEnemy(PoolObjectType enemyType, Transform parent)
         {
             var enemy = PoolManager.Instance.GetFromPool<Enemy>(enemyType);
+            enemy.Init();
             enemy.transform.SetParent(plane);
             enemy.transform.position = parent.position;
             enemy.OnDeath += GetGoldFromEnemy;

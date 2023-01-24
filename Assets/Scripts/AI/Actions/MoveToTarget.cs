@@ -9,7 +9,11 @@ public class MoveToTarget : ActionBase
     public override void Execute(IAIContext context)
     {
         var c = (AIContext)context;
-        if (c.Enemy.AttackTarget != null && c.Enemy.AttackTarget.IsAlive)
+
+        if (c.Enemy.AttackTarget != null && c.Enemy.AttackTarget.IsAlive && c.Enemy.IsNewDestination(c.Enemy.AttackTarget.Position))
+        {
             c.Enemy.MoveTo(c.Enemy.AttackTarget.Position);
+            Debug.LogError("SET DEST");
+        }
     }
 }
