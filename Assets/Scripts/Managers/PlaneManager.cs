@@ -13,7 +13,7 @@ public class PlaneManager : MonoBehaviour
 
     private void Start()
     {
-        Grid.SetActive(false);
+        Grid.transform.position = Camera.main.transform.position - Vector3.back*1000;
     }
 
     private void Update()
@@ -30,7 +30,6 @@ public class PlaneManager : MonoBehaviour
                 {
                     origin.MakeContentAppearAt(this.transform, plane.center, Quaternion.identity);
                     planeManager.requestedDetectionMode = PlaneDetectionMode.None;
-                    Grid.SetActive(true);
                 }
             }
         }
