@@ -48,6 +48,7 @@ public class InputManager : MonoBehaviour
     private void Update()
     {
 
+#if UNITY_EDITOR
         if (Input.GetMouseButtonDown(0))
         {
             var cell = GetObjectOnScene<GridCell>(GridLayer);
@@ -74,6 +75,35 @@ public class InputManager : MonoBehaviour
             }
         }
         // if (!cell || !cell.IsSelected) return;
+        #elif UNITY_IOS || PLATFORM_IOS
+        var touch = Input.GetTouch(0);
+        if (touch.phase == TouchPhase.Began)
+        {
+            var cell = GetObjectOnScene<GridCell>(GridLayer);
+            if (!TrySpawnOnCell(cell))
+            {
+                if (DefensesModel.InDefenseSelectionMode) return;
+
+                var defense = GetObjectOnScene<ActiveDefense>(DefenseLayer);
+                if ((!defense || !defense.IsActiveDefense) && !SelectedDefense) return;
+                if (SelectedDefense != defense && defense)
+                {
+                    SelectedDefense = defense;
+                    return;
+                }
+
+                if (SelectedDefense)
+                {
+                    var enemy = GetObjectOnScene<Enemy>(EnemyLayer);
+                    if (!enemy || !enemy.IsAlive || !SelectedDefense || !SelectedDefense.IsEnemyInRange(enemy)) return;
+                    SelectedDefense.SetAttackTarget(enemy);
+                    OnEnemyClick?.Invoke();
+                    SelectedDefense = null;
+                }
+            }
+        }
+        #endif
+
     }
 
     private bool TrySpawnOnCell(GridCell cell)
@@ -86,7 +116,12 @@ public class InputManager : MonoBehaviour
 
     private T GetObjectOnScene<T>(LayerMask layer) where T : MonoBehaviour
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Ray ray;
+        #if UNITY_EDITOR
+        ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        #elif UNITY_IOS || PLATFORM_IOS
+        ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
+        #endif
         if (Physics.Raycast(ray, out var raycastHit, 1000f, layer))
         {
             return raycastHit.transform.GetComponent<T>();
