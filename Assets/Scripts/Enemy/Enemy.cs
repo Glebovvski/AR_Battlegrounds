@@ -89,6 +89,7 @@ namespace Enemies
 
         private void PopulateDictionary()
         {
+            DefenseTypeToScore.Clear();
             DefenseTypeToScore.Add(DefenseType.Castle, AttackCastleScore);
             DefenseTypeToScore.Add(DefenseType.Cannon, AttackCannonScore);
             DefenseTypeToScore.Add(DefenseType.Laser, AttackLaserScore);
@@ -98,16 +99,10 @@ namespace Enemies
             DefenseTypeToScore = DefenseTypeToScore.OrderByDescending(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
         }
 
-        // public virtual void OnEnable()
-        // {
-        //     Init();
-        // }
-
         public virtual void Update()
         {
             if (AttackTarget != null)
                 Vector3.RotateTowards(this.transform.rotation.eulerAngles, new Vector3(AttackTarget.Defense.transform.rotation.x, 0, AttackTarget.Defense.transform.rotation.z), 5, 5);
-            // this.transform.LookAt(AttackTarget.Defense.transform);
             animationController.UpdateState();
         }
 

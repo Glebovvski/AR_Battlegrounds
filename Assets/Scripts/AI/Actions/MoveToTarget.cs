@@ -13,7 +13,6 @@ public class MoveToTarget : ActionBase
         if (c.Enemy.AttackTarget != null && c.Enemy.AttackTarget.IsAlive && c.Enemy.IsNewDestination(c.Enemy.AttackTarget.Position))
         {
             c.Enemy.MoveTo(c.Enemy.AttackTarget.Position);
-            Debug.LogError("SET DEST");
         }
     }
 }

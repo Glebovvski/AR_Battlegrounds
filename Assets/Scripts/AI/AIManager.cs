@@ -76,10 +76,10 @@ namespace Enemies
         {
             foreach (var enemy in enemyCoefs)
             {
+                var parent = spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Length - 1)];
                 var enemiesOnMap = Enemies.Where(x => x.Type == enemy.Key).Count();
                 if (enemiesOnMap < enemy.Value)
                 {
-                    var parent = spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Length - 1)];
                     RegisterEnemy(enemy.Key, parent);
                 }
             }
@@ -127,11 +127,13 @@ namespace Enemies
         public Enemy RegisterEnemy(PoolObjectType enemyType, Transform parent)
         {
             var enemy = PoolManager.Instance.GetFromPool<Enemy>(enemyType);
-            enemy.Init();
+            enemy.gameObject.SetActive(false);
             enemy.transform.SetParent(plane);
+            enemy.Init();
             enemy.transform.position = parent.position;
             enemy.OnDeath += GetGoldFromEnemy;
             Enemies.Add(enemy);
+            enemy.gameObject.SetActive(true);
             return enemy;
         }
 
