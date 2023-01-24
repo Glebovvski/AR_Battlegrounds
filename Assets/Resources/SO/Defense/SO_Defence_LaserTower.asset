@@ -17,10 +17,11 @@ MonoBehaviour:
   Price: 700
   Health: 25
   IsActiveDefense: 1
-  AttackForce: 1
+  AttackForce: 100
   AttackRange: 20
   ReloadTime: 10
   ProjectileSpeed: 100
+  RotationSpeed: 0
   Size: {x: 2, y: 2}
   Condition: 0
   PoolType: 102

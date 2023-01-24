@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccebcbb03116bc247887c506c2e1cbe3, type: 3}
   m_Name: SO_Missile_Launchable
   m_EditorClassIdentifier: 
-  Damage: 5
+  Damage: 50
   Speed: 0.5
   IsFromPool: 1
   HitRadius: 5

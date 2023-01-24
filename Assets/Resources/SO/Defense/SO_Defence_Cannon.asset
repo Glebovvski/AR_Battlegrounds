@@ -21,7 +21,7 @@ MonoBehaviour:
   AttackRange: 100
   ReloadTime: 5
   ProjectileSpeed: 5
-  RotationSpeed: 5
+  RotationSpeed: 30
   Size: {x: 1, y: 1}
   Condition: 2
   PoolType: 100
