@@ -238,7 +238,7 @@ public class GameGrid : MonoBehaviour
 
         TryChangeHeight();
         SpawnCastleAtCentre();
-        RebuildNavMesh();
+        // RebuildNavMesh();
         OnGridCreated?.Invoke();
     }
 
@@ -339,7 +339,7 @@ public class GameGrid : MonoBehaviour
         Vector2 centre = GetCentreOfPair(centreCells);
         Castle.Init(DefensesModel.List.Where(x => x.Type == DefenseType.Castle).FirstOrDefault());
         Castle.transform.position = GetWorldPositionFromGrid(centre, 0);
-        Castle.transform.SetParent(plane.transform);
+        // Castle.transform.SetParent(plane.transform);
         centreCells.ForEach(x => x.SetDefence(Castle));
     }
 
