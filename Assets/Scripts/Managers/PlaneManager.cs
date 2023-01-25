@@ -33,6 +33,7 @@ public class PlaneManager : MonoBehaviour
                 if (raycastHit.collider.TryGetComponent<ARPlane>(out var plane))
                 {
                     // this.transform.localScale = new Vector3(this.transform.localScale.x / plane.size.x, 1, this.transform.localScale.z / plane.size.y);
+                    this.transform.SetParent(plane.transform);
                     origin.MakeContentAppearAt(this.transform, plane.center, Quaternion.identity);
                     Grid.CreateGrid();
                     planeManager.requestedDetectionMode = PlaneDetectionMode.None;
