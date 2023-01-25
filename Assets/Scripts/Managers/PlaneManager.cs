@@ -19,6 +19,7 @@ public class PlaneManager : MonoBehaviour
     private void Update()
     {
         if (Input.touchCount == 0) return;
+        if (planeManager.trackables.count == 0) return;
 
         var touch = Input.GetTouch(0);
         if (touch.phase == TouchPhase.Began)
@@ -29,16 +30,16 @@ public class PlaneManager : MonoBehaviour
                 if (raycastHit.collider.TryGetComponent<ARPlane>(out var plane))
                 {
                     this.transform.localScale = new Vector3(this.transform.localScale.x / plane.size.x, 1, this.transform.localScale.z / plane.size.y);
-                    Grid.CreateGrid();
                     origin.MakeContentAppearAt(this.transform, plane.center, Quaternion.identity);
+                    Grid.CreateGrid();
                     planeManager.requestedDetectionMode = PlaneDetectionMode.None;
                     Debug.LogError("GRID CREATED");
                 }
                 else
-                DebugView.Instance.SetText("NO AR PLANE");
+                    DebugView.Instance.SetText("NO AR PLANE");
             }
             else
-            DebugView.Instance.SetText("NO RAYCAST TARGET");
+                DebugView.Instance.SetText("NO RAYCAST TARGET");
         }
     }
 }
