@@ -32,7 +32,11 @@ public class PlaneManager : MonoBehaviour
                     origin.MakeContentAppearAt(this.transform, plane.center, Quaternion.identity);
                     planeManager.requestedDetectionMode = PlaneDetectionMode.None;
                 }
+                else
+                DebugView.Instance.SetText("NO AR PLANE");
             }
+            else
+            DebugView.Instance.SetText("NO RAYCAST TARGET");
         }
     }
 }
