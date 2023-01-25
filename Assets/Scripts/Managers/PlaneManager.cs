@@ -13,7 +13,7 @@ public class PlaneManager : MonoBehaviour
 
     private void Start()
     {
-        Grid.transform.position = Camera.main.transform.position - Vector3.back*1000;
+        // Grid.transform.position = Camera.main.transform.position - Vector3.back*1000;
     }
 
     private void Update()
@@ -28,7 +28,7 @@ public class PlaneManager : MonoBehaviour
             {
                 if (raycastHit.collider.TryGetComponent<ARPlane>(out var plane))
                 {
-                    this.transform.localScale = new Vector3(plane.size.x, 1, plane.size.y);
+                    this.transform.localScale = new Vector3(this.transform.localScale.x / plane.size.x, 1, this.transform.localScale.z / plane.size.y);
                     Grid.CreateGrid();
                     origin.MakeContentAppearAt(this.transform, plane.center, Quaternion.identity);
                     planeManager.requestedDetectionMode = PlaneDetectionMode.None;
