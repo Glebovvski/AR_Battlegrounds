@@ -33,7 +33,7 @@ public class PlaneManager : MonoBehaviour
                     origin.MakeContentAppearAt(this.transform, plane.center, Quaternion.identity);
                     Grid.CreateGrid();
                     planeManager.requestedDetectionMode = PlaneDetectionMode.None;
-                    Debug.LogError("GRID CREATED");
+                    DebugView.Instance.SetText("GRID CREATED");
                 }
                 else
                     DebugView.Instance.SetText("NO AR PLANE");
