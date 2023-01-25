@@ -61,6 +61,7 @@ namespace Enemies
         {
             Castle.OnLose += ReturnAllEnemiesToPool;
             LoseModel.OnRestart += SpawnEnemies;
+            Grid.OnGridCreated += SpawnEnemies;
 
             enemyCoefs.Add(PoolObjectType.Enemy, maxBaseEnemies);
             enemyCoefs.Add(PoolObjectType.SpyEnemy, maxSpyEnemies);
@@ -68,8 +69,6 @@ namespace Enemies
             enemyCoefs.Add(PoolObjectType.BullEnemy, maxBullEnemies);
             enemyCoefs.Add(PoolObjectType.HealerEnemy, maxHealerEnemies);
             enemyCoefs.Add(PoolObjectType.KamikazeEnemy, maxKamikazeEnemies);
-
-            SpawnEnemies();
         }
 
         private void SpawnEnemies()
@@ -188,6 +187,7 @@ namespace Enemies
         {
             Castle.OnLose -= ReturnAllEnemiesToPool;
             LoseModel.OnRestart -= SpawnEnemies;
+            Grid.OnGridCreated -= SpawnEnemies;
         }
     }
 }

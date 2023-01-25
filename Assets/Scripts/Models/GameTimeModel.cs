@@ -17,6 +17,7 @@ public class GameTimeModel : IInitializable, ITickable
 
     public bool IsPaused = Time.timeScale != 1;
     private bool isWon = false;
+    private bool gridCreated = false;
 
     [Inject]
     private void Construct(DefensesModel defensesModel, GameGrid grid, InputManager inputManager, CastleDefense castle, CurrencyModel currencyModel, WinModel winModel)
@@ -32,6 +33,7 @@ public class GameTimeModel : IInitializable, ITickable
     private void Pause()
     {
         Time.timeScale = 0.05f;
+        gridCreated = true;
     }
 
     private void Resume()
@@ -56,6 +58,7 @@ public class GameTimeModel : IInitializable, ITickable
 
     public void Tick()
     {
+        if (!gridCreated) return;
         if (IsPaused || !Castle.IsAlive || isWon) return;
 
         if (Time.time - lastDropTime > secondsToDropGold)
