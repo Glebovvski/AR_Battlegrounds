@@ -24,13 +24,15 @@ public class PlaneManager : MonoBehaviour
         if (touch.phase == TouchPhase.Began)
         {
             Ray raycast = Camera.main.ScreenPointToRay(touch.position);
-            if (Physics.Raycast(raycast, out RaycastHit raycastHit))
+            if (Physics.Raycast(raycast, out RaycastHit raycastHit, float.MaxValue))
             {
                 if (raycastHit.collider.TryGetComponent<ARPlane>(out var plane))
                 {
+                    this.transform.localScale = new Vector3(plane.size.x, 1, plane.size.y);
                     Grid.CreateGrid();
                     origin.MakeContentAppearAt(this.transform, plane.center, Quaternion.identity);
                     planeManager.requestedDetectionMode = PlaneDetectionMode.None;
+                    Debug.LogError("GRID CREATED");
                 }
                 else
                 DebugView.Instance.SetText("NO AR PLANE");
