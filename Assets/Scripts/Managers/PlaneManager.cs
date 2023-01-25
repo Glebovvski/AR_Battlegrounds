@@ -35,12 +35,13 @@ public class PlaneManager : MonoBehaviour
                 var plane = planeManager.GetPlane(hits[0].trackableId);
                 if(!plane) return;
                 var hitPose = hits[0].pose;
+                planeManager.requestedDetectionMode = PlaneDetectionMode.None;
                 this.transform.position = plane.center;//.position;
                 // this.transform.rotation = hitPose.rotation;
+                
                 Grid.CreateGrid();
                 DebugView.Instance.SetText("GRID CREATED");
                 gridCreated = true;
-                planeManager.requestedDetectionMode = PlaneDetectionMode.None;
             }
             // Ray raycast = Camera.main.ScreenPointToRay(touch.position);
             // if (Physics.Raycast(raycast, out RaycastHit raycastHit, float.MaxValue))
