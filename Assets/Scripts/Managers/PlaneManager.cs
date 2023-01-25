@@ -9,7 +9,7 @@ public class PlaneManager : MonoBehaviour
 {
     [SerializeField] private ARPlaneManager planeManager;
     [SerializeField] private ARSessionOrigin origin;
-    [SerializeField] private GameObject Grid;
+    [SerializeField] private GameGrid Grid;
 
     private void Start()
     {
@@ -28,6 +28,7 @@ public class PlaneManager : MonoBehaviour
             {
                 if (raycastHit.collider.TryGetComponent<ARPlane>(out var plane))
                 {
+                    Grid.CreateGrid();
                     origin.MakeContentAppearAt(this.transform, plane.center, Quaternion.identity);
                     planeManager.requestedDetectionMode = PlaneDetectionMode.None;
                 }

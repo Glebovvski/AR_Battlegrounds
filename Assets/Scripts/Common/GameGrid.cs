@@ -62,7 +62,7 @@ public class GameGrid : MonoBehaviour
         DefensesModel.OnDefenseDeselected += DeselectDefense;
         LoseModel.OnRestart += RemoveAllDefenses;
 
-        CreateGrid();
+        // CreateGrid();
     }
 
     public Vector2Int GetGridPositionFromWorld(Vector3 worldPosition)

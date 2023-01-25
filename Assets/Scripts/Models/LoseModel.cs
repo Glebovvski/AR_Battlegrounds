@@ -15,6 +15,6 @@ public class LoseModel
     public void Restart()
     {
         OnRestart?.Invoke();
-        Grid.CreateGrid();
+        // Grid.CreateGrid();
     }
 }
