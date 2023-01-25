@@ -30,11 +30,13 @@ public class PlaneManager : MonoBehaviour
         var touch = Input.GetTouch(0);
         if (touch.phase == TouchPhase.Began)
         {
-            if (arRaycastManager.Raycast(touch.position, hits, UnityEngine.XR.ARSubsystems.TrackableType.PlaneWithinPolygon))
+            if (arRaycastManager.Raycast(touch.position, hits, UnityEngine.XR.ARSubsystems.TrackableType.AllTypes))
             {
+                var plane = planeManager.GetPlane(hits[0].trackableId);
+                if(!plane) return;
                 var hitPose = hits[0].pose;
-                this.transform.position = hitPose.position;
-                this.transform.rotation = hitPose.rotation;
+                this.transform.position = plane.center;//.position;
+                // this.transform.rotation = hitPose.rotation;
                 Grid.CreateGrid();
                 DebugView.Instance.SetText("GRID CREATED");
                 gridCreated = true;
