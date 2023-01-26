@@ -365,8 +365,11 @@ public class GameGrid : MonoBehaviour
         foreach (var cell in GridList)
         {
             if (IsMustHaveGroundHeight(cell))
+            {
+                // SelectedDefense = DefensesModel.List.First(x => x.PoolType == PoolObjectType.WallTower);
+                // SpawnDefence(cell);
                 continue;
-
+            }
             DeselectAllCells();
             if (IsAnyDiagonalCellUp(cell))
                 continue;
@@ -382,10 +385,10 @@ public class GameGrid : MonoBehaviour
         {
             case (GridType.Rectangle):
                 return
-                   cell.Pos.x == 0
-                || cell.Pos.y == 0
-                || cell.Pos.x == Width - 1
-                || cell.Pos.y == Length - 1
+                   cell.Pos.x == -Width / 2
+                || cell.Pos.y == -Length / 2
+                || cell.Pos.x == Width / 2 - 1
+                || cell.Pos.y == Length / 2 - 1
                 || centreCells.Contains(cell);
             case GridType.Circle:
                 bool isLastRowCircle = grid.Last().Contains(cell);
@@ -438,19 +441,18 @@ public class GameGrid : MonoBehaviour
 
     private bool IsAnyDiagonalCellUp(GridCell cell)
     {
-        int x_index = cell.Pos.x;
-        int y_index = grid[cell.Pos.x].IndexOf(cell);
+        int x_index = gridType == GridType.Rectangle ? cell.Pos.x + Width / 2 : cell.Pos.x;
+        int y_index = grid[x_index].IndexOf(cell);
 
-        int prevIndex = Mathf.Abs((grid[cell.Pos.x].Count - grid[cell.Pos.x - 1].Count) / 2);
-        int nextIndex = Mathf.Abs((grid[cell.Pos.x].Count - grid[cell.Pos.x + 1].Count) / 2);
-        int sign = grid[cell.Pos.x - 1].Count > grid[cell.Pos.x].Count ? 1 : -1;
+        int prevIndex = Mathf.Abs((grid[x_index].Count - grid[x_index - 1].Count) / 2);
+        int nextIndex = Mathf.Abs((grid[x_index].Count - grid[x_index + 1].Count) / 2);
+        int sign = grid[x_index - 1].Count > grid[x_index].Count ? 1 : -1;
         return
                grid[x_index - 1][y_index + prevIndex * sign - 1].IsUpper
             || grid[x_index - 1][y_index + prevIndex * sign + 1].IsUpper
             || grid[x_index + 1][y_index + nextIndex * sign + 1].IsUpper
             || grid[x_index + 1][y_index + nextIndex * sign - 1].IsUpper;
     }
-
 
     public void RemoveAllDefenses()
     {
