@@ -247,10 +247,11 @@ public class GameGrid : MonoBehaviour
     private void CreateRectangleGrid()
     {
         grid = new List<List<GridCell>>();
-        for (int x = 0; x < Width; x++)
+        for (int x = -Width / 2; x < Width / 2; x++)
         {
+            int x_index = x + Width / 2;
             var z_list = new List<GridCell>();
-            for (int z = 0; z < Length; z++)
+            for (int z = -Length / 2; z < Length / 2; z++)
             {
                 var cell = Instantiate(gridCellPrefab, new Vector3(x * gridSpaceSize, 0, z * gridSpaceSize), Quaternion.identity, this.transform);
                 cell.Init(x, z);
@@ -259,7 +260,7 @@ public class GameGrid : MonoBehaviour
                 z_list.Add(cell);
             }
             grid.Add(z_list);
-            GridList.AddRange(grid[x]);
+            GridList.AddRange(grid[x_index]);
         }
     }
 
