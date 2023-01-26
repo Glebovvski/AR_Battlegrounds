@@ -21,13 +21,15 @@ public class PlaneManager : MonoBehaviour
 
     private void Start()
     {
-        Grid.OnGridCreated+=SetUpGrid;
+        Grid.OnGridCreated += SetUpGrid;
     }
 
     private void SetUpGrid()
     {
-        this.transform.localScale = new Vector3(Grid.Width/10, 1, Grid.Length/10);
-        missileCollider.localScale = this.transform.localScale;
+        var scale = Grid.transform.localScale;
+        Grid.transform.localScale = new Vector3(scale.x / this.transform.localScale.x, scale.y / this.transform.localScale.y, scale.z / this.transform.localScale.z);
+        // this.transform.localScale = new Vector3(Grid.Width/10, 1, Grid.Length/10);
+        // missileCollider.localScale = this.transform.localScale;
         // this.transform.localScale = new Vector3(Grid.Width, 1, Grid.Length);
         // Grid.transform.SetParent(this.transform);
         OnGridSet?.Invoke();

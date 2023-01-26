@@ -808,7 +808,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 581853323}
   m_Direction: 0
   m_Value: 0
-  m_Size: 1
+  m_Size: 0
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1524,7 +1524,7 @@ PrefabInstance:
     - target: {fileID: 6000988167660706115, guid: 91ba00481d9194bd4974e9dcc125242e,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 10
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6000988167660706115, guid: 91ba00481d9194bd4974e9dcc125242e,
         type: 3}
@@ -1599,7 +1599,7 @@ PrefabInstance:
     - target: {fileID: 6000988167660706116, guid: 91ba00481d9194bd4974e9dcc125242e,
         type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 2147483647
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6261986795282757049, guid: 91ba00481d9194bd4974e9dcc125242e,
         type: 3}
@@ -1629,7 +1629,7 @@ PrefabInstance:
     - target: {fileID: 6261986795282757049, guid: 91ba00481d9194bd4974e9dcc125242e,
         type: 3}
       propertyPath: gridType
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6261986795282757049, guid: 91ba00481d9194bd4974e9dcc125242e,
         type: 3}
@@ -1654,12 +1654,12 @@ PrefabInstance:
     - target: {fileID: 6261986795282757049, guid: 91ba00481d9194bd4974e9dcc125242e,
         type: 3}
       propertyPath: <Width>k__BackingField
-      value: 40
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 6261986795282757049, guid: 91ba00481d9194bd4974e9dcc125242e,
         type: 3}
       propertyPath: <Length>k__BackingField
-      value: 50
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8050319249070659710, guid: 91ba00481d9194bd4974e9dcc125242e, type: 3}
@@ -2503,7 +2503,7 @@ PrefabInstance:
     - target: {fileID: 5990617354243330691, guid: efd03b8bd858c72479f151f640ff5655,
         type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: efd03b8bd858c72479f151f640ff5655, type: 3}
@@ -2930,7 +2930,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 60
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &1243855126
 Transform:
@@ -3401,7 +3401,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 8
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &1314439501
 Transform:
@@ -3828,7 +3828,7 @@ PrefabInstance:
     - target: {fileID: 5990617354243330691, guid: efd03b8bd858c72479f151f640ff5655,
         type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: efd03b8bd858c72479f151f640ff5655, type: 3}
@@ -4316,7 +4316,7 @@ PrefabInstance:
     - target: {fileID: 5990617354243330691, guid: efd03b8bd858c72479f151f640ff5655,
         type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: efd03b8bd858c72479f151f640ff5655, type: 3}
@@ -4747,7 +4747,7 @@ PrefabInstance:
     - target: {fileID: 5990617354243330691, guid: efd03b8bd858c72479f151f640ff5655,
         type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: efd03b8bd858c72479f151f640ff5655, type: 3}
