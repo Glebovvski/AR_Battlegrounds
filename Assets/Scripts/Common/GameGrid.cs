@@ -145,7 +145,7 @@ public class GameGrid : MonoBehaviour
         if (defense.GetSize() == Vector2Int.one)
         {
             var position = new Vector2(cell.transform.position.x, cell.transform.position.z);
-            defense.transform.position = GetWorldPositionFromGrid(position, cell.Height);
+            defense.transform.position = GetWorldPositionFromGrid(position, cell.Height + defense.transform.localScale.y);
             cell.SetDefence(defense);
         }
         else
@@ -154,7 +154,7 @@ public class GameGrid : MonoBehaviour
             if (selectedPair == null) return;
 
             var centre = GetCentreOfPair(selectedPair);
-            defense.transform.position = GetWorldPositionFromGrid(centre, selectedPair[0].Height);
+            defense.transform.position = GetWorldPositionFromGrid(centre, selectedPair[0].Height + defense.transform.localScale.y);
             selectedPair.ForEach(x => x.SetDefence(defense));
         }
         CurrencyModel.Buy(SelectedDefense.Price);
