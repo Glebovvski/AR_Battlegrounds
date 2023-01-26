@@ -147,7 +147,7 @@ public class GameGrid : MonoBehaviour
         if (defence.GetSize() == Vector2Int.one)
         {
             var position = new Vector2(cell.transform.position.x, cell.transform.position.z);
-            defence.transform.position = GetWorldPositionFromGrid(position, cell.IsUpper ? Mathf.CeilToInt(-yPos) : Mathf.FloorToInt(-yPos));
+            defence.transform.position = GetWorldPositionFromGrid(position, cell.Height);// cell.IsUpper ? Mathf.CeilToInt(-yPos) : Mathf.FloorToInt(-yPos));
             cell.SetDefence(defence);
         }
         else
@@ -156,7 +156,7 @@ public class GameGrid : MonoBehaviour
             if (selectedPair == null) return;
 
             var centre = GetCentreOfPair(selectedPair);
-            defence.transform.position = GetWorldPositionFromGrid(centre, selectedPair[0].Height + Mathf.FloorToInt(yPos));
+            defence.transform.position = GetWorldPositionFromGrid(centre, selectedPair[0].Height);// + Mathf.FloorToInt(yPos));
             selectedPair.ForEach(x => x.SetDefence(defence));
         }
         CurrencyModel.Buy(SelectedDefense.Price);
@@ -252,7 +252,7 @@ public class GameGrid : MonoBehaviour
             var z_list = new List<GridCell>();
             for (int z = 0; z < Length; z++)
             {
-                var cell = Instantiate(gridCellPrefab, new Vector3(x * gridSpaceSize, yPos, z * gridSpaceSize), Quaternion.identity, this.transform);
+                var cell = Instantiate(gridCellPrefab, new Vector3(x * gridSpaceSize, 0, z * gridSpaceSize), Quaternion.identity, this.transform);
                 cell.Init(x, z);
                 cell.gameObject.name = string.Format("Cell {0}:{1}", x, z);
                 cell.OnFreeCell += RebuildNavMesh;
@@ -279,7 +279,7 @@ public class GameGrid : MonoBehaviour
             {
                 if (new Vector2(x, z).sqrMagnitude > square) continue;
 
-                var cell = Instantiate(gridCellPrefab, new Vector3(x * gridSpaceSize, yPos, z * gridSpaceSize), Quaternion.identity, this.transform);
+                var cell = Instantiate(gridCellPrefab, new Vector3(x * gridSpaceSize, 0, z * gridSpaceSize), Quaternion.identity, this.transform);
                 int z_index = z + radius;
                 cell.Init(x_index, z_index);
                 cell.gameObject.name = string.Format("Cell {0}:{1}", x_index, z_index);
@@ -308,7 +308,7 @@ public class GameGrid : MonoBehaviour
             {
                 if ((z_square * x * x + x_square * z * z) > (x_square * z_square)) continue;
 
-                var cell = Instantiate(gridCellPrefab, new Vector3(x * gridSpaceSize, yPos, z * gridSpaceSize), Quaternion.identity, this.transform);
+                var cell = Instantiate(gridCellPrefab, new Vector3(x * gridSpaceSize, 0, z * gridSpaceSize), Quaternion.identity, this.transform);
                 int z_index = z + z_radius;
                 cell.Init(x_index, z_index);
                 cell.gameObject.name = string.Format("Cell {0}:{1}", x_index, z_index);
@@ -340,7 +340,7 @@ public class GameGrid : MonoBehaviour
     {
         Vector2 centre = GetCentreOfPair(centreCells);
         Castle.Init(DefensesModel.List.Where(x => x.Type == DefenseType.Castle).FirstOrDefault());
-        Castle.transform.position = GetWorldPositionFromGrid(centre, 0);
+        Castle.transform.position = GetWorldPositionFromGrid(centre, 1);
         Castle.transform.SetParent(plane.transform);
         centreCells.ForEach(x => x.SetDefence(Castle));
     }

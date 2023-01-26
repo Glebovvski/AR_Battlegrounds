@@ -13,7 +13,7 @@ public class DecorManager : MonoBehaviour
 
     private void Awake()
     {
-        Grid.OnGridCreated += SetDecor;
+        // Grid.OnGridCreated += SetDecor;
     }
 
     private void SetDecor()
