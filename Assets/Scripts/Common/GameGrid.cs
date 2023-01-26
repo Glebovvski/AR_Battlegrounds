@@ -20,9 +20,7 @@ public class GameGrid : MonoBehaviour
 
     [SerializeField] private DefensesViewModel defencesViewModel;
 
-    [SerializeField] private NavMeshSurface plane;
-    [SerializeField] private NavMeshSurface gridSurface;
-    [SerializeField] private Transform planeObstacle;
+    [SerializeField] private PlaneManager plane;
 
     [SerializeField] private GridCell gridCellPrefab;
 
@@ -141,14 +139,14 @@ public class GameGrid : MonoBehaviour
     {
         if (SelectedDefense == null) return;
 
-        var defence = PoolManager.Instance.GetFromPool<Defense>(SelectedDefense.PoolType);
-        defence.Init(SelectedDefense);
-        defence.transform.SetParent(plane.transform);
-        if (defence.GetSize() == Vector2Int.one)
+        var defense = PoolManager.Instance.GetFromPool<Defense>(SelectedDefense.PoolType);
+        defense.Init(SelectedDefense);
+        plane.AttachChild(defense.transform);
+        if (defense.GetSize() == Vector2Int.one)
         {
             var position = new Vector2(cell.transform.position.x, cell.transform.position.z);
-            defence.transform.position = GetWorldPositionFromGrid(position, cell.Height);
-            cell.SetDefence(defence);
+            defense.transform.position = GetWorldPositionFromGrid(position, cell.Height);
+            cell.SetDefence(defense);
         }
         else
         {
@@ -156,8 +154,8 @@ public class GameGrid : MonoBehaviour
             if (selectedPair == null) return;
 
             var centre = GetCentreOfPair(selectedPair);
-            defence.transform.position = GetWorldPositionFromGrid(centre, selectedPair[0].Height);
-            selectedPair.ForEach(x => x.SetDefence(defence));
+            defense.transform.position = GetWorldPositionFromGrid(centre, selectedPair[0].Height);
+            selectedPair.ForEach(x => x.SetDefence(defense));
         }
         CurrencyModel.Buy(SelectedDefense.Price);
         if (CurrencyModel.Gold >= SelectedDefense.Price)
@@ -342,7 +340,7 @@ public class GameGrid : MonoBehaviour
         Vector2 centre = GetCentreOfPair(centreCells);
         Castle.Init(DefensesModel.List.Where(x => x.Type == DefenseType.Castle).FirstOrDefault());
         Castle.transform.position = GetWorldPositionFromGrid(centre, 1);
-        Castle.transform.SetParent(plane.transform);
+        plane.AttachChild(Castle.transform);
         centreCells.ForEach(x => x.SetDefence(Castle));
     }
 

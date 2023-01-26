@@ -39,7 +39,17 @@ public class PlaneManager : MonoBehaviour
         // this.transform.localScale = new Vector3(Grid.Width, 1, Grid.Length);
         // Grid.transform.SetParent(this.transform);
         OnGridSet?.Invoke();
-        surface.BuildNavMesh();
+        // surface.BuildNavMesh();
+    }
+
+    public void UpdateNavMesh() => surface.BuildNavMesh();
+
+    public void AttachChild(Transform child)
+    {
+        var scale = child.localScale;
+        child.localScale = new Vector3(scale.x / (this.transform.localScale.x * planeFactor), scale.y / (this.transform.localScale.y * planeFactor), scale.z / (this.transform.localScale.z * planeFactor));
+        // child.localScale = new Vector3(scale.x / (this.transform.localScale.x * planeFactor), scale.y, scale.z / (this.transform.localScale.z * planeFactor));
+        child.SetParent(this.transform);
     }
 
     private void Update()
