@@ -19,7 +19,7 @@ public class GridCell : MonoBehaviour
     public Defense Defence { get; private set; }
     public bool IsFree => Defence == null;
     public Vector2Int Pos => new Vector2Int(posX, posY);
-    public int Height => Mathf.FloorToInt(transform.localScale.z);
+    public int Height => Mathf.CeilToInt(transform.localScale.y);
     public bool IsUpper => transform.localScale.y > 1;
     public bool IsSelected => quadRenderer.material.color != defaultCellColor;
 
