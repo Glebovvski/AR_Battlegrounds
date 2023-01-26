@@ -36,6 +36,7 @@ public class DecorManager : MonoBehaviour
                 } while (IsOccupied(position));
 
                 decor.transform.position = position;
+                decor.transform.SetParent(Grid.transform.parent);
             }
         }
     }

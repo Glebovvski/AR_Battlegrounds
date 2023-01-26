@@ -17,6 +17,8 @@ namespace Enemies
         public GameGrid Grid { get; private set; }
         private LoseModel LoseModel { get; set; }
 
+        [SerializeField] private PlaneManager planeManager;
+
         [Header("Enemies coefficient to spawn")]
         [SerializeField] private int maxBaseEnemies;
         [SerializeField] private int maxBullEnemies;
@@ -61,7 +63,8 @@ namespace Enemies
         {
             Castle.OnLose += ReturnAllEnemiesToPool;
             LoseModel.OnRestart += SpawnEnemies;
-            Grid.OnGridCreated += SpawnEnemies;
+            // Grid.OnGridCreated += SpawnEnemies;
+            // planeManager.OnGridSet+=SpawnEnemies;
 
             enemyCoefs.Add(PoolObjectType.Enemy, maxBaseEnemies);
             enemyCoefs.Add(PoolObjectType.SpyEnemy, maxSpyEnemies);

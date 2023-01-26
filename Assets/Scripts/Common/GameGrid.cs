@@ -26,10 +26,10 @@ public class GameGrid : MonoBehaviour
 
     [SerializeField] private GridCell gridCellPrefab;
 
-    [SerializeField] private int width;
-    [SerializeField] private int length;
+    [field: SerializeField] public int Width { get; private set; }
+    [field: SerializeField] public int Length { get; private set; }
 
-    private float gridSpaceSize = 1f;
+    private float gridSpaceSize = 1;
 
     public List<GridCell> GridList = new List<GridCell>();
 
@@ -41,7 +41,7 @@ public class GameGrid : MonoBehaviour
 
     public ScriptableDefense SelectedDefense { get; private set; }
 
-    public Vector3 Centre => this.transform.position + new Vector3(width / 2f, 0, length / 2f);
+    public Vector3 Centre => this.transform.position + new Vector3(Width / 2f, 0, Length / 2f);
     public Vector3 Position => this.transform.position;
 
     public event Action OnGridCreated;
@@ -62,6 +62,8 @@ public class GameGrid : MonoBehaviour
         DefensesModel.OnDefenseDeselected += DeselectDefense;
         LoseModel.OnRestart += RemoveAllDefenses;
 
+        gridSpaceSize *= plane.transform.localScale.x;
+
         // CreateGrid();
     }
 
@@ -70,8 +72,8 @@ public class GameGrid : MonoBehaviour
         int x = Mathf.FloorToInt(worldPosition.x / gridSpaceSize);
         int y = Mathf.FloorToInt(worldPosition.z / gridSpaceSize);
 
-        x = Mathf.Clamp(x, 0, width);
-        y = Mathf.Clamp(y, 0, length);
+        x = Mathf.Clamp(x, 0, Width);
+        y = Mathf.Clamp(y, 0, Length);
 
         return new Vector2Int(x, y);
     }
@@ -167,9 +169,9 @@ public class GameGrid : MonoBehaviour
         List<List<GridCell>> cells = new List<List<GridCell>>();
         if (gridType == GridType.Rectangle)
         {
-            for (int i = 0; i < width - 1; i++)
+            for (int i = 0; i < Width - 1; i++)
             {
-                for (int j = 0; j < length - 1; j++)
+                for (int j = 0; j < Length - 1; j++)
                 {
                     var possiblePairs = new List<GridCell>();
 
@@ -238,17 +240,17 @@ public class GameGrid : MonoBehaviour
 
         TryChangeHeight();
         SpawnCastleAtCentre();
-        // RebuildNavMesh();
+        RebuildNavMesh();
         OnGridCreated?.Invoke();
     }
 
     private void CreateRectangleGrid()
     {
         grid = new List<List<GridCell>>();
-        for (int x = 0; x < width; x++)
+        for (int x = 0; x < Width; x++)
         {
             var z_list = new List<GridCell>();
-            for (int z = 0; z < length; z++)
+            for (int z = 0; z < Length; z++)
             {
                 var cell = Instantiate(gridCellPrefab, new Vector3(x * gridSpaceSize, yPos, z * gridSpaceSize), Quaternion.identity, this.transform);
                 cell.Init(x, z);
@@ -263,7 +265,7 @@ public class GameGrid : MonoBehaviour
 
     private void CreateCircleGrid()
     {
-        int radius = width / 2;
+        int radius = Width / 2;
 
         int square = radius * radius;
 
@@ -291,8 +293,8 @@ public class GameGrid : MonoBehaviour
 
     private void CreateEllipseGrid()
     {
-        int x_radius = width / 2;
-        int z_radius = length / 2;
+        int x_radius = Width / 2;
+        int z_radius = Length / 2;
         int x_square = x_radius * x_radius;
         int z_square = z_radius * z_radius;
 
@@ -328,9 +330,9 @@ public class GameGrid : MonoBehaviour
         return new List<Vector3>()
         {
             this.transform.position,
-            this.transform.position + new Vector3(width, 0, 0),
-            this.transform.position + new Vector3(width,0, length),
-            this.transform.position + new Vector3(0, 0, length)
+            this.transform.position + new Vector3(Width, 0, 0),
+            this.transform.position + new Vector3(Width,0, Length),
+            this.transform.position + new Vector3(0, 0, Length)
         };
     }
 
@@ -339,7 +341,7 @@ public class GameGrid : MonoBehaviour
         Vector2 centre = GetCentreOfPair(centreCells);
         Castle.Init(DefensesModel.List.Where(x => x.Type == DefenseType.Castle).FirstOrDefault());
         Castle.transform.position = GetWorldPositionFromGrid(centre, 0);
-        // Castle.transform.SetParent(plane.transform);
+        Castle.transform.SetParent(plane.transform);
         centreCells.ForEach(x => x.SetDefence(Castle));
     }
 
@@ -347,8 +349,8 @@ public class GameGrid : MonoBehaviour
 
     private void TryChangeHeight()
     {
-        int centreX = width / 2 - 1;
-        int centreY = length / 2 - 1;
+        int centreX = Width / 2 - 1;
+        int centreY = Length / 2 - 1;
         var gridCell1 = grid[centreX][centreY];
         var gridCell2 = gridType == GridType.Rectangle ? grid[centreX][centreY + 1] : grid[centreX][centreY - 1];
         var gridCell3 = grid[centreX + 1][centreY];
@@ -367,7 +369,7 @@ public class GameGrid : MonoBehaviour
             DeselectAllCells();
             if (IsAnyDiagonalCellUp(cell))
                 continue;
-                
+
             cell.SetHeight(UnityEngine.Random.Range(1, 3));
         }
 
@@ -381,14 +383,14 @@ public class GameGrid : MonoBehaviour
                 return
                    cell.Pos.x == 0
                 || cell.Pos.y == 0
-                || cell.Pos.x == width - 1
-                || cell.Pos.y == length - 1
+                || cell.Pos.x == Width - 1
+                || cell.Pos.y == Length - 1
                 || centreCells.Contains(cell);
             case GridType.Circle:
                 bool isLastRowCircle = grid.Last().Contains(cell);
                 bool isFirstRowCircle = grid.First().Contains(cell);
-                var square_circle = (width / 2) * (width / 2);
-                bool isLastInColumnCircle = new Vector2(cell.Pos.x - width / 2, cell.Pos.y - length / 2).sqrMagnitude > square_circle - 2 * width * gridSpaceSize;
+                var square_circle = (Width / 2) * (Width / 2);
+                bool isLastInColumnCircle = new Vector2(cell.Pos.x - Width / 2, cell.Pos.y - Length / 2).sqrMagnitude > square_circle - 2 * Width * gridSpaceSize;
                 return
                    centreCells.Contains(cell)
                    || isLastRowCircle

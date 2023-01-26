@@ -11,19 +11,32 @@ public class PlaneManager : MonoBehaviour
     [SerializeField] private ARSessionOrigin origin;
     [SerializeField] private GameGrid Grid;
     [SerializeField] private ARRaycastManager arRaycastManager;
+    [SerializeField] private Transform missileCollider;
 
     private bool gridCreated = false;
 
     static List<ARRaycastHit> hits = new List<ARRaycastHit>();
 
+    public event Action OnGridSet;
+
     private void Start()
     {
-        // Grid.transform.position = Camera.main.transform.position - Vector3.back*1000;
+        Grid.OnGridCreated+=SetUpGrid;
+    }
+
+    private void SetUpGrid()
+    {
+        this.transform.localScale = new Vector3(Grid.Width/10, 1, Grid.Length/10);
+        missileCollider.localScale = this.transform.localScale;
+        // this.transform.localScale = new Vector3(Grid.Width, 1, Grid.Length);
+        // Grid.transform.SetParent(this.transform);
+        OnGridSet?.Invoke();
     }
 
     private void Update()
     {
         if (gridCreated) return;
+#if PLATFORM_IOS
         if (Input.touchCount == 0) return;
         if (planeManager.trackables.count == 0) return;
 
@@ -78,5 +91,11 @@ public class PlaneManager : MonoBehaviour
             else
                 DebugView.Instance.SetText("NO RAYCAST TARGET");
         }
+#elif UNITY_EDITOR
+        Grid.CreateGrid();
+        gridCreated = true;
+
+#endif
     }
 }
+
