@@ -84,7 +84,7 @@ public class GameGrid : MonoBehaviour
         return new Vector3(x, cell.Height + yPos, y);
     }
 
-    public Vector3 GetWorldPositionFromGrid(Vector2Int position, int height)
+    public Vector3 GetWorldPositionFromGrid(Vector2Int position, float height)
     {
         float x = position.x * gridSpaceSize;
         float y = position.y * gridSpaceSize;
@@ -92,7 +92,7 @@ public class GameGrid : MonoBehaviour
         return new Vector3(x, height, y);
     }
 
-    public Vector3 GetWorldPositionFromGrid(Vector2 position, int height)
+    public Vector3 GetWorldPositionFromGrid(Vector2 position, float height)
     {
         float x = position.x * gridSpaceSize;
         float y = position.y * gridSpaceSize;
