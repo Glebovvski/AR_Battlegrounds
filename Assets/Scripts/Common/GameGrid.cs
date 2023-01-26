@@ -247,11 +247,11 @@ public class GameGrid : MonoBehaviour
     private void CreateRectangleGrid()
     {
         grid = new List<List<GridCell>>();
-        for (int x = -Width / 2; x < Width / 2; x++)
+        for (int x = -Width / 2; x <= Width / 2; ++x)
         {
             int x_index = x + Width / 2;
             var z_list = new List<GridCell>();
-            for (int z = -Length / 2; z < Length / 2; z++)
+            for (int z = -Length / 2; z <= Length / 2; ++z)
             {
                 var cell = Instantiate(gridCellPrefab, new Vector3(x * gridSpaceSize, 0, z * gridSpaceSize), Quaternion.identity, this.transform);
                 cell.Init(x, z);
@@ -441,7 +441,7 @@ public class GameGrid : MonoBehaviour
 
     private bool IsAnyDiagonalCellUp(GridCell cell)
     {
-        int x_index = gridType == GridType.Rectangle ? cell.Pos.x + Width / 2 : cell.Pos.x;
+        int x_index = cell.Pos.x;// gridType == GridType.Rectangle ? cell.Pos.x + Width / 2 : cell.Pos.x;
         int y_index = grid[x_index].IndexOf(cell);
 
         int prevIndex = Mathf.Abs((grid[x_index].Count - grid[x_index - 1].Count) / 2);
