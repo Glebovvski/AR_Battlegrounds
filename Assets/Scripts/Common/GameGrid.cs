@@ -320,9 +320,9 @@ public class GameGrid : MonoBehaviour
         }
     }
 
-    private void RebuildNavMesh()
+    public void RebuildNavMesh()
     {
-        plane.BuildNavMesh();
+        // plane.BuildNavMesh();
     }
 
     public List<Vector3> Corners()

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 
@@ -13,26 +14,32 @@ public class PlaneManager : MonoBehaviour
     [SerializeField] private ARRaycastManager arRaycastManager;
     [SerializeField] private Transform missileCollider;
 
+    private NavMeshSurface surface;
+
     private bool gridCreated = false;
 
     static List<ARRaycastHit> hits = new List<ARRaycastHit>();
+
+    private int planeFactor = 5;
 
     public event Action OnGridSet;
 
     private void Start()
     {
         Grid.OnGridCreated += SetUpGrid;
+        surface = GetComponent<NavMeshSurface>();
     }
 
     private void SetUpGrid()
     {
         var scale = Grid.transform.localScale;
-        Grid.transform.localScale = new Vector3(scale.x / this.transform.localScale.x, scale.y / this.transform.localScale.y, scale.z / this.transform.localScale.z);
+        Grid.transform.localScale = new Vector3(scale.x / (this.transform.localScale.x * planeFactor), scale.y / (this.transform.localScale.y * planeFactor), scale.z / (this.transform.localScale.z * planeFactor));
+        missileCollider.localScale = this.transform.localScale;
         // this.transform.localScale = new Vector3(Grid.Width/10, 1, Grid.Length/10);
-        // missileCollider.localScale = this.transform.localScale;
         // this.transform.localScale = new Vector3(Grid.Width, 1, Grid.Length);
         // Grid.transform.SetParent(this.transform);
         OnGridSet?.Invoke();
+        surface.BuildNavMesh();
     }
 
     private void Update()
