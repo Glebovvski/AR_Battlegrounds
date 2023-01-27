@@ -28,7 +28,6 @@ namespace Enemies
         [SerializeField] private int maxFlamerEnemies;
 
         [SerializeField] private Transform[] spawnPoints;
-        [SerializeField] private PlaneManager plane;
 
 
         public List<Observation> Observations = new List<Observation>();
@@ -64,7 +63,7 @@ namespace Enemies
             Castle.OnLose += ReturnAllEnemiesToPool;
             LoseModel.OnRestart += SpawnEnemies;
             // Grid.OnGridCreated += SpawnEnemies;
-            planeManager.OnGridSet+=SpawnEnemies;
+            planeManager.OnGridSet += SpawnEnemies;
 
             enemyCoefs.Add(PoolObjectType.Enemy, maxBaseEnemies);
             enemyCoefs.Add(PoolObjectType.SpyEnemy, maxSpyEnemies);
@@ -130,7 +129,7 @@ namespace Enemies
         {
             var enemy = PoolManager.Instance.GetFromPool<Enemy>(enemyType);
             enemy.gameObject.SetActive(false);
-            plane.AttachChild(enemy.transform);
+            planeManager.AttachChild(enemy.transform);
             // enemy.transform.SetParent(plane);
             enemy.Init();
             enemy.transform.position = parent.position;
@@ -191,7 +190,7 @@ namespace Enemies
         {
             Castle.OnLose -= ReturnAllEnemiesToPool;
             LoseModel.OnRestart -= SpawnEnemies;
-            Grid.OnGridCreated -= SpawnEnemies;
+            planeManager.OnGridSet -= SpawnEnemies;
         }
     }
 }
