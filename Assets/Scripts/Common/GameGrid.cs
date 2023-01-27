@@ -341,7 +341,8 @@ public class GameGrid : MonoBehaviour
     private void SpawnCastleAtCentre()
     {
         plane.AttachChild(Castle.transform);
-        Vector2 centre = ((centreCells.First().transform.position + centreCells.Last().transform.position) / 2f) * Castle.transform.localScale.x;// GetCentreOfPair(centreCells);
+        Vector3 centre3 = ((centreCells.First().transform.position + centreCells.Last().transform.position) / 2f) * Castle.transform.localScale.x;// GetCentreOfPair(centreCells);
+        Vector2 centre = new Vector2(centre3.x, centre3.z);
         Castle.Init(DefensesModel.List.Where(x => x.Type == DefenseType.Castle).FirstOrDefault());
         Castle.transform.position = GetWorldPositionFromGrid(centre, 0.3f);
         centreCells.ForEach(x => x.SetDefence(Castle));
