@@ -253,9 +253,10 @@ public class GameGrid : MonoBehaviour
             var z_list = new List<GridCell>();
             for (int z = -Length / 2; z <= Length / 2; ++z)
             {
+                int z_index = z + Length / 2;
                 var cell = Instantiate(gridCellPrefab, new Vector3(x * gridSpaceSize, 0, z * gridSpaceSize), Quaternion.identity, this.transform);
-                cell.Init(x, z);
-                cell.gameObject.name = string.Format("Cell {0}:{1}", x, z);
+                cell.Init(x_index, z_index);
+                cell.gameObject.name = string.Format("Cell {0}:{1}", x_index, z_index);
                 cell.OnFreeCell += RebuildNavMesh;
                 z_list.Add(cell);
             }
@@ -385,10 +386,10 @@ public class GameGrid : MonoBehaviour
         {
             case (GridType.Rectangle):
                 return
-                   cell.Pos.x == -Width / 2
-                || cell.Pos.y == -Length / 2
-                || cell.Pos.x == Width / 2 - 1
-                || cell.Pos.y == Length / 2 - 1
+                   cell.Pos.x == 0
+                || cell.Pos.y == 0
+                || cell.Pos.x == Width - 1
+                || cell.Pos.y == Length - 1
                 || centreCells.Contains(cell);
             case GridType.Circle:
                 bool isLastRowCircle = grid.Last().Contains(cell);
