@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641234, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -808,7 +808,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 581853323}
   m_Direction: 0
   m_Value: 0
-  m_Size: 0
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -913,7 +913,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!20 &423027155
 Camera:
   m_ObjectHideFlags: 0
@@ -2264,7 +2264,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!81 &963194226
 AudioListener:
   m_ObjectHideFlags: 0
@@ -2712,11 +2712,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   planeManager: {fileID: 1243855130}
   maxBaseEnemies: 10
-  maxBullEnemies: 1
-  maxHealerEnemies: 2
-  maxSpyEnemies: 2
-  maxKamikazeEnemies: 1
-  maxFlamerEnemies: 1
+  maxBullEnemies: 0
+  maxHealerEnemies: 0
+  maxSpyEnemies: 1
+  maxKamikazeEnemies: 0
+  maxFlamerEnemies: 0
   spawnPoints:
   - {fileID: 4555737984256998628}
   - {fileID: 1599919936}
@@ -3091,6 +3091,7 @@ GameObject:
   - component: {fileID: 1253050447}
   - component: {fileID: 1253050448}
   - component: {fileID: 1253050449}
+  - component: {fileID: 1253050450}
   m_Layer: 0
   m_Name: SceneContext
   m_TagString: Untagged
@@ -3132,6 +3133,7 @@ MonoBehaviour:
   - {fileID: 1253050447}
   - {fileID: 1253050448}
   - {fileID: 1253050449}
+  - {fileID: 1253050450}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -3250,6 +3252,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bda2d1c2ef6d5bf4cae6cdae412f7836, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1253050450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1253050439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91005f3db6829d04f8993e1cb03be476, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1310037726
@@ -4394,7 +4408,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -773, y: 0}
+  m_AnchoredPosition: {x: -1618.5, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &2079989270

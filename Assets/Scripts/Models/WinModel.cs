@@ -6,7 +6,11 @@ using Zenject;
 
 public class WinModel : ITickable, IInitializable
 {
+    private const string timerKey = "Timer";
+    private const string killKey = "Kills";
+
     private GameGrid Grid { get; set; }
+    private StatManager StatManager { get; set; }
 
     private bool timerActive = false;
 
@@ -23,9 +27,10 @@ public class WinModel : ITickable, IInitializable
     }
 
     [Inject]
-    private void Construct(GameGrid grid)
+    private void Construct(GameGrid grid, StatManager statManager)
     {
         Grid = grid;
+        StatManager = statManager;
     }
 
     public void Initialize()
@@ -38,6 +43,14 @@ public class WinModel : ITickable, IInitializable
     //TODO: ADD STARS BASED ON RESULTS
 
     public void Win() => OnWin?.Invoke();
+
+    public int GetStars()
+    {
+        int stars = 1;
+        stars += Timer > PlayerPrefs.GetFloat(timerKey, 0) ? 0 : 1;
+        stars += StatManager.EnemiesKiiled > StatManager.DefensesDestroyed ? 1 : 0;
+        return stars;
+    }
 
     public void StartTimer() => timerActive = true;
 
