@@ -130,7 +130,6 @@ namespace Enemies
             var enemy = PoolManager.Instance.GetFromPool<Enemy>(enemyType);
             enemy.gameObject.SetActive(false);
             planeManager.AttachChild(enemy.transform);
-            // enemy.transform.SetParent(plane);
             enemy.Init();
             enemy.transform.position = parent.position;
             enemy.OnDeath += GetGoldFromEnemy;
