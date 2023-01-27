@@ -239,7 +239,7 @@ public class GameGrid : MonoBehaviour
             GridList.ForEach(cell => cell.SetHeight(1));
 
         TryChangeHeight();
-        RebuildNavMesh();
+        // RebuildNavMesh();
         SpawnCastleAtCentre();
         OnGridCreated?.Invoke();
     }

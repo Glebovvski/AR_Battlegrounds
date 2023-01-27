@@ -33,9 +33,9 @@ public class PlaneManager : MonoBehaviour
     private void SetUpGrid()
     {
         AttachChild(Grid.transform);
-        AttachChild(missileCollider.transform);
+        Grid.transform.position = new Vector3(Grid.transform.position.x, - (Grid.transform.localScale.y+0.1f), Grid.transform.position.z);
         OnGridSet?.Invoke();
-        // surface.BuildNavMesh();
+        UpdateNavMesh();
     }
 
     public void UpdateNavMesh() => surface.BuildNavMesh();
