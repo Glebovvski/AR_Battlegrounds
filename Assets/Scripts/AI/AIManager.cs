@@ -79,11 +79,13 @@ namespace Enemies
         {
             foreach (var enemy in enemyCoefs)
             {
-                var parent = spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Length - 1)];
+                var spawnPoint = spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Length - 1)];
                 var enemiesOnMap = Enemies.Where(x => x.Type == enemy.Key).Count();
                 if (enemiesOnMap < enemy.Value)
                 {
-                    RegisterEnemy(enemy.Key, parent);
+                    int enemiesToSpawn = UnityEngine.Random.Range(0, enemy.Value);
+                    for (int i = 0; i < enemiesToSpawn; i++)
+                        RegisterEnemy(enemy.Key, spawnPoint);
                 }
             }
         }
@@ -144,8 +146,8 @@ namespace Enemies
         {
             Enemies.Remove(enemy);
             PoolManager.Instance.ReturnToPool(enemy.GameObject, enemy.Type);
-            SpawnEnemies();
             StatManager.AddEnemiesKilled();
+            SpawnEnemies();
         }
 
         public IEnumerable<Enemy> GetEnemiesAttackingObservation(Observation observation) => Enemies.Where(x => x.AttackTarget == observation);

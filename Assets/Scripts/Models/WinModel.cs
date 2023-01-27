@@ -39,9 +39,6 @@ public class WinModel : ITickable, IInitializable
     }
 
     public event Action OnWin;
-
-    //TODO: ADD STARS BASED ON RESULTS
-
     public void Win()
     {
         GetStars();
