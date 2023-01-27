@@ -33,7 +33,6 @@ public class PlaneManager : MonoBehaviour
     private void SetUpGrid()
     {
         AttachChild(Grid.transform);
-        // Grid.transform.position = new Vector3(Grid.transform.position.x, -Grid.transform.localScale.y, Grid.transform.position.z);
         OnGridSet?.Invoke();
         UpdateNavMesh();
     }
@@ -72,36 +71,37 @@ public class PlaneManager : MonoBehaviour
             //     DebugView.Instance.SetText("GRID CREATED");
             //     gridCreated = true;
             // }
-            if (arRaycastManager.Raycast(touch.position, hits, UnityEngine.XR.ARSubsystems.TrackableType.Planes))
-            {
-                var plane = planeManager.GetPlane(hits[0].trackableId);
-                if (!plane)
-                {
-                    DebugView.Instance.SetText("NO PLANE FOUND");
-                    return;
-                }
-                var hitPose = hits[0].pose;
-                planeManager.requestedDetectionMode = PlaneDetectionMode.None;
-                this.transform.position = hitPose.position;// plane.center;//.position;
-                this.transform.rotation = hitPose.rotation;
-
-                Grid.CreateGrid();
-                DebugView.Instance.SetText("GRID CREATED");
-                gridCreated = true;
-            }
-            // Ray raycast = Camera.main.ScreenPointToRay(touch.position);
-            // if (Physics.Raycast(raycast, out RaycastHit raycastHit, float.MaxValue))
+            // if (arRaycastManager.Raycast(touch.position, hits, UnityEngine.XR.ARSubsystems.TrackableType.Planes))
             // {
-            //     if (raycastHit.collider.TryGetComponent<ARPlane>(out var plane))
+            //     var plane = planeManager.GetPlane(hits[0].trackableId);
+            //     if (!plane)
             //     {
-            //         // this.transform.localScale = new Vector3(this.transform.localScale.x / plane.size.x, 1, this.transform.localScale.z / plane.size.y);
-            //         // this.transform.SetParent(plane.transform);
-            //         origin.MakeContentAppearAt(this.transform, plane.center, Quaternion.identity);
-            //         DebugView.Instance.SetText("GRID CREATED");
+            //         DebugView.Instance.SetText("NO PLANE FOUND");
+            //         return;
             //     }
-            //     else
-            //         DebugView.Instance.SetText("NO AR PLANE");
+            //     var hitPose = hits[0].pose;
+            //     planeManager.requestedDetectionMode = PlaneDetectionMode.None;
+            //     this.transform.position = hitPose.position;// plane.center;//.position;
+            //     this.transform.rotation = hitPose.rotation;
+
+            //     Grid.CreateGrid();
+            //     DebugView.Instance.SetText("GRID CREATED");
+            //     gridCreated = true;
             // }
+            Ray raycast = Camera.main.ScreenPointToRay(touch.position);
+            if (Physics.Raycast(raycast, out RaycastHit raycastHit, float.MaxValue))
+            {
+                if (raycastHit.collider.TryGetComponent<ARPlane>(out var plane))
+                {
+                    origin.MakeContentAppearAt(this.transform, plane.center, Quaternion.identity);
+                    Grid.CreateGrid();
+                    gridCreated = true;
+                    planeManager.requestedDetectionMode = PlaneDetectionMode.None;
+                    DebugView.Instance.SetText("GRID CREATED");
+                }
+                else
+                    DebugView.Instance.SetText("NO AR PLANE");
+            }
             else
                 DebugView.Instance.SetText("NO RAYCAST TARGET");
         }
