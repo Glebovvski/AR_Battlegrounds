@@ -56,7 +56,7 @@ public class GameGrid : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        DefensesModel.OnDefenseSelected += SelectDefence;
+        DefensesModel.OnDefenseSelected += SelectDefense;
         DefensesModel.OnDefenseDeselected += DeselectDefense;
         LoseModel.OnRestart += RemoveAllDefenses;
 
@@ -101,7 +101,7 @@ public class GameGrid : MonoBehaviour
         return new Vector3(x, height, y);
     }
 
-    public void SelectDefence(ScriptableDefense info)
+    public void SelectDefense(ScriptableDefense info)
     {
         SelectedDefense = info;
         DeselectAllCells();
@@ -147,7 +147,7 @@ public class GameGrid : MonoBehaviour
             var position = new Vector2(cell.transform.position.x, cell.transform.position.z);
             var height = cell.IsUpper ? defense.transform.localScale.y * 20 : defense.transform.localScale.y + 0.1f;
             defense.transform.position = GetWorldPositionFromGrid(position, height);
-            cell.SetDefence(defense);
+            cell.SetDefense(defense);
         }
         else
         {
@@ -157,11 +157,11 @@ public class GameGrid : MonoBehaviour
             var centre = GetCentreOfPair(selectedPair);
             var height = cell.IsUpper ? defense.transform.localScale.y * 20 : defense.transform.localScale.y + 0.1f;
             defense.transform.position = GetWorldPositionFromGrid(centre, height);
-            selectedPair.ForEach(x => x.SetDefence(defense));
+            selectedPair.ForEach(x => x.SetDefense(defense));
         }
         CurrencyModel.Buy(SelectedDefense.Price);
         if (CurrencyModel.Gold >= SelectedDefense.Price)
-            SelectDefence(SelectedDefense);
+            SelectDefense(SelectedDefense);
     }
 
     private List<List<GridCell>> GetCellGroupsBySize(Vector2Int size)
@@ -246,6 +246,8 @@ public class GameGrid : MonoBehaviour
 
     private void CreateRectangleGrid()
     {
+        Width += Width % 2 == 0 ? 0 : 1;
+        Length += Length % 2 == 0 ? 0 : 1;
         grid = new List<List<GridCell>>();
         for (int x = -Width / 2; x <= Width / 2; ++x)
         {
@@ -324,7 +326,7 @@ public class GameGrid : MonoBehaviour
 
     public void RebuildNavMesh()
     {
-        // plane.BuildNavMesh();
+        plane.UpdateNavMesh();
     }
 
     public List<Vector3> Corners()
@@ -345,7 +347,7 @@ public class GameGrid : MonoBehaviour
         Vector2 centre = new Vector2(centre3.x, centre3.z);
         Castle.Init(DefensesModel.List.Where(x => x.Type == DefenseType.Castle).FirstOrDefault());
         Castle.transform.position = GetWorldPositionFromGrid(centre, 0.3f);
-        centreCells.ForEach(x => x.SetDefence(Castle));
+        centreCells.ForEach(x => x.SetDefense(Castle));
     }
 
     private Vector2 GetCentreOfPair(List<GridCell> cells) => cells.Aggregate(Vector2.zero, (acc, v) => acc + new Vector2(v.transform.position.x, v.transform.position.z)) / cells.Count;
@@ -392,9 +394,10 @@ public class GameGrid : MonoBehaviour
                 return
                    cell.Pos.x == 0
                 || cell.Pos.y == 0
-                || cell.Pos.x == Width - 1
-                || cell.Pos.y == Length - 1
+                || cell.Pos.x == Width
+                || cell.Pos.y == Length
                 || centreCells.Contains(cell);
+
             case GridType.Circle:
                 bool isLastRowCircle = grid.Last().Contains(cell);
                 bool isFirstRowCircle = grid.First().Contains(cell);
@@ -405,6 +408,7 @@ public class GameGrid : MonoBehaviour
                    || isLastRowCircle
                    || isFirstRowCircle
                    || isLastInColumnCircle;
+
             case GridType.Ellipse:
                 bool isLastRowEllipse = grid.Last().Contains(cell);
                 bool isFirstRowEllipse = grid.First().Contains(cell);
@@ -476,7 +480,7 @@ public class GameGrid : MonoBehaviour
 
     private void OnDestroy()
     {
-        DefensesModel.OnDefenseSelected -= SelectDefence;
+        DefensesModel.OnDefenseSelected -= SelectDefense;
         DefensesModel.OnDefenseDeselected -= DeselectDefense;
         LoseModel.OnRestart -= RemoveAllDefenses;
     }

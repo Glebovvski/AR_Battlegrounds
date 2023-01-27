@@ -41,7 +41,7 @@ public class GridCell : MonoBehaviour
         CheckNavMeshModifier();
 
     }
-    public void SetDefence(Defense defence)
+    public void SetDefense(Defense defence)
     {
         if (IsFree)
         {
