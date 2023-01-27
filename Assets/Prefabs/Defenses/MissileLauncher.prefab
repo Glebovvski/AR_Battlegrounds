@@ -124,8 +124,8 @@ Transform:
   m_GameObject: {fileID: 7620430094423512339}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.85, y: 0.85, z: 0.85}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 7623250293054145475}
   - {fileID: 7625761693159541533}
@@ -259,8 +259,8 @@ Transform:
   m_GameObject: {fileID: 7620467801476734995}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 7623313734830839559}
   - {fileID: 8460819850594454834}
@@ -294,7 +294,6 @@ MonoBehaviour:
   - {fileID: 1951606939666002595}
   hitRadius: {fileID: 562845182016389508}
   tower: {fileID: 7623250293054145475}
-  rotationSpeed: 10
   angleThreshold: 5
   cannon: {fileID: 7625972925815383461}
 --- !u!54 &1506430673013904291

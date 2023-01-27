@@ -145,7 +145,7 @@ public class GameGrid : MonoBehaviour
         if (defense.GetSize() == Vector2Int.one)
         {
             var position = new Vector2(cell.transform.position.x, cell.transform.position.z);
-            var height = cell.IsUpper ? defense.transform.localScale.y * 20 : defense.transform.localScale.y;
+            var height = cell.IsUpper ? defense.transform.localScale.y * 20 : defense.transform.localScale.y + 0.1f;
             defense.transform.position = GetWorldPositionFromGrid(position, height);
             cell.SetDefence(defense);
         }
@@ -155,7 +155,7 @@ public class GameGrid : MonoBehaviour
             if (selectedPair == null) return;
 
             var centre = GetCentreOfPair(selectedPair);
-            var height = cell.IsUpper ? defense.transform.localScale.y * 20 : defense.transform.localScale.y;
+            var height = cell.IsUpper ? defense.transform.localScale.y * 20 : defense.transform.localScale.y + 0.1f;
             defense.transform.position = GetWorldPositionFromGrid(centre, height);
             selectedPair.ForEach(x => x.SetDefence(defense));
         }
@@ -352,8 +352,8 @@ public class GameGrid : MonoBehaviour
 
     private void TryChangeHeight()
     {
-        int centreX = Width / 2;// - 1;
-        int centreY = Length / 2;// - 1;
+        int centreX = Width / 2;
+        int centreY = Length / 2;
         var gridCell1 = grid[centreX][centreY];
         var gridCell2 = gridType == GridType.Rectangle ? grid[centreX][centreY + 1] : grid[centreX][centreY - 1];
         var gridCell3 = grid[centreX + 1][centreY];
