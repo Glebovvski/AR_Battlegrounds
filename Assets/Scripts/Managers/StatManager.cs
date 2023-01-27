@@ -8,8 +8,11 @@ public class StatManager : IInitializable
     private int enemiesKilled = 0;
     private int defenseDestroyed = 0;
 
-    public int EnemiesKiiled { get => enemiesKilled; set => enemiesKilled = value; }
-    public int DefensesDestroyed { get => defenseDestroyed; set => defenseDestroyed = value; }
+    public int EnemiesKilled { get => enemiesKilled; private set => enemiesKilled = value; }
+    public int DefensesDestroyed { get => defenseDestroyed; private set => defenseDestroyed = value; }
+
+    public void AddEnemiesKilled() => EnemiesKilled++;
+    public void AddDefensesDestroyed() => DefensesDestroyed++;
 
     public void Initialize()
     {

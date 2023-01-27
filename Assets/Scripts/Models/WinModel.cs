@@ -42,13 +42,17 @@ public class WinModel : ITickable, IInitializable
 
     //TODO: ADD STARS BASED ON RESULTS
 
-    public void Win() => OnWin?.Invoke();
+    public void Win()
+    {
+        GetStars();
+        OnWin?.Invoke();
+    }
 
     public int GetStars()
     {
         int stars = 1;
         stars += Timer > PlayerPrefs.GetFloat(timerKey, 0) ? 0 : 1;
-        stars += StatManager.EnemiesKiiled > StatManager.DefensesDestroyed ? 1 : 0;
+        stars += StatManager.EnemiesKilled > StatManager.DefensesDestroyed ? 1 : 0;
         return stars;
     }
 

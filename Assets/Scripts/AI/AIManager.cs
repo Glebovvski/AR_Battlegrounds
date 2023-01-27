@@ -16,6 +16,7 @@ namespace Enemies
         private CastleDefense Castle { get; set; }
         public GameGrid Grid { get; private set; }
         private LoseModel LoseModel { get; set; }
+        private StatManager StatManager { get; set; }
 
         [SerializeField] private PlaneManager planeManager;
 
@@ -36,12 +37,13 @@ namespace Enemies
         private Dictionary<PoolObjectType, int> enemyCoefs = new Dictionary<PoolObjectType, int>();
 
         [Inject]
-        private void Construct(CurrencyModel currencyModel, GameGrid grid, CastleDefense castle, LoseModel loseModel)
+        private void Construct(CurrencyModel currencyModel, GameGrid grid, CastleDefense castle, LoseModel loseModel, StatManager statManager)
         {
             CurrencyModel = currencyModel;
             Grid = grid;
             Castle = castle;
             LoseModel = loseModel;
+            StatManager = statManager;
         }
 
         private void Awake()
@@ -143,6 +145,7 @@ namespace Enemies
             Enemies.Remove(enemy);
             PoolManager.Instance.ReturnToPool(enemy.GameObject, enemy.Type);
             SpawnEnemies();
+            StatManager.AddEnemiesKilled();
         }
 
         public IEnumerable<Enemy> GetEnemiesAttackingObservation(Observation observation) => Enemies.Where(x => x.AttackTarget == observation);

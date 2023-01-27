@@ -2,9 +2,12 @@ using System;
 using Defendable;
 using UnityEngine;
 using UnityEngine.AI;
+using Zenject;
 
 public class GridCell : MonoBehaviour
 {
+    private StatManager StatManager { get; set; }
+
     [SerializeField] private MeshRenderer quadRenderer;
     [SerializeField] private MeshFilter cubeMesh;
     [SerializeField] private Mesh ground;
@@ -26,6 +29,12 @@ public class GridCell : MonoBehaviour
     private Color defaultCellColor;
 
     public event Action OnFreeCell;
+
+    [Inject]
+    private void Construct(StatManager statManager)
+    {
+        StatManager = statManager;
+    }
 
     public void SetSelected() => quadRenderer.material.color = Color.green * 10;
     public void Init(int x, int y)
@@ -60,6 +69,7 @@ public class GridCell : MonoBehaviour
         Defence.OnDeath -= FreeCell;
         Defence = null;
         ToggleVolume(true);
+        StatManager.AddDefensesDestroyed();
         OnFreeCell?.Invoke();
     }
 
