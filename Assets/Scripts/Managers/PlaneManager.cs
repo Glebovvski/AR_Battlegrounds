@@ -33,7 +33,7 @@ public class PlaneManager : MonoBehaviour
     private void SetUpGrid()
     {
         AttachChild(Grid.transform);
-        Grid.transform.position = new Vector3(Grid.transform.position.x, -Grid.transform.localScale.y, Grid.transform.position.z);
+        // Grid.transform.position = new Vector3(Grid.transform.position.x, -Grid.transform.localScale.y, Grid.transform.position.z);
         OnGridSet?.Invoke();
         UpdateNavMesh();
     }
