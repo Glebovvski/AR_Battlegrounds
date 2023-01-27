@@ -239,8 +239,8 @@ public class GameGrid : MonoBehaviour
             GridList.ForEach(cell => cell.SetHeight(1));
 
         TryChangeHeight();
-        SpawnCastleAtCentre();
         RebuildNavMesh();
+        SpawnCastleAtCentre();
         OnGridCreated?.Invoke();
     }
 
@@ -340,10 +340,10 @@ public class GameGrid : MonoBehaviour
 
     private void SpawnCastleAtCentre()
     {
-        Vector2 centre = GetCentreOfPair(centreCells);
-        Castle.Init(DefensesModel.List.Where(x => x.Type == DefenseType.Castle).FirstOrDefault());
-        Castle.transform.position = GetWorldPositionFromGrid(centre, 0.1f);
         plane.AttachChild(Castle.transform);
+        Vector2 centre = ((centreCells.First().transform.position + centreCells.Last().transform.position) / 2f) * Castle.transform.localScale.x;// GetCentreOfPair(centreCells);
+        Castle.Init(DefensesModel.List.Where(x => x.Type == DefenseType.Castle).FirstOrDefault());
+        Castle.transform.position = GetWorldPositionFromGrid(centre, 0.3f);
         centreCells.ForEach(x => x.SetDefence(Castle));
     }
 
@@ -351,8 +351,8 @@ public class GameGrid : MonoBehaviour
 
     private void TryChangeHeight()
     {
-        int centreX = Width / 2 - 1;
-        int centreY = Length / 2 - 1;
+        int centreX = Width / 2;// - 1;
+        int centreY = Length / 2;// - 1;
         var gridCell1 = grid[centreX][centreY];
         var gridCell2 = gridType == GridType.Rectangle ? grid[centreX][centreY + 1] : grid[centreX][centreY - 1];
         var gridCell3 = grid[centreX + 1][centreY];
@@ -360,7 +360,10 @@ public class GameGrid : MonoBehaviour
 
         centreCells = new List<GridCell>()
         {
-            gridCell1, gridCell2, gridCell3, gridCell4
+            gridCell1,
+            gridCell2,
+            gridCell3,
+            gridCell4
         };
 
         foreach (var cell in GridList)
