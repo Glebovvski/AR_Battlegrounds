@@ -15,12 +15,12 @@ public class GameGrid : MonoBehaviour
     private DefensesModel DefensesModel { get; set; }
     private CastleDefense Castle { get; set; }
     private LoseModel LoseModel { get; set; }
+    private PlaneManager PlaneManager { get; set; }
+    private StatManager StatManager { get; set; }
 
     [SerializeField] private GridType gridType;
 
     [SerializeField] private DefensesViewModel defencesViewModel;
-
-    [SerializeField] private PlaneManager plane;
 
     [SerializeField] private GridCell gridCellPrefab;
 
@@ -45,12 +45,14 @@ public class GameGrid : MonoBehaviour
     public event Action OnGridCreated;
 
     [Inject]
-    private void Construct(CurrencyModel currencyModel, DefensesModel defensesModel, CastleDefense castleDefense, LoseModel loseModel)
+    private void Construct(CurrencyModel currencyModel, DefensesModel defensesModel, CastleDefense castleDefense, LoseModel loseModel, PlaneManager planeManager, StatManager statManager)
     {
         CurrencyModel = currencyModel;
         DefensesModel = defensesModel;
         Castle = castleDefense;
         LoseModel = loseModel;
+        PlaneManager = planeManager;
+        StatManager = statManager;
     }
 
     // Start is called before the first frame update
@@ -60,7 +62,7 @@ public class GameGrid : MonoBehaviour
         DefensesModel.OnDefenseDeselected += DeselectDefense;
         LoseModel.OnRestart += RemoveAllDefenses;
 
-        gridSpaceSize *= plane.transform.localScale.x;
+        gridSpaceSize *= PlaneManager.transform.localScale.x;
 
         // CreateGrid();
     }
@@ -141,6 +143,7 @@ public class GameGrid : MonoBehaviour
 
         var defense = PoolManager.Instance.GetFromPool<Defense>(SelectedDefense.PoolType);
         defense.Init(SelectedDefense);
+        defense.OnDeath += UpdateStats;
         // plane.AttachChild(defense.transform);
         if (defense.GetSize() == Vector2Int.one)
         {
@@ -162,6 +165,11 @@ public class GameGrid : MonoBehaviour
         CurrencyModel.Buy(SelectedDefense.Price);
         if (CurrencyModel.Gold >= SelectedDefense.Price)
             SelectDefense(SelectedDefense);
+    }
+
+    private void UpdateStats()
+    {
+        StatManager.AddDefensesDestroyed();
     }
 
     private List<List<GridCell>> GetCellGroupsBySize(Vector2Int size)
@@ -239,7 +247,6 @@ public class GameGrid : MonoBehaviour
             GridList.ForEach(cell => cell.SetHeight(1));
 
         TryChangeHeight();
-        // RebuildNavMesh();
         SpawnCastleAtCentre();
         OnGridCreated?.Invoke();
     }
@@ -326,7 +333,7 @@ public class GameGrid : MonoBehaviour
 
     public void RebuildNavMesh()
     {
-        plane.UpdateNavMesh();
+        PlaneManager.UpdateNavMesh();
     }
 
     public List<Vector3> Corners()
@@ -342,7 +349,7 @@ public class GameGrid : MonoBehaviour
 
     private void SpawnCastleAtCentre()
     {
-        plane.AttachChild(Castle.transform);
+        PlaneManager.AttachChild(Castle.transform);
         Vector3 centre3 = ((centreCells.First().transform.position + centreCells.Last().transform.position) / 2f) * Castle.transform.localScale.x;// GetCentreOfPair(centreCells);
         Vector2 centre = new Vector2(centre3.x, centre3.z);
         Castle.Init(DefensesModel.List.Where(x => x.Type == DefenseType.Castle).FirstOrDefault());
@@ -474,6 +481,7 @@ public class GameGrid : MonoBehaviour
                 cell.FreeCell();
             }
         }
+        CreateGrid();
     }
 
     private void DeselectAllCells() => GridList.ForEach(x => x.DeselectCell());

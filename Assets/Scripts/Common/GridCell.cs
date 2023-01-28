@@ -6,7 +6,6 @@ using Zenject;
 
 public class GridCell : MonoBehaviour
 {
-    private StatManager StatManager { get; set; }
 
     [SerializeField] private MeshRenderer quadRenderer;
     [SerializeField] private MeshFilter cubeMesh;
@@ -30,11 +29,7 @@ public class GridCell : MonoBehaviour
 
     public event Action OnFreeCell;
 
-    [Inject]
-    private void Construct(StatManager statManager)
-    {
-        StatManager = statManager;
-    }
+    
 
     public void SetSelected() => quadRenderer.material.color = Color.green * 10;
     public void Init(int x, int y)
@@ -69,7 +64,6 @@ public class GridCell : MonoBehaviour
         Defence.OnDeath -= FreeCell;
         Defence = null;
         ToggleVolume(true);
-        StatManager.AddDefensesDestroyed();
         OnFreeCell?.Invoke();
     }
 

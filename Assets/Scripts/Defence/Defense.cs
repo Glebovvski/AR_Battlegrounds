@@ -3,13 +3,16 @@ using System.Collections;
 using System.Linq;
 using CartoonFX;
 using UnityEngine;
+using Zenject;
 
 namespace Defendable
 {
     public abstract class Defense : MonoBehaviour
     {
-        [SerializeField] private CFXR_Effect destroyFX;
-        [SerializeField] private GameObject defenseMesh;
+        private StatManager StatManager { get; set; }
+
+        [SerializeField] protected CFXR_Effect destroyFX;
+        [SerializeField] protected GameObject defenseMesh;
         [SerializeField] protected HealthBarController healthBarController;
 
         [field: SerializeField] public ScriptableDefense SO { get; set; }
@@ -34,6 +37,12 @@ namespace Defendable
         public event Action OnDefenseSet;
 
         public virtual event Action OnDeath;
+
+        [Inject]
+        private void Construct(StatManager statManager)
+        {
+            StatManager = statManager;
+        }
 
         public virtual void Init(ScriptableDefense so)
         {
