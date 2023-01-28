@@ -41,6 +41,8 @@ public class PlaneManager : MonoBehaviour
 
     public void AttachChild(Transform child)
     {
+        if (child.parent == this.transform) return;
+
         var scale = child.localScale;
         child.localScale = new Vector3(scale.x / (this.transform.localScale.x * planeFactor), scale.y / (this.transform.localScale.y * planeFactor), scale.z / (this.transform.localScale.z * planeFactor));
         child.SetParent(this.transform);
