@@ -14,14 +14,14 @@ public class HasAttackTargetInRange : ContextualScorerBase
         var attackTarget = enemy.AttackTarget;
         if (attackTarget == null) return 0;
         if (!attackTarget.IsAlive) return 0;
-        if (IsNotInAttackRange(enemy)) return 0;
+        if (!enemy.IsAttackTargetInRange) return 0;
 
         return 100;
     }
 
     private bool IsNotInAttackRange(Enemy enemy)
     {
-        var result = (enemy.AttackTarget.Position - enemy.Position).sqrMagnitude > enemy.AttackRange*enemy.AttackRange;
+        var result = (enemy.AttackTarget.Position - enemy.Position).sqrMagnitude > enemy.AttackRange * enemy.AttackRange;
         return result;
     }
 }

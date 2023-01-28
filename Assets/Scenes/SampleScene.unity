@@ -1140,7 +1140,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 581853323}
   m_Direction: 0
   m_Value: 0
-  m_Size: 0
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2520,61 +2520,6 @@ MonoBehaviour:
       type: 3}
     container: {fileID: 745831102}
     pool: []
-  decorList:
-  - type: 1000
-    amount: 10
-    prefab: {fileID: 1398384037247820, guid: 018e38b65bc9fb048a9c4271cdad70c2, type: 3}
-    container: {fileID: 745831102}
-    pool: []
-  - type: 1001
-    amount: 10
-    prefab: {fileID: 1685073300064356, guid: eb322b3f7ad50984197dced1b53b11ee, type: 3}
-    container: {fileID: 745831102}
-    pool: []
-  - type: 1002
-    amount: 10
-    prefab: {fileID: 1296487970245184, guid: f4f82206765cef54ca8f19ce34136e8a, type: 3}
-    container: {fileID: 745831102}
-    pool: []
-  - type: 1003
-    amount: 10
-    prefab: {fileID: 1478007673441398, guid: 7747cd3716304194fb26aa4e29900eb1, type: 3}
-    container: {fileID: 745831102}
-    pool: []
-  - type: 1004
-    amount: 10
-    prefab: {fileID: 1685531937540468, guid: 6c919ec1c1e88a94c95afc28b198b9f8, type: 3}
-    container: {fileID: 745831102}
-    pool: []
-  - type: 1005
-    amount: 10
-    prefab: {fileID: 1913777595529458, guid: 4c9f6adf60a275840b716082e3482212, type: 3}
-    container: {fileID: 745831102}
-    pool: []
-  - type: 1006
-    amount: 10
-    prefab: {fileID: 4681031014662985979, guid: 1333a76ee8db00745be00002adae3651,
-      type: 3}
-    container: {fileID: 745831102}
-    pool: []
-  - type: 1007
-    amount: 10
-    prefab: {fileID: 6571508024509849044, guid: bf895492b0f7b4543bc83dbb0e7bdc5a,
-      type: 3}
-    container: {fileID: 745831102}
-    pool: []
-  - type: 1008
-    amount: 10
-    prefab: {fileID: 2433694902941725925, guid: 1d6fda4c7b146f543a52d11e9b06af96,
-      type: 3}
-    container: {fileID: 745831102}
-    pool: []
-  - type: 1009
-    amount: 10
-    prefab: {fileID: 8387522416135862644, guid: aa8a3ebaa00f12947a5ab5bfbbb9cc43,
-      type: 3}
-    container: {fileID: 745831102}
-    pool: []
 --- !u!4 &745831104
 Transform:
   m_ObjectHideFlags: 0
@@ -3171,12 +3116,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   planeManager: {fileID: 1243855130}
   maxWaves: 1
-  maxBaseEnemies: 0
+  maxBaseEnemies: 2
   maxBullEnemies: 0
   maxHealerEnemies: 0
   maxSpyEnemies: 0
   maxKamikazeEnemies: 0
-  maxFlamerEnemies: 5
+  maxFlamerEnemies: 0
   spawnPoints:
   - {fileID: 4555737984256998628}
   - {fileID: 1599919936}
@@ -3307,9 +3252,8 @@ GameObject:
   - component: {fileID: 1243855126}
   - component: {fileID: 1243855130}
   - component: {fileID: 1243855127}
-  - component: {fileID: 1243855128}
   - component: {fileID: 1243855129}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: PlaneManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3365,18 +3309,6 @@ MonoBehaviour:
   m_VoxelSize: 0.016666668
   m_BuildHeightMesh: 0
   m_NavMeshData: {fileID: 0}
---- !u!114 &1243855128
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1243855122}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9566ca52082fb8c4ca1f36c5a6ea20d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &1243855129
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3808,7 +3740,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1314439501}
   - component: {fileID: 1314439502}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: MissileCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}

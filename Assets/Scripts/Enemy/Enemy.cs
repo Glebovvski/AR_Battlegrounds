@@ -23,6 +23,7 @@ namespace Enemies
         [SerializeField] private Animator animator;
         [SerializeField] private CFXR_Effect fx;
         [SerializeField] private Outline outline;
+        [SerializeField] private Transform attackTrigger;
 
         public int Health { get; private set; }
         public float CurrentHealth => DamageReceiver.CurrentHealth;
@@ -39,7 +40,7 @@ namespace Enemies
         public Vector3 Position => this.gameObject.transform.position;
         public DamageReceiver DamageReceiver;
         public PoolObjectType Type => SO.Type;
-        public float AttackRange => SO.AttackRange;
+        public float AttackRange => SO.AttackRange * transform.parent.localScale.x;
         public float AttackRadius => SO.AttackRadius;
         public EnemyType EnemyType => SO.EnemyType;
         protected bool IsReadyToAttack => Time.time - LastAttackTime > SO.TimeBetweenAttacks;
@@ -49,6 +50,8 @@ namespace Enemies
         public int AttackLaserScore => SO.AttackLaserScore;
         public int AttackCastleScore => SO.AttackCastleScore;
         public int AttackTrapScore => SO.AttackTrapScore;
+
+        public bool IsAttackTargetInRange { get; private set; } = false;
 
         protected float LastAttackTime { get; set; }
 
@@ -72,6 +75,7 @@ namespace Enemies
             InputManager.OnActiveDefenseClick += OutlineEnemy;
             InputManager.OnEnemyClick += CancelOutline;
             PopulateDictionary();
+            attackTrigger.localScale = new Vector3(1, 1, AttackRange);
         }
 
         public virtual void Init()
@@ -102,7 +106,10 @@ namespace Enemies
         public virtual void Update()
         {
             if (AttackTarget != null)
-                Vector3.RotateTowards(this.transform.rotation.eulerAngles, new Vector3(AttackTarget.Defense.transform.rotation.x, 0, AttackTarget.Defense.transform.rotation.z), 5, 5);
+            {
+                var targetPos = new Vector3(AttackTarget.Defense.transform.position.x, this.transform.position.y, AttackTarget.Defense.transform.position.z);
+                transform.LookAt(targetPos);
+            }
             animationController.UpdateState();
         }
 
@@ -148,6 +155,25 @@ namespace Enemies
         private void OnTriggerEnter(Collider other)
         {
             DamageReceiver.OnCollision(other);
+            CheckAttackTarget(other);
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.TryGetComponent<Defense>(out var defense))
+            {
+                if (AttackTarget.Defense == defense)
+                    IsAttackTargetInRange = false;
+            }
+        }
+
+        private void CheckAttackTarget(Collider other)
+        {
+            if (other.TryGetComponent<Defense>(out var defense))
+            {
+                if (AttackTarget.Defense == defense)
+                    IsAttackTargetInRange = true;
+            }
         }
 
         private void Death()

@@ -20,9 +20,11 @@ public class PlaneManager : MonoBehaviour
 
     static List<ARRaycastHit> hits = new List<ARRaycastHit>();
 
-    private int planeFactor = 5;
+    private float planeFactor = 2.5f;
 
     public event Action OnGridSet;
+
+    public Vector3 Scale => transform.localScale;
 
     private void Start()
     {

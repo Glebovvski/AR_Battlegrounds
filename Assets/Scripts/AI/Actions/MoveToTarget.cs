@@ -10,7 +10,7 @@ public class MoveToTarget : ActionBase
     {
         var c = (AIContext)context;
 
-        if (c.Enemy.AttackTarget != null && c.Enemy.AttackTarget.IsAlive && c.Enemy.IsNewDestination(c.Enemy.AttackTarget.Position))
+        if (c.Enemy.AttackTarget != null && c.Enemy.AttackTarget.IsAlive)// && c.Enemy.IsNewDestination(c.Enemy.AttackTarget.Position))
         {
             c.Enemy.MoveTo(c.Enemy.AttackTarget.Position);
         }
