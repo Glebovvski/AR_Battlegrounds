@@ -20,12 +20,20 @@ namespace Enemies
 
         [SerializeField] private PlaneManager planeManager;
 
-        [Header("Enemies coefficient to spawn")]
+        [Header("Battle settings")]
+        [Range(2, 25)]
+        [SerializeField] private int maxWaves;
+        [Range(1, 50)]
         [SerializeField] private int maxBaseEnemies;
+        [Range(1, 5)]
         [SerializeField] private int maxBullEnemies;
+        [Range(1, 5)]
         [SerializeField] private int maxHealerEnemies;
+        [Range(1, 5)]
         [SerializeField] private int maxSpyEnemies;
+        [Range(1, 10)]
         [SerializeField] private int maxKamikazeEnemies;
+        [Range(1, 5)]
         [SerializeField] private int maxFlamerEnemies;
 
         [SerializeField] private Transform[] spawnPoints;
@@ -64,7 +72,6 @@ namespace Enemies
         {
             Castle.OnLose += ReturnAllEnemiesToPool;
             LoseModel.OnRestart += SpawnEnemies;
-            // Grid.OnGridCreated += SpawnEnemies;
             planeManager.OnGridSet += SpawnEnemies;
 
             enemyCoefs.Add(PoolObjectType.Enemy, maxBaseEnemies);
@@ -77,6 +84,10 @@ namespace Enemies
 
         private void SpawnEnemies()
         {
+            int maxEnemies = enemyCoefs.Select(x => x.Value).Sum();
+            if (maxEnemies - Enemies.Count > maxBaseEnemies / 2)
+                return;
+
             foreach (var enemy in enemyCoefs)
             {
                 var spawnPoint = spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Length - 1)];
@@ -88,6 +99,9 @@ namespace Enemies
                         RegisterEnemy(enemy.Key, spawnPoint);
                 }
             }
+
+            if (Enemies.Where(x => x.Type != PoolObjectType.SpyEnemy || x.Type != PoolObjectType.HealerEnemy).Count() == 0)
+                SpawnEnemies();
         }
 
         public void AddObservation(Observation observation)
