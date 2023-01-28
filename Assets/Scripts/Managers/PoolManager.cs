@@ -12,6 +12,8 @@ public class PoolManager : MonoBehaviour
 
     public static PoolManager Instance { get; private set; }
 
+    private PlaneManager PlaneManager { get; set; }
+
     private Dictionary<PoolObjectType, Type> TypeDictionary = new Dictionary<PoolObjectType, Type>();
 
     [SerializeField] private List<PoolInfo> poolList;
@@ -19,8 +21,9 @@ public class PoolManager : MonoBehaviour
     [SerializeField] private Type type;
 
     [Inject]
-    private void Construct(DiContainer container)
+    private void Construct(PlaneManager planeManager, DiContainer container)
     {
+        PlaneManager = planeManager;
         Container = container;
     }
 
@@ -70,6 +73,7 @@ public class PoolManager : MonoBehaviour
 
     public void ReturnToPool(GameObject go, PoolObjectType type)
     {
+        go.transform.localScale = Vector3.one;
         go.SetActive(false);
         PoolInfo poolInfo = poolList.FirstOrDefault(x => x.type == type);
         bool IsNotInPool = !poolInfo.pool.Contains(go);
@@ -92,6 +96,7 @@ public class PoolManager : MonoBehaviour
             pool.Remove(go);
         }
         go.SetActive(true);
+        PlaneManager.AttachChild(go.transform);
         return go.GetComponent<T>();
     }
 

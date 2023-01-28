@@ -141,7 +141,7 @@ public class GameGrid : MonoBehaviour
 
         var defense = PoolManager.Instance.GetFromPool<Defense>(SelectedDefense.PoolType);
         defense.Init(SelectedDefense);
-        plane.AttachChild(defense.transform);
+        // plane.AttachChild(defense.transform);
         if (defense.GetSize() == Vector2Int.one)
         {
             var position = new Vector2(cell.transform.position.x, cell.transform.position.z);

@@ -459,7 +459,7 @@ namespace CartoonFX
 		[System.NonSerialized] MaterialPropertyBlock materialPropertyBlock;
 		[System.NonSerialized] Renderer particleRenderer;
 
-		public event Action<GameObject> OnFinish;
+		public event Action OnFinish;
 
 		// ================================================================================================================================
 
@@ -564,7 +564,7 @@ namespace CartoonFX
 						else
 						{
 							if(clearBehavior == ClearBehavior.InvokeEvent)
-								OnFinish?.Invoke(this.gameObject);
+								OnFinish?.Invoke();
 							this.gameObject.SetActive(false);
 						}
 					}

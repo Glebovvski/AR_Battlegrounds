@@ -4,11 +4,15 @@ using UnityEngine;
 using TMPro;
 using Zenject;
 using UnityEngine.UI;
+using System;
 
 public class WinView : MonoBehaviour
 {
     private WinViewModel WinViewModel { get; set; }
 
+    [SerializeField] private GameObject WinPanel;
+
+    [Space(10)]
     [SerializeField] private StarView starCentre;
     [SerializeField] private StarView starLeft;
     [SerializeField] private StarView starRight;
@@ -20,6 +24,17 @@ public class WinView : MonoBehaviour
     private void Construct(WinViewModel winViewModel)
     {
         WinViewModel = winViewModel;
+    }
+
+    private void Start()
+    {
+        WinViewModel.OnShowWinScreen += ShowWinScreen;
+    }
+
+    private void ShowWinScreen(int stars)
+    {
+        WinPanel.SetActive(true);
+        UpdateStars(stars);
     }
 
     public void UpdateStars(int stars)
@@ -48,4 +63,9 @@ public class WinView : MonoBehaviour
     // {
     //     timer.text = data.ToString();
     // }
+
+    private void OnDestroy()
+    {
+        WinViewModel.OnShowWinScreen -= ShowWinScreen;
+    }
 }

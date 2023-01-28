@@ -97,7 +97,7 @@ namespace Defendable
             }
         }
 
-        protected virtual void ReturnToPool(GameObject fx)
+        protected virtual void ReturnToPool()
         {
             DamageReceiver.OnDeath -= OnDeath;
             PoolManager.Instance.ReturnToPool(this.gameObject, DefenseTypeToPoolType(Type));

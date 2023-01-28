@@ -21,28 +21,32 @@ namespace Enemies
         [SerializeField] private PlaneManager planeManager;
 
         [Header("Battle settings")]
-        [Range(2, 25)]
+        [Range(1, 25)]
         [SerializeField] private int maxWaves;
-        [Range(1, 50)]
+        [Range(0, 50)]
         [SerializeField] private int maxBaseEnemies;
-        [Range(1, 5)]
+        [Range(0, 5)]
         [SerializeField] private int maxBullEnemies;
-        [Range(1, 5)]
+        [Range(0, 5)]
         [SerializeField] private int maxHealerEnemies;
-        [Range(1, 5)]
+        [Range(0, 5)]
         [SerializeField] private int maxSpyEnemies;
-        [Range(1, 10)]
+        [Range(0, 10)]
         [SerializeField] private int maxKamikazeEnemies;
-        [Range(1, 5)]
+        [Range(0, 5)]
         [SerializeField] private int maxFlamerEnemies;
 
         [SerializeField] private Transform[] spawnPoints;
 
 
+        public event Action<int> OnEnemyDestroyed;
+
         public List<Observation> Observations = new List<Observation>();
         [SerializeField] private List<Enemy> Enemies = new List<Enemy>();
 
         private Dictionary<PoolObjectType, int> enemyCoefs = new Dictionary<PoolObjectType, int>();
+
+        private int Wave = 0;
 
         [Inject]
         private void Construct(CurrencyModel currencyModel, GameGrid grid, CastleDefense castle, LoseModel loseModel, StatManager statManager)
@@ -70,6 +74,7 @@ namespace Enemies
 
         private void Start()
         {
+            Wave = 0;
             Castle.OnLose += ReturnAllEnemiesToPool;
             LoseModel.OnRestart += SpawnEnemies;
             planeManager.OnGridSet += SpawnEnemies;
@@ -84,8 +89,10 @@ namespace Enemies
 
         private void SpawnEnemies()
         {
+            if (Wave > maxWaves)
+                return;
             int maxEnemies = enemyCoefs.Select(x => x.Value).Sum();
-            if (maxEnemies - Enemies.Count > maxBaseEnemies / 2)
+            if (maxEnemies - Enemies.Count > maxBaseEnemies / 2 && Wave > 0)
                 return;
 
             foreach (var enemy in enemyCoefs)
@@ -101,7 +108,11 @@ namespace Enemies
             }
 
             if (Enemies.Where(x => x.Type != PoolObjectType.SpyEnemy || x.Type != PoolObjectType.HealerEnemy).Count() == 0)
+            {
                 SpawnEnemies();
+                Wave--;
+            }
+            Wave++;
         }
 
         public void AddObservation(Observation observation)
@@ -147,7 +158,7 @@ namespace Enemies
         {
             var enemy = PoolManager.Instance.GetFromPool<Enemy>(enemyType);
             enemy.gameObject.SetActive(false);
-            planeManager.AttachChild(enemy.transform);
+            // planeManager.AttachChild(enemy.transform);
             enemy.Init();
             enemy.transform.position = parent.position;
             enemy.OnDeath += GetGoldFromEnemy;
@@ -162,6 +173,7 @@ namespace Enemies
             PoolManager.Instance.ReturnToPool(enemy.GameObject, enemy.Type);
             StatManager.AddEnemiesKilled();
             SpawnEnemies();
+            OnEnemyDestroyed?.Invoke(Enemies.Count);
         }
 
         public IEnumerable<Enemy> GetEnemiesAttackingObservation(Observation observation) => Enemies.Where(x => x.AttackTarget == observation);

@@ -48,7 +48,7 @@ namespace Enemies
             TakeDamage(1000);
         }
 
-        private void ReturnToPool(GameObject go)
+        private void ReturnToPool()
         {
             PoolManager.Instance.ReturnToPool(this.gameObject, PoolObjectType.KamikazeEnemy);
         }
