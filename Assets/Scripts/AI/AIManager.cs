@@ -15,7 +15,7 @@ namespace Enemies
         private CurrencyModel CurrencyModel { get; set; }
         private CastleDefense Castle { get; set; }
         public GameGrid Grid { get; private set; }
-        private LoseModel LoseModel { get; set; }
+        private GameControlModel GameModel { get; set; }
         private StatManager StatManager { get; set; }
 
         [SerializeField] private PlaneManager planeManager;
@@ -49,12 +49,12 @@ namespace Enemies
         private int Wave = 0;
 
         [Inject]
-        private void Construct(CurrencyModel currencyModel, GameGrid grid, CastleDefense castle, LoseModel loseModel, StatManager statManager)
+        private void Construct(CurrencyModel currencyModel, GameGrid grid, CastleDefense castle, GameControlModel gameModel, StatManager statManager)
         {
             CurrencyModel = currencyModel;
             Grid = grid;
             Castle = castle;
-            LoseModel = loseModel;
+            GameModel = gameModel;
             StatManager = statManager;
         }
 
@@ -76,7 +76,7 @@ namespace Enemies
         {
             Wave = 0;
             Castle.OnLose += ReturnAllEnemiesToPool;
-            LoseModel.OnRestart += ResetAIManager;
+            GameModel.OnRestart += ResetAIManager;
             planeManager.OnGridSet += SpawnEnemies;
 
             enemyCoefs.Add(PoolObjectType.Enemy, maxBaseEnemies);
@@ -227,7 +227,7 @@ namespace Enemies
         private void OnDestroy()
         {
             Castle.OnLose -= ReturnAllEnemiesToPool;
-            LoseModel.OnRestart -= ResetAIManager;
+            GameModel.OnRestart -= ResetAIManager;
             planeManager.OnGridSet -= SpawnEnemies;
         }
     }
