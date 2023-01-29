@@ -39,10 +39,19 @@ public class WinView : MonoBehaviour
     private void ShowWinScreen(int stars)
     {
         WinPanel.SetActive(true);
-        UpdateStars(stars);
+        UpdateData(stars);
     }
 
-    public void UpdateStars(int stars)
+    private void UpdateData(int stars)
+    {
+        UpdateStars(stars);
+        UpdateTimer();
+        UpdateBestScore();
+        UpdateEnemiesKilled();
+        UpdateDefensesDestroyed();
+    }
+
+    private void UpdateStars(int stars)
     {
         Reset();
         starCentre.Activate();
@@ -52,22 +61,17 @@ public class WinView : MonoBehaviour
             starRight.Activate();
     }
 
-    public void Reset()
+    private void UpdateTimer() => timer.text = WinViewModel.GetTimer();
+    private void UpdateBestScore() => bestScore.text = WinViewModel.GetBestScore();
+    private void UpdateEnemiesKilled() => WinViewModel.GetEnemiesKilled();
+    private void UpdateDefensesDestroyed() => WinViewModel.GetDefensesDestroyed();
+
+    private void Reset()
     {
         starCentre.Reset();
         starLeft.Reset();
         starRight.Reset();
     }
-
-    // private void Start()
-    // {
-    //     WinViewModel.OnTimerChange += UpdateData;
-    // }
-
-    // private void UpdateData(float data)
-    // {
-    //     timer.text = data.ToString();
-    // }
 
     private void OnDestroy()
     {
