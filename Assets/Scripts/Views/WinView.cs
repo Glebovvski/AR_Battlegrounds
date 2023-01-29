@@ -63,8 +63,8 @@ public class WinView : MonoBehaviour
 
     private void UpdateTimer() => timer.text = WinViewModel.GetTimer();
     private void UpdateBestScore() => bestScore.text = WinViewModel.GetBestScore();
-    private void UpdateEnemiesKilled() => WinViewModel.GetEnemiesKilled();
-    private void UpdateDefensesDestroyed() => WinViewModel.GetDefensesDestroyed();
+    private void UpdateEnemiesKilled() => enemiesDestroyed.text = WinViewModel.GetEnemiesKilled();
+    private void UpdateDefensesDestroyed() => defensesDestroyed.text = WinViewModel.GetDefensesDestroyed();
 
     private void Reset()
     {

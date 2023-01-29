@@ -25,8 +25,8 @@ public class WinViewModel : IInitializable
 
     public string GetTimer() => WinModel.GetTimer();
     public string GetBestScore() => WinModel.GetBestScore();
-    public int GetEnemiesKilled() => StatManager.EnemiesKilled;
-    public int GetDefensesDestroyed() => StatManager.DefensesDestroyed;
+    public string GetEnemiesKilled() => StatManager.EnemiesKilled.ToString();
+    public string GetDefensesDestroyed() => StatManager.DefensesDestroyed.ToString();
 
     [Inject]
     private void Construct(WinModel winModel, StatManager statManager)
