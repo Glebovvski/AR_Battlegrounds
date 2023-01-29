@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 77060595961696933}
   - component: {fileID: 913328609120314539}
   - component: {fileID: 3225368283004231948}
+  - component: {fileID: 7726721848850754718}
   m_Layer: 9
   m_Name: Healer
   m_TagString: Untagged
@@ -139,6 +140,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1.39922, z: 1}
   m_Center: {x: 0, y: 0.7053616, z: 0}
+--- !u!54 &7726721848850754718
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4157964374149680064}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &3811703267125906569
 PrefabInstance:
   m_ObjectHideFlags: 0
