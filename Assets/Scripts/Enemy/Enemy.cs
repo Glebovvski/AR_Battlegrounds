@@ -71,11 +71,11 @@ namespace Enemies
 
         private void Start()
         {
-            outline.enabled = false;
-            InputManager.OnActiveDefenseClick += OutlineEnemy;
-            InputManager.OnEnemyClick += CancelOutline;
-            PopulateDictionary();
-            attackTrigger.localScale = new Vector3(1, 1, AttackRange);
+            // outline.enabled = false;
+            // InputManager.OnActiveDefenseClick += OutlineEnemy;
+            // InputManager.OnEnemyClick += CancelOutline;
+            // PopulateDictionary();
+            // attackTrigger.localScale = new Vector3(1, 1, AttackRange);
         }
 
         public virtual void Init()
@@ -88,6 +88,12 @@ namespace Enemies
             NavMeshAgent.enabled = true;
             fx.OnFinish += RemoveEnemyFromField;
             fx.gameObject.SetActive(false);
+
+            outline.enabled = false;
+            InputManager.OnActiveDefenseClick += OutlineEnemy;
+            InputManager.OnEnemyClick += CancelOutline;
+            PopulateDictionary();
+            attackTrigger.localScale = new Vector3(1, 1, AttackRange);
         }
 
 
