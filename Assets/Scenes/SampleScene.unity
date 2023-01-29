@@ -3941,6 +3941,8 @@ MonoBehaviour:
   bestScore: {fileID: 1697057521}
   enemiesDestroyed: {fileID: 493063499}
   defensesDestroyed: {fileID: 682173994}
+  NextLevelBtn: {fileID: 1488421166}
+  MenuBtn: {fileID: 319138876}
 --- !u!1 &874005704
 GameObject:
   m_ObjectHideFlags: 0
@@ -4680,11 +4682,11 @@ MonoBehaviour:
   planeManager: {fileID: 1243855130}
   maxWaves: 1
   maxBaseEnemies: 15
-  maxBullEnemies: 2
-  maxHealerEnemies: 2
-  maxSpyEnemies: 2
-  maxKamikazeEnemies: 2
-  maxFlamerEnemies: 2
+  maxBullEnemies: 0
+  maxHealerEnemies: 0
+  maxSpyEnemies: 0
+  maxKamikazeEnemies: 0
+  maxFlamerEnemies: 0
   spawnPoints:
   - {fileID: 4555737984256998628}
   - {fileID: 1599919936}

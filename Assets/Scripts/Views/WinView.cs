@@ -25,6 +25,10 @@ public class WinView : MonoBehaviour
     [SerializeField] private TextMeshProUGUI enemiesDestroyed;
     [SerializeField] private TextMeshProUGUI defensesDestroyed;
 
+    [Space(10)]
+    [SerializeField] private Button NextLevelBtn;
+    [SerializeField] private Button MenuBtn;
+
     [Inject]
     private void Construct(WinViewModel winViewModel)
     {
@@ -34,12 +38,22 @@ public class WinView : MonoBehaviour
     private void Start()
     {
         WinViewModel.OnShowWinScreen += ShowWinScreen;
+        WinViewModel.OnCloseWinScreen += CloseWinScreen;
+        NextLevelBtn.onClick.AddListener(WinViewModel.NextLevel);
     }
+
+    public event Action OnNextLevelClick;
 
     private void ShowWinScreen(int stars)
     {
         WinPanel.SetActive(true);
         UpdateData(stars);
+    }
+
+    private void CloseWinScreen()
+    {
+        Reset();
+        WinPanel.SetActive(false);
     }
 
     private void UpdateData(int stars)

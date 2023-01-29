@@ -11,6 +11,7 @@ public class WinModel : ITickable, IInitializable
 
     private GameGrid Grid { get; set; }
     private StatManager StatManager { get; set; }
+    private GameControlModel GameControlModel { get; set; }
 
     private bool timerActive = false;
 
@@ -27,15 +28,17 @@ public class WinModel : ITickable, IInitializable
     }
 
     [Inject]
-    private void Construct(GameGrid grid, StatManager statManager)
+    private void Construct(GameGrid grid, StatManager statManager, GameControlModel gameModel)
     {
         Grid = grid;
         StatManager = statManager;
+        GameControlModel = gameModel;
     }
 
     public void Initialize()
     {
         Grid.OnGridCreated += StartTimer;
+        GameControlModel.OnRestart += ResetTimer;
         AIManager.Instance.OnEnemyDestroyed += CheckIsWon;
     }
 
@@ -51,6 +54,12 @@ public class WinModel : ITickable, IInitializable
         timerActive = false;
         CheckTimer();
         OnWin?.Invoke();
+    }
+
+    private void ResetTimer()
+    {
+        timerActive = false;
+        Timer = 0;
     }
 
     private void CheckTimer()

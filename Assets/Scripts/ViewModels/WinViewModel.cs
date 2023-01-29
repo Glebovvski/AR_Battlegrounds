@@ -9,8 +9,18 @@ public class WinViewModel : IInitializable
     public event Action<float> OnTimerChange;
     private WinModel WinModel { get; set; }
     private StatManager StatManager { get; set; }
+    private GameControlModel GameModel { get; set; }
 
     public event Action<int> OnShowWinScreen;
+    public event Action OnCloseWinScreen;
+
+    [Inject]
+    private void Construct(WinModel winModel, StatManager statManager, GameControlModel gameModel)
+    {
+        WinModel = winModel;
+        StatManager = statManager;
+        GameModel = gameModel;
+    }
 
     public void Initialize()
     {
@@ -28,11 +38,10 @@ public class WinViewModel : IInitializable
     public string GetEnemiesKilled() => StatManager.EnemiesKilled.ToString();
     public string GetDefensesDestroyed() => StatManager.DefensesDestroyed.ToString();
 
-    [Inject]
-    private void Construct(WinModel winModel, StatManager statManager)
+    public void NextLevel()
     {
-        WinModel = winModel;
-        StatManager = statManager;
+        GameModel.Restart();
+        OnCloseWinScreen?.Invoke();
     }
 
     private void TimerDataChanged() => OnTimerChange?.Invoke(WinModel.Timer);
