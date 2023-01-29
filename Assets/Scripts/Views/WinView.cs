@@ -19,6 +19,11 @@ public class WinView : MonoBehaviour
 
     [Space(10)]
     [SerializeField] private TextMeshProUGUI timer;
+    [SerializeField] private TextMeshProUGUI bestScore;
+
+    [Space(10)]
+    [SerializeField] private TextMeshProUGUI enemiesDestroyed;
+    [SerializeField] private TextMeshProUGUI defensesDestroyed;
 
     [Inject]
     private void Construct(WinViewModel winViewModel)

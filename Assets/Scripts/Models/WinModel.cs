@@ -48,8 +48,16 @@ public class WinModel : ITickable, IInitializable
     public event Action OnWin;
     private void Win()
     {
-        GetStars();
+        timerActive = false;
+        CheckTimer();
         OnWin?.Invoke();
+    }
+
+    private void CheckTimer()
+    {
+        var bestScore = PlayerPrefs.GetFloat(timerKey, 0);
+        if (bestScore < Timer)
+            PlayerPrefs.SetFloat(timerKey, Timer);
     }
 
     public int GetStars()
@@ -58,6 +66,18 @@ public class WinModel : ITickable, IInitializable
         stars += Timer < PlayerPrefs.GetFloat(timerKey, 0) ? 0 : 1;
         stars += StatManager.EnemiesKilled > StatManager.DefensesDestroyed ? 1 : 0;
         return stars;
+    }
+
+    public string GetTimer() => ConvertFloatToTime(Timer);
+
+    public string GetBestScore() => ConvertFloatToTime(PlayerPrefs.GetFloat(timerKey, 0));
+
+    private string ConvertFloatToTime(float value)
+    {
+        int timeInSecondsInt = (int)value;
+        int minutes = (int)value / 60;
+        int seconds = timeInSecondsInt - (minutes * 60);
+        return String.Format("{0}:{1}", minutes, seconds);
     }
 
     public void StartTimer() => timerActive = true;
