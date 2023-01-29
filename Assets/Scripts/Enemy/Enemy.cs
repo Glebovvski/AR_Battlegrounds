@@ -152,7 +152,7 @@ namespace Enemies
                 LastAttackTime = Time.time;
         }
 
-        private void OnTriggerEnter(Collider other)
+        protected virtual void OnTriggerEnter(Collider other)
         {
             DamageReceiver.OnCollision(other);
             CheckAttackTarget(other);
@@ -172,7 +172,9 @@ namespace Enemies
             if (other.TryGetComponent<Defense>(out var defense))
             {
                 if (AttackTarget.Defense == defense)
+                {
                     IsAttackTargetInRange = true;
+                }
             }
         }
 
