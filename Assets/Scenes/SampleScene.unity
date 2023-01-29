@@ -3116,12 +3116,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   planeManager: {fileID: 1243855130}
   maxWaves: 1
-  maxBaseEnemies: 2
-  maxBullEnemies: 0
-  maxHealerEnemies: 0
-  maxSpyEnemies: 0
-  maxKamikazeEnemies: 0
-  maxFlamerEnemies: 0
+  maxBaseEnemies: 15
+  maxBullEnemies: 3
+  maxHealerEnemies: 2
+  maxSpyEnemies: 4
+  maxKamikazeEnemies: 3
+  maxFlamerEnemies: 2
   spawnPoints:
   - {fileID: 4555737984256998628}
   - {fileID: 1599919936}
