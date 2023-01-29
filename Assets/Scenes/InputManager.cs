@@ -117,7 +117,7 @@ public class InputManager : MonoBehaviour
     private T GetObjectOnScene<T>(LayerMask layer) where T : MonoBehaviour
     {
         Ray ray;
-        #if UNITY_EDITOR
+        #if UNITY_EDITOR || PLATFORM_STANDALONE_WIN
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         #elif UNITY_IOS || PLATFORM_IOS
         ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
@@ -128,24 +128,4 @@ public class InputManager : MonoBehaviour
         }
         return null;
     }
-
-    // [SerializeField] private CharacterMain player;
-    // [SerializeField] private Transform target;
-
-    // public void Update()
-    // {
-    //     if (!Input.GetMouseButtonDown(0))
-    //         return;
-
-    //     var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-    //     RaycastHit hit = new RaycastHit();
-
-    //     if (Physics.Raycast(ray, out hit))
-    //     {
-    //         target.position = hit.point;
-    //         player.SetDestination(target.position);
-    //     }
-    // }
-
 }

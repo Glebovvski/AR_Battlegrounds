@@ -160,6 +160,8 @@ namespace Enemies
 
         private void OnTriggerExit(Collider other)
         {
+            if (AttackTarget == null) return;
+
             if (other.TryGetComponent<Defense>(out var defense))
             {
                 if (AttackTarget.Defense == defense)
@@ -169,6 +171,8 @@ namespace Enemies
 
         private void CheckAttackTarget(Collider other)
         {
+            if (AttackTarget == null) return;
+
             if (other.TryGetComponent<Defense>(out var defense))
             {
                 if (AttackTarget.Defense == defense)
