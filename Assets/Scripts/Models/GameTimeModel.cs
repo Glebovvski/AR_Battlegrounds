@@ -32,7 +32,7 @@ public class GameTimeModel : IInitializable, ITickable
 
     private void Pause()
     {
-        Time.timeScale = 0.05f;
+        Time.timeScale = 0;//0.05f;
         gridCreated = true;
     }
 
