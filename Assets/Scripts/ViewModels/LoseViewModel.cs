@@ -8,15 +8,15 @@ using Zenject;
 public class LoseViewModel : MonoBehaviour
 {
     private CastleDefense Castle { get; set; }
-    private LoseModel LoseModel { get; set; }
+    private GameControlModel GameControlModel { get; set; }
 
     [SerializeField] private LoseView view;
 
     [Inject]
-    private void Construct(CastleDefense castle, LoseModel loseModel)
+    private void Construct(CastleDefense castle, GameControlModel gameModel)
     {
         Castle = castle;
-        LoseModel = loseModel;
+        GameControlModel = gameModel;
     }
 
     private void Start()
@@ -32,7 +32,7 @@ public class LoseViewModel : MonoBehaviour
 
     public void TryAgain()
     {
-        LoseModel.Restart();
+        GameControlModel.Restart();
         view.gameObject.SetActive(false);
     }
 

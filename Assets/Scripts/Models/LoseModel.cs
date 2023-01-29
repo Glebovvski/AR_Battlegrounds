@@ -11,10 +11,5 @@ public class LoseModel
         Grid = grid;
     }
     
-    public event Action OnRestart;
-    public void Restart()
-    {
-        OnRestart?.Invoke();
-        // Grid.CreateGrid();
-    }
+    
 }

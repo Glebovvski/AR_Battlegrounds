@@ -14,7 +14,7 @@ public class GameGrid : MonoBehaviour
     private CurrencyModel CurrencyModel { get; set; }
     private DefensesModel DefensesModel { get; set; }
     private CastleDefense Castle { get; set; }
-    private LoseModel LoseModel { get; set; }
+    private GameControlModel GameModel { get; set; }
     private PlaneManager PlaneManager { get; set; }
     private StatManager StatManager { get; set; }
 
@@ -45,12 +45,12 @@ public class GameGrid : MonoBehaviour
     public event Action OnGridCreated;
 
     [Inject]
-    private void Construct(CurrencyModel currencyModel, DefensesModel defensesModel, CastleDefense castleDefense, LoseModel loseModel, PlaneManager planeManager, StatManager statManager)
+    private void Construct(CurrencyModel currencyModel, DefensesModel defensesModel, CastleDefense castleDefense, GameControlModel gameModel, PlaneManager planeManager, StatManager statManager)
     {
         CurrencyModel = currencyModel;
         DefensesModel = defensesModel;
         Castle = castleDefense;
-        LoseModel = loseModel;
+        GameModel = gameModel;
         PlaneManager = planeManager;
         StatManager = statManager;
     }
@@ -60,7 +60,7 @@ public class GameGrid : MonoBehaviour
     {
         DefensesModel.OnDefenseSelected += SelectDefense;
         DefensesModel.OnDefenseDeselected += DeselectDefense;
-        LoseModel.OnRestart += RemoveAllDefenses;
+        GameModel.OnRestart += RemoveAllDefenses;
 
         gridSpaceSize *= PlaneManager.transform.localScale.x;
 
@@ -490,7 +490,7 @@ public class GameGrid : MonoBehaviour
     {
         DefensesModel.OnDefenseSelected -= SelectDefense;
         DefensesModel.OnDefenseDeselected -= DeselectDefense;
-        LoseModel.OnRestart -= RemoveAllDefenses;
+        GameModel.OnRestart -= RemoveAllDefenses;
     }
 }
 
