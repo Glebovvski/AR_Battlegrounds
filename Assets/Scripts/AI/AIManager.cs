@@ -76,7 +76,7 @@ namespace Enemies
         {
             Wave = 0;
             Castle.OnLose += ReturnAllEnemiesToPool;
-            LoseModel.OnRestart += SpawnEnemies;
+            LoseModel.OnRestart += ResetAIManager;
             planeManager.OnGridSet += SpawnEnemies;
 
             enemyCoefs.Add(PoolObjectType.Enemy, maxBaseEnemies);
@@ -86,6 +86,8 @@ namespace Enemies
             enemyCoefs.Add(PoolObjectType.HealerEnemy, maxHealerEnemies);
             enemyCoefs.Add(PoolObjectType.KamikazeEnemy, maxKamikazeEnemies);
         }
+
+        
 
         private void SpawnEnemies()
         {
@@ -113,6 +115,11 @@ namespace Enemies
                 Wave--;
             }
             Wave++;
+        }
+
+        private void ResetAIManager()
+        {
+            throw new NotImplementedException();
         }
 
         public void AddObservation(Observation observation)
