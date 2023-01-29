@@ -49,13 +49,22 @@ namespace Enemies
             }
         }
 
-        private void OnTriggerEnter(Collider other)
+        protected override void OnTriggerEnter(Collider other)
         {
+            base.OnTriggerEnter(other);
             if (other.TryGetComponent<Defense>(out var defense))
             {
                 defensesInRange.Add(defense);
             }
         }
+
+        // private void OnTriggerEnter(Collider other)
+        // {
+        //     if (other.TryGetComponent<Defense>(out var defense))
+        //     {
+        //         defensesInRange.Add(defense);
+        //     }
+        // }
 
         public void StopAttack()
         {
