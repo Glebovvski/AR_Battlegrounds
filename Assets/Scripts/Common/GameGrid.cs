@@ -11,6 +11,11 @@ public class GameGrid : MonoBehaviour
 {
     private const float yPos = -0.99f;
 
+    private int maxWidth = 50;
+    private int maxLength = 50;
+    private int minWidth = 5;
+    private int minLength = 5;
+
     private CurrencyModel CurrencyModel { get; set; }
     private DefensesModel DefensesModel { get; set; }
     private CastleDefense Castle { get; set; }
@@ -60,7 +65,7 @@ public class GameGrid : MonoBehaviour
     {
         DefensesModel.OnDefenseSelected += SelectDefense;
         DefensesModel.OnDefenseDeselected += DeselectDefense;
-        GameModel.OnRestart += RemoveAllDefenses;
+        GameModel.OnRestart += RestartGrid;
 
         gridSpaceSize *= PlaneManager.transform.localScale.x;
 
@@ -228,27 +233,34 @@ public class GameGrid : MonoBehaviour
 
     public void CreateGrid()
     {
-        if (grid == null)
+        grid?.Clear();
+        GridList.ForEach(cell => cell.Reset());
+        SetRandomGrid();
+        switch (gridType)
         {
-            switch (gridType)
-            {
-                case (GridType.Rectangle):
-                    CreateRectangleGrid();
-                    break;
-                case (GridType.Circle):
-                    CreateCircleGrid();
-                    break;
-                case (GridType.Ellipse):
-                    CreateEllipseGrid();
-                    break;
-            }
+            case (GridType.Rectangle):
+                CreateRectangleGrid();
+                break;
+            case (GridType.Circle):
+                CreateCircleGrid();
+                break;
+            case (GridType.Ellipse):
+                CreateEllipseGrid();
+                break;
         }
-        else
-            GridList.ForEach(cell => cell.SetHeight(1));
+
+        GridList.ForEach(cell => cell.SetHeight(1));
 
         TryChangeHeight();
         SpawnCastleAtCentre();
         OnGridCreated?.Invoke();
+    }
+
+    private void SetRandomGrid()
+    {
+        Width = UnityEngine.Random.Range(minWidth, maxWidth);
+        Length = UnityEngine.Random.Range(minLength, maxLength);
+        gridType = GridType.Rectangle;// (GridType)UnityEngine.Random.Range(0, 3);
     }
 
     private void CreateRectangleGrid()
@@ -263,11 +275,14 @@ public class GameGrid : MonoBehaviour
             for (int z = -Length / 2; z <= Length / 2; ++z)
             {
                 int z_index = z + Length / 2;
-                var cell = Instantiate(gridCellPrefab, new Vector3(x * gridSpaceSize * PlaneManager.Scale.x, 0, z * gridSpaceSize * PlaneManager.Scale.z), Quaternion.identity, this.transform);
-                cell.Init(x_index, z_index);
+                GridCell cell = GridList.FirstOrDefault(x => !x.IsSet);
+                if (cell == null)
+                    cell = Instantiate(gridCellPrefab, new Vector3(x * gridSpaceSize * PlaneManager.Scale.x, 0, z * gridSpaceSize * PlaneManager.Scale.z), Quaternion.identity);
+                cell.Init(x_index, z_index, RebuildNavMesh, this.transform);
                 cell.gameObject.name = string.Format("Cell {0}:{1}", x_index, z_index);
-                cell.OnFreeCell += RebuildNavMesh;
+                // cell.OnFreeCell += RebuildNavMesh;
                 z_list.Add(cell);
+                GridList.Remove(cell);
             }
             grid.Add(z_list);
             GridList.AddRange(grid[x_index]);
@@ -277,6 +292,7 @@ public class GameGrid : MonoBehaviour
     private void CreateCircleGrid()
     {
         int radius = Width / 2;
+        Length = Width;
 
         int square = radius * radius;
 
@@ -290,12 +306,16 @@ public class GameGrid : MonoBehaviour
             {
                 if (new Vector2(x, z).sqrMagnitude > square) continue;
 
-                var cell = Instantiate(gridCellPrefab, new Vector3(x * gridSpaceSize * PlaneManager.Scale.x, 0, z * gridSpaceSize * PlaneManager.Scale.z), Quaternion.identity, this.transform);
                 int z_index = z + radius;
-                cell.Init(x_index, z_index);
+                GridCell cell = GridList.FirstOrDefault(x => !x.IsSet);
+                if (cell == null)
+                    cell = Instantiate(gridCellPrefab, new Vector3(x * gridSpaceSize * PlaneManager.Scale.x, 0, z * gridSpaceSize * PlaneManager.Scale.z), Quaternion.identity);
+
+                cell.Init(x_index, z_index, RebuildNavMesh, this.transform);
                 cell.gameObject.name = string.Format("Cell {0}:{1}", x_index, z_index);
-                cell.OnFreeCell += RebuildNavMesh;
+                // cell.OnFreeCell += RebuildNavMesh;
                 z_list.Add(cell);
+                GridList.Remove(cell);
             }
             grid.Add(z_list);
             GridList.AddRange(grid[x_index]);
@@ -319,12 +339,16 @@ public class GameGrid : MonoBehaviour
             {
                 if ((z_square * x * x + x_square * z * z) > (x_square * z_square)) continue;
 
-                var cell = Instantiate(gridCellPrefab, new Vector3(x * gridSpaceSize * PlaneManager.Scale.x, 0, z * gridSpaceSize * PlaneManager.Scale.z), Quaternion.identity, this.transform);
                 int z_index = z + z_radius;
-                cell.Init(x_index, z_index);
+                GridCell cell = GridList.FirstOrDefault(x => !x.IsSet);
+                if (cell == null)
+                    cell = Instantiate(gridCellPrefab, new Vector3(x * gridSpaceSize * PlaneManager.Scale.x, 0, z * gridSpaceSize * PlaneManager.Scale.z), Quaternion.identity);
+
+                cell.Init(x_index, z_index, RebuildNavMesh, this.transform);
                 cell.gameObject.name = string.Format("Cell {0}:{1}", x_index, z_index);
-                cell.OnFreeCell += RebuildNavMesh;
+                // cell.OnFreeCell += RebuildNavMesh;
                 z_list.Add(cell);
+                GridList.Remove(cell);
             }
             grid.Add(z_list);
             GridList.AddRange(grid[x_index]);
@@ -470,7 +494,7 @@ public class GameGrid : MonoBehaviour
             || grid[x_index + 1][y_index + nextIndex * sign - 1].IsUpper;
     }
 
-    public void RemoveAllDefenses()
+    public void RestartGrid()
     {
         foreach (var cell in GridList)
         {
@@ -490,7 +514,7 @@ public class GameGrid : MonoBehaviour
     {
         DefensesModel.OnDefenseSelected -= SelectDefense;
         DefensesModel.OnDefenseDeselected -= DeselectDefense;
-        GameModel.OnRestart -= RemoveAllDefenses;
+        GameModel.OnRestart -= RestartGrid;
     }
 }
 

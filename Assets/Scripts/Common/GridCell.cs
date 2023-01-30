@@ -20,6 +20,7 @@ public class GridCell : MonoBehaviour
 
     public Defense Defence { get; private set; }
     public bool IsFree => Defence == null;
+    public bool IsSet { get; private set; } = false;
     public Vector2Int Pos => new Vector2Int(posX, posY);
     public float Height => transform.localScale.y;
     public bool IsUpper => transform.localScale.y > 1;
@@ -28,14 +29,20 @@ public class GridCell : MonoBehaviour
     private Color defaultCellColor;
 
     public event Action OnFreeCell;
+    private Action freeCellAction;
 
-    
+
 
     public void SetSelected() => quadRenderer.material.color = Color.green * 10;
-    public void Init(int x, int y)
+    public void Init(int x, int y, Action onFreeCellAction, Transform parent)
     {
         posX = x;
         posY = y;
+        IsSet = true;
+        this.gameObject.SetActive(true);
+        this.transform.SetParent(parent);
+        freeCellAction = onFreeCellAction;
+        OnFreeCell += freeCellAction;
     }
 
     public void SetHeight(int value)
@@ -80,5 +87,14 @@ public class GridCell : MonoBehaviour
             navMeshModifier.ignoreFromBuild = false;
             OnFreeCell?.Invoke();
         }
+    }
+
+    public void Reset()
+    {
+        IsSet = false;
+        this.transform.parent = null;
+        this.transform.localScale = Vector3.one;
+        OnFreeCell -= freeCellAction;
+        this.gameObject.SetActive(false);
     }
 }
