@@ -237,7 +237,7 @@ public class GameGrid : MonoBehaviour
         this.transform.localScale = Vector3.one;
         grid?.Clear();
         GridList.ForEach(cell => cell.Reset());
-        SetRandomGrid();
+        // SetRandomGrid();
         switch (gridType)
         {
             case (GridType.Rectangle):
@@ -434,6 +434,7 @@ public class GameGrid : MonoBehaviour
 
         foreach (var cell in GridList)
         {
+            if (!cell.IsSet) continue;
             if (IsMustHaveGroundHeight(cell))
             {
                 // SelectedDefense = DefensesModel.List.First(x => x.PoolType == PoolObjectType.WallTower);
@@ -465,7 +466,7 @@ public class GameGrid : MonoBehaviour
                 bool isLastRowCircle = grid.Last().Contains(cell);
                 bool isFirstRowCircle = grid.First().Contains(cell);
                 var square_circle = (Width / 2) * (Width / 2);
-                bool isLastInColumnCircle = new Vector2(cell.Pos.x - Width / 2, cell.Pos.y - Length / 2).sqrMagnitude > square_circle - 2 * Width * gridSpaceSize;
+                bool isLastInColumnCircle = new Vector2(cell.Pos.x - Width / 2, cell.Pos.y - Width / 2).sqrMagnitude > square_circle - 2 * Width * gridSpaceSize;
                 return
                    centreCells.Contains(cell)
                    || isLastRowCircle
@@ -513,17 +514,25 @@ public class GameGrid : MonoBehaviour
 
     private bool IsAnyDiagonalCellUp(GridCell cell)
     {
-        int x_index = cell.Pos.x;// gridType == GridType.Rectangle ? cell.Pos.x + Width / 2 : cell.Pos.x;
-        int y_index = grid[x_index].IndexOf(cell);
+        try
+        {
+            int x_index = cell.Pos.x;// gridType == GridType.Rectangle ? cell.Pos.x + Width / 2 : cell.Pos.x;
+            int y_index = grid[x_index].IndexOf(cell);
 
-        int prevIndex = Mathf.Abs((grid[x_index].Count - grid[x_index - 1].Count) / 2);
-        int nextIndex = Mathf.Abs((grid[x_index].Count - grid[x_index + 1].Count) / 2);
-        int sign = grid[x_index - 1].Count > grid[x_index].Count ? 1 : -1;
-        return
-               grid[x_index - 1][y_index + prevIndex * sign - 1].IsUpper
-            || grid[x_index - 1][y_index + prevIndex * sign + 1].IsUpper
-            || grid[x_index + 1][y_index + nextIndex * sign + 1].IsUpper
-            || grid[x_index + 1][y_index + nextIndex * sign - 1].IsUpper;
+            int prevIndex = Mathf.Abs((grid[x_index].Count - grid[x_index - 1].Count) / 2);
+            int nextIndex = Mathf.Abs((grid[x_index].Count - grid[x_index + 1].Count) / 2);
+            int sign = grid[x_index - 1].Count > grid[x_index].Count ? 1 : -1;
+            return
+                   grid[x_index - 1][y_index + prevIndex * sign - 1].IsUpper
+                || grid[x_index - 1][y_index + prevIndex * sign + 1].IsUpper
+                || grid[x_index + 1][y_index + nextIndex * sign + 1].IsUpper
+                || grid[x_index + 1][y_index + nextIndex * sign - 1].IsUpper;
+        }
+        catch
+        {
+            Debug.LogError(cell.name);
+            return true;
+        }
     }
 
     public void RestartGrid()
