@@ -11,10 +11,10 @@ public class GameGrid : MonoBehaviour
 {
     private const float yPos = -0.99f;
 
-    private int maxWidth = 50;
-    private int maxLength = 50;
-    private int minWidth = 5;
-    private int minLength = 5;
+    private const int maxWidth = 30;
+    private const int maxLength = 30;
+    private const int minWidth = 5;
+    private const int minLength = 5;
 
     private CurrencyModel CurrencyModel { get; set; }
     private DefensesModel DefensesModel { get; set; }
@@ -275,10 +275,12 @@ public class GameGrid : MonoBehaviour
             for (int z = -Length / 2; z <= Length / 2; ++z)
             {
                 int z_index = z + Length / 2;
+                Vector3 position = new Vector3(x * gridSpaceSize * PlaneManager.Scale.x, 0, z * gridSpaceSize * PlaneManager.Scale.z);
                 GridCell cell = GridList.FirstOrDefault(x => !x.IsSet);
                 if (cell == null)
-                    cell = Instantiate(gridCellPrefab, new Vector3(x * gridSpaceSize * PlaneManager.Scale.x, 0, z * gridSpaceSize * PlaneManager.Scale.z), Quaternion.identity);
+                    cell = Instantiate(gridCellPrefab, position, Quaternion.identity);
                 cell.Init(x_index, z_index, RebuildNavMesh, this.transform);
+                cell.transform.position = position;
                 cell.gameObject.name = string.Format("Cell {0}:{1}", x_index, z_index);
                 // cell.OnFreeCell += RebuildNavMesh;
                 z_list.Add(cell);

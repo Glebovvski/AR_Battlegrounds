@@ -92,7 +92,7 @@ public class GridCell : MonoBehaviour
     public void Reset()
     {
         IsSet = false;
-        this.transform.parent = null;
+        this.transform.SetParent(null);
         this.transform.localScale = Vector3.one;
         OnFreeCell -= freeCellAction;
         this.gameObject.SetActive(false);
