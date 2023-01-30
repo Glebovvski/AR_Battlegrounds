@@ -11,8 +11,8 @@ public class GameGrid : MonoBehaviour
 {
     private const float yPos = -0.99f;
 
-    private const int maxWidth = 30;
-    private const int maxLength = 30;
+    private const int maxWidth = 6;//30;
+    private const int maxLength = 6;//30;
     private const int minWidth = 5;
     private const int minLength = 5;
 
@@ -234,6 +234,35 @@ public class GameGrid : MonoBehaviour
     public void CreateGrid()
     {
         this.transform.SetParent(null);
+        this.transform.localScale = Vector3.one;
+        grid?.Clear();
+        GridList.ForEach(cell => cell.Reset());
+        SetRandomGrid();
+        switch (gridType)
+        {
+            case (GridType.Rectangle):
+                CreateRectangleGrid();
+                break;
+            case (GridType.Circle):
+                CreateCircleGrid();
+                break;
+            case (GridType.Ellipse):
+                CreateEllipseGrid();
+                break;
+        }
+
+        GridList.ForEach(cell => cell.SetHeight(1));
+
+        TryChangeHeight();
+        SpawnCastleAtCentre();
+        OnGridCreated?.Invoke();
+    }
+
+    IEnumerator StartCreateGrid()
+    {
+        this.transform.SetParent(null);
+        this.transform.localScale = Vector3.one;
+        yield return null;
         grid?.Clear();
         GridList.ForEach(cell => cell.Reset());
         SetRandomGrid();
@@ -279,7 +308,7 @@ public class GameGrid : MonoBehaviour
                 Vector3 position = new Vector3(x * gridSpaceSize * PlaneManager.Scale.x, 0, z * gridSpaceSize * PlaneManager.Scale.z);
                 GridCell cell = GridList.FirstOrDefault(x => !x.IsSet);
                 if (cell == null)
-                    cell = Instantiate(gridCellPrefab, position, Quaternion.identity);
+                    cell = Instantiate(gridCellPrefab, position, Quaternion.identity, this.transform);
                 cell.Init(x_index, z_index, RebuildNavMesh, this.transform);
                 cell.transform.position = position;
                 cell.gameObject.name = string.Format("Cell {0}:{1}", x_index, z_index);
