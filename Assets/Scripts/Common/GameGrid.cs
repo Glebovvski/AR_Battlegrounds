@@ -233,6 +233,7 @@ public class GameGrid : MonoBehaviour
 
     public void CreateGrid()
     {
+        this.transform.SetParent(null);
         grid?.Clear();
         GridList.ForEach(cell => cell.Reset());
         SetRandomGrid();

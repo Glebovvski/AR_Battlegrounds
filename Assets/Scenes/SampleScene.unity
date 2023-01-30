@@ -1530,7 +1530,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 581853323}
   m_Direction: 0
   m_Value: 0
-  m_Size: 1
+  m_Size: 0
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -3584,7 +3584,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.09768243, y: 0.23453005}
   m_AnchorMax: {x: 0.901226, y: 0.697}
-  m_AnchoredPosition: {x: 0.5, y: -3.0565033}
+  m_AnchoredPosition: {x: 0.5, y: -3.0565186}
   m_SizeDelta: {x: -0.69177246, y: -0.8239136}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &758208861
@@ -4681,12 +4681,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   planeManager: {fileID: 1243855130}
   maxWaves: 1
-  maxBaseEnemies: 15
+  maxBaseEnemies: 0
   maxBullEnemies: 0
   maxHealerEnemies: 0
   maxSpyEnemies: 0
   maxKamikazeEnemies: 0
-  maxFlamerEnemies: 0
+  maxFlamerEnemies: 5
   spawnPoints:
   - {fileID: 4555737984256998628}
   - {fileID: 1599919936}
@@ -7287,7 +7287,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -1592.5, y: 0}
+  m_AnchoredPosition: {x: -1617.5, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &2079989270
