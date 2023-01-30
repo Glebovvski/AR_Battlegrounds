@@ -11,8 +11,8 @@ public class GameGrid : MonoBehaviour
 {
     private const float yPos = -0.99f;
 
-    private const int maxWidth = 6;//30;
-    private const int maxLength = 6;//30;
+    private const int maxWidth = 30;
+    private const int maxLength = 30;
     private const int minWidth = 5;
     private const int minLength = 5;
 
@@ -290,7 +290,7 @@ public class GameGrid : MonoBehaviour
     {
         Width = UnityEngine.Random.Range(minWidth, maxWidth);
         Length = UnityEngine.Random.Range(minLength, maxLength);
-        gridType = GridType.Rectangle;// (GridType)UnityEngine.Random.Range(0, 3);
+        gridType = (GridType)UnityEngine.Random.Range(0, 3);
     }
 
     private void CreateRectangleGrid()
