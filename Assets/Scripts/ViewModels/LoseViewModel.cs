@@ -30,6 +30,7 @@ public class LoseViewModel : MonoBehaviour
 
     private void Menu()
     {
+        GameControlModel.Restart();
         view.Close();
         MenuViewModel.OpenMenu();
     }

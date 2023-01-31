@@ -7,16 +7,18 @@ public class WinViewModel : IInitializable
     private WinModel WinModel { get; set; }
     private StatManager StatManager { get; set; }
     private GameControlModel GameModel { get; set; }
+    private MenuViewModel MenuViewModel { get; set; }
 
     public event Action<int> OnShowWinScreen;
     public event Action OnCloseWinScreen;
 
     [Inject]
-    private void Construct(WinModel winModel, StatManager statManager, GameControlModel gameModel)
+    private void Construct(WinModel winModel, StatManager statManager, GameControlModel gameModel, MenuViewModel menuViewModel)
     {
         WinModel = winModel;
         StatManager = statManager;
         GameModel = gameModel;
+        MenuViewModel = menuViewModel;
     }
 
     public void Initialize()
@@ -39,6 +41,12 @@ public class WinViewModel : IInitializable
     {
         GameModel.Restart();
         OnCloseWinScreen?.Invoke();
+    }
+
+    public void Menu()
+    {
+        MenuViewModel.OpenMenu();
+        NextLevel();
     }
 
     private void TimerDataChanged() => OnTimerChange?.Invoke(WinModel.Timer);

@@ -13,11 +13,6 @@ public class MenuViewModel
         DefensesViewModel = defensesViewModel;
     }
 
-    public void Play()
-    {
-
-    }
-
     public event Action OnOpen;
     public void OpenMenu()
     {

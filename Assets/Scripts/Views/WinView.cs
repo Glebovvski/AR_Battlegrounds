@@ -40,6 +40,7 @@ public class WinView : MonoBehaviour
         WinViewModel.OnShowWinScreen += ShowWinScreen;
         WinViewModel.OnCloseWinScreen += CloseWinScreen;
         NextLevelBtn.onClick.AddListener(WinViewModel.NextLevel);
+        MenuBtn.onClick.AddListener(WinViewModel.Menu);
     }
 
     public event Action OnNextLevelClick;

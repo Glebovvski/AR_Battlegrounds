@@ -19,7 +19,7 @@ public class PlaneManager : MonoBehaviour
 
     private NavMeshSurface surface;
 
-    private bool gridCreated = false;
+    public bool GridCreated { get; private set; } = false;
 
     static List<ARRaycastHit> hits = new List<ARRaycastHit>();
 
@@ -61,9 +61,9 @@ public class PlaneManager : MonoBehaviour
 
     private void Update()
     {
-        if (gridCreated) return;
-        if(MenuViewModel.IsMenuOpen) return;
-        
+        if (GridCreated) return;
+        if (MenuViewModel.IsMenuOpen) return;
+
         // #if PLATFORM_IOS
         //         if (Input.touchCount == 0) return;
         //         if (planeManager.trackables.count == 0) return;
@@ -122,7 +122,7 @@ public class PlaneManager : MonoBehaviour
         //         }
         // #elif UNITY_EDITOR
         Grid.CreateGrid();
-        gridCreated = true;
+        GridCreated = true;
 
         // #endif
     }
