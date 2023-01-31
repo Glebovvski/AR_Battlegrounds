@@ -25,8 +25,6 @@ public class GameGrid : MonoBehaviour
 
     [SerializeField] private GridType gridType;
 
-    [SerializeField] private DefensesViewModel defencesViewModel;
-
     [SerializeField] private GridCell gridCellPrefab;
 
     [field: SerializeField] public int Width { get; private set; }
