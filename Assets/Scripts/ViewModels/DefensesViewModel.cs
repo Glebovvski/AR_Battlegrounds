@@ -5,6 +5,8 @@ using Zenject;
 
 public class DefensesViewModel : MonoBehaviour
 {
+    private MenuViewModel MenuViewModel { get; set; }
+
     [SerializeField] private DefenseView prefab;
     [SerializeField] private Transform viewParent;
     private DefensesModel DefensesModel { get; set; }
@@ -14,11 +16,12 @@ public class DefensesViewModel : MonoBehaviour
     public event Action OnDefenseSelected;
 
     [Inject]
-    private void Construct(DefensesModel defensesModel, GameControlModel gameControlModel, DiContainer container)
+    private void Construct(DefensesModel defensesModel, GameControlModel gameControlModel, DiContainer container, MenuViewModel menuViewModel)
     {
         Container = container;
         DefensesModel = defensesModel;
         GameModel = gameControlModel;
+        MenuViewModel = menuViewModel;
     }
 
     private void Start()
