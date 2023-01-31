@@ -28,6 +28,9 @@ public class DefensesViewModel : MonoBehaviour
     {
         DefensesModel.OnSelectDefenseClick += DefenseSelected;
         GameModel.OnRestart += DefenseSelected;
+        MenuViewModel.OnOpen += Close;
+        MenuViewModel.OnClose += Open;
+
 
         DefenseViewFactory factory = Container.Resolve<DefenseViewFactory>();
         foreach (var defense in DefensesModel.List)
