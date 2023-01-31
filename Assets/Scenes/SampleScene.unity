@@ -5462,6 +5462,7 @@ GameObject:
   - component: {fileID: 1253050451}
   - component: {fileID: 1253050452}
   - component: {fileID: 1253050453}
+  - component: {fileID: 1253050454}
   m_Layer: 0
   m_Name: SceneContext
   m_TagString: Untagged
@@ -5507,6 +5508,7 @@ MonoBehaviour:
   - {fileID: 1253050451}
   - {fileID: 1253050452}
   - {fileID: 1253050453}
+  - {fileID: 1253050454}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -5677,6 +5679,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   viewModel: {fileID: 568455788}
+--- !u!114 &1253050454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1253050439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caa055eac1d4c2b4e9e3aa4dcceb2045, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1260254156
 GameObject:
   m_ObjectHideFlags: 0
@@ -6906,7 +6920,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d69cdf7305124d249f5cfe36b6fc166, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DefensesViewModel: {fileID: 568455788}
   cancelBtn: {fileID: 432257383}
 --- !u!1 &1617802270
 GameObject:
