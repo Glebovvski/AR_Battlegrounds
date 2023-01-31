@@ -4,6 +4,8 @@ using Zenject;
 public class DefensesView : MonoBehaviour
 {
     private DefensesViewModel ViewModel { get; set; }
+
+    [SerializeField] private GameObject defensesPanel;
     [SerializeField] private GameObject cancelBtn;
 
     [Inject]
@@ -19,8 +21,8 @@ public class DefensesView : MonoBehaviour
         ViewModel.OnClose += Hide;
     }
 
-    public void Show() => this.gameObject.SetActive(true);
-    public void Hide() => this.gameObject.SetActive(false);
+    public void Show() => defensesPanel.SetActive(true);
+    public void Hide() => defensesPanel.SetActive(false);
 
     public void CancelSelection()
     {
