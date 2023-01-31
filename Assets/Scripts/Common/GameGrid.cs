@@ -237,34 +237,6 @@ public class GameGrid : MonoBehaviour
         this.transform.localScale = Vector3.one;
         grid?.Clear();
         GridList.ForEach(cell => cell.Reset());
-        // SetRandomGrid();
-        switch (gridType)
-        {
-            case (GridType.Rectangle):
-                CreateRectangleGrid();
-                break;
-            case (GridType.Circle):
-                CreateCircleGrid();
-                break;
-            case (GridType.Ellipse):
-                CreateEllipseGrid();
-                break;
-        }
-
-        GridList.ForEach(cell => cell.SetHeight(1));
-
-        TryChangeHeight();
-        SpawnCastleAtCentre();
-        OnGridCreated?.Invoke();
-    }
-
-    IEnumerator StartCreateGrid()
-    {
-        this.transform.SetParent(null);
-        this.transform.localScale = Vector3.one;
-        yield return null;
-        grid?.Clear();
-        GridList.ForEach(cell => cell.Reset());
         SetRandomGrid();
         switch (gridType)
         {
@@ -339,11 +311,13 @@ public class GameGrid : MonoBehaviour
                 if (new Vector2(x, z).sqrMagnitude > square) continue;
 
                 int z_index = z + radius;
+                Vector3 position = new Vector3(x * gridSpaceSize * PlaneManager.Scale.x, 0, z * gridSpaceSize * PlaneManager.Scale.z);
                 GridCell cell = GridList.FirstOrDefault(x => !x.IsSet);
                 if (cell == null)
-                    cell = Instantiate(gridCellPrefab, new Vector3(x * gridSpaceSize * PlaneManager.Scale.x, 0, z * gridSpaceSize * PlaneManager.Scale.z), Quaternion.identity);
+                    cell = Instantiate(gridCellPrefab, position, Quaternion.identity);
 
                 cell.Init(x_index, z_index, RebuildNavMesh, this.transform);
+                cell.transform.position = position;
                 cell.gameObject.name = string.Format("Cell {0}:{1}", x_index, z_index);
                 // cell.OnFreeCell += RebuildNavMesh;
                 z_list.Add(cell);
@@ -372,11 +346,13 @@ public class GameGrid : MonoBehaviour
                 if ((z_square * x * x + x_square * z * z) > (x_square * z_square)) continue;
 
                 int z_index = z + z_radius;
+                Vector3 position = new Vector3(x * gridSpaceSize * PlaneManager.Scale.x, 0, z * gridSpaceSize * PlaneManager.Scale.z);
                 GridCell cell = GridList.FirstOrDefault(x => !x.IsSet);
                 if (cell == null)
-                    cell = Instantiate(gridCellPrefab, new Vector3(x * gridSpaceSize * PlaneManager.Scale.x, 0, z * gridSpaceSize * PlaneManager.Scale.z), Quaternion.identity);
+                    cell = Instantiate(gridCellPrefab, position, Quaternion.identity);
 
                 cell.Init(x_index, z_index, RebuildNavMesh, this.transform);
+                cell.transform.position = position;
                 cell.gameObject.name = string.Format("Cell {0}:{1}", x_index, z_index);
                 // cell.OnFreeCell += RebuildNavMesh;
                 z_list.Add(cell);
@@ -418,7 +394,7 @@ public class GameGrid : MonoBehaviour
     private void TryChangeHeight()
     {
         int centreX = Width / 2;
-        int centreY = Length / 2;
+        int centreY = gridType == GridType.Circle ? Width / 2 : Length / 2;
         var gridCell1 = grid[centreX][centreY];
         var gridCell2 = gridType == GridType.Rectangle ? grid[centreX][centreY + 1] : grid[centreX][centreY - 1];
         var gridCell3 = grid[centreX + 1][centreY];

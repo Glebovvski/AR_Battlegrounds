@@ -222,6 +222,7 @@ namespace Enemies
             {
                 PoolManager.Instance.ReturnToPool(enemy.GameObject, enemy.Type);
             }
+            Enemies.Clear();
         }
 
         private void OnDestroy()
