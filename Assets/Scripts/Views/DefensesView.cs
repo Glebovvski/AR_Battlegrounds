@@ -1,13 +1,22 @@
 using UnityEngine;
+using Zenject;
 
 public class DefensesView : MonoBehaviour
 {
-    [SerializeField] private DefensesViewModel DefensesViewModel;
+    private DefensesViewModel ViewModel { get; set; }
     [SerializeField] private GameObject cancelBtn;
+
+    [Inject]
+    private void Construct(DefensesViewModel vm)
+    {
+        ViewModel = vm;
+    }
 
     private void Start()
     {
-        DefensesViewModel.OnDefenseSelected += DefenseSelected;
+        ViewModel.OnDefenseSelected += DefenseSelected;
+        ViewModel.OnOpen += Show;
+        ViewModel.OnClose += Hide;
     }
 
     public void Show() => this.gameObject.SetActive(true);
@@ -15,7 +24,7 @@ public class DefensesView : MonoBehaviour
 
     public void CancelSelection()
     {
-        DefensesViewModel.DeselectDefense();
+        ViewModel.DeselectDefense();
         ToggleCancelBtn(false);
     }
 
@@ -28,6 +37,8 @@ public class DefensesView : MonoBehaviour
 
     private void OnDestroy()
     {
-        DefensesViewModel.OnDefenseSelected -= DefenseSelected;
+        ViewModel.OnDefenseSelected -= DefenseSelected;
+        ViewModel.OnOpen -= Show;
+        ViewModel.OnClose -= Hide;
     }
 }

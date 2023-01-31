@@ -33,6 +33,12 @@ public class DefensesViewModel : MonoBehaviour
         }
     }
 
+    public event Action OnClose;
+    public void Close() => OnClose?.Invoke();
+
+    public event Action OnOpen;
+    public void Open() => OnOpen?.Invoke();
+
     public void DefenseSelected() => OnDefenseSelected?.Invoke();
 
     public void DeselectDefense()
