@@ -51,4 +51,12 @@ public class DefensesViewModel : MonoBehaviour
     {
         DefensesModel.DefenseDeselected();
     }
+
+    private void OnDestroy()
+    {
+        DefensesModel.OnSelectDefenseClick -= DefenseSelected;
+        GameModel.OnRestart -= DefenseSelected;
+        MenuViewModel.OnOpen -= Close;
+        MenuViewModel.OnClose -= Open;
+    }
 }
