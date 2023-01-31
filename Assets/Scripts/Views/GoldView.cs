@@ -8,7 +8,8 @@ public class GoldView : MonoBehaviour
 {
     private GoldViewModel GoldViewModel { get; set; }
 
-    [SerializeField] TextMeshProUGUI goldText;
+    [SerializeField] private TextMeshProUGUI goldText;
+    [SerializeField] private TextMeshProUGUI goldPercent;
 
     [Inject]
     private void Construct(GoldViewModel goldViewModel)
@@ -19,6 +20,7 @@ public class GoldView : MonoBehaviour
     private void Start()
     {
         GoldViewModel.OnGoldChanged += UpdateText;
+        goldPercent.text = GoldViewModel.GetGoldPercent();
     }
 
     private void UpdateText(int value)

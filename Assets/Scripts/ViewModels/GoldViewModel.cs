@@ -16,5 +16,7 @@ public class GoldViewModel
         CurrencyModel.OnGoldAmountChanged += GoldChanged;
     }
 
+    public string GetGoldPercent() => string.Format("+{0}% / {1}s", CurrencyModel.GoldPercent, CurrencyModel.SecondsToDropGold);
+
     private void GoldChanged(int value) => OnGoldChanged?.Invoke(value);
 }

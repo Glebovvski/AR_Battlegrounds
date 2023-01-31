@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class CurrencyModel
 {
+    public float SecondsToDropGold { get; private set; } = 5f;
+    public float GoldPercent { get; private set; } = 2f;
+
     public event Action<int> OnGoldAmountChanged;
     private int _gold;
     public int Gold
