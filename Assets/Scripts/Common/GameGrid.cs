@@ -284,7 +284,6 @@ public class GameGrid : MonoBehaviour
                 cell.Init(x_index, z_index, RebuildNavMesh, this.transform);
                 cell.transform.position = position;
                 cell.gameObject.name = string.Format("Cell {0}:{1}", x_index, z_index);
-                // cell.OnFreeCell += RebuildNavMesh;
                 z_list.Add(cell);
                 GridList.Remove(cell);
             }
@@ -319,7 +318,6 @@ public class GameGrid : MonoBehaviour
                 cell.Init(x_index, z_index, RebuildNavMesh, this.transform);
                 cell.transform.position = position;
                 cell.gameObject.name = string.Format("Cell {0}:{1}", x_index, z_index);
-                // cell.OnFreeCell += RebuildNavMesh;
                 z_list.Add(cell);
                 GridList.Remove(cell);
             }
@@ -354,7 +352,6 @@ public class GameGrid : MonoBehaviour
                 cell.Init(x_index, z_index, RebuildNavMesh, this.transform);
                 cell.transform.position = position;
                 cell.gameObject.name = string.Format("Cell {0}:{1}", x_index, z_index);
-                // cell.OnFreeCell += RebuildNavMesh;
                 z_list.Add(cell);
                 GridList.Remove(cell);
             }
