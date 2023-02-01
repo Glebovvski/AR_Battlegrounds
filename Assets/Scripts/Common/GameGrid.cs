@@ -236,6 +236,8 @@ public class GameGrid : MonoBehaviour
         grid?.Clear();
         GridList.ForEach(cell => cell.Reset());
         SetRandomGrid();
+        StatManager.Reset();
+
         switch (gridType)
         {
             case (GridType.Rectangle):
