@@ -8,6 +8,8 @@ namespace Missiles
 {
     public class LaunchableMissile : Missile
     {
+        [SerializeField] private Rigidbody rigidbody;
+
         public Vector3 Target { get; private set; }
         private Vector3 InitPos { get; set; }
         private Vector3 middle;
@@ -28,8 +30,7 @@ namespace Missiles
                     enemy.TakeDamage(Damage);
                 }
             }
-            PoolManager.Instance.ReturnToPool(targetFX.gameObject, PoolObjectType.TargetFX);
-            PoolManager.Instance.ReturnToPool(this.gameObject, PoolObjectType.LaunchableMissile);
+            ReturnToPool();
         }
 
         public void Launch(Vector3 target)
@@ -41,6 +42,7 @@ namespace Missiles
             InitPos = this.transform.position;
             Target = target;
             StartCoroutine(LaunchRoutine());
+            StartCoroutine(SelfDestroy());
         }
 
         private IEnumerator LaunchRoutine()
@@ -55,6 +57,19 @@ namespace Missiles
 
                 yield return null;
             }
+        }
+
+        private IEnumerator SelfDestroy()
+        {
+            yield return new WaitForSeconds(5);
+            ReturnToPool();
+        }
+
+        private void ReturnToPool()
+        {
+            StopCoroutine(SelfDestroy());
+            PoolManager.Instance.ReturnToPool(targetFX.gameObject, PoolObjectType.TargetFX);
+            PoolManager.Instance.ReturnToPool(this.gameObject, PoolObjectType.LaunchableMissile);
         }
 
         private Vector3 CalculatePosition(float t, Vector3 target)
