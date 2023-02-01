@@ -335,6 +335,7 @@ public class GameGrid : MonoBehaviour
 
         for (int x = -x_radius; x <= x_radius; ++x)
         {
+            int index = 0;
             int x_index = x + x_radius;
             var z_list = new List<GridCell>();
             for (int z = -z_radius; z <= z_radius; ++z)
@@ -347,11 +348,12 @@ public class GameGrid : MonoBehaviour
                 if (cell == null)
                     cell = Instantiate(gridCellPrefab, position, Quaternion.identity);
 
-                cell.Init(x_index, z_index, RebuildNavMesh, this.transform);
+                cell.Init(x_index, index, RebuildNavMesh, this.transform);
                 cell.transform.position = position;
-                cell.gameObject.name = string.Format("Cell {0}:{1}", x_index, z_index);
+                cell.gameObject.name = string.Format("Cell {0}:{1}", x_index, index);
                 z_list.Add(cell);
                 GridList.Remove(cell);
+                index++;
             }
             grid.Add(z_list);
             GridList.AddRange(grid[x_index]);
@@ -454,16 +456,17 @@ public class GameGrid : MonoBehaviour
                 bool isFirstOrLastInColumn = index == 0 || index == grid[cell.Pos.x].Count - 1;
                 int prevIndex = Mathf.Abs((grid[cell.Pos.x].Count - grid[cell.Pos.x - 1].Count) / 2);
                 int nextIndex = Mathf.Abs((grid[cell.Pos.x].Count - grid[cell.Pos.x + 1].Count) / 2);
-                int sign = grid[cell.Pos.x - 1].Count > grid[cell.Pos.x].Count ? 1 : -1;
-                bool isPrevIndexNotExist = grid[cell.Pos.x - 1].Count < cell.Pos.y + prevIndex * sign;
-                bool isNextIndexNotExist = grid[cell.Pos.x + 1].Count < cell.Pos.y + nextIndex * sign;
+                int prevSign = grid[cell.Pos.x - 1].Count > grid[cell.Pos.x].Count ? 1 : -1;
+                int nextSign = grid[cell.Pos.x + 1].Count > grid[cell.Pos.x].Count ? 1 : -1;
+                bool isPrevIndexNotExist = index <= prevIndex || index + prevIndex > grid[cell.Pos.x - 1].Count;
+                bool isNextIndexNotExist = index <= nextIndex || index + nextIndex > grid[cell.Pos.x + 1].Count;
                 if (isNextIndexNotExist || isPrevIndexNotExist)
                     return true;
 
-                bool isPrevLowerIndexNotExist = index + prevIndex * sign - 1 < 0; //diagonal left lower check
-                bool isPrevHigherIndexNotExist = index + prevIndex * sign + 1 >= grid[cell.Pos.x - 1].Count; //diagonal left higher check
-                bool isNextLowerIndexNotExist = index + nextIndex * sign - 1 < 0; //diagonal right lower check
-                bool isNextHigherIndexNotExist = index + prevIndex * sign + 1 >= grid[cell.Pos.x + 1].Count; //diagonal right higher check
+                bool isPrevLowerIndexNotExist = index + prevIndex * prevSign - 1 < 0; //diagonal left lower check
+                bool isPrevHigherIndexNotExist = index + prevIndex * nextSign + 1 >= grid[cell.Pos.x - 1].Count; //diagonal left higher check
+                bool isNextLowerIndexNotExist = index + nextIndex * prevSign - 1 < 0; //diagonal right lower check
+                bool isNextHigherIndexNotExist = index + prevIndex * nextSign + 1 >= grid[cell.Pos.x + 1].Count; //diagonal right higher check
 
                 return
                     centreCells.Contains(cell)
@@ -487,17 +490,20 @@ public class GameGrid : MonoBehaviour
     {
         try
         {
-            int x_index = cell.Pos.x;// gridType == GridType.Rectangle ? cell.Pos.x + Width / 2 : cell.Pos.x;
-            int y_index = grid[x_index].IndexOf(cell);
+            int x_index = cell.Pos.x; //18
+            int y_index = grid[x_index].IndexOf(cell); //21
 
-            int prevIndex = Mathf.Abs((grid[x_index].Count - grid[x_index - 1].Count) / 2);
-            int nextIndex = Mathf.Abs((grid[x_index].Count - grid[x_index + 1].Count) / 2);
-            int sign = grid[x_index - 1].Count > grid[x_index].Count ? 1 : -1;
+            int prevIndex = Mathf.Abs((grid[x_index].Count - grid[x_index - 1].Count) / 2); //0
+            int nextIndex = Mathf.Abs((grid[x_index].Count - grid[x_index + 1].Count) / 2); //1
+
+            int prevSign = grid[x_index - 1].Count > grid[x_index].Count ? 1 : -1; // -1
+            int nextSign = grid[x_index + 1].Count > grid[x_index].Count ? 1 : -1; //-1
+
             return
-                   grid[x_index - 1][y_index + prevIndex * sign - 1].IsUpper
-                || grid[x_index - 1][y_index + prevIndex * sign + 1].IsUpper
-                || grid[x_index + 1][y_index + nextIndex * sign + 1].IsUpper
-                || grid[x_index + 1][y_index + nextIndex * sign - 1].IsUpper;
+               grid[x_index - 1][y_index + prevIndex * prevSign - 1].IsUpper //17:20
+            || grid[x_index - 1][y_index + prevIndex * prevSign + 1].IsUpper //17:22
+            || grid[x_index + 1][y_index + nextIndex * nextSign + 1].IsUpper //19:21
+            || grid[x_index + 1][y_index + nextIndex * nextSign - 1].IsUpper; //19:19
         }
         catch
         {
