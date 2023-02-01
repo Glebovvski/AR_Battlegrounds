@@ -65,14 +65,14 @@ public class WinModel : ITickable, IInitializable
     private void CheckTimer()
     {
         var bestScore = PlayerPrefs.GetFloat(timerKey, 0);
-        if (bestScore < Timer)
+        if (bestScore > Timer)
             PlayerPrefs.SetFloat(timerKey, Timer);
     }
 
     public int GetStars()
     {
         int stars = 1;
-        stars += Timer < PlayerPrefs.GetFloat(timerKey, 0) ? 0 : 1;
+        stars += Timer < PlayerPrefs.GetFloat(timerKey, 0) ? 1 : 0;
         stars += StatManager.EnemiesKilled > StatManager.DefensesDestroyed ? 1 : 0;
         return stars;
     }
