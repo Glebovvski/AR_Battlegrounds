@@ -72,14 +72,20 @@ public class WinModel : ITickable, IInitializable
     public int GetStars()
     {
         int stars = 1;
-        stars += Timer < PlayerPrefs.GetFloat(timerKey, 0) ? 1 : 0;
+        stars += Timer <= PlayerPrefs.GetFloat(timerKey, 0) ? 1 : 0;
         stars += StatManager.EnemiesKilled > StatManager.DefensesDestroyed ? 1 : 0;
         return stars;
     }
 
     public string GetTimer() => ConvertFloatToTime(Timer);
 
-    public string GetBestScore() => ConvertFloatToTime(PlayerPrefs.GetFloat(timerKey, 0));
+    public string GetBestScore()
+    {
+        var bestScore = PlayerPrefs.GetFloat(timerKey, 0);
+        if (bestScore == 0)
+            PlayerPrefs.SetFloat(timerKey, Timer);
+        return ConvertFloatToTime(PlayerPrefs.GetFloat(timerKey, 0));
+    }
 
     private string ConvertFloatToTime(float value)
     {
