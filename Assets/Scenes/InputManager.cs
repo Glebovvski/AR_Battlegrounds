@@ -75,7 +75,7 @@ public class InputManager : MonoBehaviour
             }
         }
         // if (!cell || !cell.IsSelected) return;
-        #elif  PLATFORM_IOS
+        #elif  PLATFORM_IOS || PLATFORM_ANDROID
         var touch = Input.GetTouch(0);
         if (touch.phase == TouchPhase.Began)
         {
