@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using GoogleMobileAds.Api;
 using UnityEngine;
 using UnityEngine.Advertisements;
@@ -7,6 +5,10 @@ using Zenject;
 
 public class AdManager : IInitializable, IUnityAdsInitializationListener, IUnityAdsLoadListener, IUnityAdsShowListener
 {
+    private MenuViewModel MenuViewModel { get; set; }
+    private GameControlModel GameControlModel { get; set; }
+
+
     private InterstitialAd interstitialAd;
 
     public string myGameIdAndroid = "5145689";
@@ -16,9 +18,15 @@ public class AdManager : IInitializable, IUnityAdsInitializationListener, IUnity
     public string adUnitIdIOS = "Interstitial_iOS";
 
     public string myAdUnitId;
-    public bool adStarted;
 
     private bool testMode = true;
+
+    [Inject]
+    private void Construct(MenuViewModel menuViewModel, GameControlModel gameControlModel)
+    {
+        MenuViewModel = menuViewModel;
+        GameControlModel = gameControlModel;
+    }
 
     public void Initialize()
     {
@@ -29,18 +37,18 @@ public class AdManager : IInitializable, IUnityAdsInitializationListener, IUnity
         Advertisement.Initialize(myGameIdAndroid, testMode, this);
         myAdUnitId = adUnitIdAndroid;
 #endif
+
+        GameControlModel.OnRestart += ShowInterstitialAd;
+        MenuViewModel.OnClose += ShowInterstitialAd;
     }
 
-    // Update is called once per frame
-    void ShowInterstitialAd()
+    private void ShowInterstitialAd()
     {
-        if (Advertisement.isInitialized && !adStarted)
+        if (Advertisement.isInitialized)
         {
             Advertisement.Load(myAdUnitId, this);
             Advertisement.Show(myAdUnitId, this);
-            adStarted = true;
         }
-
     }
 
     public void OnInitializationComplete()
