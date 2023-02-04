@@ -10,6 +10,7 @@ public class GameTimeModel : IInitializable, ITickable
     private CastleDefense Castle { get; set; }
     private CurrencyModel CurrencyModel { get; set; }
     private WinModel WinModel { get; set; }
+    private AdManager AdManager { get; set; }
 
     private float lastDropTime = 0;
     private float secondsToDropGold = 5f;
@@ -20,7 +21,7 @@ public class GameTimeModel : IInitializable, ITickable
     private bool gridCreated = false;
 
     [Inject]
-    private void Construct(DefensesModel defensesModel, GameGrid grid, InputManager inputManager, CastleDefense castle, CurrencyModel currencyModel, WinModel winModel)
+    private void Construct(DefensesModel defensesModel, GameGrid grid, InputManager inputManager, CastleDefense castle, CurrencyModel currencyModel, WinModel winModel, AdManager adManager)
     {
         DefensesModel = defensesModel;
         Grid = grid;
@@ -28,6 +29,7 @@ public class GameTimeModel : IInitializable, ITickable
         Castle = castle;
         CurrencyModel = currencyModel;
         WinModel = winModel;
+        AdManager = adManager;
     }
 
     private void Pause()
@@ -46,6 +48,7 @@ public class GameTimeModel : IInitializable, ITickable
         DefensesModel.OnSelectDefenseClick += Pause;
         Grid.OnGridCreated += Pause;
         InputManager.OnActiveDefenseClick += Pause;
+        AdManager.OnInterstitialAdClosed += Pause;
 
         WinModel.OnWin += Win;
 
