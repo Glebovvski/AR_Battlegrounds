@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using GoogleMobileAds.Api;
 using UnityEngine;
 using UnityEngine.Advertisements;
+using Zenject;
 
-public class AdManager : MonoBehaviour, IUnityAdsInitializationListener, IUnityAdsLoadListener, IUnityAdsShowListener
+public class AdManager : IInitializable, IUnityAdsInitializationListener, IUnityAdsLoadListener, IUnityAdsShowListener
 {
     private InterstitialAd interstitialAd;
 
@@ -19,8 +20,7 @@ public class AdManager : MonoBehaviour, IUnityAdsInitializationListener, IUnityA
 
     private bool testMode = true;
 
-    // Start is called before the first frame update
-    void Start()
+    public void Initialize()
     {
 #if UNITY_IOS
             Advertisement.Initialize(myGameIdIOS, testMode, this);
@@ -29,11 +29,10 @@ public class AdManager : MonoBehaviour, IUnityAdsInitializationListener, IUnityA
         Advertisement.Initialize(myGameIdAndroid, testMode, this);
         myAdUnitId = adUnitIdAndroid;
 #endif
-
     }
 
     // Update is called once per frame
-    void Update()
+    void ShowInterstitialAd()
     {
         if (Advertisement.isInitialized && !adStarted)
         {

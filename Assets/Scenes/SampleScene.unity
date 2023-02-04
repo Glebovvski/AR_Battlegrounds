@@ -4261,56 +4261,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 874005704}
   m_CullTransparentMesh: 1
---- !u!1 &874989814
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 874989816}
-  - component: {fileID: 874989815}
-  m_Layer: 0
-  m_Name: AdManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &874989815
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 874989814}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b57ef03e06f2ad4fac1e8fd27094122, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  myGameIdAndroid: 5145689
-  myGameIdIOS: 5145688
-  adUnitIdAndroid: Interstitial_Android
-  adUnitIdIOS: Interstitial_iOS
-  myAdUnitId: 
-  adStarted: 0
---- !u!4 &874989816
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 874989814}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.3429024, y: 14.344042, z: -8.373437}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 16
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &925689147
 GameObject:
   m_ObjectHideFlags: 0
@@ -5460,6 +5410,7 @@ GameObject:
   - component: {fileID: 1253050452}
   - component: {fileID: 1253050453}
   - component: {fileID: 1253050454}
+  - component: {fileID: 1253050455}
   m_Layer: 0
   m_Name: SceneContext
   m_TagString: Untagged
@@ -5506,6 +5457,7 @@ MonoBehaviour:
   - {fileID: 1253050452}
   - {fileID: 1253050453}
   - {fileID: 1253050454}
+  - {fileID: 1253050455}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -5686,6 +5638,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: caa055eac1d4c2b4e9e3aa4dcceb2045, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1253050455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1253050439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5264ada78304edf4db64ac5503d76d51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1260254156
