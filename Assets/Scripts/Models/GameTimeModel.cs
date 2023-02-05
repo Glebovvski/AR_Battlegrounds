@@ -16,7 +16,7 @@ public class GameTimeModel : IInitializable, ITickable
     private float secondsToDropGold = 5f;
     private float goldPercent = 2f;
 
-    public bool IsPaused = Time.timeScale != 1;
+    public bool IsPaused = Time.timeScale < 1;
     private bool isWon = false;
     private bool gridCreated = false;
 
@@ -61,8 +61,12 @@ public class GameTimeModel : IInitializable, ITickable
 
     public void Tick()
     {
+
+        if (DefensesModel.InDefenseSelectionMode && !IsPaused)
+            Pause();
         if (!gridCreated) return;
         if (IsPaused || !Castle.IsAlive || isWon) return;
+
 
         if (Time.time - lastDropTime > secondsToDropGold)
         {

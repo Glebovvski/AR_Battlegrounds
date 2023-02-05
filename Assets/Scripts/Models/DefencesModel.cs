@@ -2,18 +2,33 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Zenject;
 
 namespace Defendable
 {
-    public class DefensesModel
+    public class DefensesModel : IInitializable
     {
+        private GameControlModel GameControlModel { get; set; }
+
         private List<ScriptableDefense> defenses = new List<ScriptableDefense>();
         public List<ScriptableDefense> List => defenses;
         public bool InDefenseSelectionMode { get; private set; } = false;
 
-        public DefensesModel()
+        [Inject]
+        private void Construct(GameControlModel gameControlModel)
+        {
+            GameControlModel = gameControlModel;
+        }
+
+        public void Initialize()
         {
             GetDefensesInfo();
+            GameControlModel.OnRestart += OverrideInDefenseSelectionMode;
+        }
+
+        private void OverrideInDefenseSelectionMode()
+        {
+            InDefenseSelectionMode = true;
         }
 
         private void GetDefensesInfo()
@@ -36,5 +51,6 @@ namespace Defendable
             InDefenseSelectionMode = false;
             OnDefenseDeselected?.Invoke();
         }
+
     }
 }
