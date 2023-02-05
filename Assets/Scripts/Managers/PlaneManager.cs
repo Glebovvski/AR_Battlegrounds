@@ -71,38 +71,6 @@ public class PlaneManager : MonoBehaviour
         //         var touch = Input.GetTouch(0);
         //         if (touch.phase == TouchPhase.Began)
         //         {
-        //             // Ray ray = Camera.main.ScreenPointToRay(touch.position);
-        //             // RaycastHit rayHit;
-        //             // if (Physics.Raycast(ray, out rayHit, float.MaxValue))//, layerMask))
-        //             // {
-        //             //     // if(rayHit.)
-        //             //     // var plane = planeManager.GetPlane(hits[0].trackableId);
-        //             //     // if (!plane) return;
-        //             //     // var hitPose = hits[0].pose;
-        //             //     planeManager.requestedDetectionMode = PlaneDetectionMode.None;
-        //             //     this.transform.position = rayHit.point;
-
-        //             //     Grid.CreateGrid();
-        //             //     DebugView.Instance.SetText("GRID CREATED");
-        //             //     gridCreated = true;
-        //             // }
-        //             // if (arRaycastManager.Raycast(touch.position, hits, UnityEngine.XR.ARSubsystems.TrackableType.Planes))
-        //             // {
-        //             //     var plane = planeManager.GetPlane(hits[0].trackableId);
-        //             //     if (!plane)
-        //             //     {
-        //             //         DebugView.Instance.SetText("NO PLANE FOUND");
-        //             //         return;
-        //             //     }
-        //             //     var hitPose = hits[0].pose;
-        //             //     planeManager.requestedDetectionMode = PlaneDetectionMode.None;
-        //             //     this.transform.position = hitPose.position;// plane.center;//.position;
-        //             //     this.transform.rotation = hitPose.rotation;
-
-        //             //     Grid.CreateGrid();
-        //             //     DebugView.Instance.SetText("GRID CREATED");
-        //             //     gridCreated = true;
-        //             // }
         //             Ray raycast = Camera.main.ScreenPointToRay(touch.position);
         //             if (Physics.Raycast(raycast, out RaycastHit raycastHit, float.MaxValue))
         //             {
@@ -112,6 +80,7 @@ public class PlaneManager : MonoBehaviour
         //                     Grid.CreateGrid();
         //                     GridCreated = true;
         //                     planeManager.requestedDetectionMode = PlaneDetectionMode.None;
+        //                     RemovePlanes();
         //                     DebugView.Instance.SetText("GRID CREATED");
         //                 }
         //                 else
@@ -125,6 +94,14 @@ public class PlaneManager : MonoBehaviour
         GridCreated = true;
 
         // #endif
+    }
+
+    private void RemovePlanes()
+    {
+        foreach (var plane in planeManager.trackables)
+        {
+            plane.gameObject.SetActive(false);
+        }
     }
 }
 
