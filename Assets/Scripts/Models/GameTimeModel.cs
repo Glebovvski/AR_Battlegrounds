@@ -68,9 +68,9 @@ public class GameTimeModel : IInitializable, ITickable
         if (IsPaused || !Castle.IsAlive || isWon) return;
 
 
-        if (Time.time - lastDropTime > secondsToDropGold)
+        if (Time.time - lastDropTime > CurrencyModel.SecondsToDropGold)
         {
-            CurrencyModel.AddGold(Mathf.RoundToInt(CurrencyModel.Gold * goldPercent / 100f));
+            CurrencyModel.AddGold(Mathf.RoundToInt(CurrencyModel.Gold * CurrencyModel.GoldPercent / 100f));
             lastDropTime = Time.time;
         }
     }
