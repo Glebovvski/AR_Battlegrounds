@@ -4,13 +4,15 @@ using Zenject;
 public class MenuViewModel
 {
     private DefensesViewModel DefensesViewModel { get; set; }
+    private IAPManager IAPManager { get; set; }
 
     public bool IsMenuOpen { get; private set; } = true;
 
     [Inject]
-    private void Construct(DefensesViewModel defensesViewModel)
+    private void Construct(DefensesViewModel defensesViewModel, IAPManager iAPManager)
     {
         DefensesViewModel = defensesViewModel;
+        IAPManager = iAPManager;
     }
 
     public event Action OnOpen;
@@ -28,4 +30,8 @@ public class MenuViewModel
         DefensesViewModel.Open();
         OnClose?.Invoke();
     }
+
+    internal void BuyCoins() => IAPManager.BuyConsumable(IAPManager.coins);
+    internal void Donation() => IAPManager.BuyConsumable(IAPManager.donation);
+    internal void NoAds()=>IAPManager.BuyNonConsumable();
 }

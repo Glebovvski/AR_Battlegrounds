@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -35,6 +36,10 @@ public class MenuView : MonoBehaviour
     {
         menuPanel.SetActive(true);
     }
+
+    public void BuyCoins() => MenuViewModel.BuyCoins();
+    public void Donation() => MenuViewModel.Donation();
+    public void NoAds() => MenuViewModel.NoAds();
 
     private void OnDestroy()
     {

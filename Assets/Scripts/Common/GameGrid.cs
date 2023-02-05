@@ -13,8 +13,8 @@ public class GameGrid : MonoBehaviour
 
     private const int maxWidth = 30;
     private const int maxLength = 30;
-    private const int minWidth = 5;
-    private const int minLength = 5;
+    private const int minWidth = 7;
+    private const int minLength = 7;
 
     private CurrencyModel CurrencyModel { get; set; }
     private DefensesModel DefensesModel { get; set; }

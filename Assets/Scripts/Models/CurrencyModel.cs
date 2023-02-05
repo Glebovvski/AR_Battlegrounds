@@ -21,7 +21,7 @@ public class CurrencyModel
 
     public CurrencyModel()
     {
-        PlayerPrefs.DeleteAll();
+        // PlayerPrefs.DeleteAll();
         Gold = PlayerPrefs.GetInt("Gold", 1000000);
     }
 
