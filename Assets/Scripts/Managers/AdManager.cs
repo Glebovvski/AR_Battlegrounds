@@ -6,13 +6,24 @@ using Zenject;
 
 public class AdManager : IInitializable
 {
+    private const string noAdsKey = "NoAds"; // 0 = show ads; 1 = no ads
+
     private GameControlModel GameControlModel { get; set; }
 
     private BannerView bannerView;
     private InterstitialAd interstitialAd;
 
-    BannerPosition _bannerPosition = BannerPosition.TOP_CENTER;
-
+    public event Action OnCanShowAdValueChanged;
+    private bool canShowAd;
+    private bool CanShowAd
+    {
+        get => canShowAd;
+        set
+        {
+            canShowAd = PlayerPrefs.GetInt(noAdsKey, 0) < 1;
+            OnCanShowAdValueChanged?.Invoke();
+        }
+    }
     [Inject]
     private void Construct(GameControlModel gameControlModel)
     {
@@ -21,15 +32,20 @@ public class AdManager : IInitializable
 
     public void Initialize()
     {
+        OnCanShowAdValueChanged += HideBanner;
+        if (!CanShowAd) return;
+
         MobileAds.Initialize(initStatus => { });
         RequestInterstitial();
         RequestBanner();
         GameControlModel.OnRestart += ShowInterstitialAd;
     }
 
+
+
     private void ShowInterstitialAd()
     {
-        if (interstitialAd.CanShowAd())
+        if (interstitialAd.CanShowAd() && CanShowAd)
             interstitialAd.Show();
     }
 
@@ -64,16 +80,24 @@ public class AdManager : IInitializable
     private void InterstitialAdCallback(InterstitialAd ad, LoadAdError error)
     {
         interstitialAd = ad;
-        interstitialAd.OnAdFullScreenContentClosed += HandleInterstitialClosed;
         interstitialAd.OnAdFullScreenContentClosed += RequestInterstitial;
+        interstitialAd.OnAdFullScreenContentClosed += HandleInterstitialClosed;
     }
 
     public event Action OnInterstitialAdClosed;
     private void HandleInterstitialClosed()
     {
-        interstitialAd.OnAdFullScreenContentClosed -= HandleInterstitialClosed;
         interstitialAd.OnAdFullScreenContentClosed -= RequestInterstitial;
+        interstitialAd.OnAdFullScreenContentClosed -= HandleInterstitialClosed;
 
         OnInterstitialAdClosed?.Invoke();
+    }
+
+    private void HideBanner()
+    {
+        if (bannerView == null) return;
+        
+        bannerView.Hide();
+        bannerView.Destroy();
     }
 }
