@@ -7606,6 +7606,7 @@ MonoBehaviour:
   startBtn: {fileID: 1122340783}
   buyBtn: {fileID: 2062053034}
   donateBtn: {fileID: 743836701}
+  noAdsBtn: {fileID: 800196542}
 --- !u!1 &1715635002
 GameObject:
   m_ObjectHideFlags: 0
