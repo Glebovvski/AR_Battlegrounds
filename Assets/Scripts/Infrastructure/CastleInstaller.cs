@@ -10,5 +10,6 @@ public class CastleInstaller : MonoInstaller
     {
         var castle = Instantiate(castlePrefab, Vector3.zero, Quaternion.identity);
         Container.Bind<CastleDefense>().FromInstance(castle).AsSingle();
+        castle.gameObject.SetActive(false);
     }
 }

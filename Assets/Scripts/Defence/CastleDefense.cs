@@ -14,6 +14,7 @@ namespace Defendable
 
         public override void Init(ScriptableDefense so)
         {
+            this.gameObject.SetActive(true);
             base.Init(so);
             EnableMesh();
         }
