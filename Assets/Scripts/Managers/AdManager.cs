@@ -14,14 +14,16 @@ public class AdManager : IInitializable
     private InterstitialAd interstitialAd;
 
     public event Action OnCanShowAdValueChanged;
-    private bool canShowAd;
+    private bool canShowAd = true;
     private bool CanShowAd
     {
         get => canShowAd;
         set
         {
-            canShowAd = PlayerPrefs.GetInt(noAdsKey, 0) < 1;
-            OnCanShowAdValueChanged?.Invoke();
+            bool newValue = PlayerPrefs.GetInt(noAdsKey, 0) < 1;
+            if (canShowAd != newValue)
+                OnCanShowAdValueChanged?.Invoke();
+            canShowAd = newValue;
         }
     }
     [Inject]
@@ -32,6 +34,7 @@ public class AdManager : IInitializable
 
     public void Initialize()
     {
+        PlayerPrefs.DeleteKey(noAdsKey);
         OnCanShowAdValueChanged += HideBanner;
         if (!CanShowAd) return;
 
@@ -41,7 +44,7 @@ public class AdManager : IInitializable
         GameControlModel.OnRestart += ShowInterstitialAd;
     }
 
-
+    public void SetNoAds() => PlayerPrefs.SetInt(noAdsKey, 1);
 
     private void ShowInterstitialAd()
     {
@@ -96,7 +99,7 @@ public class AdManager : IInitializable
     private void HideBanner()
     {
         if (bannerView == null) return;
-        
+
         bannerView.Hide();
         bannerView.Destroy();
     }
