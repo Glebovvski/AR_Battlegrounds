@@ -15,7 +15,7 @@ public class IAPManager : IInitializable, IStoreListener
 
     public static string coins = "1000_coins";
     public static string donation = "donation";
-    public static string noAds = "noAds";
+    public static string noAds = "noads";
 
     // Apple App Store-specific product identifier for the subscription product.
     private static string kProductNameAppleSubscription = "com.unity3d.subscription.new";
