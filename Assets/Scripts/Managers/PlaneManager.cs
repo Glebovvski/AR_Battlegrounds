@@ -64,36 +64,36 @@ public class PlaneManager : MonoBehaviour
         if (GridCreated) return;
         if (MenuViewModel.IsMenuOpen) return;
 
-        // #if PLATFORM_IOS || PLATFORM_ANDROID
-        //         if (Input.touchCount == 0) return;
-        //         if (planeManager.trackables.count == 0) return;
+        #if PLATFORM_IOS || PLATFORM_ANDROID
+                if (Input.touchCount == 0) return;
+                if (planeManager.trackables.count == 0) return;
 
-        //         var touch = Input.GetTouch(0);
-        //         if (touch.phase == TouchPhase.Began)
-        //         {
-        //             Ray raycast = Camera.main.ScreenPointToRay(touch.position);
-        //             if (Physics.Raycast(raycast, out RaycastHit raycastHit, float.MaxValue))
-        //             {
-        //                 if (raycastHit.collider.TryGetComponent<ARPlane>(out var plane))
-        //                 {
-        //                     origin.MakeContentAppearAt(this.transform, plane.center, Quaternion.identity);
-        //                     Grid.CreateGrid();
-        //                     GridCreated = true;
-        //                     planeManager.requestedDetectionMode = PlaneDetectionMode.None;
-        //                     RemovePlanes();
-        //                     DebugView.Instance.SetText("GRID CREATED");
-        //                 }
-        //                 else
-        //                     DebugView.Instance.SetText("NO AR PLANE");
-        //             }
-        //             else
-        //                 DebugView.Instance.SetText("NO RAYCAST TARGET");
-        //         }
-        // #elif UNITY_EDITOR
+                var touch = Input.GetTouch(0);
+                if (touch.phase == TouchPhase.Began)
+                {
+                    Ray raycast = Camera.main.ScreenPointToRay(touch.position);
+                    if (Physics.Raycast(raycast, out RaycastHit raycastHit, float.MaxValue))
+                    {
+                        if (raycastHit.collider.TryGetComponent<ARPlane>(out var plane))
+                        {
+                            origin.MakeContentAppearAt(this.transform, plane.center, Quaternion.identity);
+                            Grid.CreateGrid();
+                            GridCreated = true;
+                            planeManager.requestedDetectionMode = PlaneDetectionMode.None;
+                            RemovePlanes();
+                            DebugView.Instance.SetText("GRID CREATED");
+                        }
+                        else
+                            DebugView.Instance.SetText("NO AR PLANE");
+                    }
+                    else
+                        DebugView.Instance.SetText("NO RAYCAST TARGET");
+                }
+        #elif UNITY_EDITOR
         Grid.CreateGrid();
         GridCreated = true;
 
-        // #endif
+        #endif
     }
 
     private void RemovePlanes()
