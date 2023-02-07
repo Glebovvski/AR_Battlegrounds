@@ -68,14 +68,14 @@ public class PoolManager : MonoBehaviour
 
     public void ReturnToPool(GameObject go, PoolObjectType type)
     {
+        PoolInfo poolInfo = poolList.FirstOrDefault(x => x.type == type);
+        go.transform.SetParent(poolInfo.container.transform);
         go.transform.localScale = Vector3.one;
         go.SetActive(false);
-        PoolInfo poolInfo = poolList.FirstOrDefault(x => x.type == type);
         bool IsNotInPool = !poolInfo.pool.Contains(go);
         if (IsNotInPool)
             poolInfo.pool.Add(go);
         go.transform.position = new Vector3(-100, -100, -100);
-        go.transform.SetParent(poolInfo.container.transform);
     }
 
     public T GetFromPool<T>(PoolObjectType type)
