@@ -151,7 +151,7 @@ public class GameGrid : MonoBehaviour
         if (defense.GetSize() == Vector2Int.one)
         {
             var position = new Vector2(cell.transform.position.x, cell.transform.position.z);
-            var height = cell.IsUpper ? defense.transform.localScale.y * 20 : defense.transform.localScale.y + 0.2f;
+            var height = cell.IsUpper ? defense.transform.localScale.y * 3 : defense.transform.localScale.y + 0.2f;
             defense.transform.position = GetWorldPositionFromGrid(position, height);
             cell.SetDefense(defense);
         }
