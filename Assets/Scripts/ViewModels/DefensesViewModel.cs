@@ -6,6 +6,7 @@ using Zenject;
 public class DefensesViewModel : MonoBehaviour
 {
     private MenuViewModel MenuViewModel { get; set; }
+    private PlaneManager PlaneManager { get; set; }
 
     [SerializeField] private DefenseView prefab;
     [SerializeField] private Transform viewParent;
@@ -16,12 +17,13 @@ public class DefensesViewModel : MonoBehaviour
     public event Action OnDefenseSelected;
 
     [Inject]
-    private void Construct(DefensesModel defensesModel, GameControlModel gameControlModel, DiContainer container, MenuViewModel menuViewModel)
+    private void Construct(DefensesModel defensesModel, GameControlModel gameControlModel, DiContainer container, MenuViewModel menuViewModel, PlaneManager planeManager)
     {
         Container = container;
         DefensesModel = defensesModel;
         GameModel = gameControlModel;
         MenuViewModel = menuViewModel;
+        PlaneManager = planeManager;
     }
 
     private void Start()
@@ -43,8 +45,11 @@ public class DefensesViewModel : MonoBehaviour
     public void Close() => OnClose?.Invoke();
 
     public event Action OnOpen;
-    public void Open() => OnOpen?.Invoke();
-
+    public void Open()
+    {
+        if (PlaneManager.GridCreated)
+            OnOpen?.Invoke();
+    }
     public void DefenseSelected() => OnDefenseSelected?.Invoke();
 
     public void DeselectDefense()

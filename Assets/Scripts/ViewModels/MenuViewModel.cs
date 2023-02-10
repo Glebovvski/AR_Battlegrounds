@@ -5,14 +5,16 @@ public class MenuViewModel
 {
     private DefensesViewModel DefensesViewModel { get; set; }
     private IAPManager IAPManager { get; set; }
+    private PlaneManager PlaneManager { get; set; }
 
     public bool IsMenuOpen { get; private set; } = true;
 
     [Inject]
-    private void Construct(DefensesViewModel defensesViewModel, IAPManager iAPManager)
+    private void Construct(DefensesViewModel defensesViewModel, IAPManager iAPManager, PlaneManager planeManager)
     {
         DefensesViewModel = defensesViewModel;
         IAPManager = iAPManager;
+        PlaneManager = planeManager;
     }
 
     public event Action OnOpen;
@@ -27,11 +29,12 @@ public class MenuViewModel
     public void Close()
     {
         IsMenuOpen = false;
-        DefensesViewModel.Open();
+        if (PlaneManager.GridCreated)
+            DefensesViewModel.Open();
         OnClose?.Invoke();
     }
 
     internal void BuyCoins() => IAPManager.BuyConsumable(IAPManager.coins);
     internal void Donation() => IAPManager.BuyConsumable(IAPManager.donation);
-    internal void NoAds()=>IAPManager.BuyNonConsumable();
+    internal void NoAds() => IAPManager.BuyNonConsumable();
 }
