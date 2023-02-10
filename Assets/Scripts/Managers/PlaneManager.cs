@@ -81,13 +81,8 @@ public class PlaneManager : MonoBehaviour
                             GridCreated = true;
                             planeManager.requestedDetectionMode = PlaneDetectionMode.None;
                             RemovePlanes();
-                            DebugView.Instance.SetText("GRID CREATED");
                         }
-                        else
-                            DebugView.Instance.SetText("NO AR PLANE");
                     }
-                    else
-                        DebugView.Instance.SetText("NO RAYCAST TARGET");
                 }
         #elif UNITY_EDITOR
         Grid.CreateGrid();
