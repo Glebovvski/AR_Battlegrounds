@@ -1,12 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
-public class TutorialViewModel : MonoBehaviour
+public class TutorialViewModel
 {
-    
-    public void StartTutorial()
-    {
-
-    }
+    public event Action OnTutorialStart;
+    public void StartTutorial() => OnTutorialStart?.Invoke();
 }
