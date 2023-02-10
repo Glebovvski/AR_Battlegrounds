@@ -40,6 +40,11 @@ public class DebugView : MonoBehaviour
         this.gameObject.SetActive(true);
     }
 
+    private void Close()
+    {
+        this.gameObject.SetActive(false);
+    }
+
     public event Action OnTutorialClick;
 
     private void Update()
