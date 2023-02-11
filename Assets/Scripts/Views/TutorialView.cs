@@ -42,15 +42,15 @@ public class TutorialView : MonoBehaviour
         CloseAllTexts();
 
         var textField = texts[placement];
-        textField.text = text;
-        textField.gameObject.SetActive(true);
+        textField.SetText(text);
+        textField.Show();
     }
 
     private void CloseAllTexts()
     {
         foreach (var text in texts)
         {
-            text.Value.gameObject.SetActive(false);
+            text.Value.Hide();
         }
     }
 
@@ -77,7 +77,7 @@ public class TutorialView : MonoBehaviour
 }
 
 [Serializable]
-public class PositionTextDictionary : SerializableDictionary<TutorialPlacement, TextMeshProUGUI>
+public class PositionTextDictionary : SerializableDictionary<TutorialPlacement, TutorialTextComponent>
 {
 
 }
