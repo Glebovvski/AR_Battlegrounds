@@ -34,6 +34,7 @@ public class TutorialView : MonoBehaviour
     {
         ViewModel.OnTutorialStart += Open;
         ViewModel.OnStepSet += StartTutorialStep;
+        ViewModel.OnTutorialEnd += Close;
     }
 
     private void StartTutorialStep(string text, TutorialPlacement placement)
@@ -69,7 +70,6 @@ public class TutorialView : MonoBehaviour
     {
         if (IsClickedOnTutorial)
         {
-            Debug.LogError("Tutorial Click");
             ViewModel.TutorialClick();
             // OnTutorialClick?.Invoke();
         }

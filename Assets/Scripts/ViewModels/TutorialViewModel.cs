@@ -14,6 +14,7 @@ public class TutorialViewModel : IInitializable
     public void Initialize()
     {
         TutorialModel.OnStepInited += InitTutorialStep;
+        TutorialModel.OnTutorialCompleted += EndTutorial;
     }
 
     public event Action<string, TutorialPlacement> OnStepSet;
@@ -24,4 +25,7 @@ public class TutorialViewModel : IInitializable
 
     public event Action OnTutorialClick;
     public void TutorialClick() => OnTutorialClick?.Invoke();
+
+    public event Action OnTutorialEnd;
+    public void EndTutorial() => OnTutorialEnd?.Invoke();
 }

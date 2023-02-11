@@ -96,5 +96,11 @@ public class TutorialModel : IInitializable
         simpleTutorialSteps[simpleTutorialStepIndex].Invoke();
         simpleTutorialStepIndex++;
     }
-    public void CompleteTutorial() => IsTutorialCompleted = true;
+
+    public event Action OnTutorialCompleted;
+    public void CompleteTutorial()
+    {
+        IsTutorialCompleted = true;
+        OnTutorialCompleted?.Invoke();
+    }
 }
