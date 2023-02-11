@@ -68,8 +68,11 @@ public class TutorialView : MonoBehaviour
     private void Update()
     {
         if (IsClickedOnTutorial)
+        {
+            Debug.LogError("Tutorial Click");
             ViewModel.TutorialClick();
-        // OnTutorialClick?.Invoke();
+            // OnTutorialClick?.Invoke();
+        }
     }
 }
 

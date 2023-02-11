@@ -47,7 +47,7 @@ public class DefensesViewModel : MonoBehaviour
     public event Action OnOpen;
     public void Open()
     {
-        if (PlaneManager.GridCreated)
+        // if (PlaneManager.GridCreated)
             OnOpen?.Invoke();
     }
     public void DefenseSelected() => OnDefenseSelected?.Invoke();

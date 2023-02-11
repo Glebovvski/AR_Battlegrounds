@@ -29,7 +29,7 @@ public class MenuViewModel
     public void Close()
     {
         IsMenuOpen = false;
-        if (PlaneManager.GridCreated)
+        // if (PlaneManager.GridCreated)
             DefensesViewModel.Open();
         OnClose?.Invoke();
     }

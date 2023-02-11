@@ -5,7 +5,7 @@ public class TutorialInstaller : MonoInstaller
 {
     public override void InstallBindings()
     {
-        Container.Bind<TutorialViewModel>().FromNew().AsSingle();
+        Container.BindInterfacesAndSelfTo<TutorialViewModel>().FromNew().AsSingle();
         Container.BindInterfacesAndSelfTo<TutorialModel>().FromNew().AsSingle();
     }
 }

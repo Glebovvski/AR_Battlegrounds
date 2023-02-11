@@ -36,6 +36,7 @@ public class TutorialModel : IInitializable
 
     public void Initialize()
     {
+        IsTutorialCompleted = false;
 #if !UNITY_EDITOR
         MenuViewModel.OnClose += InitStepOne;
         PlaneManager.OnPlanesChanged += InitStepTwo;
