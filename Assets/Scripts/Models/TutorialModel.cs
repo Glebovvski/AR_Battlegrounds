@@ -12,6 +12,10 @@ public class TutorialModel : IInitializable
 
     private const string isTutorialCompletedKey = "IsTutorialCompleted";
 
+    private bool stepOneInited = false;
+    private bool stepTwoInited = false;
+    private bool controlStepsFinished = false;
+
     private bool isTutorialCompleted = false;
     public bool IsTutorialCompleted
     {
@@ -57,13 +61,17 @@ public class TutorialModel : IInitializable
 
     public void InitStepOne()
     {
+        if (stepOneInited) return;
         if (IsTutorialCompleted) return;
         OnStepInited?.Invoke("Move your phone around until the plane appears", TutorialPlacement.UpperCentre);
+        stepOneInited = true;
     }
     public void InitStepTwo()
     {
+        if (stepTwoInited) return;
         if (IsTutorialCompleted) return;
         OnStepInited?.Invoke("Tap on plane to create Grid (Move your device closer to plane if nothing happens)", TutorialPlacement.UpperCentre);
+        stepTwoInited = true;
     }
     public void InitStepThree()
     {
