@@ -2,10 +2,54 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System;
+using Zenject;
 
-public class TutorialView : MonoBehaviour
+public class DebugView : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI text;
+    private TutorialViewModel ViewModel { get; set; }
 
+    [SerializeField] private TextMeshProUGUI text;
     public void SetText(string value) => text.text = value;
+
+    private bool IsClickedOnTutorial => Input.GetMouseButtonDown(0) || IsTouched;
+
+    private bool IsTouched
+    {
+        get
+        {
+            if (Input.touchCount == 0) return false;
+            var touch = Input.GetTouch(0);
+            return touch.phase == TouchPhase.Began;
+        }
+    }
+
+    [Inject]
+    private void Construct(TutorialViewModel tutorialViewModel)
+    {
+        ViewModel = tutorialViewModel;
+    }
+
+    private void Start()
+    {
+        ViewModel.OnTutorialStart += Open;
+    }
+
+    private void Open()
+    {
+        this.gameObject.SetActive(true);
+    }
+
+    private void Close()
+    {
+        this.gameObject.SetActive(false);
+    }
+
+    public event Action OnTutorialClick;
+
+    private void Update()
+    {
+        if (IsClickedOnTutorial)
+            OnTutorialClick?.Invoke();
+    }
 }
