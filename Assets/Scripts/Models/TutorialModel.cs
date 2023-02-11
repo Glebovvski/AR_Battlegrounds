@@ -8,6 +8,7 @@ public class TutorialModel : IInitializable
 {
     private PlaneManager PlaneManager { get; set; }
     private MenuViewModel MenuViewModel { get; set; }
+    private TutorialViewModel TutorialViewModel { get; set; }
 
     private const string isTutorialCompletedKey = "IsTutorialCompleted";
 
@@ -22,32 +23,76 @@ public class TutorialModel : IInitializable
         }
     }
 
+    private int simpleTutorialStepIndex = 0;
+    private Action[] simpleTutorialSteps;
+
     [Inject]
-    private void Construct(PlaneManager planeManager, MenuViewModel menuViewModel)
+    private void Construct(PlaneManager planeManager, MenuViewModel menuViewModel, TutorialViewModel tutorialViewModel)
     {
         PlaneManager = planeManager;
         MenuViewModel = menuViewModel;
+        TutorialViewModel = tutorialViewModel;
     }
 
     public void Initialize()
     {
-        MenuViewModel.OnClose += StartTutorial;
+        MenuViewModel.OnClose += InitStepOne;
+        PlaneManager.OnPlanesChanged += InitStepTwo;
+        PlaneManager.OnGridSet += InitStepThree;
+
+        simpleTutorialStepIndex = 0;
+        simpleTutorialSteps = new Action[]
+        {
+            InitStepFour,
+            InitStepFive,
+            InitStepSix
+        };
+
+        TutorialViewModel.OnTutorialClick += InitSimpleStep;
     }
 
-    private void StartTutorial()
+    public event Action<string, TutorialPlacement> OnStepInited;
+
+    public void InitStepOne()
     {
         if (IsTutorialCompleted) return;
-
-        InitStepOne();
+        OnStepInited?.Invoke("Move your phone around until the plane appears", TutorialPlacement.UpperCentre);
     }
-
-    public event Action<string> OnStepInited;
-
-    public void InitStepOne() => OnStepInited?.Invoke("Move your phone around until the plane appears");
-    public void InitStepTwo() => OnStepInited?.Invoke("Tap on plane to create Grid (Move your device closer to plane if nothing happens)");
-    public void InitStepThree() => OnStepInited?.Invoke("To set your defense select Tower from the list and put it on available cell");
-    public void InitStepFour() => OnStepInited?.Invoke("Your current money count is displayed here");
-    public void InitStepFive() => OnStepInited?.Invoke("You can get more money by destroying enemies that come.\nAlso money generate over time with this rate");
-    public void InitStepSix() => OnStepInited?.Invoke("When you done start the game by clicking cross");
+    public void InitStepTwo()
+    {
+        if (IsTutorialCompleted) return;
+        OnStepInited?.Invoke("Tap on plane to create Grid (Move your device closer to plane if nothing happens)", TutorialPlacement.UpperCentre);
+    }
+    public void InitStepThree()
+    {
+        if (IsTutorialCompleted) return;
+        OnStepInited?.Invoke("To set your defense select Tower from the list and put it on available cell", TutorialPlacement.LowerCentre);
+    }
+    public void InitStepFour()
+    {
+        if (IsTutorialCompleted) return;
+        OnStepInited?.Invoke("Your current money count is displayed here", TutorialPlacement.UpperLeft);
+    }
+    public void InitStepFive()
+    {
+        if (IsTutorialCompleted) return;
+        OnStepInited?.Invoke("You can get more money by destroying enemies that come.\nAlso money generate over time with this rate", TutorialPlacement.UpperLeft);
+    }
+    public void InitStepSix()
+    {
+        if (IsTutorialCompleted) return;
+        OnStepInited?.Invoke("When you done start the game by clicking cross", TutorialPlacement.UpperRight);
+    }
+    public void InitSimpleStep()
+    {
+        if (IsTutorialCompleted) return;
+        if (simpleTutorialStepIndex >= simpleTutorialSteps.Length)
+        {
+            CompleteTutorial();
+            return;
+        }
+        simpleTutorialSteps[simpleTutorialStepIndex].Invoke();
+        simpleTutorialStepIndex++;
+    }
     public void CompleteTutorial() => IsTutorialCompleted = true;
 }

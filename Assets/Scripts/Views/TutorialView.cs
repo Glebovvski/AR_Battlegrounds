@@ -45,12 +45,13 @@ public class TutorialView : MonoBehaviour
         this.gameObject.SetActive(false);
     }
 
-    public event Action OnTutorialClick;
+    // public event Action OnTutorialClick;
 
     private void Update()
     {
         if (IsClickedOnTutorial)
-            OnTutorialClick?.Invoke();
+            ViewModel.TutorialClick();
+        // OnTutorialClick?.Invoke();
     }
 }
 
