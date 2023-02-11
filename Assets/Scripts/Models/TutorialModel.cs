@@ -36,10 +36,11 @@ public class TutorialModel : IInitializable
 
     public void Initialize()
     {
+#if !UNITY_EDITOR
         MenuViewModel.OnClose += InitStepOne;
         PlaneManager.OnPlanesChanged += InitStepTwo;
         PlaneManager.OnGridSet += InitStepThree;
-
+#endif
         simpleTutorialStepIndex = 0;
         simpleTutorialSteps = new Action[]
         {

@@ -33,6 +33,24 @@ public class TutorialView : MonoBehaviour
     private void Start()
     {
         ViewModel.OnTutorialStart += Open;
+        ViewModel.OnStepSet += StartTutorialStep;
+    }
+
+    private void StartTutorialStep(string text, TutorialPlacement placement)
+    {
+        CloseAllTexts();
+
+        var textField = texts[placement];
+        textField.text = text;
+        textField.gameObject.SetActive(true);
+    }
+
+    private void CloseAllTexts()
+    {
+        foreach (var text in texts)
+        {
+            text.Value.gameObject.SetActive(false);
+        }
     }
 
     private void Open()
