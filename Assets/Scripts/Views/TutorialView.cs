@@ -5,12 +5,12 @@ using TMPro;
 using System;
 using Zenject;
 
-public class DebugView : MonoBehaviour
+public class TutorialView : MonoBehaviour
 {
     private TutorialViewModel ViewModel { get; set; }
 
-    [SerializeField] private TextMeshProUGUI text;
-    public void SetText(string value) => text.text = value;
+    [SerializeField] private PositionTextDictionary texts;
+    // public void SetText(string value) => text.text = value;
 
     private bool IsClickedOnTutorial => Input.GetMouseButtonDown(0) || IsTouched;
 
@@ -52,4 +52,19 @@ public class DebugView : MonoBehaviour
         if (IsClickedOnTutorial)
             OnTutorialClick?.Invoke();
     }
+}
+
+[Serializable]
+public class PositionTextDictionary : SerializableDictionary<TutorialPlacement, TextMeshProUGUI>
+{
+
+}
+
+[Serializable]
+public enum TutorialPlacement
+{
+    UpperLeft = 0,
+    LowerCentre = 1,
+    UpperCentre = 2,
+    UpperRight = 3,
 }
