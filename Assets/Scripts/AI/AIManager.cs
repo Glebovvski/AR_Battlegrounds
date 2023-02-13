@@ -38,11 +38,12 @@ namespace Enemies
 
         [SerializeField] private Transform[] spawnPoints;
 
+        public int ObservationCount => Observations.Count;
 
         public event Action<int> OnEnemyDestroyed;
 
-        public List<Observation> Observations = new List<Observation>();
-        [SerializeField] private List<Enemy> Enemies = new List<Enemy>();
+        private List<Observation> Observations = new List<Observation>();
+        private List<Enemy> Enemies = new List<Enemy>();
 
         private Dictionary<PoolObjectType, int> enemyCoefs = new Dictionary<PoolObjectType, int>();
 
@@ -120,6 +121,7 @@ namespace Enemies
         private void ResetAIManager()
         {
             Wave = 0;
+            maxWaves = UnityEngine.Random.Range(1, 25);
             SpawnEnemies();
         }
 
@@ -166,7 +168,6 @@ namespace Enemies
         {
             var enemy = PoolManager.Instance.GetFromPool<Enemy>(enemyType);
             enemy.gameObject.SetActive(false);
-            // planeManager.AttachChild(enemy.transform);
             enemy.Init();
             enemy.transform.position = parent.position;
             enemy.OnDeath += GetGoldFromEnemy;

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641234, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5207,19 +5207,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   planeManager: {fileID: 1243855130}
   maxWaves: 1
-  maxBaseEnemies: 0
-  maxBullEnemies: 0
-  maxHealerEnemies: 0
-  maxSpyEnemies: 0
-  maxKamikazeEnemies: 0
+  maxBaseEnemies: 15
+  maxBullEnemies: 5
+  maxHealerEnemies: 5
+  maxSpyEnemies: 5
+  maxKamikazeEnemies: 10
   maxFlamerEnemies: 5
   spawnPoints:
   - {fileID: 4555737984256998628}
   - {fileID: 1599919936}
   - {fileID: 1943054002}
   - {fileID: 1021889557}
-  Observations: []
-  Enemies: []
 --- !u!1 &1141302975
 GameObject:
   m_ObjectHideFlags: 0
