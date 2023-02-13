@@ -1,9 +1,7 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using Apex.AI.Components;
 using CartoonFX;
 using Defendable;
+using Managers;
 using UnityEngine;
 
 namespace Enemies
@@ -17,7 +15,6 @@ namespace Enemies
 
         public void OnEnable()
         {
-            // base.OnEnable();
             goblinMesh.SetActive(true);
             explosionFX.gameObject.SetActive(false);
             explosionFX.OnFinish += ReturnToPool;

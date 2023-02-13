@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using AI;
 using Apex.AI;
-using UnityEngine;
 
 public class IsTargetClose : ContextualScorerBase
 {

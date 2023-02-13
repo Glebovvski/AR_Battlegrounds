@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using AI;
 using Apex.AI;
 using Apex.Serialization;
-using UnityEngine;
 
 public class IsHealthBelowAmount : ContextualScorerBase
 {

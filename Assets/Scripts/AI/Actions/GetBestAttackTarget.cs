@@ -4,7 +4,6 @@ using AI;
 using Apex.AI;
 using Apex.Serialization;
 using Enemies;
-using UnityEngine;
 using UnityEngine.AI;
 
 public class GetBestAttackTarget : ActionBase
@@ -19,11 +18,6 @@ public class GetBestAttackTarget : ActionBase
         if (!enemy.IsAlive) return;
 
         Observation attackTarget = null;
-
-        if (enemy.Type == PoolObjectType.FlamerEnemy)
-        {
-
-        }
 
         if (enemy.AttackTarget != null) return;
         int pathScore = 0;

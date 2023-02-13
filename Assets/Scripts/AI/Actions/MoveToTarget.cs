@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using AI;
 using Apex.AI;
-using UnityEngine;
 
 public class MoveToTarget : ActionBase
 {
@@ -10,7 +7,7 @@ public class MoveToTarget : ActionBase
     {
         var c = (AIContext)context;
 
-        if (c.Enemy.AttackTarget != null && c.Enemy.AttackTarget.IsAlive)// && c.Enemy.IsNewDestination(c.Enemy.AttackTarget.Position))
+        if (c.Enemy.AttackTarget != null && c.Enemy.AttackTarget.IsAlive)
         {
             c.Enemy.MoveTo(c.Enemy.AttackTarget.Position);
         }

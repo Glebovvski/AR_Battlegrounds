@@ -1,10 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using AI;
 using Apex.AI;
 using Apex.Serialization;
 using Enemies;
-using UnityEngine;
 
 public class HealerScan : ActionBase
 {

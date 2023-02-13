@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using Apex.AI;
 using Enemies;
@@ -10,11 +9,10 @@ namespace AI
     {
         public override void Execute(IAIContext context)
         {
-            // Debug.LogError("MOVING AROUND: ");
             var c = (AIContext)context;
             var enemy = (SpyEnemy)c.Enemy;
 
-            var corners = Enemies.AIManager.Instance.Grid.Corners();
+            var corners = Enemies.AIManager.Instance.GridCorners();
             int closest = GetClosestCornerIndex(corners, enemy);
             if (enemy.IsNewDestination(corners[closest]))
                 enemy.MoveTo(corners[closest]);

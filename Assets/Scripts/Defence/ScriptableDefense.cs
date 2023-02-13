@@ -2,7 +2,8 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-using UnityEngine.UI;
+using Grid;
+using Managers;
 
 [CreateAssetMenu(fileName = "SO_Defence_", menuName = "ScriptableDefence", order = 0)]
 public class ScriptableDefense : ScriptableObject
@@ -11,7 +12,6 @@ public class ScriptableDefense : ScriptableObject
     public Sprite Image;
     public int Price;
 
-    // [Space(10)]
     public int Health;
     public bool IsActiveDefense;
     public int AttackForce;

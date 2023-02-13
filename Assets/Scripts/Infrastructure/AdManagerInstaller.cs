@@ -1,3 +1,4 @@
+using Managers;
 using Zenject;
 
 public class AdManagerInstaller : MonoInstaller

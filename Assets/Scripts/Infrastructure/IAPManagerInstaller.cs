@@ -1,4 +1,4 @@
-using UnityEngine;
+using Managers;
 using Zenject;
 
 public class IAPManagerInstaller : MonoInstaller

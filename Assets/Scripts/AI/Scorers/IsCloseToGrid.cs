@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using AI;
 using Apex.AI;
-using Apex.Serialization;
-using UnityEngine;
+using Enemies;
 
 public class IsCloseToGrid : ContextualScorerBase
 {
@@ -12,6 +9,6 @@ public class IsCloseToGrid : ContextualScorerBase
         var c = (AIContext)context;
         var enemy = c.Enemy;
 
-        return Vector3.Distance(Enemies.AIManager.Instance.Grid.transform.position, enemy.Position) < enemy.ScanRange ? 100 : 0; 
+        return Enemies.AIManager.Instance.GetDistanceToGrid(enemy.Position) < enemy.ScanRange*enemy.ScanRange ? 100 : 0; 
     }
 }

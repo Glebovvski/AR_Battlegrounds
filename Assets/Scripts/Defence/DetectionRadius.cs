@@ -1,9 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Enemies;
-using System;
-using System.Linq;
 
 namespace Defendable
 {

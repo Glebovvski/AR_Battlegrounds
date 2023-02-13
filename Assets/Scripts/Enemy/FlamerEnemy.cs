@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using Defendable;
 using UnityEngine;
@@ -57,14 +56,6 @@ namespace Enemies
                 defensesInRange.Add(defense);
             }
         }
-
-        // private void OnTriggerEnter(Collider other)
-        // {
-        //     if (other.TryGetComponent<Defense>(out var defense))
-        //     {
-        //         defensesInRange.Add(defense);
-        //     }
-        // }
 
         public void StopAttack()
         {

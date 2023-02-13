@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using AI;
 using Apex.AI;
@@ -11,6 +10,7 @@ using System.Linq;
 using CartoonFX;
 using cakeslice;
 using Zenject;
+using Managers;
 
 namespace Enemies
 {
@@ -67,15 +67,6 @@ namespace Enemies
         private void Construct(InputManager inputManager)
         {
             InputManager = inputManager;
-        }
-
-        private void Start()
-        {
-            // outline.enabled = false;
-            // InputManager.OnActiveDefenseClick += OutlineEnemy;
-            // InputManager.OnEnemyClick += CancelOutline;
-            // PopulateDictionary();
-            // attackTrigger.localScale = new Vector3(1, 1, AttackRange);
         }
 
         public virtual void Init()
@@ -191,7 +182,6 @@ namespace Enemies
         private void Death()
         {
             DamageReceiver.OnDeath -= Death;
-            // NavMeshAgent.enabled = false;
             fx.gameObject.SetActive(true);
         }
 
@@ -212,12 +202,6 @@ namespace Enemies
         private void OutlineEnemy() => outline.enabled = true;
 
         private void CancelOutline() => outline.enabled = false;
-
-        // private void OnDestroy()
-        // {
-        //     InputManager.OnActiveDefenseClick -= OutlineEnemy;
-        //     InputManager.OnEnemyClick -= CancelOutline;
-        // }
     }
 
     public enum EnemyType

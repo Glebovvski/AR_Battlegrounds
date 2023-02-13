@@ -3,7 +3,6 @@ using Apex.AI;
 using Enemies;
 using UnityEngine;
 using Defendable;
-using Apex.AI.Serialization;
 
 namespace AI
 {

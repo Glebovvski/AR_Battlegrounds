@@ -1,8 +1,9 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Defendable;
+using Grid;
+using Managers;
 using UnityEngine;
 using Zenject;
 
@@ -14,7 +15,7 @@ namespace Enemies
 
         private CurrencyModel CurrencyModel { get; set; }
         private CastleDefense Castle { get; set; }
-        public GameGrid Grid { get; private set; }
+        private GameGrid Grid { get; set; }
         private GameControlModel GameModel { get; set; }
         private StatManager StatManager { get; set; }
 
@@ -88,8 +89,6 @@ namespace Enemies
             enemyCoefs.Add(PoolObjectType.KamikazeEnemy, maxKamikazeEnemies);
         }
 
-
-
         private void SpawnEnemies()
         {
             if (Wave > maxWaves)
@@ -150,7 +149,6 @@ namespace Enemies
 
         public Enemy GetClosestEnemyByType(IEnemy enemy, EnemyType type) => Enemies.Where(x => (x.Position - enemy.Position).sqrMagnitude < enemy.ScanRange * enemy.ScanRange && x.EnemyType == type).FirstOrDefault();
 
-
         public Observation GetClosestObservationByType(IEnemy enemy, DefenseType type)
         {
             var observations = Observations.Where(x => x.Defense.Type == type).ToList();
@@ -189,6 +187,9 @@ namespace Enemies
 
         public IEnumerable<Enemy> GetClosestEnemiesWithSameTarget(Enemy enemy) => Enemies.Where(x => (x.Position - enemy.Position).sqrMagnitude < enemy.ScanRange * enemy.ScanRange && x.AttackTarget == enemy.AttackTarget);
 
+        public List<Vector3> GridCorners() => Grid.Corners();
+        public Vector3 GridCentre() => Grid.Centre;
+
         private void GetGoldFromEnemy(Enemy enemy)
         {
             CurrencyModel.AddGold(enemy.GoldToDrop);
@@ -199,6 +200,8 @@ namespace Enemies
         .ToList();
 
         public Enemy GetClosest(Enemy enemy, List<Enemy> selectedEnemies) => selectedEnemies.OrderBy(x => (x.Position - enemy.Position).sqrMagnitude).FirstOrDefault();
+
+        public float GetDistanceToGrid(Vector3 enemyPosition) => (Grid.transform.position - enemyPosition).sqrMagnitude;
 
         private Observation GetClosest(IEnemy enemy, List<Observation> observations)
         {

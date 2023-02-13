@@ -1,9 +1,8 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using AI;
 using Apex.AI;
 using Defendable;
+using Enemies;
 using UnityEngine;
 
 public class BaseEnemyScan : ActionBase
