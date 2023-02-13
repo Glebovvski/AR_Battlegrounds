@@ -56,10 +56,9 @@ namespace Managers
         private void RequestBanner()
         {
 #if UNITY_ANDROID
-        string adUnitId = "ca-app-pub-3940256099942544/6300978111";
-#else
-            // #elif UNITY_IPHONE
-            string adUnitId = "ca-app-pub-3940256099942544/2934735716";
+        string adUnitId = "ca-app-pub-2564312810103530/2073703808";
+#elif UNITY_IPHONE
+            string adUnitId = "ca-app-pub-2564312810103530/7469269205";
 #endif
 
             // Create a 320x50 banner at the top of the screen.
@@ -70,9 +69,9 @@ namespace Managers
         private void RequestInterstitial()
         {
 #if UNITY_ANDROID
-        string adUnitId = "ca-app-pub-3940256099942544/1033173712";
+        string adUnitId = "ca-app-pub-2564312810103530/3111453302";
 #elif UNITY_IPHONE
-            string adUnitId = "ca-app-pub-3940256099942544/4411468910";
+            string adUnitId = "ca-app-pub-2564312810103530~3588582562";
 #else
         string adUnitId = "unexpected_platform";
 #endif
