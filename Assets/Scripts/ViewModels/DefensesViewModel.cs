@@ -3,6 +3,7 @@ using Defendable;
 using Managers;
 using Models;
 using UnityEngine;
+using Views;
 using Zenject;
 
 namespace ViewModels
@@ -10,7 +11,6 @@ namespace ViewModels
     public class DefensesViewModel : MonoBehaviour
     {
         private MenuViewModel MenuViewModel { get; set; }
-        private PlaneManager PlaneManager { get; set; }
 
         [SerializeField] private DefenseView prefab;
         [SerializeField] private Transform viewParent;
@@ -21,13 +21,12 @@ namespace ViewModels
         public event Action OnDefenseSelected;
 
         [Inject]
-        private void Construct(DefensesModel defensesModel, GameControlModel gameControlModel, DiContainer container, MenuViewModel menuViewModel, PlaneManager planeManager)
+        private void Construct(DefensesModel defensesModel, GameControlModel gameControlModel, DiContainer container, MenuViewModel menuViewModel)
         {
             Container = container;
             DefensesModel = defensesModel;
             GameModel = gameControlModel;
             MenuViewModel = menuViewModel;
-            PlaneManager = planeManager;
         }
 
         private void Start()
@@ -51,7 +50,6 @@ namespace ViewModels
         public event Action OnOpen;
         public void Open()
         {
-            // if (PlaneManager.GridCreated)
             OnOpen?.Invoke();
         }
         public void DefenseSelected() => OnDefenseSelected?.Invoke();

@@ -1,3 +1,5 @@
+using Models;
+using ViewModels;
 using Zenject;
 
 public class TutorialInstaller : MonoInstaller

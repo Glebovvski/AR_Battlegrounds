@@ -1,6 +1,7 @@
 using Defendable;
 using Models;
 using UnityEngine;
+using Views;
 using Zenject;
 
 namespace ViewModels

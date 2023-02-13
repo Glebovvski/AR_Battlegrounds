@@ -1,4 +1,5 @@
 using UnityEngine;
+using ViewModels;
 using Zenject;
 
 public class DefensesViewModelInstaller : MonoInstaller

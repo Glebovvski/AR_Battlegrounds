@@ -1,3 +1,4 @@
+using Models;
 using Zenject;
 
 public class GameControllerInstaller : MonoInstaller

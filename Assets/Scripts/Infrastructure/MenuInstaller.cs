@@ -1,3 +1,4 @@
+using ViewModels;
 using Zenject;
 
 public class MenuInstaller : MonoInstaller
