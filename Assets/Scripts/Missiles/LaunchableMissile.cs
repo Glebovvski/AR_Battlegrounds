@@ -1,15 +1,12 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using Enemies;
+using Managers;
 using UnityEngine;
 
 namespace Missiles
 {
     public class LaunchableMissile : Missile
     {
-        [SerializeField] private Rigidbody rigidbody;
-
         public Vector3 Target { get; private set; }
         private Vector3 InitPos { get; set; }
         private Vector3 middle;

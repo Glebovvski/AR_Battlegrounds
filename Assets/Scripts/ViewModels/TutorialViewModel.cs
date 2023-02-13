@@ -1,31 +1,36 @@
 using System;
+using Models;
+using Views;
 using Zenject;
 
-public class TutorialViewModel : IInitializable
+namespace ViewModels
 {
-    private TutorialModel TutorialModel { get; set; }
-
-    [Inject]
-    private void Construct(TutorialModel tutorialModel)
+    public class TutorialViewModel : IInitializable
     {
-        TutorialModel = tutorialModel;
+        private TutorialModel TutorialModel { get; set; }
+
+        [Inject]
+        private void Construct(TutorialModel tutorialModel)
+        {
+            TutorialModel = tutorialModel;
+        }
+
+        public void Initialize()
+        {
+            TutorialModel.OnStepInited += InitTutorialStep;
+            TutorialModel.OnTutorialCompleted += EndTutorial;
+        }
+
+        public event Action<string, TutorialPlacement> OnStepSet;
+        private void InitTutorialStep(string text, TutorialPlacement placement) => OnStepSet?.Invoke(text, placement);
+
+        public event Action OnTutorialStart;
+        public void StartTutorial() => OnTutorialStart?.Invoke();
+
+        public event Action OnTutorialClick;
+        public void TutorialClick() => OnTutorialClick?.Invoke();
+
+        public event Action OnTutorialEnd;
+        public void EndTutorial() => OnTutorialEnd?.Invoke();
     }
-
-    public void Initialize()
-    {
-        TutorialModel.OnStepInited += InitTutorialStep;
-        TutorialModel.OnTutorialCompleted += EndTutorial;
-    }
-
-    public event Action<string, TutorialPlacement> OnStepSet;
-    private void InitTutorialStep(string text, TutorialPlacement placement) => OnStepSet?.Invoke(text, placement);
-
-    public event Action OnTutorialStart;
-    public void StartTutorial() => OnTutorialStart?.Invoke();
-
-    public event Action OnTutorialClick;
-    public void TutorialClick() => OnTutorialClick?.Invoke();
-
-    public event Action OnTutorialEnd;
-    public void EndTutorial() => OnTutorialEnd?.Invoke();
 }

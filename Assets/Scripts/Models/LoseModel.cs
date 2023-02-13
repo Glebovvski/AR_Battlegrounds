@@ -1,15 +1,18 @@
-using System;
+using Grid;
 using Zenject;
 
-public class LoseModel
+namespace Models
 {
-    private GameGrid Grid { get; set; }
-
-    [Inject]
-    private void Construct(GameGrid grid)
+    public class LoseModel
     {
-        Grid = grid;
+        private GameGrid Grid { get; set; }
+
+        [Inject]
+        private void Construct(GameGrid grid)
+        {
+            Grid = grid;
+        }
+
+
     }
-    
-    
 }

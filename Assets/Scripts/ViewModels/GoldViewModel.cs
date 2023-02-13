@@ -1,22 +1,22 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Zenject;
+using Models;
 
-public class GoldViewModel
+namespace ViewModels
 {
-    private CurrencyModel CurrencyModel { get; set; }
-
-    public event Action<int> OnGoldChanged;
-
-    public GoldViewModel(CurrencyModel currencyModel)
+    public class GoldViewModel
     {
-        CurrencyModel = currencyModel;
-        CurrencyModel.OnGoldAmountChanged += GoldChanged;
+        private CurrencyModel CurrencyModel { get; set; }
+
+        public event Action<int> OnGoldChanged;
+
+        public GoldViewModel(CurrencyModel currencyModel)
+        {
+            CurrencyModel = currencyModel;
+            CurrencyModel.OnGoldAmountChanged += GoldChanged;
+        }
+
+        public string GetGoldPercent() => string.Format("+{0}% / {1}s", CurrencyModel.GoldPercent, CurrencyModel.SecondsToDropGold);
+
+        private void GoldChanged(int value) => OnGoldChanged?.Invoke(value);
     }
-
-    public string GetGoldPercent() => string.Format("+{0}% / {1}s", CurrencyModel.GoldPercent, CurrencyModel.SecondsToDropGold);
-
-    private void GoldChanged(int value) => OnGoldChanged?.Invoke(value);
 }

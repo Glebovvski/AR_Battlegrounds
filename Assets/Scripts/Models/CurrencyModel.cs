@@ -1,36 +1,39 @@
 using System;
 using UnityEngine;
 
-public class CurrencyModel
+namespace Models
 {
-    public float SecondsToDropGold { get; private set; } = 5f;
-    public float GoldPercent { get; private set; } = 2f;
-
-    public event Action<int> OnGoldAmountChanged;
-    private int _gold;
-    public int Gold
+    public class CurrencyModel
     {
-        get => _gold;
-        private set
+        public float SecondsToDropGold { get; private set; } = 5f;
+        public float GoldPercent { get; private set; } = 2f;
+
+        public event Action<int> OnGoldAmountChanged;
+        private int _gold;
+        public int Gold
         {
-            _gold = value;
-            PlayerPrefs.SetInt("Gold", value);
-            OnGoldAmountChanged?.Invoke(_gold);
+            get => _gold;
+            private set
+            {
+                _gold = value;
+                PlayerPrefs.SetInt("Gold", value);
+                OnGoldAmountChanged?.Invoke(_gold);
+            }
         }
-    }
 
-    public CurrencyModel()
-    {
-        Gold = PlayerPrefs.GetInt("Gold", 2000);
-    }
+        public CurrencyModel()
+        {
+            Gold = PlayerPrefs.GetInt("Gold", 2000);
+        }
 
-    public void Buy(int price)
-    {
-        Gold -= price;
-    }
+        public void Buy(int price)
+        {
+            Gold -= price;
+        }
 
-    public void AddGold(int value)
-    {
-        Gold += value;
+        public void AddGold(int value)
+        {
+            Gold += value;
+        }
     }
 }

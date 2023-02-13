@@ -1,46 +1,50 @@
 using UnityEngine;
+using ViewModels;
 using Zenject;
 
-public class DefensesView : MonoBehaviour
+namespace Views
 {
-    private DefensesViewModel ViewModel { get; set; }
-
-    [SerializeField] private GameObject defensesPanel;
-    [SerializeField] private GameObject cancelBtn;
-
-    [Inject]
-    private void Construct(DefensesViewModel vm)
+    public class DefensesView : MonoBehaviour
     {
-        ViewModel = vm;
-    }
+        private DefensesViewModel ViewModel { get; set; }
 
-    private void Start()
-    {
-        ViewModel.OnDefenseSelected += DefenseSelected;
-        ViewModel.OnOpen += Show;
-        ViewModel.OnClose += Hide;
-    }
+        [SerializeField] private GameObject defensesPanel;
+        [SerializeField] private GameObject cancelBtn;
 
-    public void Show() => defensesPanel.SetActive(true);
-    public void Hide() => defensesPanel.SetActive(false);
+        [Inject]
+        private void Construct(DefensesViewModel vm)
+        {
+            ViewModel = vm;
+        }
 
-    public void CancelSelection()
-    {
-        ViewModel.DeselectDefense();
-        ToggleCancelBtn(false);
-    }
+        private void Start()
+        {
+            ViewModel.OnDefenseSelected += DefenseSelected;
+            ViewModel.OnOpen += Show;
+            ViewModel.OnClose += Hide;
+        }
 
-    private void DefenseSelected()
-    {
-        ToggleCancelBtn(true);
-    }
+        public void Show() => defensesPanel.SetActive(true);
+        public void Hide() => defensesPanel.SetActive(false);
 
-    public void ToggleCancelBtn(bool active) => cancelBtn.SetActive(active);
+        public void CancelSelection()
+        {
+            ViewModel.DeselectDefense();
+            ToggleCancelBtn(false);
+        }
 
-    private void OnDestroy()
-    {
-        ViewModel.OnDefenseSelected -= DefenseSelected;
-        ViewModel.OnOpen -= Show;
-        ViewModel.OnClose -= Hide;
+        private void DefenseSelected()
+        {
+            ToggleCancelBtn(true);
+        }
+
+        public void ToggleCancelBtn(bool active) => cancelBtn.SetActive(active);
+
+        private void OnDestroy()
+        {
+            ViewModel.OnDefenseSelected -= DefenseSelected;
+            ViewModel.OnOpen -= Show;
+            ViewModel.OnClose -= Hide;
+        }
     }
 }

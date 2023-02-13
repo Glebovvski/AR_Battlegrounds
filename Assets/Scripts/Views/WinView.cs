@@ -1,95 +1,97 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using Zenject;
 using UnityEngine.UI;
 using System;
+using ViewModels;
 
-public class WinView : MonoBehaviour
+namespace Views
 {
-    private WinViewModel WinViewModel { get; set; }
-
-    [SerializeField] private GameObject WinPanel;
-
-    [Space(10)]
-    [SerializeField] private StarView starCentre;
-    [SerializeField] private StarView starLeft;
-    [SerializeField] private StarView starRight;
-
-    [Space(10)]
-    [SerializeField] private TextMeshProUGUI timer;
-    [SerializeField] private TextMeshProUGUI bestScore;
-
-    [Space(10)]
-    [SerializeField] private TextMeshProUGUI enemiesDestroyed;
-    [SerializeField] private TextMeshProUGUI defensesDestroyed;
-
-    [Space(10)]
-    [SerializeField] private Button NextLevelBtn;
-    [SerializeField] private Button MenuBtn;
-
-    [Inject]
-    private void Construct(WinViewModel winViewModel)
+    public class WinView : MonoBehaviour
     {
-        WinViewModel = winViewModel;
-    }
+        private WinViewModel WinViewModel { get; set; }
 
-    private void Start()
-    {
-        WinViewModel.OnShowWinScreen += ShowWinScreen;
-        WinViewModel.OnCloseWinScreen += CloseWinScreen;
-        NextLevelBtn.onClick.AddListener(WinViewModel.NextLevel);
-        MenuBtn.onClick.AddListener(WinViewModel.Menu);
-    }
+        [SerializeField] private GameObject WinPanel;
 
-    public event Action OnNextLevelClick;
+        [Space(10)]
+        [SerializeField] private StarView starCentre;
+        [SerializeField] private StarView starLeft;
+        [SerializeField] private StarView starRight;
 
-    private void ShowWinScreen(int stars)
-    {
-        WinPanel.SetActive(true);
-        UpdateData(stars);
-    }
+        [Space(10)]
+        [SerializeField] private TextMeshProUGUI timer;
+        [SerializeField] private TextMeshProUGUI bestScore;
 
-    private void CloseWinScreen()
-    {
-        Reset();
-        WinPanel.SetActive(false);
-    }
+        [Space(10)]
+        [SerializeField] private TextMeshProUGUI enemiesDestroyed;
+        [SerializeField] private TextMeshProUGUI defensesDestroyed;
 
-    private void UpdateData(int stars)
-    {
-        UpdateStars(stars);
-        UpdateTimer();
-        UpdateBestScore();
-        UpdateEnemiesKilled();
-        UpdateDefensesDestroyed();
-    }
+        [Space(10)]
+        [SerializeField] private Button NextLevelBtn;
+        [SerializeField] private Button MenuBtn;
 
-    private void UpdateStars(int stars)
-    {
-        Reset();
-        starCentre.Activate();
-        if (stars > 1)
-            starLeft.Activate();
-        if (stars == 3)
-            starRight.Activate();
-    }
+        [Inject]
+        private void Construct(WinViewModel winViewModel)
+        {
+            WinViewModel = winViewModel;
+        }
 
-    private void UpdateTimer() => timer.text = WinViewModel.GetTimer();
-    private void UpdateBestScore() => bestScore.text = WinViewModel.GetBestScore();
-    private void UpdateEnemiesKilled() => enemiesDestroyed.text = WinViewModel.GetEnemiesKilled();
-    private void UpdateDefensesDestroyed() => defensesDestroyed.text = WinViewModel.GetDefensesDestroyed();
+        private void Start()
+        {
+            WinViewModel.OnShowWinScreen += ShowWinScreen;
+            WinViewModel.OnCloseWinScreen += CloseWinScreen;
+            NextLevelBtn.onClick.AddListener(WinViewModel.NextLevel);
+            MenuBtn.onClick.AddListener(WinViewModel.Menu);
+        }
 
-    private void Reset()
-    {
-        starCentre.Reset();
-        starLeft.Reset();
-        starRight.Reset();
-    }
+        public event Action OnNextLevelClick;
 
-    private void OnDestroy()
-    {
-        WinViewModel.OnShowWinScreen -= ShowWinScreen;
+        private void ShowWinScreen(int stars)
+        {
+            WinPanel.SetActive(true);
+            UpdateData(stars);
+        }
+
+        private void CloseWinScreen()
+        {
+            Reset();
+            WinPanel.SetActive(false);
+        }
+
+        private void UpdateData(int stars)
+        {
+            UpdateStars(stars);
+            UpdateTimer();
+            UpdateBestScore();
+            UpdateEnemiesKilled();
+            UpdateDefensesDestroyed();
+        }
+
+        private void UpdateStars(int stars)
+        {
+            Reset();
+            starCentre.Activate();
+            if (stars > 1)
+                starLeft.Activate();
+            if (stars == 3)
+                starRight.Activate();
+        }
+
+        private void UpdateTimer() => timer.text = WinViewModel.GetTimer();
+        private void UpdateBestScore() => bestScore.text = WinViewModel.GetBestScore();
+        private void UpdateEnemiesKilled() => enemiesDestroyed.text = WinViewModel.GetEnemiesKilled();
+        private void UpdateDefensesDestroyed() => defensesDestroyed.text = WinViewModel.GetDefensesDestroyed();
+
+        private void Reset()
+        {
+            starCentre.Reset();
+            starLeft.Reset();
+            starRight.Reset();
+        }
+
+        private void OnDestroy()
+        {
+            WinViewModel.OnShowWinScreen -= ShowWinScreen;
+        }
     }
 }

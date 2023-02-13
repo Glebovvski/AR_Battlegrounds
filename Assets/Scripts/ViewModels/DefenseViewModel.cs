@@ -1,31 +1,34 @@
-using Defendable;
-using Zenject;
+using Models;
+using Views;
 
-public class DefenseViewModel
+namespace ViewModels
 {
-    private CurrencyModel CurrencyModel { get; set; }
-    private DefensesModel DefensesModel { get; set; }
-
-    private DefenseView DefenseView { get; set; }
-    private ScriptableDefense Defense { get; set; }
-
-    public DefenseViewModel(ScriptableDefense defense, DefenseView view, CurrencyModel currencyModel, DefensesModel defensesModel)
+    public class DefenseViewModel
     {
-        DefensesModel = defensesModel;
-        CurrencyModel = currencyModel;
-        Defense = defense;
-        DefenseView = view;
-        DefenseView.OnDefenseSelected += SelectDefence;
-        CurrencyModel.OnGoldAmountChanged += UpdateDefenseAffordable;
-    }
+        private CurrencyModel CurrencyModel { get; set; }
+        private DefensesModel DefensesModel { get; set; }
 
-    private void UpdateDefenseAffordable(int gold)
-    {
-        DefenseView.UpdateButton(Defense.Price <= gold);
-    }
+        private DefenseView DefenseView { get; set; }
+        private ScriptableDefense Defense { get; set; }
 
-    public void SelectDefence()
-    {
-        DefensesModel.DefenseSelected(Defense);
+        public DefenseViewModel(ScriptableDefense defense, DefenseView view, CurrencyModel currencyModel, DefensesModel defensesModel)
+        {
+            DefensesModel = defensesModel;
+            CurrencyModel = currencyModel;
+            Defense = defense;
+            DefenseView = view;
+            DefenseView.OnDefenseSelected += SelectDefence;
+            CurrencyModel.OnGoldAmountChanged += UpdateDefenseAffordable;
+        }
+
+        private void UpdateDefenseAffordable(int gold)
+        {
+            DefenseView.UpdateButton(Defense.Price <= gold);
+        }
+
+        public void SelectDefence()
+        {
+            DefensesModel.DefenseSelected(Defense);
+        }
     }
 }

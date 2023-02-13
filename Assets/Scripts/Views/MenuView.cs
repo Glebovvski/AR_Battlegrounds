@@ -1,60 +1,62 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using Managers;
 using UnityEngine;
 using UnityEngine.UI;
+using ViewModels;
 using Zenject;
 
-public class MenuView : MonoBehaviour
+namespace Views
 {
-    private MenuViewModel MenuViewModel { get; set; }
-    private AdManager AdManager { get; set; }
-
-    [SerializeField] private GameObject menuPanel;
-
-    [SerializeField] private Button startBtn;
-    [SerializeField] private Button buyBtn;
-    [SerializeField] private Button donateBtn;
-    [SerializeField] private Button noAdsBtn;
-
-    [Inject]
-    private void Construct(MenuViewModel menuViewModel, AdManager adManager)
+    public class MenuView : MonoBehaviour
     {
-        MenuViewModel = menuViewModel;
-        AdManager = adManager;
-    }
+        private MenuViewModel MenuViewModel { get; set; }
+        private AdManager AdManager { get; set; }
 
-    private void Start()
-    {
-        MenuViewModel.OnOpen += Show;
-        AdManager.OnCanShowAdValueChanged+=SetNoAdsButtonVisibility;
-    }
+        [SerializeField] private GameObject menuPanel;
 
-    public void Close()
-    {
-        menuPanel.SetActive(false);
-        MenuViewModel.Close();
-    }
+        [SerializeField] private Button startBtn;
+        [SerializeField] private Button buyBtn;
+        [SerializeField] private Button donateBtn;
+        [SerializeField] private Button noAdsBtn;
 
-    public void Show()
-    {
-        menuPanel.SetActive(true);
-    }
+        [Inject]
+        private void Construct(MenuViewModel menuViewModel, AdManager adManager)
+        {
+            MenuViewModel = menuViewModel;
+            AdManager = adManager;
+        }
 
-    public void BuyCoins() => MenuViewModel.BuyCoins();
-    public void Donation() => MenuViewModel.Donation();
-    public void NoAds()
-    {
-        MenuViewModel.NoAds();
-    }
+        private void Start()
+        {
+            MenuViewModel.OnOpen += Show;
+            AdManager.OnCanShowAdValueChanged += SetNoAdsButtonVisibility;
+        }
 
-    private void SetNoAdsButtonVisibility()
-    {
-        noAdsBtn.gameObject.SetActive(AdManager.CanShowAd);
-    }
+        public void Close()
+        {
+            menuPanel.SetActive(false);
+            MenuViewModel.Close();
+        }
 
-    private void OnDestroy()
-    {
-        MenuViewModel.OnOpen -= Show;
+        public void Show()
+        {
+            menuPanel.SetActive(true);
+        }
+
+        public void BuyCoins() => MenuViewModel.BuyCoins();
+        public void Donation() => MenuViewModel.Donation();
+        public void NoAds()
+        {
+            MenuViewModel.NoAds();
+        }
+
+        private void SetNoAdsButtonVisibility()
+        {
+            noAdsBtn.gameObject.SetActive(AdManager.CanShowAd);
+        }
+
+        private void OnDestroy()
+        {
+            MenuViewModel.OnOpen -= Show;
+        }
     }
 }

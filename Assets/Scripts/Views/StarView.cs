@@ -1,25 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class StarView : MonoBehaviour
+namespace Views
 {
-    [SerializeField] private Image image;
-    [SerializeField] private Sprite empty;
-    [SerializeField] private Sprite filled;
-
-    [SerializeField] private Animator animator;
-
-    public void Activate()
+    public class StarView : MonoBehaviour
     {
-        animator.SetTrigger("Activate");
-    }
+        [SerializeField] private Image image;
+        [SerializeField] private Sprite empty;
+        [SerializeField] private Sprite filled;
 
-    public void ChangeSprite()
-    {
-        image.sprite = filled;
-    }
+        [SerializeField] private Animator animator;
 
-    public void Reset() => image.sprite = empty;
+        public void Activate()
+        {
+            animator.SetTrigger("Activate");
+        }
+
+        public void ChangeSprite()
+        {
+            image.sprite = filled;
+        }
+
+        public void Reset() => image.sprite = empty;
+    }
 }

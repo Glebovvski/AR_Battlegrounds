@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 using Zenject;
 
-namespace Defendable
+namespace Models
 {
     public class DefensesModel : IInitializable
     {

@@ -1,5 +1,7 @@
-using Defendable;
+using Models;
 using UnityEngine;
+using ViewModels;
+using Views;
 using Zenject;
 
 public class DefenseViewFactory : PlaceholderFactory<DefenseView>

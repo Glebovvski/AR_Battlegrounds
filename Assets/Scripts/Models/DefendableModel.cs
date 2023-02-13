@@ -1,9 +1,10 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Defendable;
+using Grid;
 using UnityEngine;
 
-namespace Defendable
+namespace Models
 {
     public class DefendableModel : MonoBehaviour
     {

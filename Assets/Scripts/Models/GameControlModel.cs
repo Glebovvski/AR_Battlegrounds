@@ -1,13 +1,13 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
-public class GameControlModel
+namespace Models
 {
-    public event Action OnRestart;
-    public void Restart()
+    public class GameControlModel
     {
-        OnRestart?.Invoke();
+        public event Action OnRestart;
+        public void Restart()
+        {
+            OnRestart?.Invoke();
+        }
     }
 }

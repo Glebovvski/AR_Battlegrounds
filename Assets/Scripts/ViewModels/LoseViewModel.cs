@@ -1,54 +1,55 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using Defendable;
+using Models;
 using UnityEngine;
 using Zenject;
 
-public class LoseViewModel : MonoBehaviour
+namespace ViewModels
 {
-    private CastleDefense Castle { get; set; }
-    private GameControlModel GameControlModel { get; set; }
-    private MenuViewModel MenuViewModel { get; set; }
-
-    [SerializeField] private LoseView view;
-
-    [Inject]
-    private void Construct(CastleDefense castle, GameControlModel gameModel, MenuViewModel menuViewModel)
+    public class LoseViewModel : MonoBehaviour
     {
-        Castle = castle;
-        GameControlModel = gameModel;
-        MenuViewModel = menuViewModel;
-    }
+        private CastleDefense Castle { get; set; }
+        private GameControlModel GameControlModel { get; set; }
+        private MenuViewModel MenuViewModel { get; set; }
 
-    private void Start()
-    {
-        Castle.OnDeath += ShowLoseView;
-        view.OnTryAgainClick += TryAgain;
-        view.OnMenuClick += Menu;
-    }
+        [SerializeField] private LoseView view;
 
-    private void Menu()
-    {
-        GameControlModel.Restart();
-        view.Close();
-        MenuViewModel.OpenMenu();
-    }
+        [Inject]
+        private void Construct(CastleDefense castle, GameControlModel gameModel, MenuViewModel menuViewModel)
+        {
+            Castle = castle;
+            GameControlModel = gameModel;
+            MenuViewModel = menuViewModel;
+        }
 
-    private void ShowLoseView()
-    {
-        view.Open();
-    }
+        private void Start()
+        {
+            Castle.OnDeath += ShowLoseView;
+            view.OnTryAgainClick += TryAgain;
+            view.OnMenuClick += Menu;
+        }
 
-    public void TryAgain()
-    {
-        GameControlModel.Restart();
-        view.gameObject.SetActive(false);
-    }
+        private void Menu()
+        {
+            GameControlModel.Restart();
+            view.Close();
+            MenuViewModel.OpenMenu();
+        }
 
-    private void OnDestroy()
-    {
-        Castle.OnDeath -= ShowLoseView;
-    }
+        private void ShowLoseView()
+        {
+            view.Open();
+        }
 
+        public void TryAgain()
+        {
+            GameControlModel.Restart();
+            view.gameObject.SetActive(false);
+        }
+
+        private void OnDestroy()
+        {
+            Castle.OnDeath -= ShowLoseView;
+        }
+
+    }
 }
