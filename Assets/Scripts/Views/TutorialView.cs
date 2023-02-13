@@ -10,7 +10,6 @@ public class TutorialView : MonoBehaviour
     private TutorialViewModel ViewModel { get; set; }
 
     [SerializeField] private PositionTextDictionary texts;
-    // public void SetText(string value) => text.text = value;
 
     private bool IsClickedOnTutorial => Input.GetMouseButtonDown(0) || IsTouched;
 
@@ -64,14 +63,11 @@ public class TutorialView : MonoBehaviour
         this.gameObject.SetActive(false);
     }
 
-    // public event Action OnTutorialClick;
-
     private void Update()
     {
         if (IsClickedOnTutorial)
         {
             ViewModel.TutorialClick();
-            // OnTutorialClick?.Invoke();
         }
     }
 }

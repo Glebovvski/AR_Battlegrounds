@@ -14,6 +14,7 @@ public class TutorialModel : IInitializable
 
     private bool stepOneInited = false;
     private bool stepTwoInited = false;
+    private bool stepThreeInited = false;
     private bool controlStepsFinished = false;
 
     private bool isTutorialCompleted = false;
@@ -75,11 +76,14 @@ public class TutorialModel : IInitializable
     }
     public void InitStepThree()
     {
+        if (stepThreeInited) return;
         if (IsTutorialCompleted) return;
         OnStepInited?.Invoke("To set your defense select Tower from the list and put it on available cell", TutorialPlacement.LowerCentre);
+        stepThreeInited = true;
     }
     public void InitStepFour()
     {
+        if (!stepThreeInited) return;
         if (IsTutorialCompleted) return;
         OnStepInited?.Invoke("Your current money count is displayed here", TutorialPlacement.UpperLeft);
     }
