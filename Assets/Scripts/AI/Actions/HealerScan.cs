@@ -18,7 +18,7 @@ public class HealerScan : ActionBase
             return;
         closestEnemy = Enemies.AIManager.Instance.GetClosest(enemy, enemiesInRange);
 
-        if (enemy.IsNewDestination(enemy.FollowTarget.Position))
+        if (enemy.IsNewDestination(closestEnemy.Position))
         {
             enemy.FollowTarget = closestEnemy;
             enemy.MoveTo(enemy.FollowTarget.Position);
