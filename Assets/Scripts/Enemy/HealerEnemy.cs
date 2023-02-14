@@ -8,9 +8,9 @@ namespace Enemies
         [SerializeField] private ParticleSystem healFx;
         private bool isHealFxPlaying = false;
 
-        public override void Init()
+        public override void Init(InputManager inputManager)
         {
-            base.Init();
+            base.Init(inputManager);
             healFx.gameObject.transform.localScale = new Vector3(AttackRange, 1, AttackRange);
         }
 

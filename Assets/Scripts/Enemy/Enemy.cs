@@ -63,14 +63,10 @@ namespace Enemies
 
         protected AnimationController animationController;
 
-        [Inject]
-        private void Construct(InputManager inputManager)
+        public virtual void Init(InputManager inputManager)
         {
             InputManager = inputManager;
-        }
 
-        public virtual void Init()
-        {
             GetData();
             DamageReceiver = new DamageReceiver(Health);
             Context = new AIContext(this);
@@ -198,7 +194,7 @@ namespace Enemies
         {
             AIManager.Instance.RemoveObservation(AttackTarget);
             if (AttackTarget == null) return;
-            
+
             AttackTarget.Defense.OnDeath -= ResetTarget;
             AttackTarget = null;
         }

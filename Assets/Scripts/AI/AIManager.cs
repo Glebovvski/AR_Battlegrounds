@@ -19,13 +19,14 @@ namespace Enemies
         private GameGrid Grid { get; set; }
         private GameControlModel GameModel { get; set; }
         private StatManager StatManager { get; set; }
+        private InputManager InputManager { get; set; }
 
         [SerializeField] private PlaneManager planeManager;
 
         [Header("Battle settings")]
         [Range(1, 25)]
         [SerializeField] private int maxWaves;
-        [Range(0, 50)]
+        [Range(0, 25)]
         [SerializeField] private int maxBaseEnemies;
         [Range(0, 5)]
         [SerializeField] private int maxBullEnemies;
@@ -52,13 +53,14 @@ namespace Enemies
         private int Wave = 0;
 
         [Inject]
-        private void Construct(CurrencyModel currencyModel, GameGrid grid, CastleDefense castle, GameControlModel gameModel, StatManager statManager)
+        private void Construct(CurrencyModel currencyModel, GameGrid grid, CastleDefense castle, GameControlModel gameModel, StatManager statManager, InputManager inputManager)
         {
             CurrencyModel = currencyModel;
             Grid = grid;
             Castle = castle;
             GameModel = gameModel;
             StatManager = statManager;
+            InputManager = inputManager;
         }
 
         private void Awake()
@@ -168,7 +170,7 @@ namespace Enemies
         {
             var enemy = PoolManager.Instance.GetFromPool<Enemy>(enemyType);
             enemy.gameObject.SetActive(false);
-            enemy.Init();
+            enemy.Init(InputManager);
             enemy.transform.position = parent.position;
             enemy.OnDeath += GetGoldFromEnemy;
             Enemies.Add(enemy);
