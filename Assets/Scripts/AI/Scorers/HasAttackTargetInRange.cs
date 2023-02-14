@@ -1,6 +1,5 @@
 using AI;
 using Apex.AI;
-using Enemies;
 
 public class HasAttackTargetInRange : ContextualScorerBase
 {
@@ -14,11 +13,5 @@ public class HasAttackTargetInRange : ContextualScorerBase
         if (!enemy.IsAttackTargetInRange) return 0;
 
         return 100;
-    }
-
-    private bool IsNotInAttackRange(Enemy enemy)
-    {
-        var result = (enemy.AttackTarget.Position - enemy.Position).sqrMagnitude > enemy.AttackRange * enemy.AttackRange;
-        return result;
     }
 }

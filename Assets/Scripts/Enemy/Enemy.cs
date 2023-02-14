@@ -179,8 +179,10 @@ namespace Enemies
             }
         }
 
-        private void Death()
+        public void Death()
         {
+            IsAttackTargetInRange = false;
+            AttackTarget = null;
             DamageReceiver.OnDeath -= Death;
             fx.gameObject.SetActive(true);
         }
@@ -195,6 +197,8 @@ namespace Enemies
         private void ResetTarget()
         {
             AIManager.Instance.RemoveObservation(AttackTarget);
+            if (AttackTarget == null) return;
+            
             AttackTarget.Defense.OnDeath -= ResetTarget;
             AttackTarget = null;
         }

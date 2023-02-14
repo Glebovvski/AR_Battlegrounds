@@ -142,6 +142,7 @@ namespace Enemies
 
         public void RemoveObservation(Observation observation)
         {
+            if (observation == null) return;
             if (Observations.Any(x => x.Equals(observation)))
                 Observations.Remove(observation);
         }
@@ -225,6 +226,7 @@ namespace Enemies
         {
             foreach (var enemy in Enemies)
             {
+                enemy.Death();
                 PoolManager.Instance.ReturnToPool(enemy.GameObject, enemy.Type);
             }
             Enemies.Clear();
