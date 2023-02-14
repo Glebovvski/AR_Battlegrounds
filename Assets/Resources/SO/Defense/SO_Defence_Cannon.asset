@@ -15,7 +15,7 @@ MonoBehaviour:
   Name: Cannon
   Image: {fileID: 21300000, guid: 8be37592c501e7d47908ec7cfcb2b789, type: 3}
   Price: 250
-  Health: 25
+  Health: 150
   IsActiveDefense: 1
   AttackForce: 20
   AttackRange: 100

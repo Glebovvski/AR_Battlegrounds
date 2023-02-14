@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641234, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4547,7 +4547,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.35700002, y: 0.24259262}
   m_AnchorMax: {x: 0.64483345, y: 0.80740744}
-  m_AnchoredPosition: {x: -1.5, y: -1.6847839}
+  m_AnchoredPosition: {x: -1.5, y: -1.6848145}
   m_SizeDelta: {x: -1.34021, y: 6.6884155}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &926278263
@@ -5180,7 +5180,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   planeManager: {fileID: 1243855130}
   maxWaves: 1
-  maxBaseEnemies: 15
+  maxBaseEnemies: 25
   maxBullEnemies: 5
   maxHealerEnemies: 5
   maxSpyEnemies: 5

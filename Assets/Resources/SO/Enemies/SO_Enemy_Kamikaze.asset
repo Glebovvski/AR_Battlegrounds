@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddeb0851e15c012489c89e8b3b85f429, type: 3}
   m_Name: SO_Enemy_Kamikaze
   m_EditorClassIdentifier: 
-  Health: 50
-  AttackForce: 5
+  Health: 250
+  AttackForce: 100
   GoldToDrop: 40
-  Speed: 5
+  Speed: 7
   ScanRange: 25
   AttackRange: 2
   AttackRadius: 1
   TimeBetweenAttacks: 0
-  AttackWallScore: 0
+  AttackWallScore: 15
   AttackCannonScore: 10
   AttackLaserScore: 20
   AttackCastleScore: 50

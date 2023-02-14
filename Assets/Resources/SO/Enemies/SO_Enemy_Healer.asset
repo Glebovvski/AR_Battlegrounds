@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddeb0851e15c012489c89e8b3b85f429, type: 3}
   m_Name: SO_Enemy_Healer
   m_EditorClassIdentifier: 
-  Health: 100
+  Health: 600
   AttackForce: 20
-  GoldToDrop: 45
+  GoldToDrop: 1500
   Speed: 5
   ScanRange: 70
   AttackRange: 3

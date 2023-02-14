@@ -15,7 +15,7 @@ MonoBehaviour:
   Name: Laser
   Image: {fileID: 21300000, guid: 4ccb92625509a0248bee2a166342e516, type: 3}
   Price: 700
-  Health: 25
+  Health: 300
   IsActiveDefense: 1
   AttackForce: 100
   AttackRange: 20

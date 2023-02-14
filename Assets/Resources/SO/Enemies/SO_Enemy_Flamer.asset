@@ -13,17 +13,17 @@ MonoBehaviour:
   m_Name: SO_Enemy_Flamer
   m_EditorClassIdentifier: 
   Health: 200
-  AttackForce: 100
-  GoldToDrop: 400
-  Speed: 2
+  AttackForce: 75
+  GoldToDrop: 1000
+  Speed: 1
   ScanRange: 10
   AttackRange: 10
   AttackRadius: 15
   TimeBetweenAttacks: 2
-  AttackWallScore: 100
-  AttackCannonScore: 300
-  AttackLaserScore: 500
-  AttackCastleScore: 600
+  AttackWallScore: 60
+  AttackCannonScore: 60
+  AttackLaserScore: 60
+  AttackCastleScore: 100
   AttackTrapScore: 100
   EnemyType: 0
   Type: 205

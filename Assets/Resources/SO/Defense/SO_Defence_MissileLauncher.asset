@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Missile Launcher
   Image: {fileID: 21300000, guid: e2acc2835432868498776b594f68f65c, type: 3}
-  Price: 1000
-  Health: 40
+  Price: 1500
+  Health: 500
   IsActiveDefense: 1
   AttackForce: 50
   AttackRange: 40
-  ReloadTime: 3
+  ReloadTime: 10
   ProjectileSpeed: 10
   RotationSpeed: 10
   Size: {x: 2, y: 2}

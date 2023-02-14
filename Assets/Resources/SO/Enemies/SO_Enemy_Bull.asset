@@ -12,16 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddeb0851e15c012489c89e8b3b85f429, type: 3}
   m_Name: SO_Enemy_Bull
   m_EditorClassIdentifier: 
-  Health: 100
-  AttackForce: 40
-  GoldToDrop: 500
+  Health: 350
+  AttackForce: 50
+  GoldToDrop: 700
   Speed: 1
   ScanRange: 25
   AttackRange: 1.5
   AttackRadius: 1
   TimeBetweenAttacks: 5
-  AttackWallScore: 5
-  AttackCannonScore: 10
+  AttackWallScore: 15
+  AttackCannonScore: 15
   AttackLaserScore: 30
   AttackCastleScore: 60
   AttackTrapScore: 0

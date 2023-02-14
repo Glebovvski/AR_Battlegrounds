@@ -15,12 +15,13 @@ MonoBehaviour:
   Name: Castle
   Image: {fileID: 0}
   Price: 0
-  Health: 500
+  Health: 3000
   IsActiveDefense: 0
   AttackForce: 0
   AttackRange: 0
   ReloadTime: 0
   ProjectileSpeed: 0
+  RotationSpeed: 0
   Size: {x: 2, y: 2}
   Condition: 0
   PoolType: 103

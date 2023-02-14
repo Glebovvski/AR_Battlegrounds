@@ -389,7 +389,8 @@ namespace Grid
             int centreX = Width / 2;
             int centreY = gridType == GridType.Circle ? Width / 2 : Length / 2;
             var gridCell1 = grid[centreX][centreY];
-            var gridCell2 = gridType == GridType.Rectangle ? grid[centreX][centreY + 1] : grid[centreX][centreY - 1];
+            // var gridCell2 = gridType == GridType.Rectangle ? grid[centreX][centreY + 1] : grid[centreX][centreY - 1];
+            var gridCell2 = grid[centreX][centreY + 1];
             var gridCell3 = grid[centreX + 1][centreY];
             var gridCell4 = grid[centreX + 1][centreY + 1];
 
