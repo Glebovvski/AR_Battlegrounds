@@ -2,13 +2,16 @@ using UnityEngine;
 using System;
 using Zenject;
 using ViewModels;
+using Models;
 
 namespace Views
 {
     public class TutorialView : MonoBehaviour
     {
         private TutorialViewModel ViewModel { get; set; }
+        private MenuViewModel MenuViewModel { get; set; }
 
+        [SerializeField] private GameObject panel;
         [SerializeField] private PositionTextDictionary texts;
 
         private bool IsClickedOnTutorial => Input.GetMouseButtonDown(0) || IsTouched;
@@ -24,16 +27,26 @@ namespace Views
         }
 
         [Inject]
-        private void Construct(TutorialViewModel tutorialViewModel)
+        private void Construct(TutorialViewModel tutorialViewModel, MenuViewModel menuViewModel)
         {
             ViewModel = tutorialViewModel;
+            MenuViewModel = menuViewModel;
         }
 
         private void Start()
         {
+            MenuViewModel.OnClose += CheckTutorialState;
             ViewModel.OnTutorialStart += Open;
             ViewModel.OnStepSet += StartTutorialStep;
             ViewModel.OnTutorialEnd += Close;
+        }
+
+        private void CheckTutorialState()
+        {
+            if (ViewModel.IsTutorialComplete)
+                Close();
+            else
+                Open();
         }
 
         private void StartTutorialStep(string text, TutorialPlacement placement)
@@ -55,12 +68,12 @@ namespace Views
 
         private void Open()
         {
-            this.gameObject.SetActive(true);
+            panel.SetActive(true);
         }
 
         private void Close()
         {
-            this.gameObject.SetActive(false);
+            panel.SetActive(false);
         }
 
         private void Update()

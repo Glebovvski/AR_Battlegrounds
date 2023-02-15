@@ -9,6 +9,8 @@ namespace ViewModels
     {
         private TutorialModel TutorialModel { get; set; }
 
+        public bool IsTutorialComplete => TutorialModel.IsTutorialCompleted;
+
         [Inject]
         private void Construct(TutorialModel tutorialModel)
         {

@@ -135,6 +135,7 @@ namespace Grid
             SelectedDefense = null;
         }
 
+        public event Action OnDefenseSet;
         public void SpawnDefence(GridCell cell)
         {
             if (SelectedDefense == null) return;
@@ -162,6 +163,8 @@ namespace Grid
             CurrencyModel.Buy(SelectedDefense.Price);
             if (CurrencyModel.Gold >= SelectedDefense.Price)
                 SelectDefense(SelectedDefense);
+
+            OnDefenseSet?.Invoke();
         }
 
         private void UpdateStats()
