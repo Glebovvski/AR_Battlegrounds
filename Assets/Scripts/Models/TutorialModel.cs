@@ -1,4 +1,5 @@
 using System;
+using Grid;
 using Managers;
 using UnityEngine;
 using ViewModels;
@@ -12,13 +13,14 @@ namespace Models
         private PlaneManager PlaneManager { get; set; }
         private MenuViewModel MenuViewModel { get; set; }
         private TutorialViewModel TutorialViewModel { get; set; }
+        private GameGrid Grid { get; set; }
 
         private const string isTutorialCompletedKey = "IsTutorialCompleted";
 
         private bool stepOneInited = false;
         private bool stepTwoInited = false;
         private bool stepThreeInited = false;
-        private bool controlStepsFinished = false;
+        private bool stepFourInited = false;
 
         private bool isTutorialCompleted = false;
         public bool IsTutorialCompleted
@@ -35,30 +37,42 @@ namespace Models
         private Action[] simpleTutorialSteps;
 
         [Inject]
-        private void Construct(PlaneManager planeManager, MenuViewModel menuViewModel, TutorialViewModel tutorialViewModel)
+        private void Construct(PlaneManager planeManager, MenuViewModel menuViewModel, TutorialViewModel tutorialViewModel, GameGrid grid)
         {
             PlaneManager = planeManager;
             MenuViewModel = menuViewModel;
             TutorialViewModel = tutorialViewModel;
+            Grid = grid;
         }
 
         public void Initialize()
         {
-            IsTutorialCompleted = false;
+            if (IsTutorialCompleted)
+            {
+                CompleteTutorial();
+                return;
+            }
+
+            StartTutorial();
 #if !UNITY_EDITOR
         MenuViewModel.OnClose += InitStepOne;
         PlaneManager.OnPlanesChanged += InitStepTwo;
         PlaneManager.OnGridSet += InitStepThree;
+        Grid.OnDefenseSet += InitStepFour;
 #endif
             simpleTutorialStepIndex = 0;
             simpleTutorialSteps = new Action[]
             {
-            InitStepFour,
             InitStepFive,
             InitStepSix
             };
 
             TutorialViewModel.OnTutorialClick += InitSimpleStep;
+        }
+
+        private void StartTutorial()
+        {
+            TutorialViewModel.StartTutorial();
         }
 
         public event Action<string, TutorialPlacement> OnStepInited;
@@ -87,8 +101,10 @@ namespace Models
         public void InitStepFour()
         {
             if (!stepThreeInited) return;
+            if (stepFourInited) return;
             if (IsTutorialCompleted) return;
             OnStepInited?.Invoke("Your current money count is displayed here", TutorialPlacement.UpperLeft);
+            stepFourInited = true;
         }
         public void InitStepFive()
         {
