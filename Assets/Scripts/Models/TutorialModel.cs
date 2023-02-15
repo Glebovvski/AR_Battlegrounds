@@ -54,12 +54,11 @@ namespace Models
             }
 
             StartTutorial();
-#if !UNITY_EDITOR
-        MenuViewModel.OnClose += InitStepOne;
-        PlaneManager.OnPlanesChanged += InitStepTwo;
-        PlaneManager.OnGridSet += InitStepThree;
-        Grid.OnDefenseSet += InitStepFour;
-#endif
+
+            MenuViewModel.OnClose += InitStepOne;
+            PlaneManager.OnPlanesChanged += InitStepTwo;
+            PlaneManager.OnGridSet += InitStepThree;
+            Grid.OnDefenseSet += InitStepFour;
             simpleTutorialStepIndex = 0;
             simpleTutorialSteps = new Action[]
             {
