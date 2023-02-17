@@ -23,12 +23,16 @@ namespace Models
 
         public CurrencyModel()
         {
-            Gold = PlayerPrefs.GetInt("Gold", 2000);
+            Gold = PlayerPrefs.GetInt("Gold", 10000);
         }
 
-        public void Buy(int price)
+        public bool TryBuy(int price)
         {
+            if (price > Gold)
+                return false;
+
             Gold -= price;
+            return true;
         }
 
         public void AddGold(int value)

@@ -74,6 +74,7 @@ namespace Models
 
             if (Time.time - lastDropTime > CurrencyModel.SecondsToDropGold)
             {
+                var gold = Mathf.Clamp(CurrencyModel.Gold, 1, CurrencyModel.Gold);
                 CurrencyModel.AddGold(Mathf.RoundToInt(CurrencyModel.Gold * CurrencyModel.GoldPercent / 100f));
                 lastDropTime = Time.time;
             }

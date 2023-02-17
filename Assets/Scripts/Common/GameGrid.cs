@@ -139,6 +139,9 @@ namespace Grid
         public void SpawnDefence(GridCell cell)
         {
             if (SelectedDefense == null) return;
+            var purchaseResult = CurrencyModel.TryBuy(SelectedDefense.Price);
+            if (purchaseResult == false)
+                return;
 
             var defense = PoolManager.Instance.GetFromPool<Defense>(SelectedDefense.PoolType);
             defense.Init(SelectedDefense);
@@ -160,7 +163,6 @@ namespace Grid
                 defense.transform.position = GetWorldPositionFromGrid(centre, height);
                 selectedPair.ForEach(x => x.SetDefense(defense));
             }
-            CurrencyModel.Buy(SelectedDefense.Price);
             if (CurrencyModel.Gold >= SelectedDefense.Price)
                 SelectDefense(SelectedDefense);
 
