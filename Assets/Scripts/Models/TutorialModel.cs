@@ -58,12 +58,13 @@ namespace Models
             MenuViewModel.OnClose += InitStepOne;
             PlaneManager.OnPlanesChanged += InitStepTwo;
             PlaneManager.OnGridSet += InitStepThree;
-            Grid.OnDefenseSet += InitStepFour;
+
             simpleTutorialStepIndex = 0;
             simpleTutorialSteps = new Action[]
             {
-            InitStepFive,
-            InitStepSix
+                InitStepFour,
+                InitStepFive,
+                InitStepSix
             };
 
             TutorialViewModel.OnTutorialClick += InitSimpleStep;
@@ -99,10 +100,8 @@ namespace Models
         }
         public void InitStepFour()
         {
-            if (stepFourInited) return;
             if (IsTutorialCompleted) return;
             OnStepInited?.Invoke("Your current money count is displayed here", TutorialPlacement.UpperLeft);
-            stepFourInited = true;
         }
         public void InitStepFive()
         {
@@ -116,9 +115,15 @@ namespace Models
         }
         public void InitSimpleStep()
         {
-            if (stepFourInited) return;
+            if (
+                !stepOneInited ||
+                !stepTwoInited ||
+                !stepThreeInited
+                )
+                return;
+
             if (IsTutorialCompleted) return;
-            
+
             if (simpleTutorialStepIndex >= simpleTutorialSteps.Length)
             {
                 CompleteTutorial();
