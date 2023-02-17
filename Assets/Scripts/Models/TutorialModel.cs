@@ -99,7 +99,6 @@ namespace Models
         }
         public void InitStepFour()
         {
-            if (!stepThreeInited) return;
             if (stepFourInited) return;
             if (IsTutorialCompleted) return;
             OnStepInited?.Invoke("Your current money count is displayed here", TutorialPlacement.UpperLeft);
@@ -117,7 +116,9 @@ namespace Models
         }
         public void InitSimpleStep()
         {
+            if (stepFourInited) return;
             if (IsTutorialCompleted) return;
+            
             if (simpleTutorialStepIndex >= simpleTutorialSteps.Length)
             {
                 CompleteTutorial();
