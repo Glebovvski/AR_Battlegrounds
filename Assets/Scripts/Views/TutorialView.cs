@@ -2,7 +2,6 @@ using UnityEngine;
 using System;
 using Zenject;
 using ViewModels;
-using Models;
 
 namespace Views
 {

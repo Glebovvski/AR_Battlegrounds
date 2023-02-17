@@ -88,7 +88,6 @@ namespace Managers
 #elif UNITY_EDITOR
         Grid.CreateGrid();
         GridCreated = true;
-
 #endif
         }
 
