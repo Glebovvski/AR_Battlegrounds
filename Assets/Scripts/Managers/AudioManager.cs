@@ -36,6 +36,7 @@ namespace Managers
 
         private void SetDefenseSound(Defense defense)
         {
+            Play(ui);
             defense.OnDeath += () => Play(destroy_defense);
         }
 
@@ -49,8 +50,6 @@ namespace Managers
             enemy.OnDeath += (enemy) => Play(destroy_enemy);
             if (type == PoolObjectType.KamikazeEnemy)
                 ((KamikazeEnemy)enemy).OnExplode += () => Play(explosion);
-            if (type == PoolObjectType.FlamerEnemy)
-                ((FlamerEnemy)enemy).OnStartAttack += () => Play(fire);
         }
 
         private void ResetEnemySounds(Enemy enemy, PoolObjectType type)
@@ -58,8 +57,6 @@ namespace Managers
             enemy.OnDeath -= (enemy) => Play(destroy_enemy);
             if (type == PoolObjectType.KamikazeEnemy)
                 ((KamikazeEnemy)enemy).OnExplode -= () => Play(explosion);
-            if (type == PoolObjectType.FlamerEnemy)
-                ((FlamerEnemy)enemy).OnStartAttack -= () => Play(fire);
         }
 
         private void Play(AudioClip clip) => source.PlayOneShot(clip);
