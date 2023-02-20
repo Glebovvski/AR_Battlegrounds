@@ -8,7 +8,6 @@ namespace Managers
 {
     public class AudioManager : MonoBehaviour
     {
-        private AIManager AIManager { get; set; }
         private GameGrid Grid { get; set; }
 
         [SerializeField] private AudioSource source;
@@ -19,16 +18,15 @@ namespace Managers
         [SerializeField] private AudioClip destroy_defense;
 
         [Inject]
-        private void Construct(AIManager aiManager, GameGrid grid)
+        private void Construct(GameGrid grid)
         {
-            AIManager = aiManager;
             Grid = grid;
         }
 
         private void Start()
         {
-            AIManager.OnEnemySpawn += SetEnemySounds;
-            AIManager.OnEnemyKilled += ResetEnemySounds;
+            AIManager.Instance.OnEnemySpawn += SetEnemySounds;
+            AIManager.Instance.OnEnemyKilled += ResetEnemySounds;
 
             Grid.OnDefenseSet += SetDefenseSound;
             Grid.OnResetDefense += ResetDefenseSound;
@@ -68,8 +66,8 @@ namespace Managers
 
         private void OnDestroy()
         {
-            AIManager.OnEnemySpawn -= SetEnemySounds;
-            AIManager.OnEnemyKilled -= ResetEnemySounds;
+            AIManager.Instance.OnEnemySpawn -= SetEnemySounds;
+            AIManager.Instance.OnEnemyKilled -= ResetEnemySounds;
         }
     }
 }
