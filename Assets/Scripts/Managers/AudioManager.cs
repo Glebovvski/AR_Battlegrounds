@@ -1,72 +1,75 @@
-using System;
 using Defendable;
 using Enemies;
 using Grid;
-using Managers;
 using UnityEngine;
 using Zenject;
 
-public class AudioManager : MonoBehaviour
+namespace Managers
 {
-    private AIManager AIManager { get; set; }
-    private GameGrid Grid { get; set; }
-
-    [SerializeField] private AudioSource source;
-    [SerializeField] private AudioClip ui;
-    [SerializeField] private AudioClip explosion;
-    [SerializeField] private AudioClip fire;
-    [SerializeField] private AudioClip destroy_enemy;
-    [SerializeField] private AudioClip destroy_defense;
-
-    [Inject]
-    private void Construct(AIManager aiManager, GameGrid grid)
+    public class AudioManager : MonoBehaviour
     {
-        AIManager = aiManager;
-        Grid = grid;
-    }
+        private AIManager AIManager { get; set; }
+        private GameGrid Grid { get; set; }
 
-    private void Start()
-    {
-        AIManager.OnEnemySpawn += SetEnemySounds;
-        AIManager.OnEnemyKilled += ResetEnemySounds;
+        [SerializeField] private AudioSource source;
+        [SerializeField] private AudioClip ui;
+        [SerializeField] private AudioClip explosion;
+        [SerializeField] private AudioClip fire;
+        [SerializeField] private AudioClip destroy_enemy;
+        [SerializeField] private AudioClip destroy_defense;
 
-        Grid.OnDefenseSet += SetDefenseSound;
-        Grid.OnResetDefense += ResetDefenseSound;
-    }
+        [Inject]
+        private void Construct(AIManager aiManager, GameGrid grid)
+        {
+            AIManager = aiManager;
+            Grid = grid;
+        }
 
-    private void SetDefenseSound(Defense defense)
-    {
-        defense.OnDeath += () => Play(destroy_defense);
-    }
+        private void Start()
+        {
+            AIManager.OnEnemySpawn += SetEnemySounds;
+            AIManager.OnEnemyKilled += ResetEnemySounds;
 
-    private void ResetDefenseSound(Defense defense)
-    {
-        defense.OnDeath -= () => Play(destroy_defense);
-    }
+            Grid.OnDefenseSet += SetDefenseSound;
+            Grid.OnResetDefense += ResetDefenseSound;
+        }
 
-    private void SetEnemySounds(Enemy enemy, PoolObjectType type)
-    {
-        enemy.OnDeath += (enemy) => Play(destroy_enemy);
-        if (type == PoolObjectType.KamikazeEnemy)
-            ((KamikazeEnemy)enemy).OnExplode += () => Play(explosion);
-        if (type == PoolObjectType.FlamerEnemy)
-            ((FlamerEnemy)enemy).OnStartAttack += () => Play(fire);
-    }
+        public void PlayUI() => Play(ui);
 
-    private void ResetEnemySounds(Enemy enemy, PoolObjectType type)
-    {
-        enemy.OnDeath -= (enemy) => Play(destroy_enemy);
-        if (type == PoolObjectType.KamikazeEnemy)
-            ((KamikazeEnemy)enemy).OnExplode -= () => Play(explosion);
-        if (type == PoolObjectType.FlamerEnemy)
-            ((FlamerEnemy)enemy).OnStartAttack -= () => Play(fire);
-    }
+        private void SetDefenseSound(Defense defense)
+        {
+            defense.OnDeath += () => Play(destroy_defense);
+        }
 
-    private void Play(AudioClip clip) => source.PlayOneShot(clip);
+        private void ResetDefenseSound(Defense defense)
+        {
+            defense.OnDeath -= () => Play(destroy_defense);
+        }
 
-    private void OnDestroy()
-    {
-        AIManager.OnEnemySpawn -= SetEnemySounds;
-        AIManager.OnEnemyKilled -= ResetEnemySounds;
+        private void SetEnemySounds(Enemy enemy, PoolObjectType type)
+        {
+            enemy.OnDeath += (enemy) => Play(destroy_enemy);
+            if (type == PoolObjectType.KamikazeEnemy)
+                ((KamikazeEnemy)enemy).OnExplode += () => Play(explosion);
+            if (type == PoolObjectType.FlamerEnemy)
+                ((FlamerEnemy)enemy).OnStartAttack += () => Play(fire);
+        }
+
+        private void ResetEnemySounds(Enemy enemy, PoolObjectType type)
+        {
+            enemy.OnDeath -= (enemy) => Play(destroy_enemy);
+            if (type == PoolObjectType.KamikazeEnemy)
+                ((KamikazeEnemy)enemy).OnExplode -= () => Play(explosion);
+            if (type == PoolObjectType.FlamerEnemy)
+                ((FlamerEnemy)enemy).OnStartAttack -= () => Play(fire);
+        }
+
+        private void Play(AudioClip clip) => source.PlayOneShot(clip);
+
+        private void OnDestroy()
+        {
+            AIManager.OnEnemySpawn -= SetEnemySounds;
+            AIManager.OnEnemyKilled -= ResetEnemySounds;
+        }
     }
 }

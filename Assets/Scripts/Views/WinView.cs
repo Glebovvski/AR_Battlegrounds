@@ -4,12 +4,14 @@ using Zenject;
 using UnityEngine.UI;
 using System;
 using ViewModels;
+using Managers;
 
 namespace Views
 {
     public class WinView : MonoBehaviour
     {
         private WinViewModel WinViewModel { get; set; }
+        private AudioManager AudioManager { get; set; }
 
         [SerializeField] private GameObject WinPanel;
 
@@ -31,9 +33,10 @@ namespace Views
         [SerializeField] private Button MenuBtn;
 
         [Inject]
-        private void Construct(WinViewModel winViewModel)
+        private void Construct(WinViewModel winViewModel, AudioManager audioManager)
         {
             WinViewModel = winViewModel;
+            AudioManager = audioManager;
         }
 
         private void Start()
@@ -54,6 +57,7 @@ namespace Views
 
         private void CloseWinScreen()
         {
+            AudioManager.PlayUI();
             Reset();
             WinPanel.SetActive(false);
         }
