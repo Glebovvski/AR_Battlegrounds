@@ -166,6 +166,9 @@ namespace Enemies
 
         public List<Observation> GetActiveDefenses(DefenseType except = DefenseType.None) => Observations.Where(x => x.Defense.IsActiveDefense && x.Defense.Type != except).ToList();
 
+
+        public event Action<Enemy, PoolObjectType> OnEnemySpawn;
+
         public Enemy RegisterEnemy(PoolObjectType enemyType, Transform parent)
         {
             var enemy = PoolManager.Instance.GetFromPool<Enemy>(enemyType);
@@ -175,11 +178,14 @@ namespace Enemies
             enemy.OnDeath += GetGoldFromEnemy;
             Enemies.Add(enemy);
             enemy.gameObject.SetActive(true);
+            OnEnemySpawn?.Invoke(enemy, enemyType);
             return enemy;
         }
 
+        public event Action<Enemy, PoolObjectType> OnEnemyKilled;
         public void UnregisterEnemy(Enemy enemy)
         {
+            OnEnemyKilled?.Invoke(enemy, enemy.Type);
             Enemies.Remove(enemy);
             PoolManager.Instance.ReturnToPool(enemy.GameObject, enemy.Type);
             StatManager.AddEnemiesKilled();

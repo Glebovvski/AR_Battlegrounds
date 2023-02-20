@@ -135,7 +135,7 @@ namespace Grid
             SelectedDefense = null;
         }
 
-        public event Action OnDefenseSet;
+        public event Action<Defense> OnDefenseSet;
         public void SpawnDefence(GridCell cell)
         {
             if (SelectedDefense == null) return;
@@ -146,6 +146,7 @@ namespace Grid
             var defense = PoolManager.Instance.GetFromPool<Defense>(SelectedDefense.PoolType);
             defense.Init(SelectedDefense);
             defense.OnDeath += UpdateStats;
+            defense.OnDefenseDestroy += ResetDefense;
             if (defense.GetSize() == Vector2Int.one)
             {
                 var position = new Vector2(cell.transform.position.x, cell.transform.position.z);
@@ -166,7 +167,15 @@ namespace Grid
             if (CurrencyModel.Gold >= SelectedDefense.Price)
                 SelectDefense(SelectedDefense);
 
-            OnDefenseSet?.Invoke();
+            OnDefenseSet?.Invoke(defense);
+        }
+
+
+        public event Action<Defense> OnResetDefense;
+        private void ResetDefense(Defense defense)
+        {
+            defense.OnDeath -= UpdateStats;
+            OnResetDefense?.Invoke(defense);
         }
 
         private void UpdateStats()

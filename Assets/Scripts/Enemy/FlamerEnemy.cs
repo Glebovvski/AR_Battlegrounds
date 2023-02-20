@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Defendable;
 using UnityEngine;
@@ -23,8 +24,10 @@ namespace Enemies
             }
         }
 
+        public event Action OnStartAttack;
         public void StartAttack()
         {
+            OnStartAttack?.Invoke();
             transform.LookAt(AttackTarget.Defense.transform);
             startAttackTime = Time.time;
             fire.SetActive(true);

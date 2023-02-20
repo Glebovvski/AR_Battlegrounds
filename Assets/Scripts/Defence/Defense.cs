@@ -38,6 +38,7 @@ namespace Defendable
         public event Action OnDefenseSet;
 
         public virtual event Action OnDeath;
+        public virtual event Action<Defense> OnDefenseDestroy;
 
         [Inject]
         private void Construct(StatManager statManager)
@@ -82,6 +83,7 @@ namespace Defendable
 
         protected virtual void Death()
         {
+            OnDefenseDestroy?.Invoke(this);
             defenseMesh.SetActive(false);
             destroyFX.gameObject.SetActive(true);
         }

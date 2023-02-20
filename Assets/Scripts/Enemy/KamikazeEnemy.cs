@@ -1,3 +1,4 @@
+using System;
 using Apex.AI.Components;
 using CartoonFX;
 using Defendable;
@@ -26,8 +27,10 @@ namespace Enemies
                 Explode();
         }
 
+        public event Action OnExplode;
         private void Explode()
         {
+            OnExplode?.Invoke();
             aiClient.Pause();
             NavMeshAgent.enabled = false;
             goblinMesh.SetActive(false);
