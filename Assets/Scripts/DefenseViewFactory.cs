@@ -1,3 +1,4 @@
+using Managers;
 using Models;
 using UnityEngine;
 using ViewModels;
@@ -8,13 +9,15 @@ public class DefenseViewFactory : PlaceholderFactory<DefenseView>
 {
     private CurrencyModel CurrencyModel { get; set; }
     private DefensesModel DefensesModel { get; set; }
+    private AudioManager AudioManager { get; set; }
 
 
     [Inject]
-    private void Construct(CurrencyModel currencyModel, DefensesModel defensesModel)
+    private void Construct(CurrencyModel currencyModel, DefensesModel defensesModel, AudioManager audioManager)
     {
         CurrencyModel = currencyModel;
         DefensesModel = defensesModel;
+        AudioManager = audioManager;
     }
 
     public DefenseView CreateDefenseView(ScriptableDefense defense, DefenseView prefab, Transform parent)
@@ -23,7 +26,7 @@ public class DefenseViewFactory : PlaceholderFactory<DefenseView>
 
         var view = GameObject.Instantiate(prefab, parent);
         DefenseViewModel vm = new DefenseViewModel(defense, view, CurrencyModel, DefensesModel);
-        view.Init(defense.Price.ToString(), defense.Image);
+        view.Init(defense.Price.ToString(), defense.Image, AudioManager);
         return view;
     }
 }

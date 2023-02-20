@@ -18,14 +18,9 @@ namespace Views
 
         public event Action OnDefenseSelected;
 
-        [Inject]
-        private void Construct(AudioManager audioManager)
+        public void Init(string Price, Sprite Image, AudioManager audioManager)
         {
             AudioManager = audioManager;
-        }
-
-        public void Init(string Price, Sprite Image)
-        {
             price.text = Price;
             image.sprite = Image;
             button.onClick.AddListener(SelectDefence);
