@@ -81,7 +81,7 @@ namespace Models
         {
             if (stepOneInited) return;
             if (IsTutorialCompleted) return;
-            OnStepInited?.Invoke("Move your phone around until the plane appears", TutorialPlacement.UpperCentre);
+            OnStepInited?.Invoke("Wait a little until camera detects AR plane", TutorialPlacement.UpperCentre);
             stepOneInited = true;
         }
         public void InitStepTwo()
