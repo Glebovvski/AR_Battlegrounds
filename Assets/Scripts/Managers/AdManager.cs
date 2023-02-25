@@ -49,6 +49,8 @@ namespace Managers
 
         private void ShowInterstitialAd()
         {
+            if(interstitialAd == null) return;
+            
             if (interstitialAd.CanShowAd() && CanShowAd)
                 interstitialAd.Show();
         }
@@ -56,7 +58,7 @@ namespace Managers
         private void RequestBanner()
         {
 #if UNITY_ANDROID
-        string adUnitId = "ca-app-pub-2564312810103530/2073703808";
+            string adUnitId = "ca-app-pub-2564312810103530/8287739858";
 #elif UNITY_IPHONE
             string adUnitId = "ca-app-pub-2564312810103530/7469269205";
 #endif
@@ -69,7 +71,7 @@ namespace Managers
         private void RequestInterstitial()
         {
 #if UNITY_ANDROID
-        string adUnitId = "ca-app-pub-2564312810103530/3111453302";
+            string adUnitId = "ca-app-pub-2564312810103530/3111453302";
 #elif UNITY_IPHONE
             string adUnitId = "ca-app-pub-2564312810103530~3588582562";
 #else
@@ -82,6 +84,8 @@ namespace Managers
 
         private void InterstitialAdCallback(InterstitialAd ad, LoadAdError error)
         {
+            if (ad == null) return;
+
             interstitialAd = ad;
             interstitialAd.OnAdFullScreenContentClosed += RequestInterstitial;
             interstitialAd.OnAdFullScreenContentClosed += HandleInterstitialClosed;

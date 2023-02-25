@@ -19,9 +19,9 @@ MonoBehaviour:
   IsActiveDefense: 1
   AttackForce: 50
   AttackRange: 40
-  ReloadTime: 10
+  ReloadTime: 7
   ProjectileSpeed: 10
-  RotationSpeed: 10
+  RotationSpeed: 3
   Size: {x: 2, y: 2}
   Condition: 1
   PoolType: 105

@@ -1461,11 +1461,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Always ask a grown-up before using the AR Tower Battlegrounds app. Watch
-    out out for other people when using AR Tower Battlegrounds and be aware of your
-    surroundings.\r \n\nFor better experience play AR Tower Battlegrounds at home\n\r\nParents
-    and guardians please note: whilst using Augmented Reality there is a tendency
-    for users to step backwards."
+  m_text: "Always ask a grown-up before using the Tower Defense AR app. Watch out
+    out for other people when using Tower Defense AR and be aware of your surroundings.\r
+    \n\nFor better experience play Tower Defense AR at home\n\r\nParents and guardians
+    please note: whilst using Augmented Reality there is a tendency for users to
+    step backwards."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5579,7 +5579,7 @@ MonoBehaviour:
   maxWaves: 1
   maxBaseEnemies: 25
   maxBullEnemies: 5
-  maxHealerEnemies: 5
+  maxHealerEnemies: 2
   maxSpyEnemies: 5
   maxKamikazeEnemies: 10
   maxFlamerEnemies: 5
