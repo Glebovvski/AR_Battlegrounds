@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SO_Enemy_Healer
   m_EditorClassIdentifier: 
   Health: 600
-  AttackForce: 10
+  AttackForce: 20
   GoldToDrop: 1500
   Speed: 5
   ScanRange: 70
