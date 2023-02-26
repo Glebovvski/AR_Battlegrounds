@@ -49,6 +49,8 @@ namespace Managers
 
         private void ShowInterstitialAd()
         {
+            if(interstitialAd == null) return;
+
             if (interstitialAd.CanShowAd() && CanShowAd)
                 interstitialAd.Show();
         }
@@ -82,6 +84,8 @@ namespace Managers
 
         private void InterstitialAdCallback(InterstitialAd ad, LoadAdError error)
         {
+            if(ad == null) return;
+
             interstitialAd = ad;
             interstitialAd.OnAdFullScreenContentClosed += RequestInterstitial;
             interstitialAd.OnAdFullScreenContentClosed += HandleInterstitialClosed;
