@@ -18,12 +18,6 @@ namespace Managers
         public static string donation = "donation";
         public static string noAds = "noads";
 
-        // Apple App Store-specific product identifier for the subscription product.
-        private static string kProductNameAppleSubscription = "com.unity3d.subscription.new";
-
-        // Google Play Store-specific product identifier subscription product.
-        private static string kProductNameGooglePlaySubscription = "com.unity3d.subscription.original";
-
         [Inject]
         private void Construct(AdManager adManager, CurrencyModel currencyModel)
         {
