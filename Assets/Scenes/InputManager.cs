@@ -4,12 +4,15 @@ using Enemies;
 using Grid;
 using Models;
 using UnityEngine;
+using ViewModels;
 using Zenject;
 
 public class InputManager : MonoBehaviour
 {
     private DefensesModel DefensesModel { get; set; }
     private GameGrid Grid { get; set; }
+    private MenuViewModel MenuViewModel { get; set; }
+
     private LayerMask GridLayer;
     private LayerMask DefenseLayer;
     private LayerMask EnemyLayer;
@@ -34,10 +37,11 @@ public class InputManager : MonoBehaviour
     }
 
     [Inject]
-    private void Construct(GameGrid gameGrid, DefensesModel defensesModel)
+    private void Construct(GameGrid gameGrid, DefensesModel defensesModel, MenuViewModel menuViewModel)
     {
         DefensesModel = defensesModel;
         Grid = gameGrid;
+        MenuViewModel = menuViewModel;
     }
 
     private void Start()
@@ -49,35 +53,36 @@ public class InputManager : MonoBehaviour
 
     private void Update()
     {
-
+        if (MenuViewModel.IsMenuOpen) return;
+        
 #if UNITY_EDITOR
-        if (Input.GetMouseButtonDown(0))
-        {
-            var cell = GetObjectOnScene<GridCell>(GridLayer);
-            if (!TrySpawnOnCell(cell))
+            if (Input.GetMouseButtonDown(0))
             {
-                if (DefensesModel.InDefenseSelectionMode) return;
-
-                var defense = GetObjectOnScene<ActiveDefense>(DefenseLayer);
-                if ((!defense || !defense.IsActiveDefense) && !SelectedDefense) return;
-                if (SelectedDefense != defense && defense)
+                var cell = GetObjectOnScene<GridCell>(GridLayer);
+                if (!TrySpawnOnCell(cell))
                 {
-                    SelectedDefense = defense;
-                    return;
-                }
+                    if (DefensesModel.InDefenseSelectionMode) return;
 
-                if (SelectedDefense)
-                {
-                    var enemy = GetObjectOnScene<Enemy>(EnemyLayer);
-                    if (!enemy || !enemy.IsAlive || !SelectedDefense || !SelectedDefense.IsEnemyInRange(enemy)) return;
-                    SelectedDefense.SetAttackTarget(enemy);
-                    OnEnemyClick?.Invoke();
-                    SelectedDefense = null;
+                    var defense = GetObjectOnScene<ActiveDefense>(DefenseLayer);
+                    if ((!defense || !defense.IsActiveDefense) && !SelectedDefense) return;
+                    if (SelectedDefense != defense && defense)
+                    {
+                        SelectedDefense = defense;
+                        return;
+                    }
+
+                    if (SelectedDefense)
+                    {
+                        var enemy = GetObjectOnScene<Enemy>(EnemyLayer);
+                        if (!enemy || !enemy.IsAlive || !SelectedDefense || !SelectedDefense.IsEnemyInRange(enemy)) return;
+                        SelectedDefense.SetAttackTarget(enemy);
+                        OnEnemyClick?.Invoke();
+                        SelectedDefense = null;
+                    }
                 }
             }
-        }
         // if (!cell || !cell.IsSelected) return;
-        #elif  PLATFORM_IOS || PLATFORM_ANDROID
+#elif PLATFORM_IOS || PLATFORM_ANDROID
         var touch = Input.GetTouch(0);
         if (touch.phase == TouchPhase.Began)
         {
@@ -104,7 +109,7 @@ public class InputManager : MonoBehaviour
                 }
             }
         }
-        #endif
+#endif
 
     }
 
@@ -119,11 +124,11 @@ public class InputManager : MonoBehaviour
     private T GetObjectOnScene<T>(LayerMask layer) where T : MonoBehaviour
     {
         Ray ray;
-        #if UNITY_EDITOR || PLATFORM_STANDALONE_WIN
+#if UNITY_EDITOR || PLATFORM_STANDALONE_WIN
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        #elif UNITY_IOS || PLATFORM_IOS || PLATFORM_ANDROID
+#elif UNITY_IOS || PLATFORM_IOS || PLATFORM_ANDROID
         ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
-        #endif
+#endif
         if (Physics.Raycast(ray, out var raycastHit, 1000f, layer))
         {
             return raycastHit.transform.GetComponent<T>();

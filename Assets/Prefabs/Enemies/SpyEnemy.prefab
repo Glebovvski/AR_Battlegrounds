@@ -71,7 +71,7 @@ MonoBehaviour:
   aiConfigs:
   - aiId: e6fc5f07-8ee4-4a75-9962-ce8dc82f8f7c
     intervalMin: 1
-    intervalMax: 5
+    intervalMax: 1
     startDelayMin: 0
     startDelayMax: 0
     isActive: 1
@@ -97,7 +97,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 497068949028825284}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.2
+  m_Radius: 1
   m_Speed: 3.5
   m_Acceleration: 1
   avoidancePriority: 50

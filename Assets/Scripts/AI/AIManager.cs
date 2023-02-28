@@ -20,8 +20,8 @@ namespace Enemies
         private GameControlModel GameModel { get; set; }
         private StatManager StatManager { get; set; }
         private InputManager InputManager { get; set; }
+        private PlaneManager PlaneManager { get; set; }
 
-        [SerializeField] private PlaneManager planeManager;
 
         [Header("Battle settings")]
         [Range(1, 25)]
@@ -32,8 +32,7 @@ namespace Enemies
         [SerializeField] private int maxBullEnemies;
         [Range(0, 5)]
         [SerializeField] private int maxHealerEnemies;
-        [Range(0, 5)]
-        [SerializeField] private int maxSpyEnemies;
+        [SerializeField] private int maxSpyEnemies = 1;
         [Range(0, 10)]
         [SerializeField] private int maxKamikazeEnemies;
         [Range(0, 5)]
@@ -53,7 +52,7 @@ namespace Enemies
         private int Wave = 0;
 
         [Inject]
-        private void Construct(CurrencyModel currencyModel, GameGrid grid, CastleDefense castle, GameControlModel gameModel, StatManager statManager, InputManager inputManager)
+        private void Construct(CurrencyModel currencyModel, GameGrid grid, CastleDefense castle, GameControlModel gameModel, StatManager statManager, InputManager inputManager, PlaneManager planeManager)
         {
             CurrencyModel = currencyModel;
             Grid = grid;
@@ -61,6 +60,7 @@ namespace Enemies
             GameModel = gameModel;
             StatManager = statManager;
             InputManager = inputManager;
+            PlaneManager = planeManager;
         }
 
         private void Awake()
@@ -82,7 +82,7 @@ namespace Enemies
             Wave = 0;
             Castle.OnLose += ReturnAllEnemiesToPool;
             GameModel.OnRestart += ResetAIManager;
-            planeManager.OnGridSet += SpawnEnemies;
+            PlaneManager.OnGridSet += SpawnEnemies;
 
             enemyCoefs.Add(PoolObjectType.Enemy, maxBaseEnemies);
             enemyCoefs.Add(PoolObjectType.SpyEnemy, maxSpyEnemies);
@@ -94,8 +94,12 @@ namespace Enemies
 
         private void SpawnEnemies()
         {
+            if (Wave == 0)
+                SpawnSpy();
+
             if (Wave > maxWaves)
                 return;
+
             int maxEnemies = enemyCoefs.Select(x => x.Value).Sum();
             if (maxEnemies - Enemies.Count > maxBaseEnemies / 2 && Wave > 0)
                 return;
@@ -120,8 +124,14 @@ namespace Enemies
             Wave++;
         }
 
+        private void SpawnSpy()
+        {
+            RegisterEnemy(PoolObjectType.SpyEnemy, spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Length - 1)]);
+        }
+
         private void ResetAIManager()
         {
+            Observations.Clear();
             Wave = 0;
             maxWaves = UnityEngine.Random.Range(1, 25);
             SpawnEnemies();
@@ -244,7 +254,7 @@ namespace Enemies
         {
             Castle.OnLose -= ReturnAllEnemiesToPool;
             GameModel.OnRestart -= ResetAIManager;
-            planeManager.OnGridSet -= SpawnEnemies;
+            PlaneManager.OnGridSet -= SpawnEnemies;
         }
     }
 }
