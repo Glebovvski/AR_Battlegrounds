@@ -73,7 +73,7 @@ namespace Managers
 #if UNITY_ANDROID
         string adUnitId = "ca-app-pub-2564312810103530/3111453302";
 #elif UNITY_IPHONE
-            string adUnitId = "ca-app-pub-2564312810103530~3588582562";
+            string adUnitId = "ca-app-pub-2564312810103530/7362780812";
 #else
         string adUnitId = "unexpected_platform";
 #endif
