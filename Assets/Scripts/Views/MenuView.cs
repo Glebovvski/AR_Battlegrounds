@@ -63,7 +63,7 @@ namespace Views
             if (isAR)
                 modeText.text = "AR mode Selected";
             else
-                modeText.text = "Classic Mde selected";
+                modeText.text = "Classic Mode selected";
         }
 
         public void Donation()
