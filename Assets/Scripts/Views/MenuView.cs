@@ -1,4 +1,5 @@
 using Managers;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using ViewModels;
@@ -18,6 +19,8 @@ namespace Views
         [SerializeField] private Button buyBtn;
         [SerializeField] private Button donateBtn;
         [SerializeField] private Button noAdsBtn;
+        [SerializeField] private Button changeModeBtn;
+        [SerializeField] private TextMeshProUGUI modeText;
 
         [Inject]
         private void Construct(MenuViewModel menuViewModel, AdManager adManager, AudioManager audioManager)
@@ -31,6 +34,9 @@ namespace Views
         {
             MenuViewModel.OnOpen += Show;
             AdManager.OnCanShowAdValueChanged += SetNoAdsButtonVisibility;
+            changeModeBtn.interactable = MenuViewModel.IsModeChangeButtonInteractable;
+            if (!changeModeBtn.interactable)
+                modeText.text = "Classic Mode Selected";
         }
 
         public void Close()
@@ -49,6 +55,15 @@ namespace Views
         {
             AudioManager.PlayUI();
             MenuViewModel.BuyCoins();
+        }
+
+        public void ChangeMode()
+        {
+            bool isAR = MenuViewModel.ChangeMode();
+            if (isAR)
+                modeText.text = "AR mode Selected";
+            else
+                modeText.text = "Classic Mode selected";
         }
 
         public void Donation()
