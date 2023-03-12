@@ -23,11 +23,7 @@ public class CameraManager : MonoBehaviour
     }
 
     private Vector3 touchStart;
-#if PLATFORM_ANDROID
     private float dragSpeed = 20;
-#elif PLATFORM_IOS
-    private float dragSpeed = 0.02f;
-#endif
 
     private float zoomSpeed = 0.5f;
     private int minZoom = 2;
@@ -80,11 +76,9 @@ public class CameraManager : MonoBehaviour
         {
             //MOVING
             var touch = Input.GetTouch(0);
-            if (touch.phase == TouchPhase.Moved)
-            {
-                float speed = dragSpeed * (Time.deltaTime / Time.timeScale);
-                Camera.main.transform.position -= new Vector3(touch.position.x * speed, 0, touch.position.y * speed);
-            }
+            float speed = (Time.deltaTime / Time.timeScale);
+            Camera.main.transform.position -= new Vector3(touch.deltaPosition.x * speed, 0, touch.deltaPosition.y * speed);
+
         }
         else if (Input.touchCount == 2)
         {
