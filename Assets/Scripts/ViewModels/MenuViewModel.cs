@@ -9,15 +9,19 @@ namespace ViewModels
         private DefensesViewModel DefensesViewModel { get; set; }
         private IAPManager IAPManager { get; set; }
         private PlaneManager PlaneManager { get; set; }
+        private GameModeModel GameModeModel { get; set; }
+
 
         public bool IsMenuOpen { get; private set; } = true;
+        public bool IsModeChangeButtonInteractable => GameModeModel.IsARSupported;
 
         [Inject]
-        private void Construct(DefensesViewModel defensesViewModel, IAPManager iAPManager, PlaneManager planeManager)
+        private void Construct(DefensesViewModel defensesViewModel, IAPManager iAPManager, PlaneManager planeManager, GameModeModel gameModeModel)
         {
             DefensesViewModel = defensesViewModel;
             IAPManager = iAPManager;
             PlaneManager = planeManager;
+            GameModeModel = gameModeModel;
         }
 
         public event Action OnOpen;
@@ -40,5 +44,10 @@ namespace ViewModels
         internal void BuyCoins() => IAPManager.BuyConsumable(IAPManager.coins);
         internal void Donation() => IAPManager.BuyConsumable(IAPManager.donation);
         internal void NoAds() => IAPManager.BuyNonConsumable();
+
+        internal bool ChangeMode()
+        {
+            return GameModeModel.ChangeMode();
+        }
     }
 }

@@ -58,7 +58,7 @@ namespace Managers
         private void RequestBanner()
         {
 #if UNITY_ANDROID
-        string adUnitId = "ca-app-pub-2564312810103530/2073703808";
+        string adUnitId = "ca-app-pub-2564312810103530/8287739858";
 #elif UNITY_IPHONE
             string adUnitId = "ca-app-pub-2564312810103530/7469269205";
 #endif

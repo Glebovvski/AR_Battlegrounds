@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using Models;
 using UnityEngine;
 using Zenject;
@@ -8,11 +6,16 @@ using Zenject;
 public class CameraManager : MonoBehaviour
 {
     private GameTimeModel GameTimeModel { get; set; }
+    private GameModeModel GameModeModel { get; set; }
+
+    [SerializeField] private Camera camera;
+    [SerializeField] private Camera arCamera;
 
     [Inject]
-    private void Construct(GameTimeModel gameTimeModel)
+    private void Construct(GameTimeModel gameTimeModel, GameModeModel gameModeModel)
     {
         GameTimeModel = gameTimeModel;
+        GameModeModel = gameModeModel;
     }
 
     private Vector3 touchStart;
@@ -22,9 +25,34 @@ public class CameraManager : MonoBehaviour
     private int minZoom = 2;
     private int maxZoom = 20;
 
+    private void Start()
+    {
+        SelectCamera();
+
+        GameModeModel.OnChangeMode += SelectCamera;
+    }
+
+    private void SelectCamera()
+    {
+        bool IsARModeSelected = GameModeModel.IsARModeSelected;
+
+        TurnOffCameras();
+
+        camera.gameObject.SetActive(!IsARModeSelected);
+        arCamera.gameObject.SetActive(IsARModeSelected);
+    }
+
+    private void TurnOffCameras()
+    {
+        camera.gameObject.SetActive(false);
+        arCamera.gameObject.SetActive(false);
+    }
+
     // Update is called once per frame
     void Update()
     {
+        if (GameModeModel.IsARModeSelected) return;
+
 #if UNITY_EDITOR
         if (Input.GetMouseButton(1))
         {
@@ -69,5 +97,10 @@ public class CameraManager : MonoBehaviour
 
         // Clamp the field of view to make sure it's between 0 and 180.
         Camera.main.fieldOfView = Mathf.Clamp(Camera.main.fieldOfView, 0.1f, 179.9f);
+    }
+
+    private void OnDestroy()
+    {
+        GameModeModel.OnChangeMode -= SelectCamera;
     }
 }

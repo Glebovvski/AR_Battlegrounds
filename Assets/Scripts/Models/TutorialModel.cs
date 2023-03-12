@@ -14,6 +14,7 @@ namespace Models
         private MenuViewModel MenuViewModel { get; set; }
         private TutorialViewModel TutorialViewModel { get; set; }
         private GameGrid Grid { get; set; }
+        private GameModeModel GameModeModel { get; set; }
 
         private const string isTutorialCompletedKey = "IsTutorialCompleted";
 
@@ -37,12 +38,13 @@ namespace Models
         private Action[] simpleTutorialSteps;
 
         [Inject]
-        private void Construct(PlaneManager planeManager, MenuViewModel menuViewModel, TutorialViewModel tutorialViewModel, GameGrid grid)
+        private void Construct(PlaneManager planeManager, MenuViewModel menuViewModel, TutorialViewModel tutorialViewModel, GameGrid grid, GameModeModel gameModeModel)
         {
             PlaneManager = planeManager;
             MenuViewModel = menuViewModel;
             TutorialViewModel = tutorialViewModel;
             Grid = grid;
+            GameModeModel = gameModeModel;
         }
 
         public void Initialize()
@@ -55,8 +57,12 @@ namespace Models
 
             StartTutorial();
 
-            MenuViewModel.OnClose += InitStepOne;
-            PlaneManager.OnPlanesChanged += InitStepTwo;
+            if (GameModeModel.IsARModeSelected)
+            {
+                MenuViewModel.OnClose += InitStepOne;
+                PlaneManager.OnPlanesChanged += InitStepTwo;
+            }
+
             PlaneManager.OnGridSet += InitStepThree;
 
             simpleTutorialStepIndex = 0;
@@ -115,11 +121,8 @@ namespace Models
         }
         public void InitSimpleStep()
         {
-            if (
-                !stepOneInited ||
-                !stepTwoInited ||
-                !stepThreeInited
-                )
+            bool canNotContinue = GameModeModel.IsARModeSelected ? !stepOneInited || !stepTwoInited || !stepThreeInited : !stepThreeInited;
+            if (canNotContinue)
                 return;
 
             if (IsTutorialCompleted) return;

@@ -12,6 +12,7 @@ namespace Managers
     public class PlaneManager : MonoBehaviour
     {
         private MenuViewModel MenuViewModel { get; set; }
+        private GameModeModel GameModeModel { get; set; }
 
         [SerializeField] private ARPlaneManager planeManager;
         [SerializeField] private ARSessionOrigin origin;
@@ -30,9 +31,10 @@ namespace Managers
         public Vector3 Scale => transform.localScale;
 
         [Inject]
-        private void Construct(MenuViewModel menuViewModel)
+        private void Construct(MenuViewModel menuViewModel, GameModeModel gameModeModel)
         {
             MenuViewModel = menuViewModel;
+            GameModeModel = gameModeModel;
         }
 
         private void Start()
@@ -65,30 +67,33 @@ namespace Managers
             if (GridCreated) return;
             if (MenuViewModel.IsMenuOpen) return;
 
-#if PLATFORM_IOS || PLATFORM_ANDROID
-            if (Input.touchCount == 0) return;
-            if (planeManager.trackables.count == 0) return;
-
-            var touch = Input.GetTouch(0);
-            if (touch.phase == TouchPhase.Began)
+            if (GameModeModel.IsARModeSelected)
             {
-                Ray raycast = Camera.main.ScreenPointToRay(touch.position);
-                if (Physics.Raycast(raycast, out RaycastHit raycastHit, float.MaxValue))
+                if (Input.touchCount == 0) return;
+                if (planeManager.trackables.count == 0) return;
+
+                var touch = Input.GetTouch(0);
+                if (touch.phase == TouchPhase.Began)
                 {
-                    if (raycastHit.collider.TryGetComponent<ARPlane>(out var plane))
+                    Ray raycast = Camera.main.ScreenPointToRay(touch.position);
+                    if (Physics.Raycast(raycast, out RaycastHit raycastHit, float.MaxValue))
                     {
-                        origin.MakeContentAppearAt(this.transform, plane.center, Quaternion.identity);
-                        Grid.CreateGrid();
-                        GridCreated = true;
-                        planeManager.requestedDetectionMode = PlaneDetectionMode.None;
-                        RemovePlanes();
+                        if (raycastHit.collider.TryGetComponent<ARPlane>(out var plane))
+                        {
+                            origin.MakeContentAppearAt(this.transform, plane.center, Quaternion.identity);
+                            Grid.CreateGrid();
+                            GridCreated = true;
+                            planeManager.requestedDetectionMode = PlaneDetectionMode.None;
+                            RemovePlanes();
+                        }
                     }
                 }
             }
-#elif UNITY_EDITOR
-        Grid.CreateGrid();
-        GridCreated = true;
-#endif
+            else
+            {
+                Grid.CreateGrid();
+                GridCreated = true;
+            }
         }
 
         public event Action OnPlanesChanged;
