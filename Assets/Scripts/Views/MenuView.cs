@@ -36,7 +36,7 @@ namespace Views
             AdManager.OnCanShowAdValueChanged += SetNoAdsButtonVisibility;
             changeModeBtn.interactable = MenuViewModel.IsModeChangeButtonInteractable;
             if (!changeModeBtn.interactable)
-                modeText.text = "Classic Mode Selected";
+                modeText.text = "Classic Mode";
         }
 
         public void Close()
@@ -61,9 +61,9 @@ namespace Views
         {
             bool isAR = MenuViewModel.ChangeMode();
             if (isAR)
-                modeText.text = "AR mode Selected";
+                modeText.text = "AR mode";
             else
-                modeText.text = "Classic Mode selected";
+                modeText.text = "Classic Mode";
         }
 
         public void Donation()

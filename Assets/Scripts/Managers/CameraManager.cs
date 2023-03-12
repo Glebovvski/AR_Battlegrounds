@@ -23,7 +23,11 @@ public class CameraManager : MonoBehaviour
     }
 
     private Vector3 touchStart;
+#if PLATFORM_ANDROID
     private float dragSpeed = 20;
+#elif PLATFORM_IOS
+    private float dragSpeed = 2;
+#endif
 
     private float zoomSpeed = 0.5f;
     private int minZoom = 2;
@@ -104,8 +108,11 @@ public class CameraManager : MonoBehaviour
 
     private void Zoom(float v)
     {
+#if PLATFORM_ANDROID
         Camera.main.fieldOfView += v * zoomSpeed;
-
+#elif PLATFORM_IOS
+        Camera.main.fieldOfView += v * zoomSpeed;
+#endif
         // Clamp the field of view to make sure it's between 0 and 180.
         Camera.main.fieldOfView = Mathf.Clamp(Camera.main.fieldOfView, 0.1f, 179.9f);
     }
