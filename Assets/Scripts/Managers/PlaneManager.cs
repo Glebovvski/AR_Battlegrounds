@@ -41,6 +41,7 @@ namespace Managers
         {
             Grid.OnGridCreated += SetUpGrid;
             planeManager.planesChanged += PlanesChanged;
+            GameModeModel.OnChangeMode += RemovePlanes;
             surface = GetComponent<NavMeshSurface>();
         }
 
@@ -99,7 +100,7 @@ namespace Managers
         public event Action OnPlanesChanged;
         private void PlanesChanged(ARPlanesChangedEventArgs args)
         {
-            if (args.added.Count > 0 || args.updated.Count > 0)
+            if (args.added.Count > 0 || args.updated.Count > 0 && GameModeModel.IsARModeSelected)
                 OnPlanesChanged?.Invoke();
         }
         private void RemovePlanes()
@@ -108,6 +109,13 @@ namespace Managers
             {
                 plane.gameObject.SetActive(false);
             }
+        }
+
+        private void OnDestroy()
+        {
+            Grid.OnGridCreated -= SetUpGrid;
+            planeManager.planesChanged -= PlanesChanged;
+            GameModeModel.OnChangeMode -= RemovePlanes;
         }
     }
 }

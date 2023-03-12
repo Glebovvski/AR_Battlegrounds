@@ -1,21 +1,25 @@
 using System;
 using Models;
 using UnityEngine;
+using ViewModels;
 using Zenject;
 
 public class CameraManager : MonoBehaviour
 {
     private GameTimeModel GameTimeModel { get; set; }
     private GameModeModel GameModeModel { get; set; }
+    private DefensesViewModel DefensesViewModel { get; set; }
+
 
     [SerializeField] private Camera camera;
     [SerializeField] private Camera arCamera;
 
     [Inject]
-    private void Construct(GameTimeModel gameTimeModel, GameModeModel gameModeModel)
+    private void Construct(GameTimeModel gameTimeModel, GameModeModel gameModeModel, DefensesViewModel defensesViewModel)
     {
         GameTimeModel = gameTimeModel;
         GameModeModel = gameModeModel;
+        DefensesViewModel = defensesViewModel;
     }
 
     private Vector3 touchStart;
@@ -30,6 +34,7 @@ public class CameraManager : MonoBehaviour
         SelectCamera();
 
         GameModeModel.OnChangeMode += SelectCamera;
+        DefensesViewModel.OnResetCameraClick += Reset;
     }
 
     private void SelectCamera()
@@ -46,6 +51,12 @@ public class CameraManager : MonoBehaviour
     {
         camera.gameObject.SetActive(false);
         arCamera.gameObject.SetActive(false);
+    }
+
+    private void Reset()
+    {
+        Camera.main.fieldOfView = 90;
+        Camera.main.transform.position = new Vector3(0, 7, 0);
     }
 
     // Update is called once per frame

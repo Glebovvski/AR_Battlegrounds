@@ -1,5 +1,6 @@
 using Managers;
 using UnityEngine;
+using UnityEngine.UI;
 using ViewModels;
 using Zenject;
 
@@ -9,15 +10,18 @@ namespace Views
     {
         private DefensesViewModel ViewModel { get; set; }
         private AudioManager AudioManager { get; set; }
+        private GameModeModel GameModeModel {get;set;}
 
         [SerializeField] private GameObject defensesPanel;
         [SerializeField] private GameObject cancelBtn;
+        [SerializeField] private Button resetCameraBtn;
 
         [Inject]
-        private void Construct(DefensesViewModel vm, AudioManager audioManager)
+        private void Construct(DefensesViewModel vm, AudioManager audioManager, GameModeModel gameModeModel)
         {
             ViewModel = vm;
             AudioManager = audioManager;
+            GameModeModel = gameModeModel;
         }
 
         private void Start()
@@ -30,6 +34,7 @@ namespace Views
         public void Show()
         {
             defensesPanel.SetActive(true);
+            resetCameraBtn.gameObject.SetActive(!GameModeModel.IsARModeSelected);
         }
         public void Hide()
         {
@@ -49,6 +54,8 @@ namespace Views
         }
 
         public void ToggleCancelBtn(bool active) => cancelBtn.SetActive(active);
+
+        public void ResetCamera() => ViewModel.ResetCamera();
 
         private void OnDestroy()
         {
