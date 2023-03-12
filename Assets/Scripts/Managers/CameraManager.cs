@@ -26,7 +26,7 @@ public class CameraManager : MonoBehaviour
 #if PLATFORM_ANDROID
     private float dragSpeed = 20;
 #elif PLATFORM_IOS
-    private float dragSpeed = 2;
+    private float dragSpeed = 0.02f;
 #endif
 
     private float zoomSpeed = 0.5f;
